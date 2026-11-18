@@ -4,7 +4,7 @@ import { About } from "@/views/about";
 import { Stats } from "@/views/stats";
 import { Showcase } from "@/views/showcase";
 import { Works } from "@/views/works";
-import { Product } from "@/views/product";
+import { Agencia360 } from "@/views/agencia-360";
 import { ContactForm } from "@/views/contact-form";
 import { SiteFooter } from "@/views/site-footer";
 import { SiteNav } from "@/views/site-nav";
@@ -12,7 +12,6 @@ import { Reviews } from "@/views/reviews";
 import { Team } from "@/views/team";
 import { Method } from "@/views/method";
 import { methodContent } from "@/data/mocks/method";
-import { productContent } from "@/data/mocks/product";
 import { contactContent, footerContent } from "@/data/mocks/contact";
 import { homeContent, preloaderContent, type HomeContent } from "@/data/mocks/home";
 import { Preloader } from "@/components/common/preloader";
@@ -38,7 +37,7 @@ export const HomeView = ({ content = homeContent, robot = false }: HomeViewProps
       <Showcase content={showcase} />
       <Works content={works} />
       <Method content={methodContent} />
-      <Product content={productContent} />
+      <Agencia360 />
       <Reviews content={reviews} />
       <Team content={team} />
       <div className="relative">

@@ -296,3 +296,13 @@ img {
 @media (min-width: 64rem) {
   .metode-caixa { width: min(100%, calc(78lvh * var(--r)), calc((100lvh - 13rem) * var(--r))); }
 }
+
+/* Agència 360°: anell que gira i píndoles que suren */
+.agencia-anell { animation: agencia-gira 60s linear infinite; transform-origin: 50% 50%; }
+@keyframes agencia-gira { to { transform: rotate(360deg); } }
+.agencia-pindola { animation: agencia-sura 6s ease-in-out infinite; }
+@keyframes agencia-sura {
+  0%, 100% { transform: translate(-50%, -50%); }
+  50% { transform: translate(-50%, calc(-50% - 10px)); }
+}
+@media (prefers-reduced-motion: reduce) { .agencia-anell, .agencia-pindola { animation: none; } }
