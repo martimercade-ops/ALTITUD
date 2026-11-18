@@ -372,3 +372,34 @@ img {
 @keyframes showcase-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 .showcase-progress { animation-name: showcase-progress; animation-timing-function: linear; animation-fill-mode: forwards; }
 @media (prefers-reduced-motion: reduce) { .showcase-col { transition: none; } }
+
+/* Logo central de la portada */
+.hero-mark {
+  position: absolute;
+  inset: 22% 8% 42% 8%;
+  width: 84%;
+  height: 36%;
+  overflow: visible;
+  transition: transform 1.2s cubic-bezier(.2, .7, .2, 1);
+}
+@media (min-width: 64rem) { .hero-mark { inset: 12% 20% 30% 20%; width: 60%; height: 58%; } }
+.hero-mark-traç { stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0.85; }
+.hero-mark-fill { opacity: 0; }
+.hero-mark-llum { transform: translateX(0); opacity: 0; }
+.hero-mark.is-on .hero-mark-traç { animation: hm-traç 2.4s cubic-bezier(.65, 0, .35, 1) 0.2s forwards, hm-traç-fon 1.6s ease 2.6s forwards; }
+.hero-mark.is-on .hero-mark-fill { animation: hm-omple 1.8s ease 1.6s forwards; }
+.hero-mark.is-on .hero-mark-llum { animation: hm-llum 7s cubic-bezier(.45, 0, .2, 1) 3.2s infinite; }
+@keyframes hm-traç { to { stroke-dashoffset: 0; } }
+@keyframes hm-traç-fon { to { opacity: 0.28; } }
+@keyframes hm-omple { to { opacity: 1; } }
+@keyframes hm-llum {
+  0% { transform: translateX(0) skewX(-18deg); opacity: 0; }
+  8% { opacity: 1; }
+  35% { transform: translateX(1050px) skewX(-18deg); opacity: 1; }
+  40%, 100% { transform: translateX(1050px) skewX(-18deg); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-mark-traç, .hero-mark.is-on .hero-mark-traç { animation: none; stroke-dashoffset: 0; opacity: 0.28; }
+  .hero-mark-fill, .hero-mark.is-on .hero-mark-fill { animation: none; opacity: 1; }
+  .hero-mark.is-on .hero-mark-llum { animation: none; }
+}

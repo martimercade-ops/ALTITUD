@@ -36,6 +36,71 @@ const REVEAL_RISE = 20;
 const REVEAL_BLUR = 10;
 const HERO_ITEMS = 6;
 
+const MARK =
+  "M2 419 L63 419 L184 249 L305 419 L637 419 L340 0 L300 0Z M345 95 L539 370 L344 368Z M294 95 L294 315 L216 206Z";
+
+/* Logo central: es dibuixa el contorn, s'omple de vidre i hi passa un reflex de llum.
+   Es mou lleugerament amb el ratolí. */
+const HeroMark = ({ on }: { on: boolean }) => {
+  const ref = useRef<SVGSVGElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || window.matchMedia("(pointer: coarse), (prefers-reduced-motion: reduce)").matches) return;
+    let raf = 0;
+    const move = (e: PointerEvent) => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const x = e.clientX / window.innerWidth - 0.5;
+        const y = e.clientY / window.innerHeight - 0.5;
+        el.style.transform = `translate3d(${x * -18}px, ${y * -12}px, 0)`;
+      });
+    };
+    window.addEventListener("pointermove", move, { passive: true });
+    return () => {
+      window.removeEventListener("pointermove", move);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+  return (
+    <svg
+      ref={ref}
+      viewBox="-4 -4 648 428"
+      preserveAspectRatio="xMidYMid meet"
+      className={`hero-mark ${on ? "is-on" : ""}`}
+    >
+      <defs>
+        <linearGradient id="hm-vidre" x1="0" y1="0" x2="0.35" y2="1">
+          <stop offset="0" stopColor="#fff" stopOpacity="0.5" />
+          <stop offset="0.5" stopColor="#fff" stopOpacity="0.18" />
+          <stop offset="1" stopColor="#fff" stopOpacity="0.02" />
+        </linearGradient>
+        <linearGradient id="hm-llum" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#fff" stopOpacity="0" />
+          <stop offset="0.5" stopColor="#fff" stopOpacity="0.55" />
+          <stop offset="1" stopColor="#fff" stopOpacity="0" />
+        </linearGradient>
+        <clipPath id="hm-clip">
+          <path d={MARK} fillRule="evenodd" />
+        </clipPath>
+      </defs>
+      <path className="hero-mark-fill" d={MARK} fillRule="evenodd" fill="url(#hm-vidre)" />
+      <g clipPath="url(#hm-clip)">
+        <rect className="hero-mark-llum" x="-200" y="-40" width="160" height="520" fill="url(#hm-llum)" />
+      </g>
+      <path
+        className="hero-mark-traç"
+        d={MARK}
+        fill="none"
+        stroke="#fff"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+        pathLength={1}
+        vectorEffect="non-scaling-stroke"
+      />
+    </svg>
+  );
+};
+
 export const Hero = ({ content }: HeroProps) => {
   const {
     titleLines,
@@ -113,7 +178,13 @@ export const Hero = ({ content }: HeroProps) => {
           aria-hidden="true"
           className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-1/2 bg-gradient-to-t from-[rgb(11_20_36/0.88)] to-transparent"
         />
-        <div aria-hidden="true" className="logo-vidre logo-vidre--centre" />
+        <animated.div
+          aria-hidden="true"
+          style={{ transform: p.to((v) => `translate3d(0, ${v * -60}px, 0) scale(${1 + v * 0.06})`) }}
+          className="pointer-events-none absolute inset-0 z-[1]"
+        >
+          <HeroMark on={preloaderDone} />
+        </animated.div>
 
         <animated.div
           style={{ transform: p.to((v) => `scale(${1 - v * 0.1})`) }}
