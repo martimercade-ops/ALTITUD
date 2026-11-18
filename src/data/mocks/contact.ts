@@ -75,7 +75,7 @@ export const footerContent: FooterContent = {
       { label: "Qui som", href: "/equip" },
       { label: "Metodologia", href: "/metodologia" },
       { label: "Serveis", href: "/#services" },
-      { label: "Projectes", href: "/#projects" },
+      { label: "Projectes", href: "/projectes" },
       { label: "Ajuts PDE", href: "/ajuts-pde" },
       { label: "Parlem", href: "/parlem" },
     ],

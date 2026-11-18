@@ -53,7 +53,7 @@ export const ServiceView = ({ service }: ServiceViewProps) => {
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-accent-lime">→</span>
               </Link>
               <Link
-                href="/#projects"
+                href="/projectes"
                 className="inline-flex h-12 items-center rounded-full border border-white/30 px-6 text-sm font-medium text-white/90 hover:border-white/70 hover:text-white"
               >
                 Veure projectes
@@ -91,6 +91,17 @@ export const ServiceView = ({ service }: ServiceViewProps) => {
             ))}
           </ul>
         </section>
+
+        {service.tools && service.tools.length > 0 && (
+          <section aria-label="Eines" className="mx-auto -mt-12 max-w-6xl px-6 pb-24 md:-mt-16 md:px-10 md:pb-28">
+            <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2 border-t border-black/10 pt-6">
+              <span className="text-xs font-semibold uppercase tracking-[0.25em] text-black/40">Treballem amb</span>
+              {service.tools.map((t) => (
+                <span key={t} className="text-[15px] text-black/55">{t}</span>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Feina recent */}
         {service.gallery && service.gallery.length > 0 && (
@@ -147,7 +158,7 @@ export const ServiceView = ({ service }: ServiceViewProps) => {
               <h2 id="related-title" className="text-[2rem] font-light leading-[1.08] tracking-tight md:text-[2.75rem]">
                 Projectes on ho hem fet
               </h2>
-              <Link href="/#projects" className="hidden whitespace-nowrap rounded-full border border-black/15 px-5 py-2.5 text-sm font-medium hover:border-black/50 sm:inline-flex">
+              <Link href="/projectes" className="hidden whitespace-nowrap rounded-full border border-black/15 px-5 py-2.5 text-sm font-medium hover:border-black/50 sm:inline-flex">
                 Tots els projectes
               </Link>
             </div>

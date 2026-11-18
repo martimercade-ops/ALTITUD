@@ -48,7 +48,7 @@ const siteNav: SiteNavContent = {
       href: "#services",
       children: services.map((s) => ({ label: s.name, href: serviceHref(s.slug), group: s.group })),
     },
-    { label: "Projectes", href: "#projects" },
+    { label: "Projectes", href: "/projectes" },
     { label: "PDE", href: "/ajuts-pde" },
   ],
   cta: contacte,
@@ -166,12 +166,16 @@ export const homeContent: HomeContent = {
         .filter((s) => !SHOWCASE.includes(s.slug))
         .map((s) => ({ label: s.name, href: serviceHref(s.slug) })),
     },
+    tools: {
+      label: "Treballem amb",
+      items: ["WordPress", "Elementor", "WooCommerce", "Shopify", "PrestaShop", "Figma", "Google Ads", "Meta Ads", "Semrush", "Google Analytics", "Claude", "ChatGPT"],
+    },
   },
   works: {
     eyebrow: "Casos d'èxit",
     heading: "Empreses d'Andorra que ja han fet créixer el seu negoci.",
-    viewLabel: "Parlem",
-    viewHref: PARLEM_HREF,
+    viewLabel: "Tots els projectes",
+    viewHref: "/projectes",
     items: projects.map((p) => ({
       name: p.name,
       sector: p.sector,

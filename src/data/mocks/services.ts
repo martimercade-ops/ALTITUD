@@ -25,6 +25,8 @@ export interface Service {
   steps: ServiceStep[];
   /** Etiquetes dels projectes relacionats (projects.ts → services) */
   projectTags?: string[];
+  /** Eines amb què treballem en aquest servei */
+  tools?: string[];
   /** Fotos de feina recent feta per l'equip */
   gallery?: { src: string; alt: string; client: string; caption: string }[];
 }
@@ -76,8 +78,31 @@ export const services: Service[] = [
       { title: "Manteniment", text: "Actualitzacions, seguretat i canvis quan els necessitis." },
       { title: "Analítica", text: "Mesurem visites i conversions per saber què funciona." },
     ],
+    tools: ["WordPress", "Elementor", "WooCommerce", "Shopify", "PrestaShop", "Figma"],
     steps: STEPS_MARKETING,
     projectTags: ["Web"],
+  },
+  {
+    slug: "disseny-ux-ui",
+    group: "marketing",
+    name: "Disseny UX/UI",
+    prefix: "Disseny",
+    suffix: "UX/UI",
+    short: "Interfícies clares que la gent sap fer servir.",
+    headline: "Webs i apps fàcils i agradables de fer servir.",
+    intro:
+      "Dissenyem l'experiència i la interfície de webs, botigues online i aplicacions: com hi navega l'usuari, què veu primer i com arriba a comprar o a contactar-te, abans d'escriure una sola línia de codi.",
+    image: `${A}/disseny.jpg`,
+    includes: [
+      { title: "Recerca d'usuari", text: "Entenem qui fa servir el teu web i què hi busca." },
+      { title: "Arquitectura i fluxos", text: "Ordenem continguts i camins perquè res costi de trobar." },
+      { title: "Wireframes", text: "L'esquelet de cada pantalla, per validar-lo ràpid." },
+      { title: "Disseny d'interfície", text: "Pantalles cuidades, coherents amb la teva marca." },
+      { title: "Prototips", text: "Un model clicable per provar-lo abans de desenvolupar." },
+      { title: "Sistema de disseny", text: "Components i estils reutilitzables per créixer amb ordre." },
+    ],
+    tools: ["Figma", "FigJam", "Maze", "Hotjar"],
+    steps: STEPS_MARKETING,
   },
   {
     slug: "seo-sem",
@@ -98,6 +123,7 @@ export const services: Service[] = [
       { title: "Landing pages", text: "Pàgines de destí pensades per convertir el trànsit en contactes." },
       { title: "Informes clars", text: "Saps què s'inverteix, què s'obté i què millorarem." },
     ],
+    tools: ["Google Ads", "Meta Ads", "Semrush", "Google Search Console", "Google Analytics", "Google Business Profile"],
     steps: STEPS_MARKETING,
     projectTags: ["SEO"],
   },
@@ -120,6 +146,7 @@ export const services: Service[] = [
       { title: "Configuració de comptes", text: "Creem i optimitzem els perfils i el Business Manager de Meta." },
       { title: "Resultats", text: "Informes mensuals amb el creixement i el que funciona millor." },
     ],
+    tools: ["Instagram", "TikTok", "Meta Business Suite", "Meta Ads", "CapCut", "Canva"],
     steps: STEPS_MARKETING,
     projectTags: ["Xarxes socials"],
   },
@@ -143,6 +170,7 @@ export const services: Service[] = [
       { title: "Edició i postproducció", text: "Muntatge, color, so i subtítols." },
       { title: "Contingut per a anuncis", text: "Peces pensades per rendir a les campanyes de pagament." },
     ],
+    tools: ["Premiere Pro", "After Effects", "Lightroom", "CapCut", "DaVinci Resolve"],
     steps: STEPS_MARKETING,
     projectTags: ["Fotografia corporativa"],
   },
@@ -165,6 +193,7 @@ export const services: Service[] = [
       { title: "Disseny per a xarxes", text: "Plantilles i peces coherents amb la identitat." },
       { title: "Packaging", text: "Envasos i etiquetes que destaquen al punt de venda." },
     ],
+    tools: ["Illustrator", "Photoshop", "Figma", "InDesign"],
     steps: STEPS_MARKETING,
     projectTags: ["Identitat corporativa"],
   },
@@ -187,6 +216,29 @@ export const services: Service[] = [
       { title: "Integracions a mida", text: "Fem parlar entre elles les eines que ja fas servir." },
       { title: "Seguretat i control", text: "Solucions supervisades, documentades i fàcils de mantenir." },
     ],
+    tools: ["Claude", "ChatGPT", "n8n", "Make", "Google Workspace"],
+    steps: STEPS_IA,
+  },
+  {
+    slug: "video-ia",
+    group: "ia",
+    name: "Vídeo amb IA",
+    prefix: "Vídeo",
+    suffix: "amb IA",
+    short: "Més vídeos, en menys temps.",
+    headline: "Vídeos per a xarxes i anuncis, més ràpid.",
+    intro:
+      "Combinem la nostra producció amb eines d'intel·ligència artificial per crear més vídeos en menys temps: versions per a cada xarxa, subtítols, veus en off en diversos idiomes i peces per a campanyes.",
+    image: `${A}/camera.jpg`,
+    includes: [
+      { title: "Reels i vídeos curts", text: "Adaptats a cada xarxa i a cada format." },
+      { title: "Subtítols automàtics", text: "En català, castellà, francès o anglès." },
+      { title: "Veu en off", text: "Locucions en diversos idiomes sense estudi de gravació." },
+      { title: "Versions per a anuncis", text: "Diverses variants per provar quina funciona millor." },
+      { title: "Edició i postproducció", text: "Retoc, color i so amb acabat professional." },
+      { title: "Imatges de suport", text: "Recursos visuals quan no hi ha material gravat." },
+    ],
+    tools: ["Premiere Pro", "CapCut", "Runway", "ElevenLabs", "Descript"],
     steps: STEPS_IA,
   },
   {
@@ -208,6 +260,7 @@ export const services: Service[] = [
       { title: "Multilingüe", text: "Català, castellà, francès, anglès… segons el teu públic." },
       { title: "Millora contínua", text: "Revisem les converses per fer-lo cada vegada més útil." },
     ],
+    tools: ["Claude", "ChatGPT", "WhatsApp Business", "WordPress", "Shopify"],
     steps: STEPS_IA,
   },
   {
@@ -229,27 +282,29 @@ export const services: Service[] = [
       { title: "Informes", text: "Productes més venuts, rotació i valor de l'estoc d'un cop d'ull." },
       { title: "Implantació acompanyada", text: "Ho configurem i formem el teu equip." },
     ],
+    tools: ["Claude", "ChatGPT", "Google Sheets", "Shopify", "WooCommerce"],
     steps: STEPS_IA,
   },
   {
     slug: "formacions-ia",
     group: "ia",
-    name: "Formacions d'IA",
+    name: "Formacions d'IA i màrqueting",
     prefix: "Formacions",
-    suffix: "d'IA",
-    short: "Equips que treuen partit a la IA.",
-    headline: "Que el teu equip domini la intel·ligència artificial.",
+    suffix: "d'IA i màrqueting",
+    short: "Equips que treuen partit a les eines digitals.",
+    headline: "Formació pràctica perquè el teu equip ho faci sol.",
     intro:
-      "Formem equips perquè facin servir la IA a la feina de cada dia, amb casos pràctics del seu sector. Comencem amb un diagnòstic i fem tallers presencials adaptats al nivell i a les necessitats de l'empresa.",
+      "Tallers presencials de màrqueting digital i d'intel·ligència artificial, adaptats al nivell de l'equip i amb casos reals del vostre sector: xarxes socials, Google, anuncis i eines d'IA per a la feina de cada dia.",
     image: `${A}/equip.jpg`,
     includes: [
       { title: "Diagnòstic inicial", text: "Analitzem on la IA pot aportar més a la teva empresa." },
       { title: "Tallers presencials", text: "Sessions pràctiques a les teves oficines o a les nostres." },
-      { title: "Eines com Claude i ChatGPT", text: "Aprèn a fer-les servir bé, amb criteri i amb seguretat." },
+      { title: "Màrqueting digital", text: "Xarxes socials, Google i anuncis explicats de manera pràctica." },
+      { title: "Eines d'IA", text: "Aprèn a fer servir Claude o ChatGPT amb criteri i seguretat." },
       { title: "Casos del teu sector", text: "Exercicis amb tasques reals del teu dia a dia." },
-      { title: "Per a tots els nivells", text: "Des de primers passos fins a usos avançats." },
       { title: "Seguiment", text: "Resolem dubtes després de la formació perquè l'ús arreli." },
     ],
+    tools: ["Claude", "ChatGPT", "Google Workspace", "Canva"],
     steps: STEPS_IA,
   },
 ];

@@ -7,10 +7,8 @@ import type { methodContent as MethodData } from "@/data/mocks/method";
 
 export interface MethodProps {
   content: typeof MethodData;
-  /** Altímetre: de l'altitud inicial a la del cim (m) */
-  altitudes?: [number, number];
-  /** Nom del punt de sortida i del cim per a l'altímetre */
-  places?: [string, string];
+  /** Altímetre: punt de sortida i una parada per fase (nom i altitud en m) */
+  route?: { name: string; alt: number; note?: string }[];
 }
 
 const RATIO = 3402 / 3456;
@@ -33,12 +31,18 @@ const segment = ([x1, y1]: [number, number], [x2, y2]: [number, number], bend: n
 
 const BENDS = [2, 6, -4, 3];
 
-export const Method = ({ content, altitudes, places }: MethodProps) => {
+/** Un color per bandera, amb el símbol de la marca */
+const FLAG_COLORS = ["#2e9bff", "#b6f13a", "#d7d1f2", "#ff9f5a"];
+
+const fmt = (n: number) => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+export const Method = ({ content, route }: MethodProps) => {
   const { eyebrow, heading, image, start, phases } = content;
   const sectionRef = useRef<HTMLElement>(null);
   const pathRefs = useRef<(SVGPathElement | null)[]>([]);
   const altRef = useRef<HTMLSpanElement>(null);
   const placeRef = useRef<HTMLParagraphElement>(null);
+  const noteRef = useRef<HTMLParagraphElement>(null);
   const [active, setActive] = useState(0);
   const [reached, setReached] = useState(0);
 
@@ -56,11 +60,17 @@ export const Method = ({ content, altitudes, places }: MethodProps) => {
         if (Math.abs(t - lastT) < 0.002) return;
         lastT = t;
         // La línia es dibuixa directament al DOM, sense tornar a pintar React a cada fotograma
-        if (altitudes && altRef.current) {
-          const k = clamp(t / phases.length);
-          const m = Math.round(altitudes[0] + (altitudes[1] - altitudes[0]) * k);
-          altRef.current.textContent = String(m).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-          if (placeRef.current && places) placeRef.current.textContent = k >= 0.999 ? places[1] : k <= 0.001 ? places[0] : "En ruta";
+        if (route && route.length === phases.length + 1 && altRef.current) {
+          // Punts de pas: sortida a t=0 i cada parada quan s'hi arriba (t = i + DRAW)
+          const ts = [0, ...phases.map((_, i) => i + DRAW)];
+          let k = 0;
+          while (k < ts.length - 1 && t > ts[k + 1]) k++;
+          const span = k < ts.length - 1 ? clamp((t - ts[k]) / (ts[k + 1] - ts[k])) : 0;
+          const alt = k < ts.length - 1 ? route[k].alt + (route[k + 1].alt - route[k].alt) * span : route[k].alt;
+          altRef.current.textContent = fmt(alt);
+          const stop = route[t >= ts[k + 1] - 0.001 && k < ts.length - 1 ? k + 1 : k];
+          if (placeRef.current) placeRef.current.textContent = stop.name;
+          if (noteRef.current) noteRef.current.textContent = stop.note ?? "";
         }
         pathRefs.current.forEach((path, i) => {
           if (path) path.style.strokeDashoffset = String(1 - clamp((t - i) / DRAW));
@@ -70,7 +80,7 @@ export const Method = ({ content, altitudes, places }: MethodProps) => {
       },
       () => 0,
     );
-  }, [phases, altitudes, places]);
+  }, [phases, route]);
 
   const points = [start, ...phases.map((p) => p.at)];
   const phase = phases[active];
@@ -93,20 +103,17 @@ export const Method = ({ content, altitudes, places }: MethodProps) => {
           </h2>
         </header>
 
-        {altitudes && (
-          <div className="absolute right-[18px] top-[152px] z-10 text-right lg:right-12 lg:top-1/2 lg:-translate-y-1/2">
+        {route && (
+          <div className="absolute right-[18px] top-[152px] z-10 max-w-[11rem] text-right lg:right-12 lg:top-1/2 lg:max-w-[14rem] lg:-translate-y-1/2">
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-white/45 lg:text-xs">Altitud</p>
             <p className="mt-1 font-light tabular-nums leading-none text-white">
-              <span ref={altRef} className="text-[30px] lg:text-[3.5rem]">
-                {String(altitudes[0]).replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-              </span>
+              <span ref={altRef} className="text-[30px] lg:text-[3.5rem]">{fmt(route[0].alt)}</span>
               <span className="ml-1 text-[14px] text-white/50 lg:text-xl">m</span>
             </p>
-            {places && (
-              <p ref={placeRef} className="mt-2 text-[11px] uppercase tracking-[0.2em] text-accent-lime lg:text-xs">
-                {places[0]}
-              </p>
-            )}
+            <p ref={placeRef} className="mt-2 text-[11px] uppercase tracking-[0.2em] text-accent-lime lg:text-xs">
+              {route[0].name}
+            </p>
+            <p ref={noteRef} className="mt-1 hidden text-[13px] leading-snug text-white/55 lg:block">{route[0].note ?? ""}</p>
           </div>
         )}
 
@@ -158,8 +165,9 @@ export const Method = ({ content, altitudes, places }: MethodProps) => {
                   {/* punt */}
                   <span
                     className={`absolute -left-1.5 -top-1.5 h-3 w-3 rotate-45 border transition-all duration-500 ${
-                      isReached ? "border-white bg-white" : "border-white/40 bg-[#070a12]"
+                      isReached ? "" : "bg-[#070a12]"
                     }`}
+                    style={{ borderColor: FLAG_COLORS[i % FLAG_COLORS.length], backgroundColor: isReached ? FLAG_COLORS[i % FLAG_COLORS.length] : undefined }}
                   />
                   {/* pal i bandera */}
                   <span
@@ -169,8 +177,9 @@ export const Method = ({ content, altitudes, places }: MethodProps) => {
                   />
                   <span
                     className={`absolute -top-12 left-0 flex h-6 w-9 items-center justify-center transition-all duration-500 md:-top-16 md:h-7 md:w-10 ${
-                      isReached ? "bg-white opacity-100" : "bg-white/40 opacity-60"
+                      isReached ? "opacity-100" : "opacity-45"
                     }`}
+                    style={{ backgroundColor: FLAG_COLORS[i % FLAG_COLORS.length] }}
                   >
                     <svg viewBox="0 0 640 420" className="h-3 w-auto md:h-3.5" aria-hidden="true">
                       <path fill="#070a12" fillRule="evenodd" d="M2 419 L63 419 L184 249 L305 419 L637 419 L340 0 L300 0Z M345 95 L539 370 L344 368Z M294 95 L294 315 L216 206Z" />

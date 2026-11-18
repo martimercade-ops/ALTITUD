@@ -20,7 +20,16 @@ export const MetodologiaView = () => (
     <SiteNav {...homeNav} homeHref="/" navLabel="Principal" />
     <main id="top" className="w-full bg-hero-page text-[#171717]">
       {/* La ruta amb altímetre */}
-      <Method content={methodContent} altitudes={[1023, 2942]} places={["Andorra la Vella", "Comapedrosa"]} />
+      <Method
+        content={methodContent}
+        route={[
+          { name: "Andorra la Vella", alt: 1023, note: "Sortim de l'oficina." },
+          { name: "Arinsal", alt: 1550, note: "Comença el camí: escoltem i analitzem." },
+          { name: "Refugi de Comapedrosa", alt: 2260, note: "Parada per recarregar piles i traçar el pla." },
+          { name: "Estany Negre", alt: 2630, note: "L'última pujada, la de més feina." },
+          { name: "Pic de Comapedrosa", alt: 2942, note: "El sostre d'Andorra. I ara, el següent cim." },
+        ]}
+      />
 
       {/* Valors de muntanya */}
       <section aria-labelledby="valors-title" className="mx-auto max-w-6xl px-6 py-24 md:px-10 md:py-32">

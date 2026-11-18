@@ -141,7 +141,7 @@ export const ProjectView = ({ project, prev, next }: ProjectViewProps) => {
         <nav aria-label="Altres projectes" className="mx-auto max-w-6xl px-6 pb-24 md:px-10 md:pb-32">
           <div className="flex items-end justify-between gap-6">
             <h2 className="text-[1.75rem] font-light leading-[1.05] tracking-tight sm:text-[2.25rem]">Més projectes</h2>
-            <Link href="/#projects" className="whitespace-nowrap rounded-full border border-black/15 px-5 py-2.5 text-sm font-medium hover:border-black/50">
+            <Link href="/projectes" className="whitespace-nowrap rounded-full border border-black/15 px-5 py-2.5 text-sm font-medium hover:border-black/50">
               Tots els projectes
             </Link>
           </div>

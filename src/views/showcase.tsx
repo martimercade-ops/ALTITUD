@@ -20,6 +20,7 @@ export interface ShowcaseContent {
   cta: { label: string; href: string };
   items: ShowcaseItem[];
   extra?: { label: string; items: { label: string; href: string }[] };
+  tools?: { label: string; items: string[] };
 }
 
 export interface ShowcaseProps {
@@ -84,7 +85,7 @@ const Column = ({ id, href, prefix, name, description, image, index }: ShowcaseI
 };
 
 export const Showcase = ({ content }: ShowcaseProps) => {
-  const { heading, cta, items, extra } = content;
+  const { heading, cta, items, extra, tools } = content;
   return (
     <section
       id="services"
@@ -125,6 +126,15 @@ export const Showcase = ({ content }: ShowcaseProps) => {
               {x.label}
               <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">→</span>
             </Link>
+          ))}
+        </div>
+      )}
+
+      {tools && (
+        <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2 border-t border-plum/10 px-6 py-6 md:px-10 lg:px-12">
+          <span className="mr-2 text-xs font-semibold uppercase tracking-[0.25em] text-black/40">{tools.label}</span>
+          {tools.items.map((t) => (
+            <span key={t} className="text-[14px] text-black/45">{t}</span>
           ))}
         </div>
       )}
