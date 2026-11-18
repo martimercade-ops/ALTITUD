@@ -28,7 +28,7 @@ for await (const ruta of fitxers(ARREL)) {
     } catch {}
     await sharp(ruta)
       .resize({ width: Math.min(w, width), withoutEnlargement: true })
-      .webp({ quality: 72, effort: 5 })
+      .webp({ quality: w >= 1920 ? 60 : w >= 1440 ? 66 : 72, effort: 6 })
       .toFile(desti);
     total++;
   }

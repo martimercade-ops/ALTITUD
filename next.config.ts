@@ -23,6 +23,13 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      {
+        // Imatges i icones: el navegador i la CDN de Hostinger les guarden 30 dies
+        source: "/assets/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=2592000, stale-while-revalidate=86400" },
+        ],
+      },
     ];
   },
 

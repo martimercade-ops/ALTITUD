@@ -15,7 +15,7 @@ export interface RevealProps {
  * Afegeix la classe `is-in` quan l'element entra a la pantalla (una sola vegada).
  * Les animacions es defineixen al CSS amb `.reveal-*`.
  */
-export const Reveal = ({ as: Tag = "div", className = "", style, children, threshold = 0.25 }: RevealProps) => {
+export const Reveal = ({ as: Tag = "div", className = "", style, children, threshold = 0.12 }: RevealProps) => {
   const ref = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
 
@@ -33,7 +33,7 @@ export const Reveal = ({ as: Tag = "div", className = "", style, children, thres
           io.disconnect();
         }
       },
-      { threshold },
+      { threshold, rootMargin: "0px 0px 10% 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
