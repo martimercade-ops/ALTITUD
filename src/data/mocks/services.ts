@@ -133,8 +133,8 @@ export const services: Service[] = [
     headline: "Imatges que expliquen la teva història.",
     intro:
       "Produïm vídeo i fotografia professional per a la teva marca: des de reels per a xarxes fins a vídeos corporatius i sessions de producte, amb edició i postproducció incloses.",
-    image: `${A}/camera.jpg`,
-    gallery: [BALANZEN, ROSTISSERIA],
+    image: `${A}/cafe-balanzen.jpg`,
+    gallery: [ROSTISSERIA],
     includes: [
       { title: "Vídeo corporatiu", text: "Presenta la teva empresa i el teu equip amb qualitat." },
       { title: "Reels per a xarxes", text: "Gravació i edició en format vertical, llestes per publicar." },
@@ -156,8 +156,7 @@ export const services: Service[] = [
     headline: "Una marca que es recorda.",
     intro:
       "Creem o renovem la identitat visual de la teva empresa: logotip, colors, tipografia i aplicacions, perquè la teva marca sigui coherent i reconeixible a tot arreu.",
-    image: `${A}/disseny.jpg`,
-    gallery: [ROSTISSERIA],
+    image: `${A}/rostisseria-cap-de-carrera.jpg`,
     includes: [
       { title: "Logotip", text: "Un símbol propi, versàtil i fàcil de recordar." },
       { title: "Identitat visual", text: "Paleta de colors, tipografies i estil gràfic." },

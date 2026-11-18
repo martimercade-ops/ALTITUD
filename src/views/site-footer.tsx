@@ -81,27 +81,16 @@ export const SiteFooter = ({ content }: SiteFooterProps) => {
           </div>
         </Reveal>
 
-        <Reveal className="reveal-up flex flex-col justify-between overflow-hidden rounded-3xl border border-footer-fg/15 bg-footer/80 backdrop-blur md:col-span-2">
-          <div className="relative h-36 overflow-hidden">
-            <Image
-              src="/assets/altitud/cafe-balanzen.jpg"
-              alt="Cafè i croissants a Balanzen, fotografia de l'equip d'Altitud Digital"
-              fill
-              sizes="(max-width: 768px) 92vw, 26rem"
-              className="object-cover object-[50%_45%]"
-            />
-            <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-transparent via-footer/20 to-footer" />
-          </div>
-          <div className="flex flex-1 flex-col justify-between px-7 pb-7">
+        <Reveal className="reveal-up flex flex-col justify-between rounded-3xl border border-footer-fg/15 bg-footer/70 p-7 backdrop-blur md:col-span-2">
           <div>
-            <svg viewBox="0 0 64 64" aria-hidden="true" className="-mt-6 h-12 w-12 text-accent-lime">
+            <svg viewBox="0 0 64 64" aria-hidden="true" className="h-14 w-14 text-accent-lime">
               <path className="cafe-vapor" d="M24 14c-3 4 3 6 0 10" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
               <path className="cafe-vapor cafe-vapor--2" d="M33 12c-3 4 3 6 0 10" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
               <path className="cafe-vapor cafe-vapor--3" d="M42 14c-3 4 3 6 0 10" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
               <path d="M14 30h36v10a14 14 0 01-14 14h-8a14 14 0 01-14-14z" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinejoin="round" />
               <path d="M50 33h3a6 6 0 010 12h-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
             </svg>
-            <p className="mt-4 text-xs font-medium uppercase tracking-wide text-footer-muted">Cafè virtual</p>
+            <p className="mt-6 text-xs font-medium uppercase tracking-wide text-footer-muted">Cafè virtual</p>
             <p className="mt-2 text-2xl font-light leading-tight tracking-tight">No pots venir? Fem el cafè per videotrucada.</p>
             <p className="mt-3 text-sm leading-relaxed text-footer-fg/70">
               Vint minuts, cadascú amb el seu cafè, per conèixer el teu projecte i veure com et podem ajudar.
@@ -114,7 +103,6 @@ export const SiteFooter = ({ content }: SiteFooterProps) => {
             Reserva un cafè virtual
             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-accent-lime">→</span>
           </Link>
-          </div>
         </Reveal>
       </div>
 
