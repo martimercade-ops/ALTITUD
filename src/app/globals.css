@@ -355,3 +355,14 @@ img {
 @media (prefers-reduced-motion: reduce) {
   .cims-pde .cims-foto, .cims-pde .cims-marca { transform: none; opacity: 1; transition: none; }
 }
+
+/* Mapa en xarxa: els punts s'encenen per tot el país */
+.reveal-map .mapa-xarxa { opacity: 0; transition: opacity 1.6s ease 0.8s; }
+.reveal-map.is-in .mapa-xarxa { opacity: 0.5; }
+.reveal-map .mapa-node { opacity: 0; }
+.reveal-map.is-in .mapa-node { animation: mapa-node 5s ease-in-out infinite; }
+@keyframes mapa-node { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .reveal-map .mapa-xarxa { opacity: 0.5; transition: none; }
+  .reveal-map .mapa-node { opacity: 1; animation: none; }
+}

@@ -1,46 +1,60 @@
 import { Reveal } from "@/components/common/reveal";
-import { andorraMap, toolIcons } from "@/data/mocks/arrels";
-
-const LABEL_SIDE: Record<string, "left" | "right"> = {
-  Canillo: "right",
-  Encamp: "right",
-  Ordino: "left",
-  "La Massana": "left",
-  "Andorra la Vella": "left",
-  "Escaldes-Engordany": "right",
-  "Sant Julià de Lòria": "left",
-};
+import { andorraMap, andorraNet, toolIcons } from "@/data/mocks/arrels";
 
 const AndorraMap = () => {
-  const { w, h, d, parishes } = andorraMap;
+  const { w, h, d } = andorraMap;
+  const { inner, border, edges, outer, outerEdges, outerLinks } = andorraNet;
+  const all = [...inner, ...border];
+  const pad = 260;
   return (
-    <svg viewBox={`-120 -40 ${w + 240} ${h + 80}`} className="h-auto w-full" role="img" aria-label="Mapa d'Andorra amb les set parròquies">
+    <svg viewBox={`${-pad} ${-pad} ${w + pad * 2} ${h + pad * 2}`} className="h-auto w-full" role="img" aria-label="Mapa d'Andorra amb punts il·luminats per tot el país">
       <defs>
-        <radialGradient id="mapa-glow" cx="45%" cy="55%" r="60%">
-          <stop offset="0%" stopColor="#2f5bff" stopOpacity="0.28" />
-          <stop offset="100%" stopColor="#2f5bff" stopOpacity="0" />
+        <filter id="mapa-brill" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="6" result="b" />
+          <feMerge>
+            <feMergeNode in="b" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+        <radialGradient id="mapa-fons" cx="45%" cy="50%" r="60%">
+          <stop offset="0%" stopColor="#1f4bff" stopOpacity="0.35" />
+          <stop offset="100%" stopColor="#1f4bff" stopOpacity="0.05" />
         </radialGradient>
-        <pattern id="mapa-punts" width="14" height="14" patternUnits="userSpaceOnUse">
-          <circle cx="7" cy="7" r="1.6" fill="rgb(255 255 255 / 0.22)" />
-        </pattern>
+        <radialGradient id="mapa-punt" r="50%">
+          <stop offset="0%" stopColor="#ffffff" />
+          <stop offset="35%" stopColor="#8fd0ff" />
+          <stop offset="100%" stopColor="#2e9bff" stopOpacity="0" />
+        </radialGradient>
       </defs>
-      <path d={d} fill="url(#mapa-glow)" />
-      <path d={d} fill="url(#mapa-punts)" />
-      <path d={d} fill="none" stroke="rgb(255 255 255 / 0.55)" strokeWidth="2.5" strokeLinejoin="round" className="mapa-traç" pathLength={1} />
-      {Object.entries(parishes).map(([name, [x, y]], i) => {
-        const side = LABEL_SIDE[name] ?? "right";
+
+      {/* Xarxa exterior */}
+      <g className="mapa-xarxa" stroke="#2e9bff" strokeWidth="1.2" opacity="0.45">
+        {outerEdges.map(([a, b]) => (
+          <line key={`o${a}-${b}`} x1={outer[a][0]} y1={outer[a][1]} x2={outer[b][0]} y2={outer[b][1]} />
+        ))}
+        {outerLinks.map(([a, b]) => (
+          <line key={`l${a}-${b}`} x1={outer[a][0]} y1={outer[a][1]} x2={border[b][0]} y2={border[b][1]} />
+        ))}
+      </g>
+
+      {/* Silueta brillant */}
+      <path d={d} fill="url(#mapa-fons)" />
+      <path d={d} fill="none" stroke="#5cc2ff" strokeWidth="5" strokeLinejoin="round" filter="url(#mapa-brill)" className="mapa-traç" pathLength={1} />
+
+      {/* Xarxa interior */}
+      <g className="mapa-xarxa" stroke="#6fb8ff" strokeWidth="1.3" opacity="0.5">
+        {edges.map(([a, b]) => (
+          <line key={`${a}-${b}`} x1={all[a][0]} y1={all[a][1]} x2={all[b][0]} y2={all[b][1]} />
+        ))}
+      </g>
+
+      {/* Punts que s'encenen */}
+      {[...outer, ...all].map(([x, y], i) => {
+        const big = i >= outer.length && i < outer.length + 7;
         return (
-          <g key={name} className="mapa-parroquia" style={{ animationDelay: `${0.8 + i * 0.18}s` }}>
-            <circle cx={x} cy={y} r="22" fill="#b6f13a" opacity="0.18" className="mapa-batec" style={{ animationDelay: `${i * 0.35}s` }} />
-            <circle cx={x} cy={y} r="8" fill="#b6f13a" />
-            <text
-              x={side === "right" ? x + 22 : x - 22}
-              y={y + 9}
-              textAnchor={side === "right" ? "start" : "end"}
-              className="fill-white/80 text-[26px] font-medium"
-            >
-              {name}
-            </text>
+          <g key={i} className="mapa-node" style={{ animationDelay: `${((i * 37) % 50) / 10}s` }}>
+            <circle cx={x} cy={y} r={big ? 26 : 16} fill="url(#mapa-punt)" />
+            <circle cx={x} cy={y} r={big ? 5 : 3} fill="#fff" />
           </g>
         );
       })}
@@ -50,7 +64,6 @@ const AndorraMap = () => {
 
 const STATS = [
   { value: "+100", label: "empreses del país confien en nosaltres" },
-  { value: "7/7", label: "parròquies on hem treballat" },
   { value: "+6", label: "anys d'experiència en màrqueting" },
 ];
 
@@ -74,7 +87,7 @@ export const Arrels = () => (
               Espanya i Llatinoamèrica.
             </p>
           </Reveal>
-          <Reveal as="dl" className="reveal-stagger mt-10 grid grid-cols-3 gap-4 border-t border-white/10 pt-8">
+          <Reveal as="dl" className="reveal-stagger mt-10 grid grid-cols-2 gap-4 border-t border-white/10 pt-8">
             {STATS.map((s, i) => (
               <div key={s.label} style={{ transitionDelay: `${i * 120}ms` }}>
                 <dt className="sr-only">{s.label}</dt>
