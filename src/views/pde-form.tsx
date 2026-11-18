@@ -141,7 +141,8 @@ export const PdeForm = ({ solutions }: { solutions: PdeSolution[] }) => {
         <span className={`mt-5 block font-normal tracking-tight ${big ? "text-xl" : "text-lg"}`}>{s.name}</span>
         <span className="mt-2 block text-[15px] leading-snug text-black/60">{s.text}</span>
         <span className="mt-5 block border-t border-black/10 pt-4 text-sm text-black/55">
-          Ajut de fins a <strong className="text-lg font-semibold text-black">{formatEuros(s.max)}</strong>
+          <strong className="font-semibold text-[#2f5bff]">{s.pct}%</strong> del cost · fins a{" "}
+          <strong className="text-lg font-semibold text-black">{formatEuros(s.max)}</strong>
         </span>
       </button>
     );

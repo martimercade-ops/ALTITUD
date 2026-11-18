@@ -45,7 +45,7 @@ const ROSTISSERIA = {
 const A = "/assets/altitud";
 
 const STEPS_MARKETING: ServiceStep[] = methodContent.phases.map((p) => ({
-  title: `${p.name} · ${p.stage}`,
+  title: p.name,
   text: p.text,
 }));
 

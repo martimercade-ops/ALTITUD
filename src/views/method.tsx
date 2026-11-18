@@ -200,7 +200,7 @@ export const Method = ({ content, altitudes, places }: MethodProps) => {
             <div className="flex items-baseline gap-[14px] lg:block">
               <p className="text-[44px] font-extralight leading-none text-white/40 lg:text-[4.5rem]">{pad(active + 1)}</p>
               <p className="text-[20px] font-light lg:mt-4 lg:text-2xl">
-                {phase.name} · <strong className="font-semibold">{phase.stage}</strong>
+                <strong className="font-semibold">{phase.name}</strong>
               </p>
             </div>
             <p className="mt-[10px] min-h-[66px] text-[15px] leading-[1.45] text-white/70 lg:mt-3 lg:min-h-0 lg:text-[0.95rem] lg:leading-relaxed">{phase.text}</p>

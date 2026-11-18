@@ -4,7 +4,7 @@ import { generateMetadata as pageMetadata } from "@/utils/seo/generate-page-meta
 export const metadata = pageMetadata({
   title: "Metodologia — Altitud Digital",
   description:
-    "Camp base, la ruta, l'ascens i el cim: la metodologia d'Altitud Digital per fer créixer el teu negoci, inspirada en la muntanya d'Andorra.",
+    "Diagnòstic, estratègia, execució i resultats: així treballem a Altitud Digital per fer créixer el teu negoci.",
   url: "/metodologia",
 });
 
