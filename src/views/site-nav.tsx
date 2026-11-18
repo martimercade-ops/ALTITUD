@@ -1,7 +1,27 @@
+import { MobileMenu } from "@/views/mobile-menu";
+
 export interface SiteNavLink {
   label: string;
   href: string;
+  /** Agrupa els enllaços del desplegable en columnes */
+  group?: string;
 }
+
+const GROUP_LABEL: Record<string, string> = {
+  marketing: "Màrqueting i creativitat",
+  ia: "Intel·ligència artificial",
+};
+
+const groupLinks = (links: SiteNavLink[]) => {
+  const groups: { key: string; links: SiteNavLink[] }[] = [];
+  for (const link of links) {
+    const key = link.group ?? "";
+    const g = groups.find((x) => x.key === key);
+    if (g) g.links.push(link);
+    else groups.push({ key, links: [link] });
+  }
+  return groups;
+};
 
 export interface SiteNavItem extends SiteNavLink {
   children?: SiteNavLink[];
@@ -30,7 +50,7 @@ export const SiteNav = ({
 }: SiteNavProps) => (
   <header className="fixed inset-x-4 top-4 z-50 flex items-center justify-between gap-4 text-white md:inset-x-6 md:top-6">
     <div className="flex items-center gap-3">
-      <a href={homeHref} aria-label={brand} className={`${PILL} gap-2 px-5 font-medium`}>
+      <a href={homeHref} aria-label={brand} className={`${PILL} relative z-[60] gap-2 px-5 font-medium`}>
         <img src="/assets/altitud/altitud-logo-h.svg" alt="" width={128} height={16} className="block h-4 w-auto" />
       </a>
       <nav aria-label={navLabel} className={`${PILL} hidden px-2 md:flex`}>
@@ -52,18 +72,29 @@ export const SiteNav = ({
                 </svg>
               </a>
               <div className="invisible absolute left-0 top-full pt-3 opacity-0 transition-[opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                <ul className="min-w-60 rounded-2xl border border-white/10 bg-[#0b0d16]/90 p-2 shadow-lg backdrop-blur-md">
-                  {item.children.map((child) => (
-                    <li key={child.href}>
-                      <a
-                        href={child.href}
-                        className="block rounded-xl px-4 py-2.5 text-sm text-white/80 hover:bg-white/10 hover:text-white focus-visible:bg-white/10 focus-visible:text-white"
-                      >
-                        {child.label}
-                      </a>
-                    </li>
+                <div className="flex gap-2 rounded-2xl border border-white/10 bg-[#0b0d16]/90 p-2 shadow-lg backdrop-blur-md">
+                  {groupLinks(item.children).map((g) => (
+                    <div key={g.key} className="min-w-60">
+                      {g.key && (
+                        <p className="px-4 pb-1 pt-3 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-white/40">
+                          {GROUP_LABEL[g.key] ?? g.key}
+                        </p>
+                      )}
+                      <ul>
+                        {g.links.map((child) => (
+                          <li key={child.href}>
+                            <a
+                              href={child.href}
+                              className="block rounded-xl px-4 py-2.5 text-sm text-white/80 hover:bg-white/10 hover:text-white focus-visible:bg-white/10 focus-visible:text-white"
+                            >
+                              {child.label}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
             </div>
           ) : (
@@ -78,11 +109,14 @@ export const SiteNav = ({
         )}
       </nav>
     </div>
-    <a
-      href={cta.href}
-      className="inline-flex h-11 items-center rounded-full bg-white px-6 text-sm font-medium text-plum shadow-sm hover:bg-white/90"
-    >
-      {cta.label}
-    </a>
+    <div className="flex items-center gap-2">
+      <a
+        href={cta.href}
+        className="inline-flex h-11 items-center rounded-full bg-white px-6 text-sm font-medium text-plum shadow-sm hover:bg-white/90"
+      >
+        {cta.label}
+      </a>
+      <MobileMenu items={items} cta={cta} label={navLabel} />
+    </div>
   </header>
 );

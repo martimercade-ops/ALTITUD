@@ -138,10 +138,16 @@ html:has(meta[name="x-robot-view"]) [data-preloader] {
   -webkit-mask-position: right center;
   mask-position: right center;
 }
+.logo-vidre--centre {
+  inset: 22% 8% 42% 8%;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
 .logo-vidre--peu { inset: 30% 0 40% 0; animation: none; }
 @media (min-width: 64rem) {
   .logo-vidre { inset: 9% 0 14% 0; }
   .logo-vidre--dreta { inset: 12% 5% 34% 50%; }
+  .logo-vidre--centre { inset: 12% 20% 30% 20%; }
   .logo-vidre--peu { inset: 28% 0 30% 0; }
 }
 @keyframes logo-vidre-in {
@@ -172,3 +178,37 @@ img {
   -webkit-user-select: none;
   user-select: none;
 }
+
+/* Logos de clients: dues files en moviment continu */
+.logos-pista {
+  animation: logos-desplaca var(--logos-durada, 60s) linear infinite;
+}
+.logos-pista--inversa {
+  animation-direction: reverse;
+}
+@keyframes logos-desplaca {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .logos-pista { animation: none; }
+  .logos-fila { overflow-x: auto; }
+}
+
+.logo-vidre--parlem { display: none; }
+@media (min-width: 64rem) {
+  .logo-vidre--parlem {
+    display: block;
+    inset: 58% 58% 2% -4%;
+    opacity: 0.18;
+    -webkit-mask-position: left bottom;
+    mask-position: left bottom;
+  }
+}
+
+.method-fase { animation: method-fase-in 600ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+@keyframes method-fase-in {
+  from { opacity: 0; transform: translateY(14px); filter: blur(6px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+@media (prefers-reduced-motion: reduce) { .method-fase { animation: none; } }

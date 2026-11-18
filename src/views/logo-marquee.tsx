@@ -1,8 +1,4 @@
-"use client";
-
-import { useEffect } from "react";
-import { animated, useSpring } from "@react-spring/web";
-import { subscribeToTicker } from "@/lib/animation/ticker";
+import type { CSSProperties } from "react";
 
 export interface ClientLogo {
   name: string;
@@ -11,76 +7,112 @@ export interface ClientLogo {
   height: number;
 }
 
-export interface LogoMarqueeProps {
-  logos: ClientLogo[];
+export interface LogoMarqueeContent {
   label: string;
+  badge: { strong: string; text: string };
+  heading: { text: string; strong: string };
+  items: ClientLogo[];
 }
 
-const COPIES = 6;
-const ONE_SET = 100 / COPIES;
+export interface LogoMarqueeProps {
+  content: LogoMarqueeContent;
+}
+
+/**
+ * Mida òptica: tots els logos ocupen aproximadament la mateixa àrea,
+ * de manera que els quadrats no es veuen enormes ni els allargats minúsculs.
+ */
+const AREA = 5200;
+const MAX_H = 52;
+const MIN_H = 18;
+const MAX_W = 190;
+
+const logoSize = ({ width, height }: ClientLogo) => {
+  const ratio = width / height;
+  let h = Math.min(MAX_H, Math.max(MIN_H, Math.sqrt(AREA / ratio)));
+  let w = h * ratio;
+  if (w > MAX_W) {
+    w = MAX_W;
+    h = w / ratio;
+  }
+  return { width: Math.round(w), height: Math.round(h) };
+};
 
 const Row = ({
   logos,
-  direction,
-  speed,
+  reverse,
+  duration,
 }: {
   logos: ClientLogo[];
-  direction: "left" | "right";
-  speed: number;
-}) => {
-  const [{ s }, api] = useSpring(() => ({
-    s: 0,
-    config: { tension: 90, friction: 34 },
-  }));
-
-  useEffect(() => {
-    const unsubscribe = subscribeToTicker(
-      () => api.start({ s: window.scrollY * speed }),
-      () => 0,
-    );
-    return unsubscribe;
-  }, [api, speed]);
-
-  const transform = s.to((v) => {
-    const m = ((v % ONE_SET) + ONE_SET) % ONE_SET;
-    const off = direction === "left" ? -m : -(ONE_SET - m);
-    return `translate3d(${off}%,0,0)`;
-  });
-
-  return (
-    <div className="flex overflow-hidden">
-      <animated.div
-        style={{ transform }}
-        className="flex w-max shrink-0 items-center text-logo"
-      >
-        {Array.from({ length: COPIES }).flatMap((_, c) =>
-          logos.map((logo, i) => (
-            <img
-              key={`${c}-${i}`}
-              src={logo.src}
-              alt=""
-              width={logo.width}
-              height={logo.height}
-              decoding="async"
-              className="mr-3 h-16 w-auto shrink-0 rounded-xl md:mr-4 md:h-20"
-            />
-          )),
-        )}
-      </animated.div>
+  reverse?: boolean;
+  duration: number;
+}) => (
+  <div className="logos-fila group flex overflow-hidden">
+    <div
+      className={`logos-pista flex w-max shrink-0 items-center group-hover:[animation-play-state:paused] ${
+        reverse ? "logos-pista--inversa" : ""
+      }`}
+      style={{ "--logos-durada": `${duration}s` } as CSSProperties}
+    >
+      {[0, 1].map((copy) =>
+        logos.map((logo) => {
+          const size = logoSize(logo);
+          return (
+            <div
+              key={`${copy}-${logo.name}`}
+              className="flex h-20 w-40 shrink-0 items-center justify-center px-4 md:h-24 md:w-56 md:px-6"
+            >
+              <img
+                src={logo.src}
+                alt=""
+                width={size.width}
+                height={size.height}
+                loading="lazy"
+                decoding="async"
+                style={{ width: size.width, height: size.height }}
+                className="max-w-full object-contain opacity-55 transition-opacity duration-300 hover:opacity-100"
+              />
+            </div>
+          );
+        }),
+      )}
     </div>
-  );
-};
+  </div>
+);
 
-export const LogoMarquee = ({ logos, label }: LogoMarqueeProps) => {
-  const half = Math.ceil(logos.length / 2);
+export const LogoMarquee = ({ content }: LogoMarqueeProps) => {
+  const { label, badge, heading, items } = content;
+  const half = Math.ceil(items.length / 2);
   return (
-    <section aria-label={label} className="bg-hero-page py-12">
-      <ul className="sr-only">
-        {logos.map((logo) => <li key={logo.name}>{logo.name}</li>)}
+    <section
+      aria-labelledby="logos-title"
+      className="bg-[#0b1424] py-20 text-white md:py-28"
+    >
+      <div className="mx-auto flex max-w-3xl flex-col items-center px-6 text-center">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-[#2f5bff] px-4 py-1.5 text-xs uppercase tracking-wide text-white shadow-[0_0_30px_rgb(47_91_255/0.35)] md:text-sm">
+          <strong className="font-bold">{badge.strong}</strong>
+          <span className="font-light">{badge.text}</span>
+        </span>
+        <h2
+          id="logos-title"
+          className="mt-6 text-[1.6rem] font-light leading-[1.2] tracking-tight md:text-[2.25rem]"
+        >
+          {heading.text} <strong className="font-semibold">{heading.strong}</strong>
+        </h2>
+      </div>
+
+      <ul className="sr-only" aria-label={label}>
+        {items.map((logo) => (
+          <li key={logo.name}>{logo.name}</li>
+        ))}
       </ul>
-      <div aria-hidden="true" className="flex flex-col gap-3 md:gap-4">
-        <Row logos={logos.slice(0, half)} direction="left" speed={0.005} />
-        <Row logos={logos.slice(half)} direction="right" speed={0.0038} />
+
+      <div
+        aria-hidden="true"
+        className="mt-14 flex flex-col gap-2 [mask-image:linear-gradient(90deg,transparent,black_12%,black_88%,transparent)] md:mt-20 md:gap-4"
+      >
+        <Row logos={items.slice(0, half)} duration={55} />
+        <Row logos={items.slice(half)} duration={65} reverse />
       </div>
     </section>
   );

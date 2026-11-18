@@ -1,4 +1,4 @@
-import type { ClientLogo } from "@/views/logo-marquee";
+import type { LogoMarqueeContent } from "@/views/logo-marquee";
 import type { HeroContent } from "@/views/hero";
 import type { AboutContent } from "@/views/about";
 import type { StatsContent } from "@/views/stats";
@@ -9,14 +9,12 @@ import type { SiteNavContent } from "@/views/site-nav";
 import type { ReviewsContent } from "@/views/reviews";
 import type { TeamContent } from "@/views/team";
 import { projectHref, projects } from "@/data/mocks/projects";
+import { serviceHref, services } from "@/data/mocks/services";
 
 export interface HomeContent {
   nav: SiteNavContent;
   hero: HeroContent;
-  logos: {
-    label: string;
-    items: ClientLogo[];
-  };
+  logos: LogoMarqueeContent;
   about: AboutContent & { labelId: string };
   stats: StatsContent;
   showcase: ShowcaseContent;
@@ -27,10 +25,14 @@ export interface HomeContent {
 }
 
 const A = "/assets/altitud";
+
+/** Serveis que surten com a columnes a la portada; la resta, com a enllaços «També». */
+const SHOWCASE = ["web-ecommerce", "seo-sem", "xarxes-socials", "audiovisual", "branding", "ia-automatitzacions"];
 export const MAPS =
   "https://www.google.com/maps/search/?api=1&query=Altitud+Digital+Ag%C3%A8ncia+de+Marketing+Andorra";
 
-const contacte = { label: "Parlem", href: "#contact" };
+export const PARLEM_HREF = "/parlem";
+const contacte = { label: "Parlem", href: PARLEM_HREF };
 
 const siteNav: SiteNavContent = {
   brand: "Altitud Digital",
@@ -38,14 +40,7 @@ const siteNav: SiteNavContent = {
     {
       label: "Serveis",
       href: "#services",
-      children: [
-        { label: "Web & e-commerce", href: "#servei-web" },
-        { label: "SEO, SEM & publicitat digital", href: "#servei-seo" },
-        { label: "Gestió de xarxes socials", href: "#servei-xarxes" },
-        { label: "Producció i edició audiovisual", href: "#servei-audiovisual" },
-        { label: "Branding & disseny gràfic", href: "#servei-branding" },
-        { label: "IA & automatitzacions", href: "#servei-ia" },
-      ],
+      children: services.map((s) => ({ label: s.name, href: serviceHref(s.slug), group: s.group })),
     },
     { label: "Projectes", href: "#projects" },
     { label: "Sobre nosaltres", href: "#about" },
@@ -54,12 +49,15 @@ const siteNav: SiteNavContent = {
   cta: contacte,
 };
 
+/** Els enllaços d'àncora (#…) apunten a la portada quan som en una altra pàgina. */
+const toHome = (href: string) => (href.startsWith("#") ? `/${href}` : href);
+
 export const homeNav: SiteNavContent = {
   ...siteNav,
   items: siteNav.items.map((item) => ({
     ...item,
-    href: `/${item.href}`,
-    children: item.children?.map((child) => ({ ...child, href: `/${child.href}` })),
+    href: toHome(item.href),
+    children: item.children?.map((child) => ({ ...child, href: toHome(child.href) })),
   })),
 };
 
@@ -69,7 +67,7 @@ export const homeContent: HomeContent = {
     titleLines: ["Generem negoci a", "empreses d'Andorra."],
     sectionLabel: "Inici",
     image: { src: `${A}/nevado-hero.jpg`, alt: "Cim nevat al capvespre, protagonista al centre de la imatge" },
-    cta: { label: "Parlem del teu projecte", href: "#contact" },
+    cta: { label: "Parlem del teu projecte", href: PARLEM_HREF },
     secondaryCta: { label: "Veure serveis", href: "#services" },
     insightTitle: "Agència de màrqueting 360° a Andorra.",
     insightBody:
@@ -77,35 +75,37 @@ export const homeContent: HomeContent = {
   },
   logos: {
     label: "Marques que confien en Altitud Digital",
+    badge: { strong: "+100", text: "clients satisfets" },
+    heading: { text: "Empreses que ja creixen amb la nostra agència de", strong: "màrqueting digital" },
     items: [
-      { name: "Princiesport", src: `${A}/clients/princiesport.webp`, width: 376, height: 160 },
-      { name: "ARK Real Estate", src: `${A}/clients/ark-real-estate.webp`, width: 160, height: 160 },
-      { name: "Ateci", src: `${A}/clients/ateci.webp`, width: 167, height: 160 },
-      { name: "Auró Jardiners", src: `${A}/clients/auro-jardiners.webp`, width: 196, height: 160 },
-      { name: "Balanzen", src: `${A}/clients/balanzen.webp`, width: 376, height: 160 },
-      { name: "Brainworks", src: `${A}/clients/brainworks.webp`, width: 227, height: 160 },
-      { name: "Ciutadans Compromesos", src: `${A}/clients/ciutadans-compromesos.webp`, width: 184, height: 160 },
-      { name: "Claudia Moncau Yoga", src: `${A}/clients/claudia-moncau-yoga.webp`, width: 217, height: 160 },
-      { name: "Constructora Carracedo", src: `${A}/clients/constructora-carracedo.webp`, width: 252, height: 160 },
-      { name: "El Rato Barre House", src: `${A}/clients/el-rato-barre-house.webp`, width: 376, height: 160 },
-      { name: "El Rollo - Café Andorra", src: `${A}/clients/el-rollo-cafe-andorra.webp`, width: 376, height: 160 },
-      { name: "FAE", src: `${A}/clients/fae.webp`, width: 352, height: 160 },
-      { name: "Federació Andorrana d'Handbol", src: `${A}/clients/federacio-andorrana-d-handbol.webp`, width: 255, height: 160 },
-      { name: "Ferreteria Principat", src: `${A}/clients/ferreteria-principat.webp`, width: 181, height: 160 },
-      { name: "Hotel Niu", src: `${A}/clients/hotel-niu.webp`, width: 178, height: 160 },
-      { name: "Kantar", src: `${A}/clients/kantar.webp`, width: 376, height: 160 },
-      { name: "Magnesi Arquitectes", src: `${A}/clients/magnesi-arquitectes.webp`, width: 180, height: 160 },
-      { name: "Maison Carne", src: `${A}/clients/maison-carne.webp`, width: 171, height: 160 },
-      { name: "MCA Assessors", src: `${A}/clients/mca-assessors.webp`, width: 306, height: 160 },
-      { name: "Medic Estetic", src: `${A}/clients/medic-estetic.webp`, width: 258, height: 160 },
-      { name: "Nou Aire", src: `${A}/clients/nou-aire.webp`, width: 172, height: 160 },
-      { name: "Olympus Race Andorra", src: `${A}/clients/olympus-race-andorra.webp`, width: 162, height: 160 },
-      { name: "Patronat Dames de Meritxell", src: `${A}/clients/patronat-dames-de-meritxell.webp`, width: 200, height: 160 },
-      { name: "Perfect Home", src: `${A}/clients/perfect-home.webp`, width: 160, height: 160 },
-      { name: "Projecte Vida", src: `${A}/clients/projecte-vida.webp`, width: 233, height: 160 },
-      { name: "Relaxia Andorra", src: `${A}/clients/relaxia-andorra.webp`, width: 376, height: 160 },
-      { name: "Restaurante La Llotja", src: `${A}/clients/restaurante-la-llotja.webp`, width: 172, height: 160 },
-      { name: "Via Moda", src: `${A}/clients/via-moda.webp`, width: 376, height: 160 },
+      { name: "Princiesport", src: `${A}/clients/mono/princiesport.webp`, width: 1051, height: 120 },
+      { name: "ARK Real Estate", src: `${A}/clients/mono/ark-real-estate.webp`, width: 104, height: 120 },
+      { name: "Ateci", src: `${A}/clients/mono/ateci.webp`, width: 114, height: 120 },
+      { name: "Auró Jardiners", src: `${A}/clients/mono/auro-jardiners.webp`, width: 143, height: 120 },
+      { name: "Balanzen", src: `${A}/clients/mono/balanzen.webp`, width: 707, height: 120 },
+      { name: "Brainworks", src: `${A}/clients/mono/brainworks.webp`, width: 175, height: 120 },
+      { name: "Ciutadans Compromesos", src: `${A}/clients/mono/ciutadans-compromesos.webp`, width: 131, height: 120 },
+      { name: "Claudia Moncau Yoga", src: `${A}/clients/mono/claudia-moncau-yoga.webp`, width: 165, height: 120 },
+      { name: "Constructora Carracedo", src: `${A}/clients/mono/constructora-carracedo.webp`, width: 206, height: 120 },
+      { name: "El Rato Barre House", src: `${A}/clients/mono/el-rato-barre-house.webp`, width: 362, height: 120 },
+      { name: "El Rollo - Café Andorra", src: `${A}/clients/mono/el-rollo-cafe-andorra.webp`, width: 401, height: 120 },
+      { name: "FAE", src: `${A}/clients/mono/fae.webp`, width: 300, height: 120 },
+      { name: "Federació Andorrana d'Handbol", src: `${A}/clients/mono/federacio-andorrana-d-handbol.webp`, width: 205, height: 120 },
+      { name: "Ferreteria Principat", src: `${A}/clients/mono/ferreteria-principat.webp`, width: 129, height: 120 },
+      { name: "Hotel Niu", src: `${A}/clients/mono/hotel-niu.webp`, width: 126, height: 120 },
+      { name: "Kantar", src: `${A}/clients/mono/kantar.webp`, width: 608, height: 120 },
+      { name: "Magnesi Arquitectes", src: `${A}/clients/mono/magnesi-arquitectes.webp`, width: 128, height: 120 },
+      { name: "Maison Carne", src: `${A}/clients/mono/maison-carne.webp`, width: 119, height: 120 },
+      { name: "MCA Assessors", src: `${A}/clients/mono/mca-assessors.webp`, width: 254, height: 120 },
+      { name: "Medic Estetic", src: `${A}/clients/mono/medic-estetic.webp`, width: 206, height: 120 },
+      { name: "Nou Aire", src: `${A}/clients/mono/nou-aire.webp`, width: 120, height: 120 },
+      { name: "Olympus Race Andorra", src: `${A}/clients/mono/olympus-race-andorra.webp`, width: 110, height: 120 },
+      { name: "Patronat Dames de Meritxell", src: `${A}/clients/mono/patronat-dames-de-meritxell.webp`, width: 146, height: 120 },
+      { name: "Perfect Home", src: `${A}/clients/mono/perfect-home.webp`, width: 99, height: 120 },
+      { name: "Projecte Vida", src: `${A}/clients/mono/projecte-vida.webp`, width: 166, height: 120 },
+      { name: "Relaxia Andorra", src: `${A}/clients/mono/relaxia-andorra.webp`, width: 381, height: 120 },
+      { name: "Restaurante La Llotja", src: `${A}/clients/mono/restaurante-la-llotja.webp`, width: 120, height: 120 },
+      { name: "Via Moda", src: `${A}/clients/mono/via-moda.webp`, width: 659, height: 120 },
     ],
   },
   about: {
@@ -145,20 +145,28 @@ export const homeContent: HomeContent = {
   showcase: {
     heading: "Tot el que la teva empresa necessita per créixer, en un sol equip.",
     cta: contacte,
-    items: [
-      { id: "servei-web", prefix: "Web &", name: "e-commerce", description: "Webs que converteixen visites en clients.", image: `${A}/codi.jpg` },
-      { id: "servei-seo", prefix: "SEO, SEM &", name: "publicitat digital", description: "Més visibilitat, més oportunitats.", image: `${A}/seo.jpg` },
-      { id: "servei-xarxes", prefix: "Gestió de", name: "xarxes socials", description: "Contingut que connecta i genera resultat.", image: `${A}/xarxes.jpg` },
-      { id: "servei-audiovisual", prefix: "Producció i", name: "edició audiovisual", description: "Vídeo, foto i creativitat amb impacte.", image: `${A}/camera.jpg` },
-      { id: "servei-branding", prefix: "Branding &", name: "disseny gràfic", description: "Marques amb identitat que destaquen.", image: `${A}/disseny.jpg` },
-      { id: "servei-ia", prefix: "IA &", name: "automatitzacions", description: "Solucions per estalviar temps i vendre més.", image: `${A}/ia.jpg` },
-    ],
+    items: services
+      .filter((s) => SHOWCASE.includes(s.slug))
+      .map((s) => ({
+        id: `servei-${s.slug}`,
+        href: serviceHref(s.slug),
+        prefix: s.prefix,
+        name: s.suffix,
+        description: s.short,
+        image: s.image,
+      })),
+    extra: {
+      label: "També",
+      items: services
+        .filter((s) => !SHOWCASE.includes(s.slug))
+        .map((s) => ({ label: s.name, href: serviceHref(s.slug) })),
+    },
   },
   works: {
     eyebrow: "Casos d'èxit",
     heading: "Empreses d'Andorra que ja han fet créixer el seu negoci.",
     viewLabel: "Parlem",
-    viewHref: "#contact",
+    viewHref: PARLEM_HREF,
     items: projects.map((p) => ({
       name: p.name,
       sector: p.sector,

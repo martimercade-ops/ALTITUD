@@ -11,6 +11,8 @@ import { SiteFooter } from "@/views/site-footer";
 import { SiteNav } from "@/views/site-nav";
 import { Reviews } from "@/views/reviews";
 import { Team } from "@/views/team";
+import { Method } from "@/views/method";
+import { methodContent } from "@/data/mocks/method";
 import { productContent } from "@/data/mocks/product";
 import { contactContent, footerContent } from "@/data/mocks/contact";
 import { homeContent, preloaderContent, type HomeContent } from "@/data/mocks/home";
@@ -31,7 +33,7 @@ export const HomeView = ({ content = homeContent, robot = false }: HomeViewProps
       <SiteNav {...nav} navLabel="Principal" />
       <main id="top" className="w-full bg-hero-page">
         <Hero content={hero} />
-      <LogoMarquee logos={logos.items} label={logos.label} />
+      <LogoMarquee content={logos} />
       <About content={about} labelId={about.labelId} />
       <Stats content={stats} />
       <Showcase content={showcase} />
@@ -40,6 +42,7 @@ export const HomeView = ({ content = homeContent, robot = false }: HomeViewProps
         <Chain content={chain} />
         <Product content={productContent} />
       </div>
+      <Method content={methodContent} />
       <Reviews content={reviews} />
       <Team content={team} />
       <div className="relative">

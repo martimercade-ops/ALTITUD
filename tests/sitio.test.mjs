@@ -95,15 +95,22 @@ test("no publica mapas de código fuente", async () => {
 
 test("redirige las URL antiguas", async () => {
   const casos = [
-    ["/contacto/", "/#contact"],
-    ["/servicios/optimizacion-seo/", "/#services"],
+    ["/contacto/", "/parlem"],
+    ["/servicios/optimizacion-seo/", "/serveis/seo-sem"],
     ["/quienes-somos/", "/#about"],
     ["/privacy-policy/", "/privacy-policy"],
   ];
   for (const [ruta, destino] of casos) {
-    const respuesta = await pedir(ruta);
-    assert.ok([301, 308].includes(respuesta.status), `${ruta} → ${respuesta.status}`);
-    assert.equal(new URL(respuesta.headers.get("location"), BASE).pathname + new URL(respuesta.headers.get("location"), BASE).hash, destino, ruta);
+    // Segueix com a màxim dues redireccions (la de la barra final i la de l'URL antiga)
+    let actual = ruta;
+    for (let salt = 0; salt < 2; salt++) {
+      const respuesta = await pedir(actual);
+      if (salt === 0) assert.ok([301, 308].includes(respuesta.status), `${ruta} → ${respuesta.status}`);
+      if (![301, 308].includes(respuesta.status)) break;
+      const url = new URL(respuesta.headers.get("location"), BASE);
+      actual = url.pathname + url.hash;
+    }
+    assert.equal(actual, destino, ruta);
   }
 });
 

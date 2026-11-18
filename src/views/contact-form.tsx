@@ -3,29 +3,45 @@
 import { useState, type FormEvent } from "react";
 import { AnimatedHeading } from "@/components/common/animated-heading";
 import type { ContactContent } from "@/data/mocks/contact";
+import { CONTACT_EMAIL, sendContact } from "@/lib/send-contact";
 
 export interface ContactFormProps {
   content: ContactContent;
 }
 
 export const ContactForm = ({ content }: ContactFormProps) => {
-  const { labelId, heading, fields, cta, to, subject, sentMessage } = content;
+  const { labelId, heading, fields, cta } = content;
   const [values, setValues] = useState({ name: "", phone: "", email: "" });
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "mailto" | "error">("idle");
 
   const set = (key: keyof typeof values) => (e: { target: { value: string } }) =>
     setValues((v) => ({ ...v, [key]: e.target.value }));
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const body = [
-      `Nom: ${values.name}`,
-      `Telèfon: ${values.phone}`,
-      `Correu: ${values.email}`,
-    ].join("\n");
-    window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setSent(true);
+    if (status === "sending") return;
+    setStatus("sending");
+    try {
+      const result = await sendContact({
+        name: values.name,
+        email: values.email,
+        phone: values.phone,
+        source: "Portada",
+      });
+      setStatus(result);
+      if (result === "sent") setValues({ name: "", phone: "", email: "" });
+    } catch {
+      setStatus("error");
+    }
   };
+
+  const statusText = {
+    idle: "",
+    sending: "Enviant…",
+    sent: "Gràcies! Hem rebut el teu missatge i et contactarem aviat.",
+    mailto: "Hem obert el teu correu amb el missatge preparat.",
+    error: `No s'ha pogut enviar. Escriu-nos a ${CONTACT_EMAIL}.`,
+  }[status];
 
   const dot = (filled: boolean) =>
     `pointer-events-none absolute right-0 top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full ${
@@ -112,7 +128,8 @@ export const ContactForm = ({ content }: ContactFormProps) => {
         <div className="mt-10 flex flex-col items-center gap-4">
           <button
             type="submit"
-            className="rounded-full bg-black px-6 py-3 text-sm font-medium text-white hover:bg-black/90"
+            disabled={status === "sending"}
+            className="rounded-full disabled:opacity-60 bg-black px-6 py-3 text-sm font-medium text-white hover:bg-black/90"
           >
             {cta}
           </button>
@@ -121,7 +138,7 @@ export const ContactForm = ({ content }: ContactFormProps) => {
             aria-live="polite"
             className="min-h-5 text-sm text-black/60"
           >
-            {sent ? sentMessage : ""}
+            {statusText}
           </p>
         </div>
       </form>

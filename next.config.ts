@@ -26,6 +26,17 @@ const nextConfig: NextConfig = {
     ];
   },
 
+  /** URL de l'antic web: es redirigeixen perquè no es perdi el posicionament */
+  async redirects() {
+    return [
+      { source: "/contacto", destination: "/parlem", permanent: true },
+      { source: "/contacte", destination: "/parlem", permanent: true },
+      { source: "/servicios/optimizacion-seo", destination: "/serveis/seo-sem", permanent: true },
+      { source: "/servicios/:path*", destination: "/#services", permanent: true },
+      { source: "/quienes-somos", destination: "/#about", permanent: true },
+    ];
+  },
+
   poweredByHeader: false,
 
   compiler: {

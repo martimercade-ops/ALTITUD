@@ -113,7 +113,7 @@ export const Hero = ({ content }: HeroProps) => {
           aria-hidden="true"
           className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-1/2 bg-gradient-to-t from-[rgb(11_20_36/0.88)] to-transparent"
         />
-        <div aria-hidden="true" className="logo-vidre logo-vidre--dreta" />
+        <div aria-hidden="true" className="logo-vidre logo-vidre--centre" />
 
         <animated.div
           style={{ transform: p.to((v) => `scale(${1 - v * 0.1})`) }}

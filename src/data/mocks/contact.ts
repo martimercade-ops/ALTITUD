@@ -72,10 +72,11 @@ export const footerContent: FooterContent = {
   sitemap: {
     title: "Mapa del lloc",
     links: [
-      { label: "Serveis", href: "#services" },
-      { label: "Projectes", href: "#projects" },
-      { label: "Sobre nosaltres", href: "#about" },
-      { label: "Equip", href: "#team" },
+      { label: "Serveis", href: "/#services" },
+      { label: "Projectes", href: "/#projects" },
+      { label: "Sobre nosaltres", href: "/#about" },
+      { label: "Equip", href: "/#team" },
+      { label: "Parlem", href: "/parlem" },
       { label: "Privacitat", href: "/privacy-policy" },
     ],
   },

@@ -21,5 +21,6 @@ Este software usa los siguientes componentes de terceros, cada uno bajo su propi
 | spring-text-engine | 0.1.5 | MIT |
 | zod | 4.6.7 | MIT |
 | zustand | 5.0.12 | MIT |
+| nodemailer | 7.0.13 | MIT-0 |
 
 El texto completo de cada licencia MIT se distribuye con el paquete correspondiente.

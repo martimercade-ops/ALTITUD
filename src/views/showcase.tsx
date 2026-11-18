@@ -2,11 +2,13 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Hover } from "@/components/animation/springs/hover";
 import { AnimatedHeading } from "@/components/common/animated-heading";
 
 export interface ShowcaseItem {
   id?: string;
+  href?: string;
   prefix: string;
   name: string;
   description: string;
@@ -17,6 +19,7 @@ export interface ShowcaseContent {
   heading: string;
   cta: { label: string; href: string };
   items: ShowcaseItem[];
+  extra?: { label: string; items: { label: string; href: string }[] };
 }
 
 export interface ShowcaseProps {
@@ -25,7 +28,7 @@ export interface ShowcaseProps {
 
 const REVEAL_CONFIG = { tension: 170, friction: 26 };
 
-const Column = ({ id, prefix, name, description, image }: ShowcaseItem) => {
+const Column = ({ id, href, prefix, name, description, image }: ShowcaseItem) => {
   const ref = useRef<HTMLElement>(null);
   return (
     <article
@@ -77,12 +80,15 @@ const Column = ({ id, prefix, name, description, image }: ShowcaseItem) => {
           {description}
         </span>
       </div>
+      {href && (
+        <Link href={href} className="absolute inset-0 z-10" aria-label={`${prefix} ${name}`} />
+      )}
     </article>
   );
 };
 
 export const Showcase = ({ content }: ShowcaseProps) => {
-  const { heading, cta, items } = content;
+  const { heading, cta, items, extra } = content;
   return (
     <section
       id="services"
@@ -110,6 +116,7 @@ export const Showcase = ({ content }: ShowcaseProps) => {
           <Column
             key={item.name}
             id={item.id}
+            href={item.href}
             prefix={item.prefix}
             name={item.name}
             description={item.description}
@@ -117,6 +124,22 @@ export const Showcase = ({ content }: ShowcaseProps) => {
           />
         ))}
       </div>
+
+      {extra && extra.items.length > 0 && (
+        <div className="flex flex-wrap items-center gap-3 border-t border-plum/10 px-6 py-6 md:px-10 lg:px-6">
+          <span className="mr-2 text-xs font-semibold uppercase tracking-[0.25em] text-black/50">{extra.label}</span>
+          {extra.items.map((x) => (
+            <Link
+              key={x.href}
+              href={x.href}
+              className="group inline-flex items-center gap-2 rounded-full border border-black/15 px-5 py-2.5 text-sm text-black transition-colors hover:border-black hover:bg-black hover:text-white"
+            >
+              {x.label}
+              <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">→</span>
+            </Link>
+          ))}
+        </div>
+      )}
     </section>
   );
 };
