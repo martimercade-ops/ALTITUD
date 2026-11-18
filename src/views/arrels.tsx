@@ -176,29 +176,29 @@ export const Talent = () => (
 );
 
 const ToolLogo = ({ name, path }: { name: string; path: string }) => (
-  <div className="flex h-14 shrink-0 items-center gap-2 px-6 md:px-8">
+  <div className="flex h-16 w-44 shrink-0 items-center justify-center gap-3 px-5 md:h-20 md:w-56">
     {path ? (
-      <svg viewBox="0 0 24 24" aria-hidden="true" className={`shrink-0 fill-white/40 ${name === "WooCommerce" ? "h-7 w-7" : "h-[18px] w-[18px]"}`}>
+      <svg viewBox="0 0 24 24" aria-hidden="true" className={`shrink-0 fill-white/55 ${name === "WooCommerce" ? "h-9 w-9" : "h-6 w-6 md:h-7 md:w-7"}`}>
         <path d={path} />
       </svg>
     ) : null}
-    <span className="whitespace-nowrap text-[14px] text-white/40">{name}</span>
+    <span className="whitespace-nowrap text-[16px] font-medium tracking-tight text-white/55 md:text-[18px]">{name}</span>
   </div>
 );
 
 export const Eines = () => {
   const tools = [...toolIcons, { name: "OpenAI", path: "" }];
   return (
-    <section aria-labelledby="eines-title" className="flex flex-col gap-4 bg-[#0a0c10] py-8 text-white md:flex-row md:items-center md:gap-0 md:py-6">
-      <h2 id="eines-title" className="shrink-0 px-6 text-[11px] font-semibold uppercase tracking-[0.3em] text-white/45 md:pl-12 md:pr-4">
-        Les nostres eines
+    <section aria-labelledby="eines-title" className="bg-[#0a0c10] py-12 text-white md:py-14">
+      <h2 id="eines-title" className="px-6 text-center text-[1.35rem] font-light leading-[1.2] tracking-tight md:text-[1.75rem]">
+        Les eines amb què <strong className="font-semibold">treballem cada dia</strong>
       </h2>
       <ul className="sr-only">
         {tools.map((t) => (
           <li key={t.name}>{t.name}</li>
         ))}
       </ul>
-      <div aria-hidden="true" className="logos-fila group flex min-w-0 flex-1 overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
+      <div aria-hidden="true" className="logos-fila group mt-6 flex overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_12%,black_88%,transparent)] md:mt-8">
         <div className="logos-pista flex w-max shrink-0 items-center group-hover:[animation-play-state:paused]" style={{ ["--logos-durada" as string]: "45s" }}>
           {[0, 1].map((copy) => tools.map((t) => <ToolLogo key={`${copy}-${t.name}`} {...t} />))}
         </div>
