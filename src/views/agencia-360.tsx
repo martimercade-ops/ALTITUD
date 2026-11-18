@@ -1,7 +1,5 @@
 import Image from "next/image";
-import localFont from "next/font/local";
 
-const inter = localFont({ src: "../app/fonts/Inter-Variable-latin.woff2", weight: "100 900", display: "swap" });
 import Link from "next/link";
 import { Reveal } from "@/components/common/reveal";
 
@@ -22,7 +20,7 @@ const Center = () => (
 );
 
 export const Agencia360 = () => (
-  <section aria-labelledby="agencia-title" className={`${inter.className} relative overflow-hidden bg-[#141414] text-white`}>
+  <section aria-labelledby="agencia-title" className="relative overflow-hidden bg-[#141414] text-white">
     {/* Muntanya de fons a dalt */}
     <div aria-hidden="true" className="absolute inset-x-0 top-0 h-[620px]">
       <Image src="/assets/altitud/nevado-3.jpg" alt="" fill sizes="100vw" className="object-cover object-[50%_40%] opacity-55" />

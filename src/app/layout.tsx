@@ -16,14 +16,11 @@ import { ConsentBanner } from "@/components/common/consent";
 
 import "@/app/globals.css";
 
-const mulish = localFont({
-  variable: "--font-mulish",
+const inter = localFont({
+  variable: "--font-inter",
   display: "swap",
-  src: [
-    { path: "./fonts/Mulish-Light.woff2", weight: "300", style: "normal" },
-    { path: "./fonts/Mulish-Regular.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/Mulish-Medium.woff2", weight: "500", style: "normal" },
-  ],
+  src: "./fonts/Inter-Variable-latin.woff2",
+  weight: "100 900",
 });
 
 export const metadata: Metadata = generateMetadata({
@@ -38,7 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html suppressHydrationWarning lang="ca">
-      <body className={`${mulish.variable}`}>
+      <body className={`${inter.variable}`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
