@@ -25,12 +25,12 @@ export const TeamPageView = () => {
             <Reveal className="reveal-up">
               <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.35em] text-white/60">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent-lime" />
-                L&apos;equip
+                Qui som
               </p>
             </Reveal>
             <Reveal className="reveal-up" style={{ transitionDelay: "120ms" }}>
               <h1 id="equip-title" className="mt-6 max-w-[16ch] text-[2.75rem] font-light leading-[1] tracking-tight sm:text-6xl lg:text-[5rem]">
-                Persones reals, d&apos;Andorra.
+                Un equip creatiu i compromès.
               </h1>
             </Reveal>
             <Reveal className="reveal-up" style={{ transitionDelay: "240ms" }}>

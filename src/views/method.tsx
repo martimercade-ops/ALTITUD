@@ -7,6 +7,10 @@ import type { methodContent as MethodData } from "@/data/mocks/method";
 
 export interface MethodProps {
   content: typeof MethodData;
+  /** Altímetre: de l'altitud inicial a la del cim (m) */
+  altitudes?: [number, number];
+  /** Nom del punt de sortida i del cim per a l'altímetre */
+  places?: [string, string];
 }
 
 const RATIO = 3402 / 3456;
@@ -29,10 +33,12 @@ const segment = ([x1, y1]: [number, number], [x2, y2]: [number, number], bend: n
 
 const BENDS = [2, 6, -4, 3];
 
-export const Method = ({ content }: MethodProps) => {
+export const Method = ({ content, altitudes, places }: MethodProps) => {
   const { eyebrow, heading, image, start, phases } = content;
   const sectionRef = useRef<HTMLElement>(null);
   const pathRefs = useRef<(SVGPathElement | null)[]>([]);
+  const altRef = useRef<HTMLSpanElement>(null);
+  const placeRef = useRef<HTMLParagraphElement>(null);
   const [active, setActive] = useState(0);
   const [reached, setReached] = useState(0);
 
@@ -50,6 +56,12 @@ export const Method = ({ content }: MethodProps) => {
         if (Math.abs(t - lastT) < 0.002) return;
         lastT = t;
         // La línia es dibuixa directament al DOM, sense tornar a pintar React a cada fotograma
+        if (altitudes && altRef.current) {
+          const k = clamp(t / phases.length);
+          const m = Math.round(altitudes[0] + (altitudes[1] - altitudes[0]) * k);
+          altRef.current.textContent = String(m).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+          if (placeRef.current && places) placeRef.current.textContent = k >= 0.999 ? places[1] : k <= 0.001 ? places[0] : "En ruta";
+        }
         pathRefs.current.forEach((path, i) => {
           if (path) path.style.strokeDashoffset = String(1 - clamp((t - i) / DRAW));
         });
@@ -58,7 +70,7 @@ export const Method = ({ content }: MethodProps) => {
       },
       () => 0,
     );
-  }, [phases]);
+  }, [phases, altitudes, places]);
 
   const points = [start, ...phases.map((p) => p.at)];
   const phase = phases[active];
@@ -80,6 +92,23 @@ export const Method = ({ content }: MethodProps) => {
             {heading.text} <strong className="font-semibold">{heading.strong}</strong>
           </h2>
         </header>
+
+        {altitudes && (
+          <div className="absolute right-[18px] top-[152px] z-10 text-right lg:right-12 lg:top-1/2 lg:-translate-y-1/2">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-white/45 lg:text-xs">Altitud</p>
+            <p className="mt-1 font-light tabular-nums leading-none text-white">
+              <span ref={altRef} className="text-[30px] lg:text-[3.5rem]">
+                {String(altitudes[0]).replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+              </span>
+              <span className="ml-1 text-[14px] text-white/50 lg:text-xl">m</span>
+            </p>
+            {places && (
+              <p ref={placeRef} className="mt-2 text-[11px] uppercase tracking-[0.2em] text-accent-lime lg:text-xs">
+                {places[0]}
+              </p>
+            )}
+          </div>
+        )}
 
         {/* Muntanya amb la ruta */}
         <div className="relative flex min-h-0 flex-1 items-center justify-center overflow-hidden lg:items-end lg:overflow-visible">
