@@ -174,7 +174,7 @@ const ToolLogo = ({ name, path }: { name: string; path: string }) => (
 );
 
 export const Eines = () => {
-  const tools = [...toolIcons, { name: "ChatGPT", path: "" }];
+  const tools = [...toolIcons, { name: "OpenAI", path: "" }];
   return (
     <section aria-labelledby="eines-title" className="bg-[#0a0c10] py-20 text-white md:py-28">
       <div className="mx-auto flex max-w-3xl flex-col items-center px-6 text-center">
