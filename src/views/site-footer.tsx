@@ -1,6 +1,11 @@
 import type { FooterContent, FooterLink } from "@/data/mocks/contact";
 import Image from "next/image";
+import Link from "next/link";
 import { AnimatedHeading } from "@/components/common/animated-heading";
+import { Reveal } from "@/components/common/reveal";
+
+const MAP_EMBED =
+  "https://www.google.com/maps?q=Carrer+Ciutat+de+Valls+24,+AD500+Andorra+la+Vella&z=16&output=embed";
 
 export interface SiteFooterProps {
   content: FooterContent;
@@ -35,7 +40,6 @@ export const SiteFooter = ({ content }: SiteFooterProps) => {
     >
       <Image src={content.image} alt="" fill sizes="100vw" quality={90} className="object-cover" />
       <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgb(11_20_36/0.45),transparent_40%,rgb(11_20_36/0.82))]" />
-      <div aria-hidden="true" className="logo-vidre logo-vidre--peu" />
 
       <div className="relative z-10 flex flex-1 flex-col">
       <div className="flex flex-col items-center text-center">
@@ -46,26 +50,68 @@ export const SiteFooter = ({ content }: SiteFooterProps) => {
         >
           {heading}
         </AnimatedHeading>
-        <figure className="mt-6 flex items-center gap-4 rounded-2xl border border-footer-fg/20 bg-footer/60 p-2 pr-5 text-left shadow-2xl backdrop-blur">
-          <Image
-            src={office.src}
-            alt={office.alt}
-            width={office.width}
-            height={office.height}
-            sizes="9rem"
-            className="block h-auto w-28 rounded-xl sm:w-36"
+      </div>
+
+      {/* Dues maneres de fer el cafè: a l'oficina o per videotrucada */}
+      <div className="mx-auto mt-12 grid w-full max-w-5xl gap-4 text-left md:grid-cols-5">
+        <Reveal className="reveal-map relative min-h-[22rem] overflow-hidden rounded-3xl border border-footer-fg/15 bg-footer md:col-span-3">
+          <iframe
+            title="Mapa de l'oficina d'Altitud Digital a Andorra la Vella"
+            src={MAP_EMBED}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="absolute inset-0 h-full w-full [filter:grayscale(1)_invert(0.92)_hue-rotate(180deg)_contrast(0.9)_brightness(0.95)]"
           />
-          <figcaption className="text-sm leading-snug text-footer-fg/85">
-            <span className="block text-xs font-medium uppercase tracking-wide text-footer-muted">La nostra oficina</span>
-            <span className="mt-1 block whitespace-pre-line">{contact.address}</span>
-          </figcaption>
-        </figure>
-        <a
-          {...linkProps(cta)}
-          className="mt-6 rounded-full border border-footer-fg/40 px-6 py-3 text-sm font-medium hover:bg-footer-fg hover:text-footer"
-        >
-          {cta.label}
-        </a>
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 shadow-[inset_0_0_60px_20px_rgb(10_21_51/0.9)]" />
+          <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            <span className="mapa-pols absolute -left-10 -top-10 block h-20 w-20 rounded-full bg-accent-lime/40" />
+            <span className="mapa-pols mapa-pols--2 absolute -left-10 -top-10 block h-20 w-20 rounded-full bg-accent-lime/30" />
+          </div>
+          <div className="absolute inset-x-3 bottom-3 flex items-center gap-3 rounded-2xl border border-footer-fg/15 bg-footer/85 p-2 pr-3 backdrop-blur-md sm:pr-4">
+            <Image
+              src={office.src}
+              alt={office.alt}
+              width={office.width}
+              height={office.height}
+              sizes="7rem"
+              className="block h-16 w-24 shrink-0 rounded-xl object-cover sm:h-20 sm:w-28"
+            />
+            <span className="min-w-0 flex-1 text-sm leading-snug text-footer-fg/85">
+              <span className="block text-xs font-medium uppercase tracking-wide text-footer-muted">Cafè a l&apos;oficina</span>
+              <span className="mt-1 block whitespace-pre-line">{contact.address}</span>
+            </span>
+            <a
+              {...linkProps(cta)}
+              className="inline-flex shrink-0 rounded-full bg-footer-fg px-3 py-2 text-xs font-medium text-footer hover:bg-white sm:px-4 sm:py-2.5 sm:text-sm"
+            >
+              {cta.label} ↗
+            </a>
+          </div>
+        </Reveal>
+
+        <Reveal className="reveal-up flex flex-col justify-between rounded-3xl border border-footer-fg/15 bg-footer/70 p-7 backdrop-blur md:col-span-2">
+          <div>
+            <svg viewBox="0 0 64 64" aria-hidden="true" className="h-14 w-14 text-accent-lime">
+              <path className="cafe-vapor" d="M24 14c-3 4 3 6 0 10" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+              <path className="cafe-vapor cafe-vapor--2" d="M33 12c-3 4 3 6 0 10" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+              <path className="cafe-vapor cafe-vapor--3" d="M42 14c-3 4 3 6 0 10" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+              <path d="M14 30h36v10a14 14 0 01-14 14h-8a14 14 0 01-14-14z" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinejoin="round" />
+              <path d="M50 33h3a6 6 0 010 12h-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+            </svg>
+            <p className="mt-6 text-xs font-medium uppercase tracking-wide text-footer-muted">Cafè virtual</p>
+            <p className="mt-2 text-2xl font-light leading-tight tracking-tight">No pots venir? Fem el cafè per videotrucada.</p>
+            <p className="mt-3 text-sm leading-relaxed text-footer-fg/70">
+              Vint minuts, cadascú amb el seu cafè, per conèixer el teu projecte i veure com et podem ajudar.
+            </p>
+          </div>
+          <Link
+            href="/parlem?cafe=virtual"
+            className="mt-8 inline-flex h-12 items-center justify-between gap-3 rounded-full bg-accent-lime pl-6 pr-2 text-sm font-semibold text-black transition-transform hover:scale-[1.02]"
+          >
+            Reserva un cafè virtual
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-accent-lime">→</span>
+          </Link>
+        </Reveal>
       </div>
 
       <div className="flex-1" />

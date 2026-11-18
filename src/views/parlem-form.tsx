@@ -50,9 +50,15 @@ export const ParlemForm = ({ services, budgets, unsureLabel }: ParlemFormProps) 
 
   // Preselecciona el servei si venim d'una pàgina de servei (?servei=slug)
   useEffect(() => {
-    const slug = new URLSearchParams(window.location.search).get("servei");
-    const match = services.find((s) => s.slug === slug);
+    const params = new URLSearchParams(window.location.search);
+    const match = services.find((s) => s.slug === params.get("servei"));
     if (match) setSelected([match.label]);
+    if (params.get("cafe") === "virtual") {
+      setValues((v) => ({
+        ...v,
+        message: v.message || "M'agradaria fer un cafè virtual (videotrucada de 20 minuts) per explicar-vos el meu projecte.",
+      }));
+    }
   }, [services]);
 
   const set =
