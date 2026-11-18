@@ -4,16 +4,11 @@ import { SiteNav } from "@/views/site-nav";
 import { SiteFooter } from "@/views/site-footer";
 import { Method } from "@/views/method";
 import { Reveal } from "@/components/common/reveal";
+import { Arrels } from "@/views/arrels";
 import { footerContent } from "@/data/mocks/contact";
 import { homeNav, PARLEM_HREF } from "@/data/mocks/home";
 import { methodContent } from "@/data/mocks/method";
 
-const VALUES = [
-  { title: "Escoltar", text: "Abans de proposar res, volem entendre bé el teu negoci." },
-  { title: "Pas a pas", text: "Sense presses ni promeses màgiques: feina constant, mes a mes." },
-  { title: "Al teu costat", text: "Ens tens a prop, a Andorra la Vella, i et parlem clar." },
-  { title: "Sempre més amunt", text: "Quan arribem a l'objectiu, en busquem un de nou." },
-];
 
 export const MetodologiaView = () => (
   <>
@@ -31,22 +26,7 @@ export const MetodologiaView = () => (
         ]}
       />
 
-      {/* Valors de muntanya */}
-      <section aria-labelledby="valors-title" className="mx-auto max-w-6xl px-6 py-24 md:px-10 md:py-32">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-small">Com som</p>
-        <h2 id="valors-title" className="mt-4 max-w-[22ch] text-[2rem] font-light leading-[1.08] tracking-tight md:text-[2.75rem]">
-          Treballem com es puja una muntanya.
-        </h2>
-        <Reveal as="ol" className="reveal-stagger mt-14 grid gap-px overflow-hidden rounded-3xl border border-black/10 bg-black/10 sm:grid-cols-2 lg:grid-cols-4">
-          {VALUES.map((v, i) => (
-            <li key={v.title} className="flex flex-col bg-white p-8" style={{ transitionDelay: `${i * 100}ms` }}>
-              <span className="text-sm font-medium text-[#2f5bff]">0{i + 1}</span>
-              <h3 className="mt-8 text-2xl font-light tracking-tight">{v.title}</h3>
-              <p className="mt-3 text-[15px] leading-relaxed text-black/60">{v.text}</p>
-            </li>
-          ))}
-        </Reveal>
-      </section>
+      <Arrels />
 
       {/* Esport de muntanya */}
       <section className="relative overflow-hidden bg-[#0b1424] px-6 py-24 text-white md:px-10 md:py-32 lg:px-12">

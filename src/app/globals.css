@@ -306,3 +306,17 @@ img {
   50% { transform: translate(-50%, calc(-50% - 10px)); }
 }
 @media (prefers-reduced-motion: reduce) { .agencia-anell, .agencia-pindola { animation: none; } }
+
+/* Mapa d'Andorra: el contorn es dibuixa i les parròquies s'encenen */
+.reveal-map .mapa-traç { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 2.2s cubic-bezier(0.6, 0, 0.2, 1) 0.2s; }
+.reveal-map.is-in .mapa-traç { stroke-dashoffset: 0; }
+.reveal-map .mapa-parroquia { opacity: 0; transform-box: fill-box; }
+.reveal-map.is-in .mapa-parroquia { animation: mapa-apareix 700ms ease both; }
+@keyframes mapa-apareix { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.mapa-batec { transform-box: fill-box; transform-origin: center; animation: mapa-batec 2.6s ease-out infinite; }
+@keyframes mapa-batec { 0% { transform: scale(0.4); opacity: 0.5; } 100% { transform: scale(2.2); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .reveal-map .mapa-traç { stroke-dashoffset: 0; transition: none; }
+  .reveal-map .mapa-parroquia { opacity: 1; animation: none; }
+  .mapa-batec { animation: none; }
+}

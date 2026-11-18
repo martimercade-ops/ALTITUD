@@ -22,5 +22,7 @@ Este software usa los siguientes componentes de terceros, cada uno bajo su propi
 | zod | 4.6.7 | MIT |
 | zustand | 5.0.12 | MIT |
 | nodemailer | 7.0.13 | MIT-0 |
+| simple-icons (icones d'eines) | 16.38.0 | CC0 1.0 |
+| Natural Earth (contorn d'Andorra) | 10m | Domini públic |
 
 El texto completo de cada licencia MIT se distribuye con el paquete correspondiente.
