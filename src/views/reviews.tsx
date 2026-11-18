@@ -27,7 +27,7 @@ const Stars = () => (
   </span>
 );
 
-const GoogleMark = () => (
+export const GoogleMark = () => (
   <svg viewBox="0 0 24 24" aria-label="Google" role="img" className="h-5 w-5 shrink-0">
     <path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5a5.5 5.5 0 0 1-2.4 3.6v3h3.9c2.2-2.1 3.5-5.1 3.5-8.8z" />
     <path fill="#34A853" d="M12 24c3.2 0 6-1.1 8-2.9l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.1 0-5.8-2.1-6.7-5H1.2v3.1A12 12 0 0 0 12 24z" />

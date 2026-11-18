@@ -3,7 +3,8 @@ import { SiteFooter } from "@/views/site-footer";
 import { PdeForm } from "@/views/pde-form";
 import { Reveal } from "@/components/common/reveal";
 import { footerContent } from "@/data/mocks/contact";
-import { homeNav } from "@/data/mocks/home";
+import { homeContent, homeNav } from "@/data/mocks/home";
+import { HeroMountain, PdePeaks, ReviewToasts } from "@/views/pde-extres";
 import { formatEuros, pdeSolutions } from "@/data/mocks/pde";
 
 const STEPS = [
@@ -21,8 +22,9 @@ export const PdeView = () => {
         {/* Capçalera */}
         <section
           aria-labelledby="pde-title"
-          className="relative overflow-hidden bg-[#0b1424] px-6 pb-24 pt-36 text-white md:px-10 md:pb-32 md:pt-44 lg:px-12"
+          className="relative overflow-hidden bg-[#0b1424] px-6 pb-56 pt-36 text-white md:px-10 md:pb-72 md:pt-44 lg:px-12"
         >
+          <HeroMountain />
           <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(55%_70%_at_85%_0%,rgb(47_91_255/0.35),transparent_70%),radial-gradient(35%_45%_at_0%_100%,rgb(182_241_58/0.08),transparent_70%)]" />
           <div className="relative z-10 mx-auto grid max-w-6xl gap-14 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-7">
@@ -84,6 +86,8 @@ export const PdeView = () => {
           </div>
         </section>
 
+        <PdePeaks />
+
         {/* Com funciona */}
         <section aria-labelledby="pde-steps" className="mx-auto max-w-6xl px-6 py-20 md:px-10 md:py-28">
           <h2 id="pde-steps" className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-small">Com funciona la llista d&apos;espera</h2>
@@ -106,6 +110,7 @@ export const PdeView = () => {
         </section>
 
         <SiteFooter content={footerContent} />
+        <ReviewToasts items={homeContent.reviews.items.filter((r) => r.text.length < 190)} />
       </main>
     </>
   );

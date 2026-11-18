@@ -320,3 +320,18 @@ img {
   .reveal-map .mapa-parroquia { opacity: 1; animation: none; }
   .mapa-batec { animation: none; }
 }
+
+/* PDE: pics que pugen, bandera que oneja */
+.pics-pde .pic { transform-box: fill-box; transform-origin: 50% 100%; transform: scaleY(0); transition: transform 1100ms cubic-bezier(0.2, 0.8, 0.2, 1); }
+.pics-pde.is-in .pic { transform: scaleY(1); }
+.pics-pde .pic-text { opacity: 0; transition: opacity 700ms ease; }
+.pics-pde.is-in .pic-text { opacity: 1; }
+.bandera-onada { transform-box: fill-box; transform-origin: 0% 50%; animation: bandera-onada 2.4s ease-in-out infinite; }
+@keyframes bandera-onada { 0%, 100% { transform: skewY(0deg) scaleX(1); } 50% { transform: skewY(-4deg) scaleX(0.94); } }
+.bandera-puja { animation: bandera-puja 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) 0.6s both; }
+@keyframes bandera-puja { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .pics-pde .pic { transform: none; transition: none; }
+  .pics-pde .pic-text { opacity: 1; }
+  .bandera-onada, .bandera-puja { animation: none; }
+}
