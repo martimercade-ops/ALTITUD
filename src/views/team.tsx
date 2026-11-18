@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { animated } from "@react-spring/web";
 import { AnimatedHeading } from "@/components/common/animated-heading";
 import { useRevealCascade } from "@/components/common/use-reveal-cascade";
@@ -9,6 +10,8 @@ export interface TeamMember {
   name: string;
   role: string;
   image: string;
+  bio?: string;
+  focus?: string[];
 }
 
 export interface TeamContent {
@@ -55,6 +58,15 @@ export const Team = ({ content }: { content: TeamContent }) => {
           </animated.li>
         ))}
       </ul>
+      <div className="mt-14 flex justify-center">
+        <Link
+          href="/equip"
+          className="group inline-flex items-center gap-2 rounded-full border border-black/20 px-6 py-3 text-sm font-medium hover:border-black hover:bg-black hover:text-white"
+        >
+          Coneix l&apos;equip
+          <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">→</span>
+        </Link>
+      </div>
     </section>
   );
 };
