@@ -70,25 +70,19 @@ export const Method = ({ content }: MethodProps) => {
       className="relative bg-[#070a12] text-white"
       style={{ height: `${100 + phases.length * 70}lvh` }}
     >
-      <div className="sticky top-0 flex h-lvh flex-col overflow-hidden">
+      <div className="sticky top-0 flex h-svh flex-col overflow-hidden lg:h-lvh">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_55%_at_50%_60%,rgb(47_91_255/0.12),transparent_70%)]" />
 
-        <header className="relative z-10 px-6 pt-24 text-center md:pt-28">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-white/50">{eyebrow}</p>
-          <h2 id="method-title" className="mt-4 text-[1.9rem] font-light leading-[1.1] tracking-tight md:text-[3rem]">
+        <header className="relative z-10 px-[24px] pt-[92px] text-center lg:pt-28">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/50 lg:text-xs lg:tracking-[0.35em]">{eyebrow}</p>
+          <h2 id="method-title" className="mt-[10px] text-[26px] font-light leading-[1.15] tracking-tight lg:mt-4 lg:text-[3rem]">
             {heading.text} <strong className="font-semibold">{heading.strong}</strong>
           </h2>
         </header>
 
         {/* Muntanya amb la ruta */}
-        <div className="relative flex min-h-0 flex-1 items-start justify-center pt-6 lg:items-end lg:pt-0">
-          <div
-            className="relative"
-            style={{
-              aspectRatio: `${RATIO}`,
-              width: `min(100%, calc(78lvh * ${RATIO}), calc((100lvh - 13rem) * ${RATIO}))`,
-            }}
-          >
+        <div className="relative flex min-h-0 flex-1 items-center justify-center overflow-hidden lg:items-end lg:overflow-visible">
+          <div className="metode-caixa relative shrink-0" style={{ aspectRatio: `${RATIO}`, ["--r" as string]: RATIO }}>
             <Image
               src={image}
               alt="Muntanya nevada amb la ruta de les quatre fases de la metodologia"
@@ -165,22 +159,25 @@ export const Method = ({ content }: MethodProps) => {
             })}
           </div>
 
-          {/* Text de la fase activa */}
-          <div
-            aria-live="polite"
-            className="absolute inset-x-6 bottom-8 z-10 md:inset-x-10 lg:inset-x-auto lg:bottom-auto lg:left-12 lg:top-1/2 lg:w-[22rem] lg:-translate-y-1/2 xl:left-20"
-          >
-            <div key={active} className="method-fase rounded-2xl bg-[#070a12]/75 p-5 backdrop-blur-md lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
-              <p className="text-[3.5rem] font-extralight leading-none text-white/40 md:text-[4.5rem]">{pad(active + 1)}</p>
-              <p className="mt-4 text-xl font-light md:text-2xl">
+        </div>
+
+        {/* Text de la fase activa: sota la muntanya al mòbil, a l'esquerra a l'ordinador */}
+        <div
+          aria-live="polite"
+          className="relative z-10 shrink-0 px-[24px] pb-[28px] pt-[8px] lg:absolute lg:left-12 lg:top-1/2 lg:w-[22rem] lg:-translate-y-1/2 lg:p-0 xl:left-20"
+        >
+          <div key={active} className="method-fase">
+            <div className="flex items-baseline gap-[14px] lg:block">
+              <p className="text-[44px] font-extralight leading-none text-white/40 lg:text-[4.5rem]">{pad(active + 1)}</p>
+              <p className="text-[20px] font-light lg:mt-4 lg:text-2xl">
                 {phase.name} · <strong className="font-semibold">{phase.stage}</strong>
               </p>
-              <p className="mt-3 text-[0.95rem] leading-relaxed text-white/70">{phase.text}</p>
-              <div className="mt-6 flex gap-1.5" aria-hidden="true">
-                {phases.map((_, i) => (
-                  <span key={i} className={`h-0.5 rounded-full transition-all duration-500 ${i === active ? "w-8 bg-accent-lime" : "w-4 bg-white/25"}`} />
-                ))}
-              </div>
+            </div>
+            <p className="mt-[10px] min-h-[66px] text-[15px] leading-[1.45] text-white/70 lg:mt-3 lg:min-h-0 lg:text-[0.95rem] lg:leading-relaxed">{phase.text}</p>
+            <div className="mt-[14px] flex gap-1.5 lg:mt-6" aria-hidden="true">
+              {phases.map((_, i) => (
+                <span key={i} className={`h-[3px] rounded-full transition-all duration-500 lg:h-0.5 ${i === active ? "w-8 bg-accent-lime" : "w-4 bg-white/25"}`} />
+              ))}
             </div>
           </div>
         </div>

@@ -4,7 +4,6 @@ import { About } from "@/views/about";
 import { Stats } from "@/views/stats";
 import { Showcase } from "@/views/showcase";
 import { Works } from "@/views/works";
-import { Chain } from "@/views/chain";
 import { Product } from "@/views/product";
 import { ContactForm } from "@/views/contact-form";
 import { SiteFooter } from "@/views/site-footer";
@@ -25,7 +24,7 @@ export interface HomeViewProps {
 }
 
 export const HomeView = ({ content = homeContent, robot = false }: HomeViewProps) => {
-  const { hero, logos, about, stats, showcase, works, chain, nav, reviews, team } = content;
+  const { hero, logos, about, stats, showcase, works, nav, reviews, team } = content;
   return (
     <RobotProvider robot={robot}>
       {robot && <RobotView />}
@@ -38,11 +37,8 @@ export const HomeView = ({ content = homeContent, robot = false }: HomeViewProps
       <Stats content={stats} />
       <Showcase content={showcase} />
       <Works content={works} />
-      <div className="relative">
-        <Chain content={chain} />
-        <Product content={productContent} />
-      </div>
       <Method content={methodContent} />
+      <Product content={productContent} />
       <Reviews content={reviews} />
       <Team content={team} />
       <div className="relative">

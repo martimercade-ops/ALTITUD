@@ -280,3 +280,9 @@ img {
   100% { opacity: 0; transform: translateY(-8px); }
 }
 @media (prefers-reduced-motion: reduce) { .cafe-vapor { animation: none; opacity: 1; } }
+
+/* Mida de la muntanya de la metodologia: al mòbil s'amplia i es retalla pels costats */
+.metode-caixa { width: min(125vw, calc((100svh - 330px) * var(--r))); }
+@media (min-width: 64rem) {
+  .metode-caixa { width: min(100%, calc(78lvh * var(--r)), calc((100lvh - 13rem) * var(--r))); }
+}
