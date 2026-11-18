@@ -7,6 +7,7 @@ Este software usa los siguientes componentes de terceros, cada uno bajo su propi
 | Componente | Licencia | Texto de la licencia |
 |---|---|---|
 | Mulish (Light, Regular, Medium) | SIL Open Font License 1.1 | `src/app/fonts/OFL.txt` |
+| Inter (variable) | SIL Open Font License 1.1 | https://github.com/rsms/inter |
 
 ## Librerías
 
