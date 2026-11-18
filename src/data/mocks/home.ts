@@ -35,7 +35,18 @@ const contacte = { label: "Parlem", href: "#contact" };
 const siteNav: SiteNavContent = {
   brand: "Altitud Digital",
   items: [
-    { label: "Serveis", href: "#services" },
+    {
+      label: "Serveis",
+      href: "#services",
+      children: [
+        { label: "Web & e-commerce", href: "#servei-web" },
+        { label: "SEO, SEM & publicitat digital", href: "#servei-seo" },
+        { label: "Gestió de xarxes socials", href: "#servei-xarxes" },
+        { label: "Producció i edició audiovisual", href: "#servei-audiovisual" },
+        { label: "Branding & disseny gràfic", href: "#servei-branding" },
+        { label: "IA & automatitzacions", href: "#servei-ia" },
+      ],
+    },
     { label: "Projectes", href: "#projects" },
     { label: "Sobre nosaltres", href: "#about" },
     { label: "Equip", href: "#team" },
@@ -45,7 +56,11 @@ const siteNav: SiteNavContent = {
 
 export const homeNav: SiteNavContent = {
   ...siteNav,
-  items: siteNav.items.map((item) => ({ ...item, href: `/${item.href}` })),
+  items: siteNav.items.map((item) => ({
+    ...item,
+    href: `/${item.href}`,
+    children: item.children?.map((child) => ({ ...child, href: `/${child.href}` })),
+  })),
 };
 
 export const homeContent: HomeContent = {
@@ -131,12 +146,12 @@ export const homeContent: HomeContent = {
     heading: "Tot el que la teva empresa necessita per créixer, en un sol equip.",
     cta: contacte,
     items: [
-      { prefix: "Web &", name: "e-commerce", description: "Webs que converteixen visites en clients.", image: `${A}/codi.jpg` },
-      { prefix: "SEO, SEM &", name: "publicitat digital", description: "Més visibilitat, més oportunitats.", image: `${A}/seo.jpg` },
-      { prefix: "Gestió de", name: "xarxes socials", description: "Contingut que connecta i genera resultat.", image: `${A}/xarxes.jpg` },
-      { prefix: "Producció i", name: "edició audiovisual", description: "Vídeo, foto i creativitat amb impacte.", image: `${A}/camera.jpg` },
-      { prefix: "Branding &", name: "disseny gràfic", description: "Marques amb identitat que destaquen.", image: `${A}/disseny.jpg` },
-      { prefix: "IA &", name: "automatitzacions", description: "Solucions per estalviar temps i vendre més.", image: `${A}/ia.jpg` },
+      { id: "servei-web", prefix: "Web &", name: "e-commerce", description: "Webs que converteixen visites en clients.", image: `${A}/codi.jpg` },
+      { id: "servei-seo", prefix: "SEO, SEM &", name: "publicitat digital", description: "Més visibilitat, més oportunitats.", image: `${A}/seo.jpg` },
+      { id: "servei-xarxes", prefix: "Gestió de", name: "xarxes socials", description: "Contingut que connecta i genera resultat.", image: `${A}/xarxes.jpg` },
+      { id: "servei-audiovisual", prefix: "Producció i", name: "edició audiovisual", description: "Vídeo, foto i creativitat amb impacte.", image: `${A}/camera.jpg` },
+      { id: "servei-branding", prefix: "Branding &", name: "disseny gràfic", description: "Marques amb identitat que destaquen.", image: `${A}/disseny.jpg` },
+      { id: "servei-ia", prefix: "IA &", name: "automatitzacions", description: "Solucions per estalviar temps i vendre més.", image: `${A}/ia.jpg` },
     ],
   },
   works: {

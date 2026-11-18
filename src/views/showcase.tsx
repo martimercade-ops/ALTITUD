@@ -6,6 +6,7 @@ import { Hover } from "@/components/animation/springs/hover";
 import { AnimatedHeading } from "@/components/common/animated-heading";
 
 export interface ShowcaseItem {
+  id?: string;
   prefix: string;
   name: string;
   description: string;
@@ -24,12 +25,13 @@ export interface ShowcaseProps {
 
 const REVEAL_CONFIG = { tension: 170, friction: 26 };
 
-const Column = ({ prefix, name, description, image }: ShowcaseItem) => {
+const Column = ({ id, prefix, name, description, image }: ShowcaseItem) => {
   const ref = useRef<HTMLElement>(null);
   return (
     <article
       ref={ref}
-      className="relative min-h-[38vh] overflow-hidden rounded-2xl lg:min-h-[85vh] lg:rounded-none"
+      id={id}
+      className="relative scroll-mt-24 min-h-[38vh] overflow-hidden rounded-2xl lg:min-h-[85vh] lg:rounded-none"
     >
       <Image
         src={image}
@@ -107,6 +109,7 @@ export const Showcase = ({ content }: ShowcaseProps) => {
         {items.map((item) => (
           <Column
             key={item.name}
+            id={item.id}
             prefix={item.prefix}
             name={item.name}
             description={item.description}
