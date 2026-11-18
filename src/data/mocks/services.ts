@@ -60,6 +60,28 @@ const STEPS_IA: ServiceStep[] = [
 
 export const services: Service[] = [
   {
+    slug: "consultoria",
+    group: "marketing",
+    name: "Consultoria estratègica",
+    prefix: "Consultoria",
+    suffix: "estratègica",
+    short: "Saber on posar el temps i els diners.",
+    headline: "Abans de fer, decidim bé què fer.",
+    intro:
+      "Ens asseiem amb tu, mirem com està el teu negoci i et diem amb claredat què funciona, què no i per on començar. Pots quedar-te amb el pla i executar-lo tu, o fer-lo amb nosaltres.",
+    image: `${A}/oficina.jpg`,
+    includes: [
+      { title: "Auditoria digital", text: "Web, xarxes, anuncis i posicionament, revisats amb lupa." },
+      { title: "Anàlisi de competència", text: "Què fan els altres a Andorra i on tens espai per destacar." },
+      { title: "Pla de màrqueting", text: "Objectius, canals, pressupost i calendari en un document clar." },
+      { title: "Digitalització i IA", text: "Quins processos val la pena automatitzar i quins no." },
+      { title: "Sessions de seguiment", text: "Revisem els números amb tu cada mes i ajustem." },
+      { title: "Ajuts PDE", text: "T'orientem per aprofitar les subvencions del Govern." },
+    ],
+    tools: ["Google Analytics", "Semrush", "Notion", "Google Workspace"],
+    steps: STEPS_MARKETING,
+  },
+  {
     slug: "web-ecommerce",
     group: "marketing",
     name: "Web & e-commerce",
@@ -128,6 +150,28 @@ export const services: Service[] = [
     projectTags: ["SEO"],
   },
   {
+    slug: "cro-growth",
+    group: "marketing",
+    name: "CRO i growth",
+    prefix: "CRO i",
+    suffix: "growth",
+    short: "Treure més clients del trànsit que ja tens.",
+    headline: "Més vendes sense haver de pagar més anuncis.",
+    intro:
+      "Mirem on es perden les visites de la teva web o botiga, provem canvis i ens quedem amb els que funcionen. Pas a pas, amb dades, perquè cada visita valgui més.",
+    image: `${A}/seo.jpg`,
+    includes: [
+      { title: "Analítica ben muntada", text: "Saber d'on venen les vendes i on s'encallen els usuaris." },
+      { title: "Optimització de la conversió", text: "Formularis, fitxes de producte i checkout més fàcils." },
+      { title: "Tests A/B", text: "Provem dues versions i decidim amb números, no per intuïció." },
+      { title: "Embuts de venda", text: "Del primer clic a la compra, i de la compra a repetir." },
+      { title: "Email màrqueting", text: "Automatitzacions per recuperar carrets i fidelitzar clients." },
+      { title: "Creixement continu", text: "Una llista d'experiments ordenada per impacte, cada mes." },
+    ],
+    tools: ["Google Analytics", "Hotjar", "Google Tag Manager", "Mailchimp", "Shopify", "WooCommerce"],
+    steps: STEPS_MARKETING,
+  },
+  {
     slug: "xarxes-socials",
     group: "marketing",
     name: "Gestió de xarxes socials",
@@ -153,7 +197,7 @@ export const services: Service[] = [
   {
     slug: "audiovisual",
     group: "marketing",
-    name: "Producció i edició audiovisual",
+    name: "Producció audiovisual",
     prefix: "Producció i",
     suffix: "edició audiovisual",
     short: "Vídeo, foto i creativitat amb impacte.",
@@ -264,10 +308,10 @@ export const services: Service[] = [
     steps: STEPS_IA,
   },
   {
-    slug: "programari-a-mida",
+    slug: "crm-erp-a-mida",
     group: "ia",
-    name: "Programari a mida (CRM, ERP i estoc)",
-    prefix: "Programari",
+    name: "CRM i ERP a mida",
+    prefix: "CRM i ERP",
     suffix: "a mida",
     short: "Eines fetes per al teu negoci.",
     headline: "El programa que el teu negoci necessita, fet a mida.",
