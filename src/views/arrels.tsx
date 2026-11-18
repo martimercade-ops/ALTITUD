@@ -162,34 +162,39 @@ export const Talent = () => (
   </>
 );
 
-export const Eines = () => (
-  <>
-    {/* Eines */}
-    <section aria-labelledby="eines-title" className="bg-[#0a0c10] px-6 py-20 text-white md:px-10 md:py-24 lg:px-12">
-      <div className="mx-auto max-w-6xl">
-        <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-          <h2 id="eines-title" className="text-[1.6rem] font-light tracking-tight md:text-[2rem]">Les eines amb què treballem</h2>
-          <p className="text-[14px] text-white/45">Les mateixes que fan servir les grans agències.</p>
+const ToolLogo = ({ name, path }: { name: string; path: string }) => (
+  <div className="flex h-24 w-48 shrink-0 items-center justify-center gap-3 px-6 md:h-28 md:w-60">
+    {path ? (
+      <svg viewBox="0 0 24 24" aria-hidden="true" className={`shrink-0 fill-white/55 ${name === "WooCommerce" ? "h-10 w-10" : "h-7 w-7 md:h-8 md:w-8"}`}>
+        <path d={path} />
+      </svg>
+    ) : null}
+    <span className="whitespace-nowrap text-[17px] font-medium tracking-tight text-white/55 md:text-[19px]">{name}</span>
+  </div>
+);
+
+export const Eines = () => {
+  const tools = [...toolIcons, { name: "ChatGPT", path: "" }];
+  return (
+    <section aria-labelledby="eines-title" className="bg-[#0a0c10] py-20 text-white md:py-28">
+      <div className="mx-auto flex max-w-3xl flex-col items-center px-6 text-center">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-4 py-1.5 text-xs uppercase tracking-wide text-white/70 md:text-sm">
+          <strong className="font-bold text-white">{tools.length}</strong> eines professionals
+        </span>
+        <h2 id="eines-title" className="mt-6 text-[1.6rem] font-light leading-[1.2] tracking-tight md:text-[2.25rem]">
+          Les eines amb què <strong className="font-semibold">treballem cada dia</strong>
+        </h2>
+      </div>
+      <ul className="sr-only">
+        {tools.map((t) => (
+          <li key={t.name}>{t.name}</li>
+        ))}
+      </ul>
+      <div aria-hidden="true" className="logos-fila group mt-14 flex overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_12%,black_88%,transparent)] md:mt-16">
+        <div className="logos-pista flex w-max shrink-0 items-center group-hover:[animation-play-state:paused]" style={{ ["--logos-durada" as string]: "45s" }}>
+          {[0, 1].map((copy) => tools.map((t) => <ToolLogo key={`${copy}-${t.name}`} {...t} />))}
         </div>
-        <Reveal as="ul" className="reveal-stagger mt-10 grid grid-cols-3 gap-px overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.06] sm:grid-cols-4 lg:grid-cols-6">
-          {[...toolIcons, { name: "ChatGPT", path: "" }].map((t, i) => (
-            <li
-              key={t.name}
-              style={{ transitionDelay: `${i * 50}ms` }}
-              className="group flex aspect-[4/3] flex-col items-center justify-center gap-3 bg-[#0a0c10] transition-colors hover:bg-[#12151b]"
-            >
-              {t.path ? (
-                <svg viewBox="0 0 24 24" aria-hidden="true" className={`fill-white/45 transition-colors duration-300 group-hover:fill-white ${t.name === "WooCommerce" ? "h-11 w-11 md:h-12 md:w-12" : "h-7 w-7 md:h-8 md:w-8"}`}>
-                  <path d={t.path} />
-                </svg>
-              ) : (
-                <span aria-hidden="true" className="flex h-8 items-center text-[15px] font-semibold tracking-tight text-white/45 group-hover:text-white">GPT</span>
-              )}
-              <span className="text-[12px] text-white/40 transition-colors group-hover:text-white/80">{t.name}</span>
-            </li>
-          ))}
-        </Reveal>
       </div>
     </section>
-  </>
-);
+  );
+};
