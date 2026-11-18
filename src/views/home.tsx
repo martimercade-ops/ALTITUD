@@ -5,6 +5,7 @@ import { Stats } from "@/views/stats";
 import { Showcase } from "@/views/showcase";
 import { Works } from "@/views/works";
 import { Agencia360 } from "@/views/agencia-360";
+import { Eines } from "@/views/arrels";
 import { ContactForm } from "@/views/contact-form";
 import { SiteFooter } from "@/views/site-footer";
 import { SiteNav } from "@/views/site-nav";
@@ -35,6 +36,7 @@ export const HomeView = ({ content = homeContent, robot = false }: HomeViewProps
       <About content={about} labelId={about.labelId} />
       <Stats content={stats} />
       <Showcase content={showcase} />
+      <Eines />
       <Works content={works} />
       <Method content={methodContent} />
       <Agencia360 />

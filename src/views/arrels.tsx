@@ -97,9 +97,14 @@ export const Arrels = () => (
       </div>
     </section>
 
+  </>
+);
+
+export const Talent = () => (
+  <>
     {/* Talent i experiència */}
-    <section aria-labelledby="talent-title" className="bg-[#0e1116] px-6 pb-24 text-white md:px-10 md:pb-32 lg:px-12">
-      <div className="mx-auto max-w-6xl border-t border-white/10 pt-20 md:pt-24">
+    <section aria-labelledby="talent-title" className="bg-[#0e1116] px-6 py-24 text-white md:px-10 md:py-32 lg:px-12">
+      <div className="mx-auto max-w-6xl">
         <Reveal className="reveal-up">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/55">Talent i experiència</p>
           <h2 id="talent-title" className="mt-5 max-w-[24ch] text-[2rem] font-light leading-[1.1] tracking-tight md:text-[2.75rem]">
@@ -118,7 +123,7 @@ export const Arrels = () => (
             <p className="text-[3rem] font-extralight leading-none">Màster</p>
             <p className="mt-5 text-lg">en màrqueting</p>
             <p className="mt-2 text-[15px] leading-relaxed text-white/55">
-              Un equip format en màrqueting que es manté al dia de cada novetat del sector.
+              L&apos;Andrea, la nostra project manager, té un màster en màrqueting: cada projecte, ben planificat.
             </p>
           </Reveal>
           <Reveal className="reveal-up rounded-3xl border border-white/10 bg-white/[0.03] p-8" style={{ transitionDelay: "240ms" }}>
@@ -154,6 +159,11 @@ export const Arrels = () => (
       </div>
     </section>
 
+  </>
+);
+
+export const Eines = () => (
+  <>
     {/* Eines */}
     <section aria-labelledby="eines-title" className="bg-[#0a0c10] px-6 py-20 text-white md:px-10 md:py-24 lg:px-12">
       <div className="mx-auto max-w-6xl">

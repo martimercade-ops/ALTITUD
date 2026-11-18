@@ -3,6 +3,7 @@ import Link from "next/link";
 import { SiteNav } from "@/views/site-nav";
 import { SiteFooter } from "@/views/site-footer";
 import { Reveal } from "@/components/common/reveal";
+import { Talent } from "@/views/arrels";
 import { footerContent } from "@/data/mocks/contact";
 import { homeContent, homeNav, PARLEM_HREF } from "@/data/mocks/home";
 
@@ -109,6 +110,8 @@ export const TeamPageView = () => {
             })}
           </ol>
         </section>
+
+        <Talent />
 
         {/* Crida */}
         <section className="px-6 py-24 text-center md:py-32">

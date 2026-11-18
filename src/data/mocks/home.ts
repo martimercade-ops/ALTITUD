@@ -166,10 +166,6 @@ export const homeContent: HomeContent = {
         .filter((s) => !SHOWCASE.includes(s.slug))
         .map((s) => ({ label: s.name, href: serviceHref(s.slug) })),
     },
-    tools: {
-      label: "Treballem amb",
-      items: ["WordPress", "Elementor", "WooCommerce", "Shopify", "PrestaShop", "Figma", "Google Ads", "Meta Ads", "Semrush", "Google Analytics", "Claude", "ChatGPT"],
-    },
   },
   works: {
     eyebrow: "Casos d'èxit",
