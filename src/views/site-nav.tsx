@@ -39,7 +39,7 @@ export interface SiteNavProps extends SiteNavContent {
 }
 
 const PILL =
-  "flex h-11 items-center rounded-full border border-white/10 bg-black/30 backdrop-blur-md";
+  "flex h-[56px] items-center rounded-full border border-white/10 bg-black/30 backdrop-blur-md md:h-[60px]";
 
 export const SiteNav = ({
   brand,
@@ -48,10 +48,10 @@ export const SiteNav = ({
   navLabel = "Primary",
   homeHref = "#top",
 }: SiteNavProps) => (
-  <header className="fixed inset-x-4 top-4 z-50 flex items-center justify-between gap-4 text-white md:inset-x-6 md:top-6">
+  <header className="fixed inset-x-[14px] top-[14px] z-50 flex items-center justify-between gap-4 text-white md:inset-x-[24px] md:top-[24px]">
     <div className="flex items-center gap-3">
-      <a href={homeHref} aria-label={brand} className={`${PILL} relative z-[60] gap-2 px-5 font-medium`}>
-        <img src="/assets/altitud/altitud-logo-h.svg" alt="" width={128} height={16} className="block h-4 w-auto" />
+      <a href={homeHref} aria-label={brand} className={`${PILL} relative z-[60] gap-2 px-[22px] font-medium md:px-[26px]`}>
+        <img src="/assets/altitud/altitud-logo-h.svg" alt="" width={128} height={16} className="block h-[19px] w-auto md:h-[21px]" />
       </a>
       <nav aria-label={navLabel} className={`${PILL} hidden px-2 md:flex`}>
         {items.map((item) =>
@@ -60,7 +60,7 @@ export const SiteNav = ({
               <a
                 href={item.href}
                 aria-haspopup="true"
-                className="flex items-center gap-1.5 rounded-full px-4 py-2 text-sm text-white/80 hover:text-white group-focus-within:text-white"
+                className="flex items-center gap-1.5 rounded-full px-[18px] py-[12px] text-[15px] text-white/80 hover:text-white group-focus-within:text-white"
               >
                 {item.label}
                 <svg
@@ -85,7 +85,7 @@ export const SiteNav = ({
                           <li key={child.href}>
                             <a
                               href={child.href}
-                              className="block rounded-xl px-4 py-2.5 text-sm text-white/80 hover:bg-white/10 hover:text-white focus-visible:bg-white/10 focus-visible:text-white"
+                              className="block rounded-xl px-[16px] py-[12px] text-[15px] text-white/80 hover:bg-white/10 hover:text-white focus-visible:bg-white/10 focus-visible:text-white"
                             >
                               {child.label}
                             </a>
@@ -101,7 +101,7 @@ export const SiteNav = ({
             <a
               key={item.href}
               href={item.href}
-              className="rounded-full px-4 py-2 text-sm text-white/80 hover:text-white"
+              className="rounded-full px-[18px] py-[12px] text-[15px] text-white/80 hover:text-white"
             >
               {item.label}
             </a>
@@ -109,10 +109,10 @@ export const SiteNav = ({
         )}
       </nav>
     </div>
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-[8px]">
       <a
         href={cta.href}
-        className="inline-flex h-11 items-center rounded-full bg-white px-6 text-sm font-medium text-plum shadow-sm hover:bg-white/90"
+        className="inline-flex h-[56px] items-center rounded-full bg-white px-[24px] text-[15px] font-medium text-plum md:h-[60px] md:px-[30px] shadow-sm hover:bg-white/90"
       >
         {cta.label}
       </a>
