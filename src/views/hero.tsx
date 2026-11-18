@@ -83,7 +83,7 @@ export const Hero = ({ content }: HeroProps) => {
     <section
       ref={sectionRef}
       aria-label={sectionLabel}
-      className="relative h-lvh bg-hero-page"
+      className="relative h-lvh bg-[#0b1424]"
     >
       <animated.div
         style={{
