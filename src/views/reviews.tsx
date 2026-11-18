@@ -6,21 +6,22 @@ import { Reveal } from "@/components/common/reveal";
 export interface ReviewItem {
   name: string;
   text: string;
+  /** Foto de perfil de Google, si la tenim */
+  avatar?: string;
 }
 
 export interface ReviewsContent {
   eyebrow: string;
   heading: string;
-  score: string;
   basis: string;
   link: { label: string; href: string };
   items: ReviewItem[];
 }
 
-const Stars = () => (
+const Stars = ({ size = "h-3.5 w-3.5" }: { size?: string }) => (
   <span role="img" aria-label="5 de 5 estrelles" className="flex gap-0.5">
     {[0, 1, 2, 3, 4].map((star) => (
-      <svg key={star} viewBox="0 0 20 20" aria-hidden="true" className="h-3.5 w-3.5 fill-[#fbbc04]">
+      <svg key={star} viewBox="0 0 20 20" aria-hidden="true" className={`${size} fill-[#fbbc04]`}>
         <path d="M10 1.5l2.6 5.5 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L1.4 7.8l6-.8z" />
       </svg>
     ))}
@@ -45,75 +46,97 @@ const initials = (name: string) =>
     .map((w) => w[0]!.toUpperCase())
     .join("");
 
-/** Tons suaus per als avatars amb inicials */
-const TONES = ["bg-[#e8edff] text-[#2f5bff]", "bg-[#eef7d6] text-[#4d6b10]", "bg-[#f1ecff] text-[#6b4fd8]", "bg-[#e6f4f1] text-[#1f7a68]", "bg-[#fff1e6] text-[#b35a14]"];
+/** Colors dels avatars de Google quan no hi ha foto */
+const TONES = ["bg-[#1a73e8]", "bg-[#188038]", "bg-[#e37400]", "bg-[#a142f4]", "bg-[#d93025]", "bg-[#12b5cb]"];
+
+const Card = ({ item, i }: { item: ReviewItem; i: number }) => (
+  <figure className="flex h-full w-[19rem] shrink-0 flex-col rounded-2xl border border-black/[0.08] bg-white p-5 shadow-[0_1px_2px_rgba(0,0,0,0.04)] sm:w-[22rem]">
+    <figcaption className="flex items-center gap-3">
+      {item.avatar ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={item.avatar} alt="" className="h-10 w-10 shrink-0 rounded-full object-cover" loading="lazy" />
+      ) : (
+        <span
+          aria-hidden="true"
+          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-medium text-white ${TONES[i % TONES.length]}`}
+        >
+          {initials(item.name)}
+        </span>
+      )}
+      <span className="min-w-0 flex-1">
+        <span className="block truncate text-[15px] font-medium text-[#202124]">{item.name}</span>
+        <span className="block text-xs text-[#5f6368]">Ressenya de Google</span>
+      </span>
+      <GoogleMark />
+    </figcaption>
+    <div className="mt-3">
+      <Stars />
+    </div>
+    <blockquote className="mt-2 line-clamp-5 text-[14px] leading-[1.55] text-[#3c4043]">{item.text}</blockquote>
+  </figure>
+);
+
+/** Fila que gira sola; es para en passar-hi el ratolí */
+const Row = ({ items, offset, reverse }: { items: ReviewItem[]; offset: number; reverse?: boolean }) => (
+  <div className="ressenyes-fila group relative overflow-hidden">
+    <ul
+      className={`ressenyes-pista flex w-max gap-4 py-2 ${reverse ? "ressenyes-pista--inversa" : ""}`}
+      style={{ animationDuration: `${items.length * 7}s` }}
+    >
+      {[...items, ...items].map((item, i) => (
+        <li key={`${item.name}-${i}`} aria-hidden={i >= items.length || undefined} className="flex">
+          <Card item={item} i={i + offset} />
+        </li>
+      ))}
+    </ul>
+  </div>
+);
 
 export const Reviews = ({ content }: { content: ReviewsContent }) => {
-  const { eyebrow, heading, score, basis, link, items } = content;
+  const { eyebrow, heading, basis, link, items } = content;
+  const half = Math.ceil(items.length / 2);
   return (
     <section
       id="reviews"
       aria-labelledby="reviews-title"
-      className="relative z-20 bg-hero-page px-4 py-24 text-black md:px-10 lg:px-12"
+      className="relative z-20 overflow-hidden bg-hero-page py-24 text-black"
     >
-      <div className="mx-auto max-w-6xl">
-        <div className="flex flex-col items-center text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-muted-small">{eyebrow}</p>
-          <AnimatedHeading
-            as="h2"
-            id="reviews-title"
-            className="mt-6 text-[1.75rem] font-light leading-[1.05] tracking-tight text-black sm:text-[2.25rem] lg:text-[2.75rem]"
-          >
-            {heading}
-          </AnimatedHeading>
-          <div className="mt-8 inline-flex items-center gap-4 rounded-full border border-black/10 py-2 pl-3 pr-5">
-            <GoogleMark />
-            <span className="text-[1.6rem] font-light leading-none">{score}</span>
-            <Stars />
-            <span className="text-sm text-black/55">{basis}</span>
-          </div>
-        </div>
+      <div className="mx-auto flex max-w-6xl flex-col items-center px-4 text-center md:px-10">
+        <p className="text-xs font-semibold uppercase tracking-[0.35em] text-muted-small">{eyebrow}</p>
+        <AnimatedHeading
+          as="h2"
+          id="reviews-title"
+          className="mt-6 text-[1.75rem] font-light leading-[1.05] tracking-tight text-black sm:text-[2.25rem] lg:text-[2.75rem]"
+        >
+          {heading}
+        </AnimatedHeading>
+        <a
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-8 inline-flex items-center gap-3 rounded-full border border-black/10 bg-white py-2.5 pl-3 pr-5 transition-colors hover:border-black/25"
+        >
+          <GoogleMark />
+          <Stars size="h-4 w-4" />
+          <span className="text-sm text-black/60">{basis}</span>
+        </a>
+      </div>
 
-        <div className="relative mt-12">
-          <ul className="columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-4 [&>li]:mb-4">
-            {items.map((item, i) => (
-              <Reveal
-                key={item.name}
-                as="li"
-                className={`reveal-up break-inside-avoid ${i >= 12 ? "hidden lg:block" : i >= 6 ? "hidden sm:block" : ""}`}
-                style={{ transitionDelay: `${(i % 4) * 70}ms` }}
-              >
-                <figure className="rounded-2xl border border-black/[0.07] bg-[#f6f7f9] p-5 transition-colors hover:border-black/15 hover:bg-white">
-                  <Stars />
-                  <blockquote className="mt-3 text-[14px] leading-[1.55] text-black/75">{item.text}</blockquote>
-                  <figcaption className="mt-4 flex items-center gap-2.5">
-                    <span
-                      aria-hidden="true"
-                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold ${TONES[i % TONES.length]}`}
-                    >
-                      {initials(item.name)}
-                    </span>
-                    <span className="min-w-0 truncate text-[13px] font-medium text-black/80">{item.name}</span>
-                  </figcaption>
-                </figure>
-              </Reveal>
-            ))}
-          </ul>
-          {/* Difuminat final que convida a veure'n més */}
-          <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-hero-page via-hero-page/80 to-transparent" />
-        </div>
+      <div className="ressenyes mt-12 flex flex-col gap-4">
+        <Row items={items.slice(0, half)} offset={0} />
+        <Row items={items.slice(half)} offset={half} reverse />
+      </div>
 
-        <div className="relative -mt-6 flex justify-center">
-          <a
-            href={link.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex h-12 items-center gap-3 rounded-full bg-black pl-6 pr-2 text-sm font-medium text-white transition-transform hover:scale-[1.02]"
-          >
-            {link.label}
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-black transition-transform group-hover:translate-x-0.5">↗</span>
-          </a>
-        </div>
+      <div className="mt-10 flex justify-center px-4">
+        <a
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group inline-flex h-12 items-center gap-3 rounded-full bg-black pl-6 pr-2 text-sm font-medium text-white transition-transform hover:scale-[1.02]"
+        >
+          {link.label}
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-black transition-transform group-hover:translate-x-0.5">↗</span>
+        </a>
       </div>
     </section>
   );

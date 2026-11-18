@@ -406,3 +406,16 @@ img {
   .hero-mark-fill, .hero-mark.is-on .hero-mark-fill { animation: none; opacity: 1; }
   .hero-mark.is-on .hero-mark-llum { animation: none; }
 }
+
+/* Ressenyes de Google que giren soles */
+.ressenyes-fila {
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.ressenyes-pista { animation: ressenyes-gira linear infinite; }
+.ressenyes-pista--inversa { animation-direction: reverse; }
+.ressenyes-fila:hover .ressenyes-pista { animation-play-state: paused; }
+@keyframes ressenyes-gira { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .ressenyes-pista { animation: none; }
+  .ressenyes-fila { overflow-x: auto; }
+}
