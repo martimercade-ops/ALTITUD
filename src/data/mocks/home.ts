@@ -45,7 +45,7 @@ const siteNav: SiteNavContent = {
     { label: "Metodologia", href: "/metodologia" },
     {
       label: "Serveis",
-      href: "#services",
+      href: "/serveis",
       children: services.map((s) => ({ label: s.name, href: serviceHref(s.slug), group: s.group })),
     },
     { label: "Projectes", href: "/projectes" },
@@ -73,7 +73,7 @@ export const homeContent: HomeContent = {
     sectionLabel: "Inici",
     image: { src: `${A}/nevado-hero.jpg`, alt: "Cim nevat al capvespre, protagonista al centre de la imatge" },
     cta: { label: "Parlem del teu projecte", href: PARLEM_HREF },
-    secondaryCta: { label: "Veure serveis", href: "#services" },
+    secondaryCta: { label: "Veure serveis", href: "/serveis" },
     insightTitle: "Agència de màrqueting 360° a Andorra.",
     insightBody:
       "Estratègia, creativitat i tecnologia per atraure clients, fer créixer la teva marca i convertir oportunitats en resultats reals.",

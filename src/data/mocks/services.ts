@@ -91,7 +91,7 @@ export const services: Service[] = [
     headline: "Webs que treballen per al teu negoci.",
     intro:
       "Dissenyem i desenvolupem webs i botigues online ràpides, fàcils de gestionar i pensades per convertir. Des d'una web corporativa fins a un e-commerce complet, amb manteniment inclòs perquè no t'hagis de preocupar de res.",
-    image: `${A}/codi.jpg`,
+    image: `${A}/serveis/carretera-tardor.jpg`,
     includes: [
       { title: "Webs corporatives", text: "Una imatge professional que transmet confiança des del primer clic." },
       { title: "Botigues online", text: "E-commerce preparat per vendre, amb pagaments i gestió d'estoc." },
@@ -114,7 +114,7 @@ export const services: Service[] = [
     headline: "Webs i apps fàcils i agradables de fer servir.",
     intro:
       "Dissenyem l'experiència i la interfície de webs, botigues online i aplicacions: com hi navega l'usuari, què veu primer i com arriba a comprar o a contactar-te, abans d'escriure una sola línia de codi.",
-    image: `${A}/disseny.jpg`,
+    image: `${A}/serveis/grandalla.jpg`,
     includes: [
       { title: "Recerca d'usuari", text: "Entenem qui fa servir el teu web i què hi busca." },
       { title: "Arquitectura i fluxos", text: "Ordenem continguts i camins perquè res costi de trobar." },
@@ -136,7 +136,7 @@ export const services: Service[] = [
     headline: "Que et trobin quan et busquen.",
     intro:
       "Posicionem la teva empresa a Google i gestionem campanyes de publicitat online a Google i Meta perquè arribis als clients adequats en el moment adequat, amb cada euro invertit sota control.",
-    image: `${A}/seo.jpg`,
+    image: `${A}/serveis/cim-fita.jpg`,
     includes: [
       { title: "SEO", text: "Auditoria, optimització tècnica, continguts i posicionament local." },
       { title: "Google Ads", text: "Campanyes de cerca, display i Shopping orientades a resultats." },
@@ -159,7 +159,7 @@ export const services: Service[] = [
     headline: "Més vendes sense haver de pagar més anuncis.",
     intro:
       "Mirem on es perden les visites de la teva web o botiga, provem canvis i ens quedem amb els que funcionen. Pas a pas, amb dades, perquè cada visita valgui més.",
-    image: `${A}/seo.jpg`,
+    image: `${A}/serveis/cordada.jpg`,
     includes: [
       { title: "Analítica ben muntada", text: "Saber d'on venen les vendes i on s'encallen els usuaris." },
       { title: "Optimització de la conversió", text: "Formularis, fitxes de producte i checkout més fàcils." },
@@ -181,7 +181,7 @@ export const services: Service[] = [
     headline: "Xarxes socials que fan créixer la teva marca.",
     intro:
       "Creem i gestionem el contingut de les teves xarxes amb una estratègia clara: reels, publicacions i campanyes que connecten amb la teva audiència i la converteixen en clients.",
-    image: `${A}/xarxes.jpg`,
+    image: `${A}/serveis/isard.jpg`,
     includes: [
       { title: "Estratègia de contingut", text: "Calendari editorial alineat amb els objectius del negoci." },
       { title: "Reels i vídeo curt", text: "Peces creatives pensades per a Instagram i TikTok." },
@@ -251,7 +251,7 @@ export const services: Service[] = [
     headline: "Deixa que la feina repetitiva es faci sola.",
     intro:
       "Connectem les eines del teu negoci i automatitzem processos amb intel·ligència artificial: menys tasques manuals, menys errors i més temps per al que de debò aporta valor.",
-    image: `${A}/ia.jpg`,
+    image: `${A}/serveis/estany-estels.jpg`,
     includes: [
       { title: "Automatització de processos", text: "Fluxos que connecten correu, CRM, fulls de càlcul i més." },
       { title: "Gestió de leads", text: "Cada contacte arriba al lloc correcte i rep resposta a temps." },
@@ -273,7 +273,7 @@ export const services: Service[] = [
     headline: "Vídeos per a xarxes i anuncis, més ràpid.",
     intro:
       "Combinem la nostra producció amb eines d'intel·ligència artificial per crear més vídeos en menys temps: versions per a cada xarxa, subtítols, veus en off en diversos idiomes i peces per a campanyes.",
-    image: `${A}/camera.jpg`,
+    image: `${A}/serveis/andorra-nit.jpg`,
     includes: [
       { title: "Reels i vídeos curts", text: "Adaptats a cada xarxa i a cada format." },
       { title: "Subtítols automàtics", text: "En català, castellà, francès o anglès." },
@@ -295,7 +295,7 @@ export const services: Service[] = [
     headline: "Respon els teus clients a qualsevol hora.",
     intro:
       "Implantem chatbots amb intel·ligència artificial a webs i botigues online: responen dubtes, recomanen productes i capten contactes les 24 hores, amb el to de la teva marca. Ja en funcionen a molts e-commerce.",
-    image: `${A}/ia.jpg`,
+    image: `${A}/serveis/bordes.jpg`,
     includes: [
       { title: "Chatbot per a la web", text: "Respon preguntes freqüents amb la informació del teu negoci." },
       { title: "Chatbot per a e-commerce", text: "Ajuda a triar producte, resol dubtes de comandes i enviaments." },
