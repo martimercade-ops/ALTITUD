@@ -9,7 +9,11 @@ export const siteConfig = {
     "Estratègia, creativitat i tecnologia per atraure clients, fer créixer la teva marca i convertir oportunitats en resultats reals.",
   url:
     publicEnv.NEXT_PUBLIC_SITE_URL ??
-    (vercelProduction ? `https://${vercelProduction}` : "http://localhost:3000"),
+    (vercelProduction
+      ? `https://${vercelProduction}`
+      : process.env.NODE_ENV === "production"
+        ? "https://altitudigital.com"
+        : "http://localhost:3000"),
   ogImage: "/open-graph.jpg",
   ogImageAlt: "Altitud Digital, agència de màrqueting 360° a Andorra",
   twitterHandle: undefined as string | undefined,
