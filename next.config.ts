@@ -40,6 +40,7 @@ const nextConfig: NextConfig = {
       { source: "/contacte", destination: "/parlem", permanent: true },
       { source: "/servicios/optimizacion-seo", destination: "/serveis/seo-sem", permanent: true },
       { source: "/servicios/:path*", destination: "/#services", permanent: true },
+      { source: "/serveis/estoc-automatic-ia", destination: "/serveis/programari-a-mida", permanent: true },
       { source: "/quienes-somos", destination: "/#about", permanent: true },
     ];
   },
