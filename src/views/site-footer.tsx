@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { AnimatedHeading } from "@/components/common/animated-heading";
 import { Reveal } from "@/components/common/reveal";
+import { ConsentSettingsLink, MapEmbed } from "@/components/common/consent";
+import { legalPages } from "@/data/mocks/legal";
 
 const MAP_EMBED =
   "https://www.google.com/maps?q=Carrer+Ciutat+de+Valls+24,+AD500+Andorra+la+Vella&z=16&output=embed";
@@ -55,18 +57,8 @@ export const SiteFooter = ({ content }: SiteFooterProps) => {
       {/* Dues maneres de fer el cafè: a l'oficina o per videotrucada */}
       <div className="mx-auto mt-12 grid w-full max-w-5xl gap-4 text-left md:grid-cols-5">
         <Reveal className="reveal-map relative min-h-[22rem] overflow-hidden rounded-3xl border border-footer-fg/15 bg-footer md:col-span-3">
-          <iframe
-            title="Mapa de l'oficina d'Altitud Digital a Andorra la Vella"
-            src={MAP_EMBED}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            className="absolute inset-0 h-full w-full [filter:grayscale(1)_invert(0.92)_hue-rotate(180deg)_contrast(0.9)_brightness(0.95)]"
-          />
+          <MapEmbed src={MAP_EMBED} title="Mapa de l'oficina d'Altitud Digital a Andorra la Vella" />
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 shadow-[inset_0_0_60px_20px_rgb(10_21_51/0.9)]" />
-          <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <span className="mapa-pols absolute -left-10 -top-10 block h-20 w-20 rounded-full bg-accent-lime/40" />
-            <span className="mapa-pols mapa-pols--2 absolute -left-10 -top-10 block h-20 w-20 rounded-full bg-accent-lime/30" />
-          </div>
           <div className="absolute inset-x-3 bottom-3 flex items-center gap-3 rounded-2xl border border-footer-fg/15 bg-footer/85 p-2 pr-3 backdrop-blur-md sm:pr-4">
             <Image
               src={office.src}
@@ -185,6 +177,24 @@ export const SiteFooter = ({ content }: SiteFooterProps) => {
           </div>
         </div>
       </nav>
+
+      <div className="-mx-6 mt-12 flex flex-col gap-4 border-t border-footer-fg/15 px-6 pt-6 text-xs text-footer-fg/55 md:-mx-10 md:flex-row md:items-center md:justify-between md:px-10 lg:-mx-12 lg:px-12">
+        <p>
+          {content.copyright} NRT F-222591-D
+        </p>
+        <ul className="flex flex-wrap gap-x-6 gap-y-2">
+          {legalPages.map((p) => (
+            <li key={p.slug}>
+              <Link href={p.href} className="hover:text-footer-fg">
+                {p.title}
+              </Link>
+            </li>
+          ))}
+          <li>
+            <ConsentSettingsLink className="hover:text-footer-fg" />
+          </li>
+        </ul>
+      </div>
       </div>
       <img src="/assets/altitud/altitud-paraula.svg" alt="Altitud Digital" width="1600" height="245" className="peu-logo relative z-10 mt-8" />
     </footer>

@@ -12,6 +12,7 @@ import { AdaptiveGrid } from "@/components/common/grid";
 import { ReducedMotion } from "@/components/common/reduced-motion";
 import { Guardia } from "@/components/common/guardia";
 import { ScrollLayout } from "@/layouts/scroll-layout";
+import { ConsentBanner } from "@/components/common/consent";
 
 import "@/app/globals.css";
 
@@ -53,6 +54,7 @@ export default function RootLayout({
           <ReducedMotion />
           {children}
         </ScrollLayout>
+        <ConsentBanner />
       </body>
     </html>
   );

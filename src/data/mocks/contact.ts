@@ -78,7 +78,6 @@ export const footerContent: FooterContent = {
       { label: "Sobre nosaltres", href: "/#about" },
       { label: "Equip", href: "/equip" },
       { label: "Parlem", href: "/parlem" },
-      { label: "Privacitat", href: "/privacy-policy" },
     ],
   },
   contact: {
