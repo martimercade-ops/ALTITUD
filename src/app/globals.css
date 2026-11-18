@@ -366,3 +366,9 @@ img {
   .reveal-map .mapa-xarxa { opacity: 0.5; transition: none; }
   .reveal-map .mapa-node { opacity: 1; animation: none; }
 }
+
+/* Serveis (home): acordió */
+.showcase-col { transition: flex-grow 900ms cubic-bezier(.7, 0, .2, 1); }
+@keyframes showcase-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.showcase-progress { animation-name: showcase-progress; animation-timing-function: linear; animation-fill-mode: forwards; }
+@media (prefers-reduced-motion: reduce) { .showcase-col { transition: none; } }
