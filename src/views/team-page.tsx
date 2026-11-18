@@ -3,7 +3,6 @@ import Link from "next/link";
 import { SiteNav } from "@/views/site-nav";
 import { SiteFooter } from "@/views/site-footer";
 import { Reveal } from "@/components/common/reveal";
-import { Talent } from "@/views/arrels";
 import { footerContent } from "@/data/mocks/contact";
 import { homeContent, homeNav, PARLEM_HREF } from "@/data/mocks/home";
 
@@ -95,6 +94,13 @@ export const TeamPageView = () => {
                     <h2 className="mt-6 text-[2.5rem] font-light leading-[1] tracking-tight md:text-[3.5rem]">{m.name}</h2>
                     <p className="mt-3 text-lg text-[#2f5bff]">{m.role}</p>
                     {m.bio && <p className="mt-8 max-w-md text-lg leading-relaxed text-black/65">{m.bio}</p>}
+                    {m.highlights && (
+                      <ul className="mt-8 flex flex-col gap-3 border-l-2 border-[#2f5bff] pl-5" aria-label="Formació i experiència">
+                        {m.highlights.map((h) => (
+                          <li key={h} className="text-[15px] leading-snug text-black/75">{h}</li>
+                        ))}
+                      </ul>
+                    )}
                     {m.focus && (
                       <ul className="mt-8 flex flex-wrap gap-2" aria-label="Especialitats">
                         {m.focus.map((f) => (
@@ -110,8 +116,6 @@ export const TeamPageView = () => {
             })}
           </ol>
         </section>
-
-        <Talent />
 
         {/* Crida */}
         <section className="px-6 py-24 text-center md:py-32">

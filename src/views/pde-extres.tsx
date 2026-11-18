@@ -90,68 +90,92 @@ const TIERS = [
 
 const euros = (n: number) => `${String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ".")} €`;
 
-/** Imports per mida d'empresa, com a pics que pugen */
-export const PdePeaks = () => {
-  const W = 1000;
-  const H = 420;
-  const col = W / TIERS.length;
-  const peak = (amt: number) => H - (150 + ((amt - 3000) / 3000) * 190);
-  return (
-    <section aria-labelledby="pics-title" className="relative overflow-hidden bg-[#0b1424] px-6 pb-20 pt-24 text-white md:px-10 md:pb-28 md:pt-32 lg:px-12">
-      <div className="mx-auto max-w-6xl">
-        <div className="text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/50">Quant et pot cobrir</p>
-          <h2 id="pics-title" className="mt-4 text-[2rem] font-light leading-[1.1] tracking-tight md:text-[2.75rem]">
-            Com més petita l&apos;empresa, <strong className="font-semibold">més alt el cim.</strong>
-          </h2>
-          <p className="mx-auto mt-5 max-w-xl text-[16px] leading-relaxed text-white/60">
-            L&apos;import total que pots rebre depèn de la mida de la teva empresa, a repartir entre les solucions que triïs.
-          </p>
-        </div>
+/** Cims reals de la foto (nevado-3.jpg, en coordenades d'una imatge de 800×530) */
+const SUMMITS = [
+  { x: 745, y: 390, tier: 0 },
+  { x: 640, y: 338, tier: 1 },
+  { x: 200, y: 303, tier: 2 },
+  { x: 432, y: 270, tier: 3 },
+];
+const HUT = { x: 545, y: 352 };
+const IW = 800;
+const IH = 530;
+const CROP_TOP = 190;
+const CROP_H = 320;
 
-        <Reveal className="pics-pde mt-14">
-          <svg viewBox={`0 -110 ${W} ${H + 110}`} className="h-auto w-full" role="img" aria-label="Imports màxims del PDE segons la mida de l'empresa">
-            <defs>
-              <linearGradient id="pic-cos" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stopColor="#3a4f7a" />
-                <stop offset="1" stopColor="#0b1424" />
-              </linearGradient>
-            </defs>
-            <line x1="0" y1={H - 1} x2={W} y2={H - 1} stroke="rgb(255 255 255 / 0.15)" />
-            {TIERS.map((t, i) => {
-              const cx = col * i + col / 2;
-              const top = peak(t.amount);
-              const half = col * 0.62;
-              const last = i === TIERS.length - 1;
-              return (
-                <g key={t.name}>
-                  <g className="pic" style={{ transitionDelay: `${i * 160}ms` }}>
-                    <path d={`M${cx - half} ${H} L${cx} ${top} L${cx + half} ${H}Z`} fill="url(#pic-cos)" stroke="rgb(255 255 255 / 0.12)" />
-                    <path d={`M${cx} ${top} L${cx - 26} ${top + 34} L${cx - 9} ${top + 28} L${cx} ${top + 40} L${cx + 11} ${top + 27} L${cx + 26} ${top + 34}Z`} fill="white" opacity="0.85" />
-                  </g>
-                  <text x={last ? cx - 16 : cx} y={top - (last ? 40 : 22)} textAnchor={last ? "end" : "middle"} className={`pic-text fill-white font-light ${last ? "text-[44px]" : "text-[36px]"}`} style={{ transitionDelay: `${400 + i * 160}ms` }}>
-                    {euros(t.amount)}
-                  </text>
-                  {last && (
-                    <g className="pic-text" style={{ transitionDelay: "1100ms" }}>
-                      <Flag x={cx} y={top} />
-                    </g>
-                  )}
-                </g>
-              );
-            })}
-          </svg>
-          <ul className="grid grid-cols-4 gap-2 border-t border-white/10 pt-6 text-center">
-            {TIERS.map((t) => (
-              <li key={t.name}>
-                <p className="text-[13px] font-medium md:text-[17px]">{t.name}</p>
-                <p className="mt-1 text-[11px] text-white/50 md:text-[14px]">{t.people}</p>
-                <p className="mt-2 text-[11px] text-accent-lime md:text-[13px]">Fins a {t.solutions} solucions</p>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
+/** Imports per mida d'empresa, marcats sobre els cims d'una muntanya real */
+export const PdePeaks = () => {
+  const pos = (x: number, y: number) => ({ left: `${(x / IW) * 100}%`, top: `${(y / IH) * 100}%` });
+  return (
+    <section aria-labelledby="pics-title" className="relative overflow-hidden bg-[#0b1424] pb-20 pt-24 text-white md:pb-28 md:pt-32">
+      <div className="mx-auto max-w-6xl px-6 text-center md:px-10">
+        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/50">Quant et pot cobrir</p>
+        <h2 id="pics-title" className="mt-4 text-[2rem] font-light leading-[1.1] tracking-tight md:text-[2.75rem]">
+          Com més petita l&apos;empresa, <strong className="font-semibold">més alt el cim.</strong>
+        </h2>
       </div>
+
+      <Reveal className="cims-pde relative mx-auto mt-12 max-w-[1400px] overflow-hidden md:mt-16" style={{ aspectRatio: `${IW} / ${CROP_H}` }}>
+        <div className="cims-foto absolute inset-x-0" style={{ top: `${(-CROP_TOP / CROP_H) * 100}%`, height: `${(IH / CROP_H) * 100}%` }}>
+          <Image src="/assets/altitud/nevado-3.jpg" alt="Serralada nevada amb quatre cims marcats amb els imports del PDE" fill sizes="(max-width: 1400px) 100vw, 1400px" className="object-cover" />
+          {/* Ruta de cim a cim */}
+          <svg viewBox={`0 0 ${IW} ${IH}`} preserveAspectRatio="none" aria-hidden="true" className="absolute inset-0 h-full w-full">
+            <path
+              d={`M${SUMMITS[0].x} ${SUMMITS[0].y} Q 700 380 ${SUMMITS[1].x} ${SUMMITS[1].y} Q ${HUT.x + 30} 370 ${HUT.x} ${HUT.y} Q 480 340 ${SUMMITS[3].x} ${SUMMITS[3].y}`}
+              fill="none"
+              stroke="white"
+              strokeWidth="1.4"
+              strokeDasharray="3 5"
+              vectorEffect="non-scaling-stroke"
+              className="cims-ruta"
+              opacity="0.7"
+            />
+          </svg>
+
+          {SUMMITS.map((m) => {
+            const t = TIERS[m.tier];
+            const top = m.tier === TIERS.length - 1;
+            return (
+              <div key={t.name} className="cims-marca absolute" style={{ ...pos(m.x, m.y), transitionDelay: `${500 + m.tier * 260}ms` }}>
+                <span className="absolute -left-[5px] -top-[5px] block h-[10px] w-[10px] rotate-45 border-2 border-white bg-[#0b1424]" />
+                {top ? (
+                  <svg viewBox="-4 -80 80 84" className="absolute -left-[4px] bottom-0 h-[64px] w-[64px] overflow-visible md:h-[84px] md:w-[84px]" aria-hidden="true">
+                    <Flag x={0} y={0} />
+                  </svg>
+                ) : null}
+                <span
+                  className={`absolute whitespace-nowrap rounded-full border border-white/25 bg-[#0b1424]/70 px-3 py-1 font-light backdrop-blur-md ${
+                    top ? "-top-[4.6rem] left-12 text-[15px] md:-top-[6rem] md:left-16 md:text-[22px]" : "-top-10 left-1/2 -translate-x-1/2 text-[12px] md:-top-12 md:text-[17px]"
+                  }`}
+                >
+                  {euros(t.amount)}
+                </span>
+              </div>
+            );
+          })}
+
+          {/* Refugi */}
+          <div className="cims-marca absolute" style={{ ...pos(HUT.x, HUT.y), transitionDelay: "1300ms" }}>
+            <svg viewBox="0 0 24 24" className="absolute -left-[11px] -top-[20px] h-[22px] w-[22px] drop-shadow" aria-hidden="true">
+              <path d="M2 12 L12 4 L22 12" fill="none" stroke="white" strokeWidth="2" strokeLinejoin="round" />
+              <path d="M5 11 V20 H19 V11" fill="#0b1424" stroke="white" strokeWidth="2" strokeLinejoin="round" />
+              <rect x="10" y="14" width="4" height="6" fill="#b6f13a" />
+            </svg>
+            <span className="absolute left-4 top-1 hidden whitespace-nowrap rounded-full bg-[#0b1424]/60 px-2 py-0.5 text-[11px] text-white/85 backdrop-blur md:block">Refugi · t&apos;ajudem amb els tràmits</span>
+          </div>
+        </div>
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,#0b1424,transparent_12%,transparent_88%,#0b1424),linear-gradient(180deg,#0b1424,transparent_18%,transparent_75%,#0b1424)]" />
+      </Reveal>
+
+      <ul className="mx-auto mt-10 grid max-w-6xl grid-cols-2 gap-6 px-6 text-center md:grid-cols-4 md:px-10">
+        {TIERS.map((t) => (
+          <li key={t.name} className="border-t border-white/10 pt-5">
+            <p className="text-[22px] font-light md:text-[26px]">{euros(t.amount)}</p>
+            <p className="mt-1 text-[14px]">{t.name}</p>
+            <p className="mt-1 text-[12px] text-white/50">{t.people} · fins a {t.solutions} solucions</p>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 };

@@ -221,7 +221,12 @@ export const homeContent: HomeContent = {
         name: "Martí Mercadé",
         role: "CEO",
         image: `${A}/equip/marti.jpg`,
-        bio: "Lidera l'estratègia de l'agència i acompanya cada client des del primer cafè fins als resultats.",
+        bio: "Fundador d'Altitud Digital. Lidera l'estratègia de l'agència i acompanya cada client des del primer cafè fins als resultats.",
+        highlights: [
+          "Doble grau en Màrqueting i Negocis Digitals a ESIC",
+          "Diversos premis en projectes universitaris",
+          "Experiència a Havas Media amb clients com UNICEF, JDE i Banca March",
+        ],
         focus: ["Estratègia", "Desenvolupament de negoci", "IA"],
       },
       {
@@ -236,6 +241,7 @@ export const homeContent: HomeContent = {
         role: "Project Manager",
         image: `${A}/equip/andrea.jpg`,
         bio: "Coordina els projectes perquè tot arribi a temps, amb ordre i comunicació clara amb cada client.",
+        highlights: ["Màster en màrqueting"],
         focus: ["Gestió de projectes", "Atenció al client", "Planificació"],
       },
       {

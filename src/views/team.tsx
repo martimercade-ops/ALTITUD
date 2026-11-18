@@ -12,6 +12,8 @@ export interface TeamMember {
   image: string;
   bio?: string;
   focus?: string[];
+  /** Formació i experiència destacades */
+  highlights?: string[];
 }
 
 export interface TeamContent {
