@@ -64,8 +64,8 @@ const HeroMark = ({ on }: { on: boolean }) => {
   return (
     <svg
       ref={ref}
-      viewBox="-4 -4 648 428"
-      preserveAspectRatio="xMidYMid meet"
+      viewBox="-4 -4 648 424"
+      preserveAspectRatio="xMidYMax meet"
       className={`hero-mark ${on ? "is-on" : ""}`}
     >
       <defs>
