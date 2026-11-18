@@ -5,6 +5,7 @@ import { AnimatedHeading } from "@/components/common/animated-heading";
 import { Reveal } from "@/components/common/reveal";
 import { ConsentSettingsLink, MapEmbed } from "@/components/common/consent";
 import { legalPages } from "@/data/mocks/legal";
+import { BOOKING_URL } from "@/lib/send-contact";
 
 const MAP_EMBED =
   "https://www.google.com/maps?q=Carrer+Ciutat+de+Valls+24,+AD500+Andorra+la+Vella&z=16&output=embed";
@@ -93,16 +94,18 @@ export const SiteFooter = ({ content }: SiteFooterProps) => {
             <p className="mt-6 text-xs font-medium uppercase tracking-wide text-footer-muted">Cafè virtual</p>
             <p className="mt-2 text-2xl font-light leading-tight tracking-tight">No pots venir? Fem el cafè per videotrucada.</p>
             <p className="mt-3 text-sm leading-relaxed text-footer-fg/70">
-              Vint minuts, cadascú amb el seu cafè, per conèixer el teu projecte i veure com et podem ajudar.
+              Vint minuts, cadascú amb el seu cafè, per conèixer el teu projecte i veure com et podem ajudar. Tria el dia i l&apos;hora que et vagi bé.
             </p>
           </div>
-          <Link
-            href="/parlem?cafe=virtual"
+          <a
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noopener"
             className="mt-8 inline-flex h-12 items-center justify-between gap-3 rounded-full bg-accent-lime pl-6 pr-2 text-sm font-semibold text-black transition-transform hover:scale-[1.02]"
           >
             Reserva un cafè virtual
             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-accent-lime">→</span>
-          </Link>
+          </a>
         </Reveal>
       </div>
 

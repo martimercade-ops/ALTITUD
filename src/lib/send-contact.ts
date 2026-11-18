@@ -17,6 +17,8 @@ export interface ContactPayload {
 }
 
 export const CONTACT_EMAIL = "info@altitudigital.com";
+/** Agenda de Google per reservar reunions amb en Martí */
+export const BOOKING_URL = "https://calendar.app.google/qQwTx3KyvEzpvTT3A";
 
 const mailtoBody = (p: ContactPayload) =>
   [

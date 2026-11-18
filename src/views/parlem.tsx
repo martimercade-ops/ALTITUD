@@ -5,6 +5,8 @@ import { ParlemForm } from "@/views/parlem-form";
 import { footerContent } from "@/data/mocks/contact";
 import { homeContent, homeNav, MAPS } from "@/data/mocks/home";
 import { services } from "@/data/mocks/services";
+import Image from "next/image";
+import { BOOKING_URL } from "@/lib/send-contact";
 
 const BUDGETS = [
   "Menys de 500 €",
@@ -87,6 +89,23 @@ export const ParlemView = () => {
                   </a>
                 </li>
               </ul>
+
+              <a
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noopener"
+                className="group mt-12 flex max-w-md items-center gap-5 rounded-2xl border border-white/12 bg-white/[0.04] p-4 pr-5 transition-colors hover:border-accent-lime/60 hover:bg-white/[0.07]"
+              >
+                <span className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full ring-2 ring-accent-lime/70">
+                  <Image src="/assets/altitud/equip/marti.jpg" alt="Martí Mercadé" fill sizes="64px" className="object-cover" />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block text-[11px] font-semibold uppercase tracking-[0.25em] text-accent-lime">Parla amb el CEO</span>
+                  <span className="mt-1 block text-lg leading-snug text-white">Reserva 20 minuts amb en Martí</span>
+                  <span className="mt-0.5 block text-sm text-white/60">Videotrucada o cafè a l&apos;oficina. Tu tries el dia.</span>
+                </span>
+                <span aria-hidden="true" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-lime text-black transition-transform group-hover:translate-x-1">→</span>
+              </a>
             </div>
 
             <div className="lg:pt-4">
