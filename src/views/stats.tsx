@@ -10,7 +10,9 @@ export interface StatsContent {
   collab: { value: string; desc: string };
   commitment: { eyebrow: string; value: string; quote: string; author: string; avatars: string[] };
   image: string;
-  data: { label: string; value: string; desc: string };
+  /** Enquadrament de la foto (classe object-position de Tailwind) */
+  imagePosition?: string;
+  data: { label: string; value: string; desc: string; tags?: string[] };
   reach: { label: string; value: string };
 }
 
@@ -57,10 +59,10 @@ export const Stats = ({ content }: StatsProps) => {
             fill
             sizes="(max-width: 1024px) 100vw, 66vw"
             quality={90}
-            className="object-cover object-[82%_50%]"
+            className={`object-cover ${content.imagePosition ?? "object-[82%_50%]"}`}
           />
           <div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/20 to-black/25"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/45 via-transparent to-black/25"
             aria-hidden="true"
           />
           <span className="absolute left-7 top-7 text-lg font-medium tracking-tight text-white">
@@ -110,9 +112,18 @@ export const Stats = ({ content }: StatsProps) => {
           >
             <p className="text-sm text-white">{data.label}</p>
             <div className={`mt-4 ${STAT_NUM}`}>{data.value}</div>
-            <p className="mt-auto max-w-xs text-base leading-relaxed text-white">
-              {data.desc}
-            </p>
+            <div className="mt-auto">
+              {data.tags && (
+                <ul className="mb-5 flex flex-wrap gap-2">
+                  {data.tags.map((t) => (
+                    <li key={t} className="rounded-full border border-white/35 px-3 py-1 text-sm text-white">
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <p className="max-w-xs text-base leading-relaxed text-white">{data.desc}</p>
+            </div>
           </animated.article>
           <animated.article
             style={cardStyle(3)}

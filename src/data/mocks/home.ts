@@ -121,11 +121,12 @@ export const homeContent: HomeContent = {
   },
   stats: {
     label: "Resultats",
-    brand: "Altitud Digital",
-    image: `${A}/equip.jpg`,
+    brand: "L'agència nº1 d'Andorra",
+    image: `${A}/oficina-altitud.jpg`,
+    imagePosition: "object-[22%_50%]",
     collab: {
-      value: "+150",
-      desc: "Més de 150 empreses ja confien en nosaltres.",
+      value: "+100",
+      desc: "Més de 100 clients a Andorra ja confien en nosaltres.",
     },
     commitment: {
       eyebrow: "95 ressenyes a Google",
@@ -135,11 +136,12 @@ export const homeContent: HomeContent = {
       avatars: [`${A}/google/esther.png`, `${A}/google/balanzen.png`, `${A}/google/cristiana.png`, `${A}/google/beatriz.png`],
     },
     data: {
-      label: "Renovació",
-      value: "98%",
-      desc: "Resultats reals que fan que els clients es quedin.",
+      label: "Projectes",
+      value: "+200",
+      desc: "A Andorra, França, Espanya i Llatinoamèrica.",
+      tags: ["Màrqueting", "Digitalització", "Web i IA", "Formació"],
     },
-    reach: { label: "d'experiència", value: "+2 anys" },
+    reach: { label: "d'experiència", value: "+6 anys" },
   },
   chain: {
     heading: "Coneixement del mercat local",
