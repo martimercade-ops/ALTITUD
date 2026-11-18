@@ -1,9 +1,7 @@
 "use client";
 
-import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Hover } from "@/components/animation/springs/hover";
 import { AnimatedHeading } from "@/components/common/animated-heading";
 
 export interface ShowcaseItem {
@@ -26,66 +24,41 @@ export interface ShowcaseProps {
   content: ShowcaseContent;
 }
 
-const REVEAL_CONFIG = { tension: 170, friction: 26 };
+const Column = ({ id, href, prefix, name, description, image }: ShowcaseItem) => (
+  <article
+    id={id}
+    className="group relative min-h-[46vh] scroll-mt-24 overflow-hidden rounded-2xl bg-[#0b1424] lg:min-h-[78vh] lg:rounded-none"
+  >
+    <Image
+      src={image}
+      alt=""
+      fill
+      sizes="(max-width: 1024px) 50vw, 17vw"
+      quality={85}
+      className="object-cover opacity-70 transition-[transform,opacity,filter] duration-700 ease-out [filter:saturate(0.75)] group-hover:scale-[1.06] group-hover:opacity-100 group-hover:[filter:saturate(1)]"
+    />
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0b1424] via-[#0b1424]/45 to-[#0b1424]/10 transition-opacity duration-700 group-hover:opacity-80"
+    />
 
-const Column = ({ id, href, prefix, name, description, image }: ShowcaseItem) => {
-  const ref = useRef<HTMLElement>(null);
-  return (
-    <article
-      ref={ref}
-      id={id}
-      className="relative scroll-mt-24 min-h-[38vh] overflow-hidden rounded-2xl lg:min-h-[85vh] lg:rounded-none"
-    >
-      <Image
-        src={image}
-        alt=""
-        fill
-        sizes="(max-width: 1024px) 100vw, 60vw"
-        quality={90}
-        className="object-cover lg:hidden"
-      />
-
-      <Hover
-        trigger={ref}
-        tag="div"
-        className="absolute inset-0 hidden will-change-[clip-path] lg:block"
-        from={{ clipPath: "inset(100% 0% 0% 0%)" }}
-        to={{ clipPath: "inset(0% 0% 0% 0%)" }}
-        config={REVEAL_CONFIG}
-      >
-        <Image src={image} alt="" fill sizes="60vw" quality={90} className="object-cover" />
-      </Hover>
-
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 via-black/30 to-transparent lg:hidden"
-      />
-      <Hover
-        trigger={ref}
-        tag="div"
-        className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-1/2 origin-bottom bg-gradient-to-t from-white via-white/80 to-transparent will-change-transform lg:block"
-        from={{ transform: "scaleY(0)" }}
-        to={{ transform: "scaleY(1)" }}
-        config={REVEAL_CONFIG}
-      />
-
-      <div className="pointer-events-none absolute inset-x-5 bottom-6 lg:inset-x-6 lg:bottom-8">
-        <span className="block text-lg font-normal leading-[1.1] tracking-tight text-white lg:text-xl lg:text-black">
-          {prefix}
-        </span>
-        <span className="block text-lg font-normal leading-[1.1] tracking-tight text-white lg:text-xl lg:text-black">
-          {name}
-        </span>
-        <span className="mt-2 block text-sm leading-snug text-white/85 lg:text-black/65">
-          {description}
-        </span>
-      </div>
+    <div className="pointer-events-none absolute inset-x-5 bottom-6 text-white lg:inset-x-6 lg:bottom-8">
+      <span className="block text-lg font-light leading-[1.1] tracking-tight text-white/75 lg:text-xl">
+        {prefix}
+      </span>
+      <span className="block text-lg font-normal leading-[1.1] tracking-tight lg:text-xl">{name}</span>
+      <span className="mt-3 block max-h-0 overflow-hidden text-sm leading-snug text-white/80 opacity-0 transition-all duration-500 group-hover:max-h-20 group-hover:opacity-100 max-lg:max-h-20 max-lg:opacity-100">
+        {description}
+      </span>
       {href && (
-        <Link href={href} className="absolute inset-0 z-10" aria-label={`${prefix} ${name}`} />
+        <span className="mt-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent-lime opacity-0 transition-all duration-500 group-hover:opacity-100 max-lg:opacity-100">
+          Descobrir <span aria-hidden="true">→</span>
+        </span>
       )}
-    </article>
-  );
-};
+    </div>
+    {href && <Link href={href} className="absolute inset-0 z-10" aria-label={`${prefix} ${name}`} />}
+  </article>
+);
 
 export const Showcase = ({ content }: ShowcaseProps) => {
   const { heading, cta, items, extra } = content;
@@ -93,46 +66,45 @@ export const Showcase = ({ content }: ShowcaseProps) => {
     <section
       id="services"
       aria-labelledby="showcase-title"
-      className="relative overflow-hidden border-y border-plum/10 bg-hero-page text-black"
+      className="relative overflow-hidden bg-[#0b1424] text-white"
     >
-      <div className="relative z-10 px-6 pb-10 pt-14 md:px-10 lg:pointer-events-none lg:absolute lg:left-1/2 lg:right-0 lg:top-14 lg:z-20 lg:px-12 lg:pb-0">
-        <AnimatedHeading
-          as="h2"
-          id="showcase-title"
-          className="text-[1.75rem] font-light leading-[1.05] tracking-tight sm:text-[2.25rem] lg:text-[2.5rem]"
-        >
-          {heading}
-        </AnimatedHeading>
+      <div className="flex flex-col gap-8 px-6 pb-12 pt-20 md:px-10 lg:flex-row lg:items-end lg:justify-between lg:px-12 lg:pb-14 lg:pt-28">
+        <div>
+          <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.35em] text-white/50">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent-lime" />
+            Serveis
+          </p>
+          <AnimatedHeading
+            as="h2"
+            id="showcase-title"
+            className="mt-5 max-w-[22ch] text-[1.9rem] font-light leading-[1.08] tracking-tight sm:text-[2.4rem] lg:text-[3rem]"
+          >
+            {heading}
+          </AnimatedHeading>
+        </div>
         <a
           href={cta.href}
-          className="pointer-events-auto mt-8 inline-block rounded-full border border-black/30 px-6 py-3 text-sm font-medium text-black hover:bg-black hover:text-hero-page"
+          className="inline-flex h-12 shrink-0 items-center gap-3 self-start rounded-full bg-white pl-6 pr-2 text-sm font-medium text-black transition-transform hover:scale-[1.02] lg:self-auto"
         >
           {cta.label}
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white">→</span>
         </a>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 px-6 pb-6 sm:gap-5 md:px-10 lg:grid-cols-6 lg:gap-0 lg:px-0 lg:pb-0 lg:divide-x lg:divide-plum/10">
+      <div className="grid grid-cols-2 gap-3 px-4 pb-4 sm:gap-4 md:px-10 lg:grid-cols-6 lg:gap-0 lg:divide-x lg:divide-white/10 lg:border-y lg:border-white/10 lg:px-0 lg:pb-0">
         {items.map((item) => (
-          <Column
-            key={item.name}
-            id={item.id}
-            href={item.href}
-            prefix={item.prefix}
-            name={item.name}
-            description={item.description}
-            image={item.image}
-          />
+          <Column key={item.name} {...item} />
         ))}
       </div>
 
       {extra && extra.items.length > 0 && (
-        <div className="flex flex-wrap items-center gap-3 border-t border-plum/10 px-6 py-6 md:px-10 lg:px-6">
-          <span className="mr-2 text-xs font-semibold uppercase tracking-[0.25em] text-black/50">{extra.label}</span>
+        <div className="flex flex-wrap items-center gap-3 px-6 py-8 md:px-10 lg:px-12">
+          <span className="mr-2 text-xs font-semibold uppercase tracking-[0.25em] text-white/50">{extra.label}</span>
           {extra.items.map((x) => (
             <Link
               key={x.href}
               href={x.href}
-              className="group inline-flex items-center gap-2 rounded-full border border-black/15 px-5 py-2.5 text-sm text-black transition-colors hover:border-black hover:bg-black hover:text-white"
+              className="group inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2.5 text-sm text-white/90 transition-colors hover:border-accent-lime hover:bg-accent-lime hover:text-black"
             >
               {x.label}
               <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">→</span>
