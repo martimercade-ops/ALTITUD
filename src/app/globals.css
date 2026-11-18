@@ -376,16 +376,16 @@ img {
 /* Logo central de la portada */
 .hero-mark {
   position: absolute;
-  /* La «A» neix a la base de la pantalla i puja gairebé fins a dalt */
+  /* La «A» gran, centrada, amb aire a sota */
   left: 50%;
-  bottom: 0;
-  width: 170%;
-  height: 72%;
+  bottom: 14%;
+  width: 150%;
+  height: 58%;
   translate: -50% 0;
   overflow: visible;
   transition: transform 1.2s cubic-bezier(.2, .7, .2, 1);
 }
-@media (min-width: 64rem) { .hero-mark { width: 100%; height: 88%; } }
+@media (min-width: 64rem) { .hero-mark { bottom: 11%; width: 100%; height: 74%; } }
 .hero-mark-traç { stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0.85; }
 .hero-mark-fill { opacity: 0; }
 .hero-mark-llum { transform: translateX(0); opacity: 0; }
