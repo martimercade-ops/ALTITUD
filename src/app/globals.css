@@ -127,8 +127,6 @@ html:has(meta[name="x-robot-view"]) [data-preloader] {
   z-index: 1;
   pointer-events: none;
   background: linear-gradient(165deg, rgb(255 255 255 / 0.46) 0%, rgb(255 255 255 / 0.18) 50%, rgb(255 255 255 / 0.02) 100%);
-  -webkit-backdrop-filter: brightness(1.2) saturate(1.1);
-  backdrop-filter: brightness(1.2) saturate(1.1);
   -webkit-mask: url("/assets/altitud/simbol.svg") center / contain no-repeat;
   mask: url("/assets/altitud/simbol.svg") center / contain no-repeat;
   animation: logo-vidre-in 1.6s ease both;
@@ -182,7 +180,10 @@ img {
 /* Logos de clients: dues files en moviment continu */
 .logos-pista {
   animation: logos-desplaca var(--logos-durada, 60s) linear infinite;
+  will-change: transform;
 }
+/* Fora de pantalla, l'animació s'atura per no gastar recursos */
+[data-fora] .logos-pista { animation-play-state: paused; }
 .logos-pista--inversa {
   animation-direction: reverse;
 }

@@ -40,7 +40,7 @@ export const MobileMenu = ({ items, cta, label }: MobileMenuProps) => {
         aria-controls={panelId}
         aria-label={open ? "Tancar el menú" : "Obrir el menú"}
         onClick={() => setOpen((v) => !v)}
-        className="relative z-[60] flex h-[56px] w-[56px] items-center justify-center rounded-full border border-white/10 bg-black/30 backdrop-blur-md"
+        className="relative z-[60] flex h-[56px] w-[56px] items-center justify-center rounded-full border border-white/10 bg-[#0b1424]/85 shadow-[0_8px_30px_rgb(0_0_0/0.12)] backdrop-blur-md"
       >
         <span aria-hidden="true" className="relative block h-[14px] w-[22px]">
           <span

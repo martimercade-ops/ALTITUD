@@ -39,7 +39,7 @@ export interface SiteNavProps extends SiteNavContent {
 }
 
 const PILL =
-  "flex h-[56px] items-center rounded-full border border-white/10 bg-black/30 backdrop-blur-md md:h-[60px]";
+  "flex h-[56px] items-center rounded-full border border-white/10 bg-[#0b1424]/85 shadow-[0_8px_30px_rgb(0_0_0/0.12)] backdrop-blur-md md:h-[60px]";
 
 export const SiteNav = ({
   brand,
@@ -112,7 +112,7 @@ export const SiteNav = ({
     <div className="flex items-center gap-[8px]">
       <a
         href={cta.href}
-        className="inline-flex h-[56px] items-center rounded-full bg-white px-[24px] text-[15px] font-medium text-plum md:h-[60px] md:px-[30px] shadow-sm hover:bg-white/90"
+        className="inline-flex h-[56px] items-center rounded-full bg-white px-[24px] text-[15px] font-medium text-plum md:h-[60px] md:px-[30px] border border-black/10 shadow-[0_8px_30px_rgb(0_0_0/0.12)] hover:bg-white/90"
       >
         {cta.label}
       </a>

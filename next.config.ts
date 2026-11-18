@@ -47,11 +47,12 @@ const nextConfig: NextConfig = {
   },
 
   images: {
-    formats: ["image/webp"],
-    qualities: [30, 75, 90],
-    deviceSizes: [360, 640, 768, 1024, 1280, 1440, 1920, 2560, 3200],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    loader: "custom",
+    loaderFile: "./src/lib/image-loader.ts",
+    deviceSizes: [480, 960, 1440, 1920, 2560],
+    imageSizes: [64, 128, 256],
   },
+
 };
 
 export default nextConfig;

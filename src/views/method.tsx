@@ -32,28 +32,34 @@ const BENDS = [2, 6, -4, 3];
 export const Method = ({ content }: MethodProps) => {
   const { eyebrow, heading, image, start, phases } = content;
   const sectionRef = useRef<HTMLElement>(null);
-  const [t, setT] = useState(0);
+  const pathRefs = useRef<(SVGPathElement | null)[]>([]);
+  const [active, setActive] = useState(0);
+  const [reached, setReached] = useState(0);
 
   useEffect(() => {
-    let last = -1;
+    let lastT = -1;
     return subscribeToTicker(
       () => {
         const el = sectionRef.current;
         if (!el) return;
         const rect = el.getBoundingClientRect();
+        // Fora de pantalla: res a fer
+        if (rect.bottom < 0 || rect.top > window.innerHeight) return;
         const total = rect.height - window.innerHeight;
-        const p = clamp(-rect.top / Math.max(1, total));
-        const next = Math.round(p * phases.length * 1000) / 1000;
-        if (next !== last) {
-          last = next;
-          setT(next);
-        }
+        const t = clamp(-rect.top / Math.max(1, total)) * phases.length;
+        if (Math.abs(t - lastT) < 0.002) return;
+        lastT = t;
+        // La línia es dibuixa directament al DOM, sense tornar a pintar React a cada fotograma
+        pathRefs.current.forEach((path, i) => {
+          if (path) path.style.strokeDashoffset = String(1 - clamp((t - i) / DRAW));
+        });
+        setActive(Math.min(phases.length - 1, Math.floor(t)));
+        setReached(phases.filter((_, i) => t >= i + DRAW).length);
       },
       () => 0,
     );
-  }, [phases.length]);
+  }, [phases]);
 
-  const active = Math.min(phases.length - 1, Math.floor(t));
   const points = [start, ...phases.map((p) => p.at)];
   const phase = phases[active];
 
@@ -95,11 +101,13 @@ export const Method = ({ content }: MethodProps) => {
             <svg viewBox={`0 0 ${VB_W} ${VB_H}`} aria-hidden="true" className="absolute inset-0 h-full w-full overflow-visible">
               {points.slice(1).map((to, i) => {
                 const d = segment(points[i] as [number, number], to as [number, number], BENDS[i] ?? 0);
-                const fill = clamp((t - i) / DRAW);
                 return (
                   <g key={i}>
                     <path d={d} fill="none" stroke="rgb(255 255 255 / 0.35)" strokeWidth="2" strokeDasharray="3 9" strokeLinecap="round" />
                     <path
+                      ref={(el) => {
+                        pathRefs.current[i] = el;
+                      }}
                       d={d}
                       fill="none"
                       stroke="white"
@@ -107,7 +115,7 @@ export const Method = ({ content }: MethodProps) => {
                       strokeLinecap="round"
                       pathLength={1}
                       strokeDasharray="1 1"
-                      strokeDashoffset={1 - fill}
+                      strokeDashoffset={1}
                     />
                   </g>
                 );
@@ -115,7 +123,7 @@ export const Method = ({ content }: MethodProps) => {
             </svg>
 
             {phases.map((p, i) => {
-              const reached = t >= i + DRAW;
+              const isReached = i < reached;
               const current = i === active;
               return (
                 <div
@@ -126,18 +134,18 @@ export const Method = ({ content }: MethodProps) => {
                   {/* punt */}
                   <span
                     className={`absolute -left-1.5 -top-1.5 h-3 w-3 rotate-45 border transition-all duration-500 ${
-                      reached ? "border-white bg-white" : "border-white/40 bg-[#070a12]"
+                      isReached ? "border-white bg-white" : "border-white/40 bg-[#070a12]"
                     }`}
                   />
                   {/* pal i bandera */}
                   <span
                     className={`absolute bottom-0 left-0 h-12 w-px origin-bottom transition-all duration-500 md:h-16 ${
-                      reached ? "scale-y-100 bg-white" : "scale-y-50 bg-white/30"
+                      isReached ? "scale-y-100 bg-white" : "scale-y-50 bg-white/30"
                     }`}
                   />
                   <span
                     className={`absolute -top-12 left-0 flex h-6 w-9 items-center justify-center transition-all duration-500 md:-top-16 md:h-7 md:w-10 ${
-                      reached ? "bg-white opacity-100" : "bg-white/40 opacity-60"
+                      isReached ? "bg-white opacity-100" : "bg-white/40 opacity-60"
                     }`}
                   >
                     <svg viewBox="0 0 640 420" className="h-3 w-auto md:h-3.5" aria-hidden="true">
@@ -146,7 +154,7 @@ export const Method = ({ content }: MethodProps) => {
                   </span>
                   <span
                     className={`absolute -top-12 left-12 hidden whitespace-nowrap leading-tight transition-all duration-500 sm:block md:-top-16 md:left-14 ${
-                      current ? "opacity-100" : reached ? "opacity-60" : "opacity-30"
+                      current ? "opacity-100" : isReached ? "opacity-60" : "opacity-30"
                     }`}
                   >
                     <span className="block text-[0.65rem] uppercase tracking-[0.2em] text-white/70">Fase {pad(i + 1)}</span>

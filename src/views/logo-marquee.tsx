@@ -1,4 +1,6 @@
-import type { CSSProperties } from "react";
+"use client";
+
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 export interface ClientLogo {
   name: string;
@@ -83,8 +85,19 @@ const Row = ({
 export const LogoMarquee = ({ content }: LogoMarqueeProps) => {
   const { label, badge, heading, items } = content;
   const half = Math.ceil(items.length / 2);
+  const ref = useRef<HTMLElement>(null);
+  const [fora, setFora] = useState(true);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || typeof IntersectionObserver === "undefined") return setFora(false);
+    const io = new IntersectionObserver(([e]) => setFora(!e.isIntersecting));
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
   return (
     <section
+      ref={ref}
+      data-fora={fora ? "" : undefined}
       aria-labelledby="logos-title"
       className="bg-[#0b1424] py-20 text-white md:py-28"
     >
