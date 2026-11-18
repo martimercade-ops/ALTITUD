@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { subscribeToTicker } from "@/lib/animation/ticker";
 import { Reveal } from "@/components/common/reveal";
 import { GoogleMark } from "@/views/reviews";
 
@@ -20,27 +22,64 @@ export const Flag = ({ x, y, scale = 1 }: { x: number; y: number; scale?: number
   </g>
 );
 
-/** Silueta de muntanya amb la bandera al cim, per a la capçalera */
-export const HeroMountain = () => (
-  <svg viewBox="0 0 1440 360" preserveAspectRatio="xMidYMax slice" aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-[300px] w-full md:h-[360px]">
-    <defs>
-      <linearGradient id="pde-m1" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stopColor="#2f5bff" stopOpacity="0.22" />
-        <stop offset="1" stopColor="#0b1424" stopOpacity="1" />
-      </linearGradient>
-      <linearGradient id="pde-m2" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stopColor="#ffffff" stopOpacity="0.1" />
-        <stop offset="1" stopColor="#0b1424" stopOpacity="1" />
-      </linearGradient>
-    </defs>
-    <path d="M0 360 L0 250 L180 190 L320 240 L470 150 L600 220 L760 120 L900 210 L1060 160 L1220 230 L1440 180 L1440 360Z" fill="url(#pde-m1)" />
-    <path d="M0 360 L0 300 L260 230 L520 280 L780 200 L960 250 L1150 180 L1360 96 L1440 140 L1440 360Z" fill="url(#pde-m2)" />
-    <path d="M1360 96 L1330 120 L1346 118 L1360 130 L1374 118 L1392 124Z" fill="white" opacity="0.5" />
-    <g className="bandera-puja">
-      <Flag x={1360} y={96} scale={0.9} />
-    </g>
-  </svg>
-);
+/** Capçalera amb foto de muntanya: zoom lent i paral·laxi en fer scroll */
+export const PdeHero = () => {
+  const ref = useRef<HTMLElement>(null);
+  const imgRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+  useEffect(
+    () =>
+      subscribeToTicker(
+        () => {
+          const el = ref.current;
+          if (!el) return;
+          const r = el.getBoundingClientRect();
+          if (r.bottom < 0) return;
+          const p = Math.min(Math.max(-r.top / r.height, 0), 1);
+          if (imgRef.current) imgRef.current.style.transform = `translate3d(0, ${p * 18}%, 0)`;
+          if (textRef.current) {
+            textRef.current.style.transform = `translate3d(0, ${p * -80}px, 0)`;
+            textRef.current.style.opacity = String(1 - p * 1.4);
+          }
+        },
+        () => 0,
+      ),
+    [],
+  );
+  return (
+    <section ref={ref} aria-labelledby="pde-title" className="relative flex h-svh min-h-[600px] items-end overflow-hidden bg-[#0b1424] text-white">
+      <div ref={imgRef} className="absolute inset-0 will-change-transform">
+        <div className="pde-zoom absolute inset-0">
+          <Image src="/assets/altitud/nevado-3.jpg" alt="" fill priority sizes="100vw" className="object-cover object-[50%_65%]" />
+        </div>
+      </div>
+      <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgb(11_20_36/0.5),rgb(11_20_36/0.1)_35%,rgb(11_20_36/0.85))]" />
+      <div aria-hidden="true" className="pde-boira absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0b1424] via-[#0b1424]/60 to-transparent" />
+
+      <div ref={textRef} className="relative z-10 w-full px-6 pb-16 md:px-10 md:pb-24 lg:px-12">
+        <div className="mx-auto max-w-6xl">
+          <p className="pde-entra flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.35em] text-white/70">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent-lime" />
+            Ajuts del Govern · PDE
+          </p>
+          <h1 id="pde-title" className="pde-entra mt-6 max-w-[18ch] text-[2.6rem] font-light leading-[1.02] tracking-tight sm:text-6xl lg:text-[4.75rem]" style={{ animationDelay: "120ms" }}>
+            Digitalitza&apos;t amb fins al <strong className="font-semibold">50%</strong> subvencionat.
+          </h1>
+          <div className="pde-entra mt-10 flex flex-wrap items-center gap-x-8 gap-y-4" style={{ animationDelay: "260ms" }}>
+            <a
+              href="#llista"
+              className="inline-flex h-12 items-center gap-3 rounded-full bg-white pl-6 pr-2 text-sm font-medium text-black transition-transform hover:scale-[1.02]"
+            >
+              Apunta&apos;m a la llista d&apos;espera
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white">↓</span>
+            </a>
+            <p className="text-sm text-white/65">La convocatòria s&apos;esgota en pocs dies.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const TIERS = [
   { name: "Gran empresa", people: "Més de 100 treballadors", amount: 3000, solutions: 3 },
