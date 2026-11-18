@@ -74,7 +74,7 @@ export const SiteNav = ({
                 </svg>
               </a>
               <div className="invisible absolute left-0 top-full pt-3 opacity-0 transition-[opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                <div className="flex gap-2 rounded-2xl border border-white/10 bg-[#0b0d16]/90 p-2 shadow-lg backdrop-blur-md">
+                <div className="flex gap-2 rounded-2xl border border-white/10 bg-[#0b1424] p-2 shadow-[0_24px_60px_rgb(0_0_0/0.55)]">
                   {groupLinks(item.children).map((g) => (
                     <div key={g.key} className="min-w-60">
                       {g.key && (
