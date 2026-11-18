@@ -66,6 +66,7 @@ export const Method = ({ content }: MethodProps) => {
   return (
     <section
       ref={sectionRef}
+      id="metodologia"
       aria-labelledby="method-title"
       className="relative bg-[#070a12] text-white"
       style={{ height: `${100 + phases.length * 70}lvh` }}

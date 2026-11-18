@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { SiteNav } from "@/views/site-nav";
 import { SiteFooter } from "@/views/site-footer";
+import { Reveal } from "@/components/common/reveal";
 import { footerContent } from "@/data/mocks/contact";
 import { homeNav, PARLEM_HREF } from "@/data/mocks/home";
 import { projectHref, projects } from "@/data/mocks/projects";
@@ -90,6 +91,35 @@ export const ServiceView = ({ service }: ServiceViewProps) => {
             ))}
           </ul>
         </section>
+
+        {/* Feina recent */}
+        {service.gallery && service.gallery.length > 0 && (
+          <section aria-labelledby="gallery-title" className="mx-auto max-w-6xl px-6 pb-24 md:px-10 md:pb-32">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-small">Feina recent</p>
+            <h2 id="gallery-title" className="mt-4 text-[2rem] font-light leading-[1.08] tracking-tight md:text-[2.75rem]">
+              Fet per l&apos;equip, per a clients d&apos;aquí.
+            </h2>
+            <div className={`mt-12 grid gap-6 ${service.gallery.length > 1 ? "md:grid-cols-2" : "md:max-w-md"}`}>
+              {service.gallery.map((g) => (
+                <figure key={g.src} className="group">
+                  <Reveal className="reveal-photo relative aspect-[2/3] overflow-hidden rounded-3xl bg-card-gray">
+                    <Image
+                      src={g.src}
+                      alt={g.alt}
+                      fill
+                      sizes="(max-width: 768px) 92vw, 45vw"
+                      className="object-cover"
+                    />
+                  </Reveal>
+                  <figcaption className="mt-4">
+                    <span className="block text-lg font-light tracking-tight">{g.client}</span>
+                    <span className="mt-1 block text-sm text-black/55">{g.caption}</span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Com treballem */}
         <section aria-labelledby="steps-title" className="bg-[#0b1424] px-6 py-24 text-white md:px-10 md:py-32">

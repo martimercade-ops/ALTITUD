@@ -19,6 +19,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.2,
     },
     {
+      url: `${siteConfig.url}/ajuts-pde`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: `${siteConfig.url}/equip`,
       lastModified: new Date(),
       changeFrequency: "monthly",

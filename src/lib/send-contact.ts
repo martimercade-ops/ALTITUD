@@ -3,6 +3,8 @@ import { ApiClientError, apiFetch } from "@/lib/api-client";
 export interface ContactPayload {
   name: string;
   surname?: string;
+  company?: string;
+  subject?: string;
   email: string;
   phone?: string;
   website?: string;
@@ -19,10 +21,11 @@ export const CONTACT_EMAIL = "info@altitudigital.com";
 const mailtoBody = (p: ContactPayload) =>
   [
     `Nom: ${[p.name, p.surname].filter(Boolean).join(" ")}`,
+    p.company && `Empresa: ${p.company}`,
     `Correu: ${p.email}`,
     p.phone && `Telèfon: ${p.phone}`,
     p.website && `Web: ${p.website}`,
-    p.services?.length && `Serveis d'interès: ${p.services.join(", ")}`,
+    p.services?.length && `Serveis d'interès:\n- ${p.services.join("\n- ")}`,
     p.budget && `Inversió mensual: ${p.budget}`,
     p.message && `\n${p.message}`,
   ]
@@ -44,7 +47,7 @@ export async function sendContact(
     return "sent";
   } catch (error) {
     if (error instanceof ApiClientError && error.code === "not_configured") {
-      const subject = `Demanda de pressupost — ${payload.name}`;
+      const subject = payload.subject ?? `Demanda de pressupost — ${payload.name}`;
       window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(mailtoBody(payload))}`;
       return "mailto";
     }

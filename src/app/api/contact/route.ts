@@ -7,6 +7,8 @@ import { ApiError, handle } from "@/lib/api";
 const contactSchema = z.object({
   name: z.string().trim().min(1).max(100),
   surname: z.string().trim().max(100).optional().default(""),
+  company: z.string().trim().max(150).optional().default(""),
+  subject: z.string().trim().max(200).optional().default(""),
   email: z.email().max(200),
   phone: z.string().trim().max(40).optional().default(""),
   website: z.string().trim().max(200).optional().default(""),
@@ -27,10 +29,11 @@ const row = (label: string, value: string) =>
 const toText = (c: Contact) =>
   [
     row("Nom", `${c.name} ${c.surname}`.trim()),
+    row("Empresa", c.company),
     row("Correu", c.email),
     row("Telèfon", c.phone),
     row("Web", c.website),
-    row("Serveis d'interès", c.services.join(", ")),
+    c.services.length ? `Serveis d'interès:\n- ${c.services.join("\n- ")}` : null,
     row("Inversió mensual", c.budget),
     row("Newsletter", c.newsletter ? "Sí" : ""),
     row("Formulari", c.source),
@@ -60,7 +63,7 @@ export const POST = handle(async (req) => {
         from: `"Web Altitud Digital" <${env.SMTP_USER}>`,
         to: env.CONTACT_TO ?? "info@altitudigital.com",
         replyTo: input.email,
-        subject: `Nova sol·licitud de ${input.name} ${input.surname}`.trim(),
+        subject: input.subject || `Nova sol·licitud de ${input.name} ${input.surname}`.trim(),
         text,
         html: `<pre style="font-family:inherit;font-size:14px;line-height:1.6">${escape(text)}</pre>`,
       });

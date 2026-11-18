@@ -123,9 +123,10 @@ export const MobileMenu = ({ items, cta, label }: MobileMenuProps) => {
                     <a
                       href={item.href}
                       onClick={close}
-                      className="block py-[18px] text-[26px] font-light tracking-tight text-white"
+                      className="flex items-center gap-3 py-[18px] text-[26px] font-light tracking-tight text-white"
                     >
                       {item.label}
+                      {item.highlight && <span aria-hidden="true" className="h-[8px] w-[8px] rounded-full bg-accent-lime" />}
                     </a>
                   )}
                 </li>

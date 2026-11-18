@@ -25,6 +25,8 @@ const groupLinks = (links: SiteNavLink[]) => {
 
 export interface SiteNavItem extends SiteNavLink {
   children?: SiteNavLink[];
+  /** Enllaç destacat (punt verd) */
+  highlight?: boolean;
 }
 
 export interface SiteNavContent {
@@ -101,8 +103,16 @@ export const SiteNav = ({
             <a
               key={item.href}
               href={item.href}
-              className="rounded-full px-[18px] py-[12px] text-[15px] text-white/80 hover:text-white"
+              className={`flex items-center gap-2 rounded-full px-[18px] py-[12px] text-[15px] hover:text-white ${
+                item.highlight ? "text-white" : "text-white/80"
+              }`}
             >
+              {item.highlight && (
+                <span aria-hidden="true" className="relative flex h-[7px] w-[7px]">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-lime/70" />
+                  <span className="relative inline-flex h-[7px] w-[7px] rounded-full bg-accent-lime" />
+                </span>
+              )}
               {item.label}
             </a>
           ),

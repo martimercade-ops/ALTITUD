@@ -25,7 +25,22 @@ export interface Service {
   steps: ServiceStep[];
   /** Etiquetes dels projectes relacionats (projects.ts → services) */
   projectTags?: string[];
+  /** Fotos de feina recent feta per l'equip */
+  gallery?: { src: string; alt: string; client: string; caption: string }[];
 }
+
+const BALANZEN = {
+  src: `/assets/altitud/cafe-balanzen.jpg`,
+  alt: "Croissants, matcha i cafè amb gel sobre una taula negra a Balanzen",
+  client: "Balanzen pilates & coffee",
+  caption: "Fotografia de producte per a la carta i les xarxes",
+};
+const ROSTISSERIA = {
+  src: `/assets/altitud/rostisseria-cap-de-carrera.jpg`,
+  alt: "Pollastre a l'ast, patates i bossa amb el logo de La Rostisseria",
+  client: "La Rostisseria · Cap de Carrera",
+  caption: "Fotos per al web i targetes de visita",
+};
 
 const A = "/assets/altitud";
 
@@ -119,6 +134,7 @@ export const services: Service[] = [
     intro:
       "Produïm vídeo i fotografia professional per a la teva marca: des de reels per a xarxes fins a vídeos corporatius i sessions de producte, amb edició i postproducció incloses.",
     image: `${A}/camera.jpg`,
+    gallery: [BALANZEN, ROSTISSERIA],
     includes: [
       { title: "Vídeo corporatiu", text: "Presenta la teva empresa i el teu equip amb qualitat." },
       { title: "Reels per a xarxes", text: "Gravació i edició en format vertical, llestes per publicar." },
@@ -141,6 +157,7 @@ export const services: Service[] = [
     intro:
       "Creem o renovem la identitat visual de la teva empresa: logotip, colors, tipografia i aplicacions, perquè la teva marca sigui coherent i reconeixible a tot arreu.",
     image: `${A}/disseny.jpg`,
+    gallery: [ROSTISSERIA],
     includes: [
       { title: "Logotip", text: "Un símbol propi, versàtil i fàcil de recordar." },
       { title: "Identitat visual", text: "Paleta de colors, tipografies i estil gràfic." },

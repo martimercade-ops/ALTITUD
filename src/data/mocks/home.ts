@@ -42,9 +42,17 @@ const siteNav: SiteNavContent = {
       href: "#services",
       children: services.map((s) => ({ label: s.name, href: serviceHref(s.slug), group: s.group })),
     },
+    { label: "Ajuts PDE", href: "/ajuts-pde", highlight: true },
     { label: "Projectes", href: "#projects" },
-    { label: "Sobre nosaltres", href: "#about" },
-    { label: "Equip", href: "/equip" },
+    {
+      label: "Agència",
+      href: "#about",
+      children: [
+        { label: "Sobre nosaltres", href: "#about" },
+        { label: "La nostra metodologia", href: "#metodologia" },
+        { label: "L'equip", href: "/equip" },
+      ],
+    },
   ],
   cta: contacte,
 };

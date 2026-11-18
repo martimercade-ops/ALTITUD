@@ -73,6 +73,7 @@ export const footerContent: FooterContent = {
     title: "Mapa del lloc",
     links: [
       { label: "Serveis", href: "/#services" },
+      { label: "Ajuts PDE", href: "/ajuts-pde" },
       { label: "Projectes", href: "/#projects" },
       { label: "Sobre nosaltres", href: "/#about" },
       { label: "Equip", href: "/equip" },
