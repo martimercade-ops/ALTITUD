@@ -642,3 +642,69 @@ font { background: transparent !important; }
   .cim-text { transform: none; }
   .cim--on .cim-muntanyes, .cim-llac { animation: none; }
 }
+
+/* Formulari de la portada: isard al capvespre */
+.isard { --p: 0.5; --mx: 0; }
+.isard-foto {
+  position: absolute; z-index: -3; inset: 0 auto auto 0;
+  width: 100%; height: 62vw; overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+}
+@media (min-width: 1024px) {
+  .isard-foto {
+    width: 62%; height: 100%;
+    -webkit-mask-image: linear-gradient(90deg, #000 45%, transparent 100%);
+    mask-image: linear-gradient(90deg, #000 45%, transparent 100%);
+  }
+}
+.isard-foto img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 30% 50%;
+  transform: translate3d(calc(var(--mx) * -14px), calc((var(--p) - 0.5) * -60px), 0) scale(calc(1.08 + var(--p) * 0.08));
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  filter: saturate(1.05) contrast(1.05);
+}
+.isard--on .isard-foto { animation: isard-foto 2s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+@keyframes isard-foto { from { opacity: 0; filter: blur(12px); } to { opacity: 1; filter: none; } }
+.isard-estels {
+  position: absolute; inset: 0; z-index: -2; pointer-events: none; opacity: 0.55;
+  background-image:
+    radial-gradient(1px 1px at 72% 18%, #fff, transparent), radial-gradient(1px 1px at 85% 32%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 64% 8%, #fff, transparent), radial-gradient(1px 1px at 92% 12%, #fff, transparent),
+    radial-gradient(1px 1px at 78% 6%, #fff, transparent), radial-gradient(1.2px 1.2px at 58% 26%, #fff, transparent),
+    radial-gradient(1px 1px at 96% 44%, #fff, transparent), radial-gradient(1px 1px at 68% 40%, #fff, transparent);
+  animation: isard-estels 5s ease-in-out infinite alternate;
+}
+@keyframes isard-estels { to { opacity: 0.2; } }
+.isard-llum {
+  position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(480px circle at var(--sx, 30%) var(--sy, 40%), rgb(255 190 120 / 0.14), transparent 60%),
+    radial-gradient(50% 60% at 100% 100%, rgb(47 91 255 / 0.18), transparent 70%);
+}
+.isard-entra { opacity: 0; transform: translateY(16px); }
+.isard--on .isard-entra { animation: n1-entra 0.9s cubic-bezier(0.2, 0.75, 0.2, 1) both; }
+.isard-paraula { opacity: 0; transform: translateY(0.4em) rotate(4deg); filter: blur(8px); }
+.isard--on .isard-paraula {
+  background: linear-gradient(100deg, #fff 0%, #fff 40%, #b6f13a 50%, #fff 60%, #fff 100%);
+  background-size: 300% 100%; background-position: 100% 0;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: lletra-puja 1s cubic-bezier(0.2, 0.75, 0.15, 1) both, n1-llum 8s ease-in-out infinite;
+  animation-delay: var(--d, 0ms), calc(var(--d, 0ms) + 2200ms);
+}
+.isard-camp::after {
+  content: ""; position: absolute; left: 0; bottom: -1px; height: 1px; width: 100%;
+  background: linear-gradient(90deg, #b6f13a, #2f5bff); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.isard-camp:focus-within::after { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) {
+  .isard-foto img { transform: none; }
+  .isard-estels, .isard--on .isard-foto { animation: none; }
+  .isard-entra, .isard-paraula { opacity: 1; transform: none; filter: none; }
+  .isard--on .isard-paraula { animation: none; color: #fff; }
+}
+@media (max-width: 1023px) {
+  .isard-foto { height: 92vw; }
+  .isard-foto img { object-position: 32% 0%; }
+}
