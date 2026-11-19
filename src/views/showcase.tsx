@@ -60,7 +60,7 @@ const Accordion = ({ items }: { items: ShowcaseItem[] }) => {
       ref={ref}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
-      className="hidden h-[min(78vh,820px)] min-h-[560px] border-y border-plum/10 lg:flex"
+      className="relative z-[1] hidden h-[min(78vh,820px)] min-h-[560px] border-y border-white/10 lg:flex"
     >
       {items.map((item, i) => {
         const on = i === active;
@@ -73,8 +73,14 @@ const Accordion = ({ items }: { items: ShowcaseItem[] }) => {
             onMouseEnter={() => setActive(i)}
             onFocus={() => setActive(i)}
             style={{ flexGrow: on ? 5.2 : 1 }}
-            className="showcase-col group relative min-w-0 basis-0 scroll-mt-24 overflow-hidden border-l border-plum/10 first:border-l-0 focus-visible:outline-none"
+            className="showcase-col group relative min-w-0 basis-0 scroll-mt-24 overflow-hidden border-l border-white/10 first:border-l-0 focus-visible:outline-none"
           >
+            {/* Foto apagada de fons a les columnes tancades */}
+            <div aria-hidden="true" className={`absolute inset-0 transition-opacity duration-700 ${on ? "opacity-0" : "opacity-100"}`}>
+              <Image src={item.image} alt="" fill sizes="12vw" quality={60} className="object-cover opacity-[0.18] grayscale transition-all duration-700 group-hover:opacity-50 group-hover:grayscale-0 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0b1424] via-[#0b1424]/40 to-[#0b1424]/70" />
+            </div>
+
             {/* Foto */}
             <div
               aria-hidden="true"
@@ -96,7 +102,7 @@ const Accordion = ({ items }: { items: ShowcaseItem[] }) => {
             {/* Número */}
             <span
               className={`absolute left-6 top-7 z-[1] text-xs font-medium tracking-[0.2em] transition-colors duration-500 ${
-                on ? "text-white/75" : "text-black/35"
+                on ? "text-white/75" : "text-white/40"
               }`}
             >
               {pad(i + 1)}
@@ -105,8 +111,8 @@ const Accordion = ({ items }: { items: ShowcaseItem[] }) => {
             {/* Títol vertical (columna estreta) */}
             <span
               aria-hidden="true"
-              className={`absolute bottom-8 left-1/2 z-[1] -translate-x-1/2 rotate-180 whitespace-nowrap text-lg font-light tracking-tight text-black/80 transition-opacity [writing-mode:vertical-rl] ${
-                on ? "opacity-0 duration-200" : "opacity-100 delay-300 duration-500 group-hover:text-black"
+              className={`absolute bottom-8 left-1/2 z-[1] -translate-x-1/2 rotate-180 whitespace-nowrap text-lg font-light tracking-tight text-white/75 transition-opacity [writing-mode:vertical-rl] ${
+                on ? "opacity-0 duration-200" : "opacity-100 delay-300 duration-500 group-hover:text-white"
               }`}
             >
               {item.prefix} <span className="font-normal">{item.name}</span>
@@ -122,7 +128,7 @@ const Accordion = ({ items }: { items: ShowcaseItem[] }) => {
               <span className="block text-[2.4rem] font-normal leading-[1.02] tracking-tight">{item.name}</span>
               <span className="mt-4 block max-w-[34ch] text-base leading-snug text-white/85">{item.description}</span>
               {item.href && (
-                <span className="mt-6 inline-flex items-center gap-3 rounded-full bg-white px-5 py-2.5 text-xs font-medium uppercase tracking-[0.18em] text-black transition-transform duration-300 group-hover:translate-x-1">
+                <span className="mt-6 inline-flex items-center gap-3 rounded-full bg-accent-lime px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-black transition-transform duration-300 group-hover:translate-x-1">
                   Veure servei <span aria-hidden="true">→</span>
                 </span>
               )}
@@ -133,7 +139,7 @@ const Accordion = ({ items }: { items: ShowcaseItem[] }) => {
               <span
                 key={active}
                 aria-hidden="true"
-                className="showcase-progress absolute inset-x-0 bottom-0 z-[1] h-[3px] origin-left bg-white/80"
+                className="showcase-progress absolute inset-x-0 bottom-0 z-[1] h-[3px] origin-left bg-gradient-to-r from-[#2f5bff] to-accent-lime"
                 style={{ animationDuration: `${AUTOPLAY_MS}ms` }}
               />
             )}
@@ -146,24 +152,24 @@ const Accordion = ({ items }: { items: ShowcaseItem[] }) => {
 
 /* Mòbil i tauleta: llista neta amb foto petita */
 const MobileList = ({ items }: { items: ShowcaseItem[] }) => (
-  <ul className="border-t border-plum/10 lg:hidden">
+  <ul className="relative z-[1] border-t border-white/10 lg:hidden">
     {items.map((item, i) => (
-      <li key={item.name} className="border-b border-plum/10">
+      <li key={item.name} className="border-b border-white/10">
         <Link
           href={item.href ?? "#"}
-          className="flex items-center gap-4 px-6 py-5 active:bg-black/[0.03] md:px-10"
+          className="flex items-center gap-4 px-6 py-5 active:bg-white/[0.05] md:px-10"
         >
           <span className="relative h-[84px] w-[84px] shrink-0 overflow-hidden rounded-xl md:h-[110px] md:w-[110px]">
             <Image src={item.image} alt="" fill sizes="110px" quality={80} className="object-cover" />
           </span>
           <span className="min-w-0 flex-1">
-            <span className="block text-[11px] font-medium tracking-[0.2em] text-black/35">{pad(i + 1)}</span>
-            <span className="mt-1 block text-lg leading-[1.15] tracking-tight text-black">
+            <span className="block text-[11px] font-medium tracking-[0.2em] text-white/40">{pad(i + 1)}</span>
+            <span className="mt-1 block text-lg leading-[1.15] tracking-tight text-white">
               <span className="font-light">{item.prefix}</span> {item.name}
             </span>
-            <span className="mt-1 block text-sm leading-snug text-black/55">{item.description}</span>
+            <span className="mt-1 block text-sm leading-snug text-white/55">{item.description}</span>
           </span>
-          <span aria-hidden="true" className="shrink-0 text-lg text-black/40">→</span>
+          <span aria-hidden="true" className="shrink-0 text-lg text-accent-lime">→</span>
         </Link>
       </li>
     ))}
@@ -172,13 +178,21 @@ const MobileList = ({ items }: { items: ShowcaseItem[] }) => (
 
 export const Showcase = ({ content }: ShowcaseProps) => {
   const { heading, cta, items, extra, tools } = content;
+  const onMove = (e: React.PointerEvent<HTMLElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty("--fx", `${e.clientX - r.left}px`);
+    e.currentTarget.style.setProperty("--fy", `${e.clientY - r.top}px`);
+  };
   return (
     <section
+      onPointerMove={onMove}
       id="services"
       aria-labelledby="showcase-title"
-      className="relative overflow-hidden bg-hero-page text-black"
+      className="serveis-fosc relative isolate overflow-hidden bg-[#0b1424] text-white"
     >
-      <div className="flex flex-col gap-8 px-6 pb-12 pt-20 md:px-10 lg:flex-row lg:items-end lg:justify-between lg:px-12 lg:pb-14 lg:pt-28">
+      <span aria-hidden="true" className="serveis-aurora" />
+      <span aria-hidden="true" className="serveis-focus" />
+      <div className="relative z-[1] flex flex-col gap-8 px-6 pb-12 pt-20 md:px-10 lg:flex-row lg:items-end lg:justify-between lg:px-12 lg:pb-14 lg:pt-28">
         <AnimatedHeading
           as="h2"
           id="showcase-title"
@@ -188,7 +202,7 @@ export const Showcase = ({ content }: ShowcaseProps) => {
         </AnimatedHeading>
         <a
           href={cta.href}
-          className="inline-block shrink-0 self-start rounded-full border border-black/30 px-6 py-3 text-sm font-medium text-black hover:bg-black hover:text-hero-page lg:self-auto"
+          className="inline-block shrink-0 self-start rounded-full border border-white/30 px-6 py-3 text-sm font-medium text-white transition-colors hover:border-accent-lime hover:bg-accent-lime hover:text-black lg:self-auto"
         >
           {cta.label}
         </a>
@@ -198,13 +212,13 @@ export const Showcase = ({ content }: ShowcaseProps) => {
       <MobileList items={items} />
 
       {extra && extra.items.length > 0 && (
-        <div className="flex flex-wrap items-center gap-3 px-6 py-8 md:px-10 lg:px-12">
-          <span className="mr-2 text-xs font-semibold uppercase tracking-[0.25em] text-black/45">{extra.label}</span>
+        <div className="relative z-[1] flex flex-wrap items-center gap-3 px-6 py-8 md:px-10 lg:px-12">
+          <span className="mr-2 text-xs font-semibold uppercase tracking-[0.25em] text-white/45">{extra.label}</span>
           {extra.items.map((x) => (
             <Link
               key={x.href}
               href={x.href}
-              className="group inline-flex items-center gap-2 rounded-full border border-black/15 px-5 py-2.5 text-sm text-black transition-colors hover:border-black hover:bg-black hover:text-white"
+              className="group inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-5 py-2.5 text-sm text-white/85 backdrop-blur transition-colors hover:border-accent-lime hover:bg-accent-lime hover:text-black"
             >
               {x.label}
               <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">→</span>
@@ -214,10 +228,10 @@ export const Showcase = ({ content }: ShowcaseProps) => {
       )}
 
       {tools && (
-        <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2 border-t border-plum/10 px-6 py-6 md:px-10 lg:px-12">
-          <span className="mr-2 text-xs font-semibold uppercase tracking-[0.25em] text-black/40">{tools.label}</span>
+        <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2 relative z-[1] border-t border-white/10 px-6 py-6 md:px-10 lg:px-12">
+          <span className="mr-2 text-xs font-semibold uppercase tracking-[0.25em] text-white/40">{tools.label}</span>
           {tools.items.map((t) => (
-            <span key={t} className="text-[14px] text-black/45">{t}</span>
+            <span key={t} className="text-[14px] text-white/50">{t}</span>
           ))}
         </div>
       )}
