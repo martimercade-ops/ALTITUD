@@ -23,6 +23,26 @@ const web = (url: string): ProjectLink => ({
 
 export const projects: Project[] = [
   {
+    slug: "la-rostisseria",
+    name: "La Rostisseria",
+    sector: "Restauració",
+    summary: "Web, fotografia, xarxes socials i targetes de visita.",
+    about: "Rostisseria de barri al casc antic d'Andorra la Vella: pollastres a l'ast, carns, amanides i vins.",
+    services: ["Web", "Fotografia", "Xarxes socials", "Branding"],
+    links: [web("https://larostisseria.ad/")],
+    image: `${P}/la-rostisseria.jpg`,
+  },
+  {
+    slug: "erf-assegurances",
+    name: "ERF Assegurances",
+    sector: "Assegurances",
+    summary: "Web.",
+    about: "Corredoria d'assegurances a Escaldes-Engordany per a particulars i empreses, amb més de 20 anys d'experiència.",
+    services: ["Web"],
+    links: [web("https://erfassegurances.com/")],
+    image: `${P}/erf-assegurances.jpg`,
+  },
+  {
     slug: "la-llotja",
     name: "La Llotja",
     sector: "Restauració",
