@@ -24,10 +24,10 @@ export interface LogoMarqueeProps {
  * Mida òptica: tots els logos ocupen aproximadament la mateixa àrea,
  * de manera que els quadrats no es veuen enormes ni els allargats minúsculs.
  */
-const AREA = 8200;
-const MAX_H = 68;
-const MIN_H = 24;
-const MAX_W = 220;
+const AREA = 6800;
+const MAX_H = 60;
+const MIN_H = 22;
+const MAX_W = 200;
 
 const logoSize = ({ width, height }: ClientLogo) => {
   const ratio = width / height;
@@ -84,7 +84,7 @@ const Row = ({
 
 export const LogoMarquee = ({ content }: LogoMarqueeProps) => {
   const { label, badge, heading, items } = content;
-  const half = Math.ceil(items.length / 2);
+  const third = Math.ceil(items.length / 3);
   const ref = useRef<HTMLElement>(null);
   const [fora, setFora] = useState(true);
   useEffect(() => {
@@ -122,10 +122,11 @@ export const LogoMarquee = ({ content }: LogoMarqueeProps) => {
 
       <div
         aria-hidden="true"
-        className="mt-14 flex flex-col gap-2 [mask-image:linear-gradient(90deg,transparent,black_12%,black_88%,transparent)] md:mt-20 md:gap-4"
+        className="mt-14 flex flex-col gap-5 [mask-image:linear-gradient(90deg,transparent,black_12%,black_88%,transparent)] md:mt-20 md:gap-8"
       >
-        <Row logos={items.slice(0, half)} duration={70} />
-        <Row logos={items.slice(half)} duration={80} reverse />
+        <Row logos={items.slice(0, third)} duration={60} />
+        <Row logos={items.slice(third, third * 2)} duration={70} reverse />
+        <Row logos={items.slice(third * 2)} duration={65} />
       </div>
     </section>
   );
