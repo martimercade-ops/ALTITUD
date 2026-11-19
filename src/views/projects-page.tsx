@@ -46,10 +46,11 @@ const LOGOS: Record<string, string> = {
 
 /** Portàtil real, de cara, amb la web del client a la pantalla */
 const Dispositius = ({ src }: { src: string }) => (
-  <div className="relative w-full" style={{ aspectRatio: "1552 / 1081" }}>
+  <div className="illa-dispositiu relative w-full" style={{ aspectRatio: "1552 / 1081" }}>
     <div className="illa-pantalla absolute overflow-hidden bg-black" style={{ left: "14.2%", top: "3.8%", width: "72.9%", height: "65.1%" }}>
       <Image src={src} alt="" fill sizes="(max-width: 640px) 70vw, 24vw" className="object-cover object-top" />
       <span aria-hidden="true" className="illa-reflex" />
+      <span aria-hidden="true" className="illa-vidre" />
     </div>
     {/* eslint-disable-next-line @next/next/no-img-element */}
     <img src="/assets/altitud/portatil.webp" alt="" className="relative h-full w-full select-none" draggable={false} />
@@ -73,7 +74,7 @@ const ProjectCard = ({ p }: { p: Project }) => {
       aria-label={`Veure el projecte de ${p.name}`}
       onPointerMove={onMove}
       onPointerLeave={onLeave}
-      className="illa illa--clar group relative block aspect-[4/5] lg:aspect-square overflow-hidden rounded-[28px] bg-[#eceef2] text-black"
+      className="illa illa--clar group relative block aspect-[4/5] lg:aspect-[6/7] overflow-hidden rounded-[28px] bg-[#eceef2] text-black"
     >
       <span aria-hidden="true" className="illa-llum" />
       <span aria-hidden="true" className="illa-ombra" />
