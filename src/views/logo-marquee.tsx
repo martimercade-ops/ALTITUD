@@ -84,7 +84,7 @@ const Row = ({
 
 export const LogoMarquee = ({ content }: LogoMarqueeProps) => {
   const { label, badge, heading, items } = content;
-  const third = Math.ceil(items.length / 3);
+  const half = Math.ceil(items.length / 2);
   const ref = useRef<HTMLElement>(null);
   const [fora, setFora] = useState(true);
   useEffect(() => {
@@ -124,9 +124,8 @@ export const LogoMarquee = ({ content }: LogoMarqueeProps) => {
         aria-hidden="true"
         className="mt-14 flex flex-col gap-2 [mask-image:linear-gradient(90deg,transparent,black_12%,black_88%,transparent)] md:mt-20 md:gap-4"
       >
-        <Row logos={items.slice(0, third)} duration={60} />
-        <Row logos={items.slice(third, third * 2)} duration={70} reverse />
-        <Row logos={items.slice(third * 2)} duration={65} />
+        <Row logos={items.slice(0, half)} duration={70} />
+        <Row logos={items.slice(half)} duration={80} reverse />
       </div>
     </section>
   );

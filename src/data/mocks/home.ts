@@ -88,7 +88,6 @@ export const homeContent: HomeContent = {
       { name: "ARK Real Estate", src: `${A}/clients/mono/ark-real-estate.webp`, width: 208, height: 240 },
       { name: "Ateci", src: `${A}/clients/mono/ateci.webp`, width: 228, height: 240 },
       { name: "Auró Jardiners", src: `${A}/clients/mono/auro-jardiners.webp`, width: 286, height: 240 },
-      { name: "The Fucking Cheesecake", src: `${A}/clients/mono/the-fucking-cheesecake.webp`, width: 926, height: 240 },
       { name: "Balanzen", src: `${A}/clients/mono/balanzen.webp`, width: 1414, height: 240 },
       { name: "Brainworks", src: `${A}/clients/mono/brainworks.webp`, width: 350, height: 240 },
       { name: "Ciutadans Compromesos", src: `${A}/clients/mono/ciutadans-compromesos.webp`, width: 262, height: 240 },
