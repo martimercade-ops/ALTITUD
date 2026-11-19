@@ -181,7 +181,7 @@ export const PdePeaks = () => {
 };
 
 /** Ressenyes de Google que van apareixent en una cantonada */
-export const ReviewToasts = ({ items }: { items: { name: string; text: string }[] }) => {
+export const ReviewToasts = ({ items, side = "right" }: { items: { name: string; text: string }[]; side?: "left" | "right" }) => {
   const [i, setI] = useState(0);
   const [shown, setShown] = useState(false);
   const [closed, setClosed] = useState(false);
@@ -214,7 +214,7 @@ export const ReviewToasts = ({ items }: { items: { name: string; text: string }[
     <aside
       aria-live="polite"
       aria-label="Ressenya de Google"
-      className={`fixed bottom-20 right-6 z-[65] hidden w-[340px] transition-all duration-500 sm:block ${
+      className={`fixed bottom-20 ${side === "left" ? "left-6" : "right-6"} z-[65] hidden w-[340px] transition-all duration-500 sm:block ${
         shown ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0"
       }`}
     >

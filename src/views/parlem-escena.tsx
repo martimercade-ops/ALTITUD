@@ -15,6 +15,8 @@ export const ParlemEscena = () => {
         const r = el.getBoundingClientRect();
         el.style.setProperty("--fx", `${e.clientX - r.left}px`);
         el.style.setProperty("--fy", `${e.clientY - r.top}px`);
+        el.style.setProperty("--mx", String((e.clientX / window.innerWidth - 0.5) * 2));
+        el.style.setProperty("--my", String((e.clientY / window.innerHeight - 0.5) * 2));
       });
     };
     window.addEventListener("pointermove", move, { passive: true });
@@ -28,6 +30,7 @@ export const ParlemEscena = () => {
       <span className="aurora aurora--1" />
       <span className="aurora aurora--2" />
       <span className="aurora aurora--3" />
+      <span className="parlem-logo" />
       <span className="parlem-focus" />
       <span className="parlem-gra" />
     </div>

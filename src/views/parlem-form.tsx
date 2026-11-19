@@ -63,7 +63,7 @@ export const ParlemForm = ({ services, topSlugs, unsureLabel }: ParlemFormProps)
 
   const chips = useMemo(
     () => [
-      ...services.filter((s) => topSlugs.includes(s.slug) || s.slug === extra).map((s) => s.label),
+      ...services.filter((s) => !topSlugs.length || topSlugs.includes(s.slug) || s.slug === extra).map((s) => s.label),
       unsureLabel,
     ],
     [services, topSlugs, extra, unsureLabel],
@@ -124,7 +124,7 @@ export const ParlemForm = ({ services, topSlugs, unsureLabel }: ParlemFormProps)
     <form onSubmit={onSubmit} className="form-aura flex flex-col gap-3 p-7 md:p-10">
       <div className="form-entra" style={{ animationDelay: "0ms" }}>
         <p className="text-[1.65rem] font-light leading-tight tracking-tight md:text-3xl">
-          Comencem?
+          Explica&apos;ns què necessites.
         </p>
       </div>
 
@@ -139,6 +139,48 @@ export const ParlemForm = ({ services, topSlugs, unsureLabel }: ParlemFormProps)
       <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
         <label htmlFor="hp-zx">Deixa-ho buit</label>
         <input id="hp-zx" name="hp-zx" type="text" tabIndex={-1} autoComplete="new-password" data-lpignore="true" data-1p-ignore value={values.company_url} onChange={set("company_url")} />
+      </div>
+
+      <fieldset className="form-entra mt-3" style={{ animationDelay: "180ms" }}>
+        <legend className="mb-2.5 text-sm text-white/70">Quins serveis t&apos;interessen?</legend>
+        <div className="flex flex-wrap gap-2">
+          {chips.map((label) => {
+            const on = selected.includes(label);
+            return (
+              <button
+                key={label}
+                type="button"
+                aria-pressed={on}
+                onClick={() => toggle(label)}
+                className={`rounded-full border px-3 py-1.5 text-[13px] transition-all duration-200 ${
+                  on
+                    ? "border-accent-lime bg-accent-lime text-black"
+                    : "border-white/20 text-white/80 hover:border-white/55 hover:text-white"
+                }`}
+              >
+                {label}
+              </button>
+            );
+          })}
+        </div>
+      </fieldset>
+
+      <div className="form-entra relative mt-3" style={{ animationDelay: "240ms" }}>
+        <textarea
+          id="message"
+          name="message"
+          rows={3}
+          placeholder="Explica'ns el teu projecte"
+          value={values.message}
+          onChange={set("message")}
+          className="peer w-full resize-none rounded-xl border border-white/15 bg-white/[0.05] px-4 pb-3 pt-7 text-[0.95rem] text-white outline-none transition-all duration-300 placeholder:text-transparent hover:border-white/30 focus:border-accent-lime focus:bg-white/[0.08] focus:shadow-[0_0_0_4px_rgb(182_241_58/0.12)]"
+        />
+        <label
+          htmlFor="message"
+          className="pointer-events-none absolute left-4 top-5 text-[0.95rem] text-white/50 transition-all duration-200 peer-focus:top-2.5 peer-focus:text-[0.7rem] peer-focus:text-accent-lime peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:text-[0.7rem]"
+        >
+          Explica&apos;ns el teu projecte <span className="text-white/30">· opcional</span>
+        </label>
       </div>
 
       <div className="form-entra mt-3" style={{ animationDelay: "300ms" }}>
