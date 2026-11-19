@@ -103,20 +103,8 @@ export const Reviews = ({ content }: { content: ReviewsContent }) => {
       className="relative z-20 overflow-hidden bg-hero-page pb-24 pt-24 text-black md:pt-32"
     >
       <ReviewsHeader />
-      <div className="mx-auto flex max-w-6xl flex-col items-center px-4 text-center md:px-10">
-        <a
-          href={link.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-14 inline-flex items-center gap-3 rounded-full border border-black/10 bg-white py-2.5 pl-3 pr-5 transition-colors hover:border-black/25"
-        >
-          <GoogleMark />
-          <Stars size="h-4 w-4" />
-          <span className="text-sm text-black/60">{basis}</span>
-        </a>
-      </div>
 
-      <div className="ressenyes mt-12 flex flex-col gap-4">
+      <div className="ressenyes mt-16 flex flex-col gap-4">
         <Row items={items.slice(0, half)} offset={0} />
         <Row items={items.slice(half)} offset={half} reverse />
       </div>

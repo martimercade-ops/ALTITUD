@@ -575,3 +575,22 @@ font { background: transparent !important; }
   .n1-entra, .n1--on .n1-entra { opacity: 1; transform: none; filter: none; animation: none; }
   .n1--on .n1-titol, .n1-halo { animation: none; }
 }
+.n1-paraula { opacity: 0; transform: translateY(0.4em) rotate(4deg); filter: blur(8px); }
+.n1--on .n1-paraula { animation: lletra-puja 1s cubic-bezier(0.2, 0.75, 0.15, 1) both; }
+.n1--on .n1-titol { animation: n1-llum 6s ease-in-out 1.6s infinite; }
+@media (prefers-reduced-motion: reduce) { .n1-paraula, .n1--on .n1-paraula { opacity: 1; transform: none; filter: none; animation: none; } }
+/* La llum passa paraula a paraula (el degradat va a cada paraula, no al títol) */
+.n1-titol { background: none; color: #0b1424; }
+.n1--on .n1-titol { animation: none; }
+.n1-paraula {
+  background: linear-gradient(100deg, #0b1424 0%, #0b1424 40%, #2f5bff 50%, #0b1424 60%, #0b1424 100%);
+  background-size: 300% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.n1--on .n1-paraula {
+  animation: lletra-puja 1s cubic-bezier(0.2, 0.75, 0.15, 1) both, n1-llum 7s ease-in-out infinite;
+  animation-delay: var(--d, 0ms), calc(var(--d, 0ms) + 1600ms);
+}

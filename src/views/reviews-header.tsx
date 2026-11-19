@@ -2,10 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 
+const FRASE = "Cada cim comença amb un primer pas.".split(" ");
+
 const STATS = [
   { to: 100, prefix: "+", label: "clients a Andorra" },
   { to: 200, prefix: "+", label: "projectes" },
-  { to: 98, prefix: "", label: "ressenyes ★★★★★" },
   { to: 6, prefix: "+", suffix: " anys", label: "d'experiència" },
 ];
 
@@ -53,15 +54,20 @@ export const ReviewsHeader = () => {
   return (
     <div ref={ref} className={`n1 ${run ? "n1--on" : ""} relative mx-auto max-w-6xl px-4 text-center md:px-10`}>
       <span aria-hidden="true" className="n1-halo" />
-      <p className="n1-entra text-xs font-semibold uppercase tracking-[0.35em] text-muted-small">Valoracions</p>
-      <h2 id="reviews-title" className="n1-entra n1-titol mt-5 text-[2.6rem] font-light leading-[1] tracking-tight sm:text-6xl lg:text-[5.25rem]" style={{ animationDelay: "120ms" }}>
-        L&apos;agència <span className="font-semibold">nº1</span> d&apos;Andorra
+      <p className="n1-entra text-xs font-semibold uppercase tracking-[0.35em] text-muted-small">Altitud Digital</p>
+      <h2 id="reviews-title" aria-label={FRASE.join(" ")} className="n1-titol mt-5 text-[2.6rem] font-light leading-[1.05] tracking-tight sm:text-6xl lg:text-[5rem]">
+        {FRASE.map((w, i) => (
+          <span key={i} aria-hidden="true" className={`n1-paraula inline-block ${w === "cim" ? "font-semibold" : ""}`} style={{ ["--d" as string]: `${120 + i * 90}ms` }}>
+            {w}
+            {i < FRASE.length - 1 ? "\u00a0" : ""}
+          </span>
+        ))}
       </h2>
-      <dl className="mt-12 grid grid-cols-2 gap-y-8 md:grid-cols-4">
+      <dl className="mx-auto mt-12 grid max-w-3xl grid-cols-3 gap-y-8">
         {STATS.map((s, i) => (
-          <div key={s.label} className="n1-entra relative px-3" style={{ animationDelay: `${300 + i * 120}ms` }}>
-            {i > 0 && <span aria-hidden="true" className="absolute left-0 top-1/2 hidden h-12 w-px -translate-y-1/2 bg-black/10 md:block" />}
-            <dd className="text-[2.6rem] font-light leading-none tracking-tight md:text-[3.5rem]">
+          <div key={s.label} className="n1-entra relative px-3" style={{ animationDelay: `${700 + i * 120}ms` }}>
+            {i > 0 && <span aria-hidden="true" className="absolute left-0 top-1/2 h-12 w-px -translate-y-1/2 bg-black/10" />}
+            <dd className="text-[1.9rem] font-light leading-none tracking-tight sm:text-[2.6rem] md:text-[3.5rem]">
               <Counter to={s.to} prefix={s.prefix} suffix={s.suffix} run={run} />
             </dd>
             <dt className="mt-2 text-sm text-black/55">{s.label}</dt>
