@@ -105,7 +105,7 @@ export const ContactForm = ({ content }: ContactFormProps) => {
       <span aria-hidden="true" className="isard-estels" />
       <span aria-hidden="true" className="isard-llum" />
 
-      <div className="relative z-10 grid min-h-[100svh] items-center gap-12 px-6 pb-24 pt-[70vw] md:px-12 lg:grid-cols-[0.8fr_1.2fr] lg:px-page-gutter lg:pb-16 lg:pt-28">
+      <div className="relative z-10 grid min-h-[100svh] items-center gap-12 px-6 pb-24 pt-[112vw] md:px-12 lg:grid-cols-[0.8fr_1.2fr] lg:px-page-gutter lg:pb-16 lg:pt-28">
         <div className="hidden lg:block" />
         <div>
           <p className="isard-entra mb-5 text-xs font-semibold uppercase tracking-[0.35em] text-white/55">
