@@ -32,6 +32,18 @@ export const Laptop = ({ src, alt, url }: { src: string; alt: string; url?: stri
   </div>
 );
 
+const LOGOS: Record<string, string> = {
+  "perfect-home": "perfect-home",
+  "la-llotja": "restaurante-la-llotja",
+  "claudia-moncau": "claudia-moncau-yoga",
+  "medic-estetic": "medic-estetic",
+  "auro-jardiners": "auro-jardiners",
+  "federacio-andorrana-d-esqui": "fae",
+  "brainworks-center": "brainworks",
+  "hotel-niu": "hotel-niu",
+  "olympus-race": "olympus-race-andorra",
+};
+
 /** Targeta de projecte: en passar-hi el cursor surt el portàtil de perfil amb la web */
 const ProjectCard = ({ p }: { p: Project }) => {
   const onMove = (e: React.PointerEvent<HTMLAnchorElement>) => {
@@ -63,7 +75,15 @@ const ProjectCard = ({ p }: { p: Project }) => {
 
       <div className="absolute inset-x-0 bottom-0 z-[3] p-6">
         <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/55">{p.sector}</p>
-        <h2 className="mt-2 text-[1.7rem] font-light leading-[1.05] tracking-tight">{p.name}</h2>
+        {LOGOS[p.slug] ? (
+          <h2 className="mt-3">
+            <span className="sr-only">{p.name}</span>
+            { }
+            <img src={`/assets/altitud/clients/mono/${LOGOS[p.slug]}.webp`} alt="" aria-hidden="true" className="illa-logo h-11 w-auto max-w-[70%] object-contain object-left md:h-12" />
+          </h2>
+        ) : (
+          <h2 className="mt-2 text-[1.7rem] font-light leading-[1.05] tracking-tight">{p.name}</h2>
+        )}
         <ul className="mt-4 flex flex-wrap gap-1.5" aria-label="Serveis">
           {p.services.map((s) => (
             <li key={s} className="rounded-full border border-white/20 bg-white/[0.06] px-3 py-1 text-xs text-white/85 backdrop-blur">{s}</li>

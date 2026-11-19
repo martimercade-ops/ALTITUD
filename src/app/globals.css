@@ -822,28 +822,25 @@ font { background: transparent !important; }
 }
 @media (prefers-reduced-motion: reduce) { .clar-halo { animation: none; } .isard--clar .isard-paraula { color: #0b1424; } }
 
-/* Projectes: illes amb el portàtil de perfil */
+/* Projectes: illes amb portàtil i logo */
 .illa { --tx: 0; --ty: 0; isolation: isolate; transform: perspective(1200px) rotateX(calc(var(--ty) * -3deg)) rotateY(calc(var(--tx) * 4deg)); transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.5s; }
 .illa:hover { box-shadow: 0 40px 80px -30px rgb(11 20 36 / 0.55); }
-.illa-fons { opacity: 0.55; filter: blur(2px) saturate(0.9); transform: scale(1.08); transition: opacity 0.6s, filter 0.6s, transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1); }
-.illa:hover .illa-fons { opacity: 0.25; filter: blur(14px) saturate(1.2); transform: scale(1.2); }
-.illa-vel { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgb(11 20 36 / 0.1) 0%, rgb(11 20 36 / 0.35) 45%, rgb(11 20 36 / 0.92) 100%); }
-.illa-llum { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(60% 45% at calc(50% + var(--tx) * 30%) 30%, rgb(47 91 255 / 0.35), transparent 70%); opacity: 0; transition: opacity 0.5s; }
+.illa-fons { opacity: 0.22; filter: blur(16px) saturate(1.2); transform: scale(1.25); transition: opacity 0.6s, transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.illa:hover .illa-fons { opacity: 0.35; transform: scale(1.35); }
+.illa-vel { position: absolute; inset: 0; z-index: 1; background: radial-gradient(80% 60% at 50% 25%, transparent, rgb(11 20 36 / 0.4) 70%), linear-gradient(180deg, transparent 45%, rgb(11 20 36 / 0.95) 82%); }
+.illa-llum { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(55% 40% at calc(50% + var(--tx) * 25%) 32%, rgb(47 91 255 / 0.4), transparent 70%); opacity: 0.35; transition: opacity 0.5s; }
 .illa:hover .illa-llum { opacity: 1; }
-.illa-escenari { position: absolute; inset: 7% 15% 46% 15%; z-index: 2; display: flex; align-items: center; justify-content: center; perspective: 1400px; }
+.illa-escenari { position: absolute; inset: 6% 18% 50% 18%; z-index: 2; display: flex; align-items: center; justify-content: center; perspective: 1400px; }
 .illa-portatil {
   width: 100%;
   transform-style: preserve-3d;
-  transform: translateY(40%) rotateX(18deg) rotateY(-32deg) rotateZ(2deg) scale(0.82);
-  opacity: 0;
-  transition: transform 0.9s cubic-bezier(0.2, 0.75, 0.2, 1), opacity 0.5s;
+  transform: rotateX(8deg) rotateY(-14deg) rotateZ(0.5deg);
+  filter: drop-shadow(0 24px 30px rgb(0 0 0 / 0.45));
+  transition: transform 0.9s cubic-bezier(0.2, 0.75, 0.2, 1);
 }
 .illa:hover .illa-portatil, .illa:focus-visible .illa-portatil {
-  opacity: 1;
-  transform: translate3d(calc(var(--tx) * 10px), -4%, 0) rotateX(12deg) rotateY(calc(-34deg + var(--tx) * 6deg)) rotateZ(2deg) scale(0.92);
+  transform: translate3d(calc(var(--tx) * 10px), -4%, 0) rotateX(12deg) rotateY(calc(-34deg + var(--tx) * 6deg)) rotateZ(2deg) scale(1.08);
 }
-@media (hover: none) {
-  .illa-portatil { opacity: 1; transform: rotateX(10deg) rotateY(-22deg) rotateZ(1deg) scale(0.95); }
-  .illa-fons { opacity: 0.25; filter: blur(14px); }
-}
+.illa-logo { filter: brightness(0) invert(1); opacity: 0.92; transition: opacity 0.4s, transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1); transform-origin: left center; }
+.illa:hover .illa-logo { opacity: 1; transform: scale(1.04); }
 @media (prefers-reduced-motion: reduce) { .illa, .illa-portatil, .illa-fons { transition: none; } }
