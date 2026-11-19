@@ -57,7 +57,7 @@ export const ContactForm = ({ content }: ContactFormProps) => {
     <section
       id="contact"
       aria-labelledby={labelId}
-      className="sticky top-0 z-10 flex h-lvh flex-col justify-center bg-hero-page px-6 py-24 md:px-12 lg:px-page-gutter"
+      className="sticky top-0 z-10 flex flex-col bg-hero-page px-6 pb-24 pt-10 md:px-12 md:pt-14 lg:px-page-gutter"
     >
       <AnimatedHeading
         as="h2"

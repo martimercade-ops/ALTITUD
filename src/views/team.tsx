@@ -37,7 +37,7 @@ export const Team = ({ content }: { content: TeamContent }) => {
     <section
       id="team"
       aria-labelledby="team-title"
-      className="relative z-20 bg-hero-page px-6 pb-24 pt-8 text-black md:px-12 lg:px-page-gutter"
+      className="relative z-20 bg-hero-page px-6 pb-16 pt-8 text-black md:px-12 lg:px-page-gutter"
     >
       <p className="mb-6 text-center text-xs font-semibold uppercase tracking-[0.35em] text-muted-small">
         {eyebrow}
