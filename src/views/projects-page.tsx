@@ -44,6 +44,20 @@ const LOGOS: Record<string, string> = {
   "olympus-race": "olympus-race-andorra",
 };
 
+/** Portàtil i mòbil reals amb la web del client a les pantalles */
+const Dispositius = ({ src }: { src: string }) => (
+  <div className="relative w-full" style={{ aspectRatio: "1457 / 863" }}>
+    <div className="absolute overflow-hidden bg-black" style={{ left: "27.1%", top: "4.8%", width: "65.4%", height: "73%" }}>
+      <Image src={src} alt="" fill sizes="(max-width: 640px) 60vw, 22vw" className="object-cover object-top" />
+    </div>
+    <div className="absolute overflow-hidden bg-black" style={{ left: "8%", top: "32.2%", width: "17.5%", height: "61%", borderRadius: "11% / 5.5%" }}>
+      <Image src={src} alt="" fill sizes="10vw" className="object-cover object-[18%_0%]" />
+    </div>
+    { }
+    <img src="/assets/altitud/mockup-dispositius.webp" alt="" className="relative h-full w-full select-none" draggable={false} />
+  </div>
+);
+
 /** Targeta de projecte: en passar-hi el cursor surt el portàtil de perfil amb la web */
 const ProjectCard = ({ p }: { p: Project }) => {
   const onMove = (e: React.PointerEvent<HTMLAnchorElement>) => {
@@ -61,20 +75,19 @@ const ProjectCard = ({ p }: { p: Project }) => {
       aria-label={`Veure el projecte de ${p.name}`}
       onPointerMove={onMove}
       onPointerLeave={onLeave}
-      className="illa group relative block aspect-[4/5] lg:aspect-square overflow-hidden rounded-[28px] bg-[#0b1424] text-white"
+      className="illa illa--clar group relative block aspect-[4/5] lg:aspect-square overflow-hidden rounded-[28px] bg-[#eceef2] text-black"
     >
-      <Image src={p.image} alt="" fill sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 31vw" className="illa-fons object-cover object-top" />
-      <span aria-hidden="true" className="illa-vel" />
       <span aria-hidden="true" className="illa-llum" />
+      <span aria-hidden="true" className="illa-ombra" />
 
       <div aria-hidden="true" className="illa-escenari">
         <div className="illa-portatil">
-          <Laptop src={p.image} alt="" url={p.links[0]?.label} />
+          <Dispositius src={p.image} />
         </div>
       </div>
 
       <div className="absolute inset-x-0 bottom-0 z-[3] p-6">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/55">{p.sector}</p>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-black/45">{p.sector}</p>
         {LOGOS[p.slug] ? (
           <h2 className="mt-3">
             <span className="sr-only">{p.name}</span>
@@ -86,11 +99,11 @@ const ProjectCard = ({ p }: { p: Project }) => {
         )}
         <ul className="mt-4 flex flex-wrap gap-1.5" aria-label="Serveis">
           {p.services.map((s) => (
-            <li key={s} className="rounded-full border border-white/20 bg-white/[0.06] px-3 py-1 text-xs text-white/85 backdrop-blur">{s}</li>
+            <li key={s} className="rounded-full border border-black/10 bg-white/70 px-3 py-1 text-xs text-black/70">{s}</li>
           ))}
         </ul>
       </div>
-      <span aria-hidden="true" className="absolute right-5 top-5 z-[3] flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition-colors group-hover:bg-accent-lime group-hover:text-black">↗</span>
+      <span aria-hidden="true" className="absolute right-5 top-5 z-[3] flex h-10 w-10 items-center justify-center rounded-full bg-white text-black shadow-sm transition-colors group-hover:bg-black group-hover:text-accent-lime">↗</span>
     </Link>
   );
 };

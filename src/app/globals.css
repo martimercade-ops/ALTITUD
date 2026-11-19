@@ -844,3 +844,37 @@ font { background: transparent !important; }
 .illa-logo { filter: brightness(0) invert(1); opacity: 0.92; transition: opacity 0.4s, transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1); transform-origin: left center; }
 .illa:hover .illa-logo { opacity: 1; transform: scale(1.04); }
 @media (prefers-reduced-motion: reduce) { .illa, .illa-portatil, .illa-fons { transition: none; } }
+
+/* Mockup real (portàtil + mòbil) */
+.illa-escenari { inset: 8% 9% 46% 9% !important; }
+.illa-portatil { transform: rotateX(6deg) rotateY(-10deg) rotateZ(0deg); filter: drop-shadow(0 30px 30px rgb(0 0 0 / 0.5)); }
+.illa:hover .illa-portatil, .illa:focus-visible .illa-portatil {
+  transform: translate3d(calc(var(--tx) * 10px), -5%, 0) rotateX(16deg) rotateY(calc(-26deg + var(--tx) * 8deg)) rotateZ(-3deg) scale(1.06);
+}
+
+/* Projectes en clar: dispositius flotants amb ombra a terra */
+.illa--clar { background: radial-gradient(120% 90% at 50% 0%, #f7f8fa 0%, #e9ecf0 60%, #dfe3e8 100%); }
+.illa--clar:hover { box-shadow: 0 40px 70px -35px rgb(11 20 36 / 0.35); }
+.illa--clar .illa-llum { background: radial-gradient(55% 40% at calc(50% + var(--tx) * 25%) 30%, rgb(255 255 255 / 0.9), transparent 70%); opacity: 0.8; }
+.illa--clar .illa-escenari { inset: 11% 15% 49% 15% !important; }
+.illa--clar .illa-portatil {
+  transform: rotateX(14deg) rotateY(-18deg) rotateZ(-5deg);
+  filter: drop-shadow(0 18px 18px rgb(11 20 36 / 0.18));
+  animation: illa-flota 6s ease-in-out infinite;
+}
+@keyframes illa-flota { 50% { translate: 0 -2.5%; } }
+.illa--clar:hover .illa-portatil, .illa--clar:focus-visible .illa-portatil {
+  transform: translate3d(calc(var(--tx) * 10px), -6%, 0) rotateX(20deg) rotateY(calc(-28deg + var(--tx) * 8deg)) rotateZ(-7deg) scale(1.02);
+}
+.illa-ombra {
+  position: absolute; left: 24%; right: 24%; top: 52%; height: 6%; z-index: 1; border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(11 20 36 / 0.28), transparent);
+  filter: blur(6px);
+  animation: illa-ombra 6s ease-in-out infinite;
+  transition: transform 0.9s cubic-bezier(0.2, 0.75, 0.2, 1), opacity 0.9s;
+}
+@keyframes illa-ombra { 50% { transform: scaleX(0.9); opacity: 0.8; } }
+.illa--clar:hover .illa-ombra { transform: scale(0.8); opacity: 0.55; }
+.illa--clar .illa-logo { filter: brightness(0); opacity: 0.85; }
+@media (hover: none) { .illa--clar .illa-portatil { transform: rotateX(14deg) rotateY(-18deg) rotateZ(-5deg); } }
+@media (prefers-reduced-motion: reduce) { .illa--clar .illa-portatil, .illa-ombra { animation: none; } }
