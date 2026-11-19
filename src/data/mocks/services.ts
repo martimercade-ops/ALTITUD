@@ -330,6 +330,28 @@ export const services: Service[] = [
     steps: STEPS_IA,
   },
   {
+    slug: "ciberseguretat",
+    group: "ia",
+    name: "Ciberseguretat",
+    prefix: "Ciberseguretat",
+    suffix: "per a empreses",
+    short: "La teva web, els teus comptes i les teves dades, protegits.",
+    headline: "Protegeix el que has construït.",
+    intro:
+      "Revisem i reforcem la seguretat digital del teu negoci: webs, botigues online, correu, comptes de xarxes i dades de clients. Detectem els punts febles, els tanquem i et deixem un pla perquè no et tornin a agafar desprevingut.",
+    image: `${A}/serveis/refugi.jpg`,
+    includes: [
+      { title: "Auditoria de seguretat", text: "Analitzem la web, el servidor i els comptes per trobar vulnerabilitats." },
+      { title: "Web i e-commerce segurs", text: "Actualitzacions, certificats, còpies de seguretat i neteja de malware." },
+      { title: "Correu i comptes", text: "Doble factor, contrasenyes i protecció contra el phishing i la suplantació." },
+      { title: "Protecció de dades", text: "Bones pràctiques i adaptació a la normativa de protecció de dades." },
+      { title: "Formació de l'equip", text: "Aprèn a detectar enganys i a treballar de manera segura." },
+      { title: "Monitoratge", text: "Vigilem la web i t'avisem si alguna cosa no va bé." },
+    ],
+    tools: ["Cloudflare", "Wordfence", "Google Workspace", "Microsoft 365", "Hostinger"],
+    steps: STEPS_IA,
+  },
+  {
     slug: "formacions-ia",
     group: "ia",
     name: "Formacions d'IA i màrqueting",

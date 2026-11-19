@@ -64,7 +64,7 @@ export const MobileMenu = ({ items, cta, label }: MobileMenuProps) => {
           open ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >
-        <nav aria-label={label} className="flex-1 overflow-y-auto">
+        <nav aria-label={label} data-lenis-prevent className="-mx-[24px] flex-1 overflow-y-auto overscroll-contain px-[24px]">
           <ul className="flex flex-col">
             {items.map((item, i) => {
               const hasChildren = !!item.children?.length;
@@ -102,20 +102,30 @@ export const MobileMenu = ({ items, cta, label }: MobileMenuProps) => {
                           isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
                         }`}
                       >
-                        <ul className="overflow-hidden">
+                        <ul className="grid grid-cols-2 gap-2 overflow-hidden">
+                          <li className="col-span-2">
+                            <a
+                              href={item.href.startsWith("#") || item.href.startsWith("/#") ? "/serveis" : item.href}
+                              onClick={close}
+                              tabIndex={isOpen ? 0 : -1}
+                              className="flex items-center justify-between rounded-2xl bg-accent-lime px-4 py-3 text-[15px] font-medium text-black"
+                            >
+                              Veure tots els serveis <span aria-hidden="true">→</span>
+                            </a>
+                          </li>
                           {item.children!.map((child) => (
                             <li key={child.href}>
                               <a
                                 href={child.href}
                                 onClick={close}
                                 tabIndex={isOpen ? 0 : -1}
-                                className="block py-[11px] pl-[4px] text-[18px] text-white/70 hover:text-white"
+                                className="flex h-full min-h-[52px] items-center rounded-2xl border border-white/10 bg-white/[0.04] px-3.5 py-2.5 text-[14px] leading-tight text-white/85 active:bg-white/10"
                               >
                                 {child.label}
                               </a>
                             </li>
                           ))}
-                          <li className="pb-4" />
+                          <li className="col-span-2 pb-4" />
                         </ul>
                       </div>
                     </>
