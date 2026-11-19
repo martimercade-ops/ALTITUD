@@ -4,36 +4,6 @@ import { useEffect, useRef, useState } from "react";
 
 const FRASE = "Cada cim comença amb un primer pas.".split(" ");
 
-const STATS = [
-  { to: 100, prefix: "+", label: "clients a Andorra" },
-  { to: 200, prefix: "+", label: "projectes" },
-  { to: 6, prefix: "+", suffix: " anys", label: "d'experiència" },
-];
-
-const Counter = ({ to, prefix = "", suffix = "", run }: { to: number; prefix?: string; suffix?: string; run: boolean }) => {
-  const [n, setN] = useState(0);
-  useEffect(() => {
-    if (!run) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return setN(to);
-    let raf = 0;
-    const t0 = performance.now();
-    const tick = (t: number) => {
-      const p = Math.min(1, (t - t0) / 1800);
-      setN(Math.round(to * (1 - Math.pow(1 - p, 4))));
-      if (p < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [run, to]);
-  return (
-    <span className="tabular-nums">
-      {prefix}
-      {n}
-      {suffix}
-    </span>
-  );
-};
-
 /** Capçalera de les ressenyes: títol amb llum que hi passa i xifres que compten */
 export const ReviewsHeader = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -63,17 +33,6 @@ export const ReviewsHeader = () => {
           </span>
         ))}
       </h2>
-      <dl className="mx-auto mt-12 grid max-w-3xl grid-cols-3 gap-y-8">
-        {STATS.map((s, i) => (
-          <div key={s.label} className="n1-entra relative px-3" style={{ animationDelay: `${700 + i * 120}ms` }}>
-            {i > 0 && <span aria-hidden="true" className="absolute left-0 top-1/2 h-12 w-px -translate-y-1/2 bg-black/10" />}
-            <dd className="text-[1.9rem] font-light leading-none tracking-tight sm:text-[2.6rem] md:text-[3.5rem]">
-              <Counter to={s.to} prefix={s.prefix} suffix={s.suffix} run={run} />
-            </dd>
-            <dt className="mt-2 text-sm text-black/55">{s.label}</dt>
-          </div>
-        ))}
-      </dl>
     </div>
   );
 };
