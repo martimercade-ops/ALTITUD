@@ -24,10 +24,10 @@ export interface LogoMarqueeProps {
  * Mida òptica: tots els logos ocupen aproximadament la mateixa àrea,
  * de manera que els quadrats no es veuen enormes ni els allargats minúsculs.
  */
-const AREA = 5200;
-const MAX_H = 52;
-const MIN_H = 18;
-const MAX_W = 190;
+const AREA = 8200;
+const MAX_H = 68;
+const MIN_H = 24;
+const MAX_W = 220;
 
 const logoSize = ({ width, height }: ClientLogo) => {
   const ratio = width / height;
@@ -62,7 +62,7 @@ const Row = ({
           return (
             <div
               key={`${copy}-${logo.name}`}
-              className="flex h-20 w-40 shrink-0 items-center justify-center px-4 md:h-24 md:w-56 md:px-6"
+              className="flex h-20 w-44 shrink-0 items-center justify-center px-4 md:h-24 md:w-60 md:px-6"
             >
               <img
                 src={logo.src}
@@ -72,7 +72,7 @@ const Row = ({
                 loading="lazy"
                 decoding="async"
                 style={{ width: size.width, height: size.height }}
-                className="max-w-full object-contain opacity-55 transition-opacity duration-300 hover:opacity-100"
+                className="max-w-full object-contain opacity-70 transition-opacity duration-300 hover:opacity-100"
               />
             </div>
           );
@@ -84,7 +84,7 @@ const Row = ({
 
 export const LogoMarquee = ({ content }: LogoMarqueeProps) => {
   const { label, badge, heading, items } = content;
-  const half = Math.ceil(items.length / 2);
+  const third = Math.ceil(items.length / 3);
   const ref = useRef<HTMLElement>(null);
   const [fora, setFora] = useState(true);
   useEffect(() => {
@@ -124,8 +124,9 @@ export const LogoMarquee = ({ content }: LogoMarqueeProps) => {
         aria-hidden="true"
         className="mt-14 flex flex-col gap-2 [mask-image:linear-gradient(90deg,transparent,black_12%,black_88%,transparent)] md:mt-20 md:gap-4"
       >
-        <Row logos={items.slice(0, half)} duration={55} />
-        <Row logos={items.slice(half)} duration={65} reverse />
+        <Row logos={items.slice(0, third)} duration={60} />
+        <Row logos={items.slice(third, third * 2)} duration={70} reverse />
+        <Row logos={items.slice(third * 2)} duration={65} />
       </div>
     </section>
   );
