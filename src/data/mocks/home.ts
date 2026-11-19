@@ -179,7 +179,10 @@ export const homeContent: HomeContent = {
     heading: "Empreses d'Andorra que ja han fet créixer el seu negoci.",
     viewLabel: "Tots els projectes",
     viewHref: "/projectes",
-    items: projects.map((p) => ({
+    // Només els 5 projectes destacats; la resta, a /projectes
+    items: ["federacio-andorrana-d-esqui", "brainworks-center", "olympus-race", "hotel-niu", "la-casa"]
+      .map((slug) => projects.find((p) => p.slug === slug)!)
+      .map((p) => ({
       name: p.name,
       sector: p.sector,
       description: p.summary,
