@@ -754,3 +754,38 @@ font { background: transparent !important; }
   background: radial-gradient(360px circle at var(--fx, -500px) var(--fy, -500px), rgb(255 255 255 / 0.08), transparent 65%);
 }
 @media (prefers-reduced-motion: reduce) { .serveis-aurora { animation: none; } }
+
+/* Formulari: serralada vectorial amb el pic */
+.pic-escena svg { overflow: visible; }
+.pic-capa { transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.pic-capa--1 { transform: translate3d(calc(var(--mx, 0) * -6px), calc((var(--p, 0.5) - 0.5) * 30px), 0); }
+.pic-capa--2 { transform: translate3d(calc(var(--mx, 0) * -12px), calc((var(--p, 0.5) - 0.5) * 60px), 0); }
+.pic-capa--3 { transform: translate3d(calc(var(--mx, 0) * -20px), calc((var(--p, 0.5) - 0.5) * 100px), 0); }
+.pic-capa--4 { transform: translate3d(calc(var(--mx, 0) * -32px), calc((var(--p, 0.5) - 0.5) * 150px), 0); }
+.pic-linia { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.isard--on .pic-linia { animation: pic-traca 3.2s cubic-bezier(0.6, 0, 0.2, 1) 0.3s forwards, pic-batec 5s ease-in-out 3.5s infinite; }
+@keyframes pic-traca { to { stroke-dashoffset: 0; } }
+@keyframes pic-batec { 50% { opacity: 0.55; } }
+.pic-cim { opacity: 0; transform-box: fill-box; transform-origin: center; }
+.isard--on .pic-cim { animation: pic-cim 2.4s ease-in-out 2.2s infinite; }
+@keyframes pic-cim { 0% { opacity: 0; transform: scale(0.6); } 30% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(3.2); } }
+.pic-sol {
+  position: absolute; left: 24%; top: 34%; width: 46vw; height: 46vw; max-width: 760px; max-height: 760px;
+  translate: -50% -50%; border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(255 160 80 / 0.38), rgb(255 120 60 / 0.12) 45%, transparent 70%);
+  transform: translate3d(calc(var(--mx, 0) * 30px), calc((var(--p, 0.5) - 0.5) * 140px), 0);
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.pic-boira {
+  position: absolute; inset: auto 0 0 0; height: 40%;
+  background: linear-gradient(180deg, transparent, rgb(11 20 36 / 0.5) 60%, #0b1424);
+}
+@media (max-width: 1023px) {
+  .pic-escena svg { height: 75vw; inset: 0 0 auto 0; }
+  .pic-boira { inset: 30vw 0 auto 0; height: 50vw; }
+  .pic-sol { top: 22vw; left: 28%; width: 90vw; height: 90vw; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pic-capa, .pic-sol { transform: none; }
+  .pic-linia { stroke-dashoffset: 0; animation: none; }
+}
