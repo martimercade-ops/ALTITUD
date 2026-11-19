@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { CONTACT_EMAIL, sendContact } from "@/lib/send-contact";
 import { formatEuros, type PdeSolution } from "@/data/mocks/pde";
@@ -46,6 +46,11 @@ export const PdeForm = ({ solutions }: { solutions: PdeSolution[] }) => {
   const [values, setValues] = useState(empty);
   const [selected, setSelected] = useState<string[]>([]);
   const [status, setStatus] = useState<Status>("idle");
+  const doneRef = useRef<HTMLDivElement>(null);
+  // En enviar, el missatge de confirmació queda al mateix lloc de la pantalla
+  useEffect(() => {
+    if (status === "sent") doneRef.current?.scrollIntoView({ block: "center", behavior: "smooth" });
+  }, [status]);
   const [missing, setMissing] = useState(false);
 
   const set = (key: keyof typeof empty) => (e: { target: { value: string } }) =>
@@ -88,7 +93,7 @@ export const PdeForm = ({ solutions }: { solutions: PdeSolution[] }) => {
 
   if (status === "sent" || status === "mailto") {
     return (
-      <div role="status" className="rounded-3xl border border-black/10 bg-white p-8 md:p-12">
+      <div ref={doneRef} role="status" className="rounded-3xl border border-black/10 bg-white p-8 md:p-12">
         <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#2f5bff] text-white">
           <svg viewBox="0 0 20 20" aria-hidden="true" className="h-5 w-5">
             <path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -101,6 +106,10 @@ export const PdeForm = ({ solutions }: { solutions: PdeSolution[] }) => {
           {status === "sent"
             ? "Quan s'obri la nova convocatòria del PDE et contactarem de seguida perquè ho tinguis tot preparat i no perdis l'ajut."
             : "Hem obert el teu correu amb la sol·licitud preparada. Només cal que l'enviïs per entrar a la llista d'espera."}
+        </p>
+        <p className="mt-6 text-sm text-black/60">
+          Si és urgent, truca&apos;ns al{" "}
+          <a href="tel:+376670222" className="font-medium text-black underline underline-offset-4">+376 670 222</a>.
         </p>
         <ul className="mt-8 flex flex-wrap gap-2">
           {chosen.map((s) => (
@@ -213,8 +222,8 @@ export const PdeForm = ({ solutions }: { solutions: PdeSolution[] }) => {
         </div>
 
         <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
-          <label htmlFor="pde-company-url">No omplis aquest camp</label>
-          <input id="pde-company-url" tabIndex={-1} autoComplete="off" value={values.company_url} onChange={set("company_url")} />
+          <label htmlFor="hp-zx-pde">Deixa-ho buit</label>
+          <input id="hp-zx-pde" name="hp-zx-pde" type="text" tabIndex={-1} autoComplete="new-password" data-lpignore="true" data-1p-ignore value={values.company_url} onChange={set("company_url")} />
         </div>
       </fieldset>
 

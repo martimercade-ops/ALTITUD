@@ -38,7 +38,7 @@ export const ContactForm = ({ content }: ContactFormProps) => {
   const statusText = {
     idle: "",
     sending: "Enviant…",
-    sent: "Gràcies! Hem rebut el teu missatge i et contactarem aviat.",
+    sent: "Gràcies! Hem rebut el teu missatge i et contactarem aviat. Si és urgent, truca'ns al +376 670 222.",
     mailto: "Hem obert el teu correu amb el missatge preparat.",
     error: `No s'ha pogut enviar. Escriu-nos a ${CONTACT_EMAIL}.`,
   }[status];

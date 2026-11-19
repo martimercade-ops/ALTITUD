@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { CONTACT_EMAIL, sendContact } from "@/lib/send-contact";
 
@@ -47,6 +47,11 @@ export const ParlemForm = ({ services, budgets, unsureLabel }: ParlemFormProps) 
   const [selected, setSelected] = useState<string[]>([]);
   const [newsletter, setNewsletter] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
+  const doneRef = useRef<HTMLDivElement>(null);
+  // En enviar, el missatge de confirmació queda al mateix lloc de la pantalla
+  useEffect(() => {
+    if (status === "sent") doneRef.current?.scrollIntoView({ block: "center", behavior: "smooth" });
+  }, [status]);
 
   // Preselecciona el servei si venim d'una pàgina de servei (?servei=slug)
   useEffect(() => {
@@ -91,6 +96,7 @@ export const ParlemForm = ({ services, budgets, unsureLabel }: ParlemFormProps) 
   if (status === "sent" || status === "mailto") {
     return (
       <div
+        ref={doneRef}
         role="status"
         className="flex min-h-[28rem] flex-col items-start justify-center rounded-3xl border border-white/15 bg-white/[0.04] p-8 backdrop-blur md:p-12"
       >
@@ -106,6 +112,10 @@ export const ParlemForm = ({ services, budgets, unsureLabel }: ParlemFormProps) 
           {status === "sent"
             ? "Gràcies per confiar en nosaltres. Revisarem el teu projecte i et contactarem molt aviat."
             : "Hem obert el teu correu amb el missatge preparat. Només cal que el revisis i l'enviïs."}
+        </p>
+        <p className="mt-6 text-sm text-white/60">
+          Si és urgent, truca&apos;ns al{" "}
+          <a href="tel:+376670222" className="font-medium text-white underline underline-offset-4">+376 670 222</a>.
         </p>
         <Link
           href="/"
@@ -129,8 +139,8 @@ export const ParlemForm = ({ services, budgets, unsureLabel }: ParlemFormProps) 
 
       {/* Camp trampa contra robots: invisible per a les persones */}
       <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
-        <label htmlFor="company_url">No omplis aquest camp</label>
-        <input id="company_url" name="company_url" tabIndex={-1} autoComplete="off" value={values.company_url} onChange={set("company_url")} />
+        <label htmlFor="hp-zx">Deixa-ho buit</label>
+        <input id="hp-zx" name="hp-zx" type="text" tabIndex={-1} autoComplete="new-password" data-lpignore="true" data-1p-ignore value={values.company_url} onChange={set("company_url")} />
       </div>
 
       <fieldset className="mt-4">
