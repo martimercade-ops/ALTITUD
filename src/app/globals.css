@@ -594,3 +594,51 @@ font { background: transparent !important; }
   animation: lletra-puja 1s cubic-bezier(0.2, 0.75, 0.15, 1) both, n1-llum 7s ease-in-out infinite;
   animation-delay: var(--d, 0ms), calc(var(--d, 0ms) + 1600ms);
 }
+
+/* «Més que una agència»: frase entre muntanyes */
+.cim { --p: 0.5; --mx: 0; --my: 0; }
+.cim-cel {
+  position: absolute; inset: 0; z-index: -2;
+  background: linear-gradient(180deg, #ffffff 0%, #eef2f6 38%, #e6ecf2 62%, #f4f7f9 100%);
+}
+.cim-sol {
+  position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(520px circle at var(--sx, 50%) var(--sy, 45%), rgb(255 246 222 / 0.75), transparent 60%),
+    radial-gradient(60% 40% at 50% 62%, rgb(47 91 255 / 0.10), transparent 70%);
+  transition: background 0.15s linear;
+}
+.cim-text {
+  transform: translate3d(calc(var(--mx) * 10px), calc((var(--p) - 0.5) * 120px + var(--my) * 6px), 0);
+  will-change: transform;
+}
+.cim-muted { --tinta: #8a93a6; }
+.cim .n1-paraula {
+  background-image: linear-gradient(100deg, var(--tinta, #0b1424) 0%, var(--tinta, #0b1424) 40%, #2f5bff 50%, var(--tinta, #0b1424) 60%, var(--tinta, #0b1424) 100%);
+}
+.cim-muntanyes {
+  transform: translate3d(calc(-50% + var(--mx) * -22px), calc((0.5 - var(--p)) * 140px), 0) scale(calc(1.02 + var(--p) * 0.06));
+  transform-origin: 50% 100%;
+  will-change: transform;
+  filter: drop-shadow(0 -10px 40px rgb(11 20 36 / 0.08));
+}
+.cim--on .cim-muntanyes { animation: cim-puja 1.6s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+@keyframes cim-puja { from { opacity: 0; translate: 0 8%; } to { opacity: 1; translate: 0 0; } }
+.cim-llac {
+  background: linear-gradient(100deg, transparent 30%, rgb(255 255 255 / 0.16) 45%, transparent 60%);
+  background-size: 250% 100%;
+  mix-blend-mode: screen;
+  animation: cim-reflex 9s ease-in-out infinite;
+}
+@keyframes cim-reflex { from { background-position: 120% 0; } to { background-position: -120% 0; } }
+.cim:not(.cim--on) .n1-entra { opacity: 0; }
+.cim--on .n1-entra { animation: n1-entra 0.9s cubic-bezier(0.2, 0.75, 0.2, 1) both; }
+.cim--on .n1-paraula {
+  animation: lletra-puja 1s cubic-bezier(0.2, 0.75, 0.15, 1) both, n1-llum 7s ease-in-out infinite;
+  animation-delay: var(--d, 0ms), calc(var(--d, 0ms) + 2000ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .cim-text, .cim-muntanyes { transform: translateX(-50%); }
+  .cim-text { transform: none; }
+  .cim--on .cim-muntanyes, .cim-llac { animation: none; }
+}
