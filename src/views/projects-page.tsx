@@ -32,6 +32,49 @@ export const Laptop = ({ src, alt, url }: { src: string; alt: string; url?: stri
   </div>
 );
 
+/** Targeta de projecte: en passar-hi el cursor surt el portàtil de perfil amb la web */
+const ProjectCard = ({ p }: { p: Project }) => {
+  const onMove = (e: React.PointerEvent<HTMLAnchorElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty("--tx", (((e.clientX - r.left) / r.width - 0.5) * 2).toFixed(3));
+    e.currentTarget.style.setProperty("--ty", (((e.clientY - r.top) / r.height - 0.5) * 2).toFixed(3));
+  };
+  const onLeave = (e: React.PointerEvent<HTMLAnchorElement>) => {
+    e.currentTarget.style.setProperty("--tx", "0");
+    e.currentTarget.style.setProperty("--ty", "0");
+  };
+  return (
+    <Link
+      href={projectHref(p.slug)}
+      aria-label={`Veure el projecte de ${p.name}`}
+      onPointerMove={onMove}
+      onPointerLeave={onLeave}
+      className="illa group relative block aspect-[4/5] lg:aspect-square overflow-hidden rounded-[28px] bg-[#0b1424] text-white"
+    >
+      <Image src={p.image} alt="" fill sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 31vw" className="illa-fons object-cover object-top" />
+      <span aria-hidden="true" className="illa-vel" />
+      <span aria-hidden="true" className="illa-llum" />
+
+      <div aria-hidden="true" className="illa-escenari">
+        <div className="illa-portatil">
+          <Laptop src={p.image} alt="" url={p.links[0]?.label} />
+        </div>
+      </div>
+
+      <div className="absolute inset-x-0 bottom-0 z-[3] p-6">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/55">{p.sector}</p>
+        <h2 className="mt-2 text-[1.7rem] font-light leading-[1.05] tracking-tight">{p.name}</h2>
+        <ul className="mt-4 flex flex-wrap gap-1.5" aria-label="Serveis">
+          {p.services.map((s) => (
+            <li key={s} className="rounded-full border border-white/20 bg-white/[0.06] px-3 py-1 text-xs text-white/85 backdrop-blur">{s}</li>
+          ))}
+        </ul>
+      </div>
+      <span aria-hidden="true" className="absolute right-5 top-5 z-[3] flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition-colors group-hover:bg-accent-lime group-hover:text-black">↗</span>
+    </Link>
+  );
+};
+
 export const ProjectsList = ({ projects }: { projects: Project[] }) => {
   const tags = useMemo(() => {
     const all = projects.flatMap((p) => p.services);
@@ -64,42 +107,13 @@ export const ProjectsList = ({ projects }: { projects: Project[] }) => {
         })}
       </div>
 
-      <ol className="mt-16 flex flex-col">
-        {shown.map((p, i) => {
-          const flip = i % 2 === 1;
-          return (
-            <li key={p.slug} className="grid items-center gap-10 border-t border-black/10 py-16 md:py-24 lg:grid-cols-12 lg:gap-16">
-              <Reveal className={`reveal-up lg:col-span-7 ${flip ? "lg:order-2" : ""}`}>
-                <Link href={projectHref(p.slug)} aria-label={`Veure el projecte de ${p.name}`} className="block">
-                  <Laptop src={p.image} alt={`Web de ${p.name}`} url={p.links[0]?.label} />
-                </Link>
-              </Reveal>
-              <Reveal className={`reveal-text lg:col-span-5 ${flip ? "lg:order-1" : ""}`}>
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-black/40">{p.sector}</p>
-                <h2 className="mt-4 text-[2rem] font-light leading-[1.05] tracking-tight md:text-[2.75rem]">{p.name}</h2>
-                <p className="mt-5 text-[16px] leading-relaxed text-black/65">
-                  {p.about} {p.summary}
-                </p>
-                <ul className="mt-6 flex flex-wrap gap-2" aria-label="Serveis">
-                  {p.services.map((s) => (
-                    <li key={s} className="rounded-full bg-black/[0.05] px-3.5 py-1.5 text-[13px] text-black/70">{s}</li>
-                  ))}
-                </ul>
-                <div className="mt-8 flex flex-wrap items-center gap-5 text-sm">
-                  <Link href={projectHref(p.slug)} className="inline-flex h-11 items-center gap-2 rounded-full bg-black px-5 font-medium text-white hover:bg-black/85">
-                    Veure el projecte →
-                  </Link>
-                  {p.links[0] && (
-                    <a href={p.links[0].url} target="_blank" rel="noopener noreferrer" className="border-b border-black/30 pb-0.5 text-black/70 hover:border-black hover:text-black">
-                      {p.links[0].label} ↗
-                    </a>
-                  )}
-                </div>
-              </Reveal>
-            </li>
-          );
-        })}
-      </ol>
+      <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {shown.map((p, i) => (
+          <Reveal key={p.slug} as="li" className="reveal-up" style={{ transitionDelay: `${(i % 3) * 90}ms` }}>
+            <ProjectCard p={p} />
+          </Reveal>
+        ))}
+      </ul>
     </>
   );
 };
