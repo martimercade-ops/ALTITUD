@@ -23,6 +23,16 @@ const web = (url: string): ProjectLink => ({
 
 export const projects: Project[] = [
   {
+    slug: "perfect-home",
+    name: "Perfect Home",
+    sector: "Immobiliària",
+    summary: "Web i chatbot amb IA.",
+    about: "Agència immobiliària a Andorra: compra, venda i assessorament personalitzat. El chatbot amb IA atén els visitants a qualsevol hora.",
+    services: ["Web", "Chatbot amb IA"],
+    links: [web("https://perfecthomeandorra.com/")],
+    image: `${P}/perfect-home.jpg`,
+  },
+  {
     slug: "la-rostisseria",
     name: "La Rostisseria",
     sector: "Restauració",
