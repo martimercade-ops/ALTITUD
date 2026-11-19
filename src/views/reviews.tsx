@@ -2,6 +2,7 @@
 
 import { AnimatedHeading } from "@/components/common/animated-heading";
 import { Reveal } from "@/components/common/reveal";
+import { ReviewsHeader } from "@/views/reviews-header";
 
 export interface ReviewItem {
   name: string;
@@ -53,7 +54,7 @@ const Card = ({ item, i }: { item: ReviewItem; i: number }) => (
   <figure className="flex h-full w-[19rem] shrink-0 flex-col rounded-2xl border border-black/[0.08] bg-white p-5 shadow-[0_1px_2px_rgba(0,0,0,0.04)] sm:w-[22rem]">
     <figcaption className="flex items-center gap-3">
       {item.avatar ? (
-        // eslint-disable-next-line @next/next/no-img-element
+         
         <img src={item.avatar} alt="" className="h-10 w-10 shrink-0 rounded-full object-cover" loading="lazy" />
       ) : (
         <span
@@ -93,28 +94,21 @@ const Row = ({ items, offset, reverse }: { items: ReviewItem[]; offset: number; 
 );
 
 export const Reviews = ({ content }: { content: ReviewsContent }) => {
-  const { eyebrow, heading, basis, link, items } = content;
+  const { basis, link, items } = content;
   const half = Math.ceil(items.length / 2);
   return (
     <section
       id="reviews"
       aria-labelledby="reviews-title"
-      className="relative z-20 overflow-hidden bg-hero-page py-24 text-black"
+      className="relative z-20 overflow-hidden bg-hero-page pb-24 pt-24 text-black md:pt-32"
     >
+      <ReviewsHeader />
       <div className="mx-auto flex max-w-6xl flex-col items-center px-4 text-center md:px-10">
-        <p className="text-xs font-semibold uppercase tracking-[0.35em] text-muted-small">{eyebrow}</p>
-        <AnimatedHeading
-          as="h2"
-          id="reviews-title"
-          className="mt-6 text-[1.75rem] font-light leading-[1.05] tracking-tight text-black sm:text-[2.25rem] lg:text-[2.75rem]"
-        >
-          {heading}
-        </AnimatedHeading>
         <a
           href={link.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-8 inline-flex items-center gap-3 rounded-full border border-black/10 bg-white py-2.5 pl-3 pr-5 transition-colors hover:border-black/25"
+          className="mt-14 inline-flex items-center gap-3 rounded-full border border-black/10 bg-white py-2.5 pl-3 pr-5 transition-colors hover:border-black/25"
         >
           <GoogleMark />
           <Stars size="h-4 w-4" />

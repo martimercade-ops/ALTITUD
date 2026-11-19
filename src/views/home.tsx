@@ -1,7 +1,6 @@
 import { Hero } from "@/views/hero";
 import { LogoMarquee } from "@/views/logo-marquee";
 import { About } from "@/views/about";
-import { Stats } from "@/views/stats";
 import { Showcase } from "@/views/showcase";
 import { Works } from "@/views/works";
 import { Agencia360 } from "@/views/agencia-360";
@@ -24,7 +23,7 @@ export interface HomeViewProps {
 }
 
 export const HomeView = ({ content = homeContent, robot = false }: HomeViewProps) => {
-  const { hero, logos, about, stats, showcase, works, nav, reviews, team } = content;
+  const { hero, logos, about, showcase, works, nav, reviews, team } = content;
   return (
     <RobotProvider robot={robot}>
       {robot && <RobotView />}
@@ -33,14 +32,13 @@ export const HomeView = ({ content = homeContent, robot = false }: HomeViewProps
       <main id="top" className="w-full bg-hero-page">
         <Hero content={hero} />
       <LogoMarquee content={logos} />
+      <Reviews content={reviews} />
       <About content={about} labelId={about.labelId} />
-      <Stats content={stats} />
       <Showcase content={showcase} />
       <Eines />
       <Works content={works} />
       <Method content={methodContent} />
       <Agencia360 />
-      <Reviews content={reviews} />
       <Team content={team} />
       <div className="relative">
         <ContactForm content={contactContent} />

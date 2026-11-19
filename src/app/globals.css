@@ -543,3 +543,35 @@ font { background: transparent !important; }
   .exit-traç { animation: none; stroke-dashoffset: 0; }
 }
 .chip-check { animation: exit-pop 0.35s cubic-bezier(0.3, 1.6, 0.5, 1) both; }
+
+/* Capçalera «L'agència nº1 d'Andorra» */
+.n1-entra { opacity: 0; transform: translateY(18px); filter: blur(6px); }
+.n1--on .n1-entra { animation: n1-entra 0.9s cubic-bezier(0.2, 0.75, 0.2, 1) both; }
+@keyframes n1-entra { to { opacity: 1; transform: none; filter: none; } }
+.n1-titol {
+  background: linear-gradient(100deg, #0b1424 0%, #0b1424 40%, #2f5bff 50%, #0b1424 60%, #0b1424 100%);
+  background-size: 250% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.n1--on .n1-titol { animation: n1-entra 0.9s cubic-bezier(0.2, 0.75, 0.2, 1) 120ms both, n1-llum 6s ease-in-out 1.2s infinite; }
+@keyframes n1-llum { 0% { background-position: 100% 0; } 45%, 100% { background-position: -50% 0; } }
+.n1-halo {
+  position: absolute;
+  left: 50%;
+  top: 18%;
+  width: min(70vw, 760px);
+  height: 260px;
+  translate: -50% 0;
+  background: radial-gradient(closest-side, rgb(47 91 255 / 0.16), rgb(182 241 58 / 0.08) 55%, transparent);
+  filter: blur(30px);
+  pointer-events: none;
+  animation: n1-halo 9s ease-in-out infinite alternate;
+}
+@keyframes n1-halo { to { transform: scale(1.15) translateY(12px); opacity: 0.7; } }
+@media (prefers-reduced-motion: reduce) {
+  .n1-entra, .n1--on .n1-entra { opacity: 1; transform: none; filter: none; animation: none; }
+  .n1--on .n1-titol, .n1-halo { animation: none; }
+}
