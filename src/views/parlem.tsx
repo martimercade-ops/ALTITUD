@@ -24,7 +24,7 @@ export const ParlemView = () => {
         >
           <ParlemEscena />
 
-          <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-14 lg:grid-cols-[1fr_30rem] lg:gap-20">
+          <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
             <div>
               <ParlemTitol id="parlem-title" />
               <p className="form-entra mt-8 max-w-sm text-xl font-light leading-snug text-white/75 md:text-2xl" style={{ animationDelay: "700ms" }}>
@@ -36,6 +36,7 @@ export const ParlemView = () => {
                 <a href={`mailto:${contact.email}`} className="hover:text-accent-lime">{contact.email}</a>
               </div>
 
+              <div className="hidden lg:block">
               <a
                 href={BOOKING_URL}
                 target="_blank"
@@ -53,6 +54,7 @@ export const ParlemView = () => {
                 </span>
                 <span aria-hidden="true" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-lime text-black transition-transform group-hover:translate-x-1">→</span>
               </a>
+              </div>
             </div>
 
             <div>
@@ -61,6 +63,25 @@ export const ParlemView = () => {
                 topSlugs={[]}
                 unsureLabel="No ho sé, assessoreu-me"
               />
+              <div className="lg:hidden">
+              <a
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noopener"
+                className="form-entra group mt-10 flex max-w-md items-center gap-5 rounded-2xl border border-white/12 bg-white/[0.05] p-4 pr-5 backdrop-blur-md transition-colors hover:border-accent-lime/60 hover:bg-white/[0.08]"
+                style={{ animationDelay: "1000ms" }}
+              >
+                <span className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full ring-2 ring-accent-lime/70">
+                  <Image src="/assets/altitud/equip/marti.jpg" alt="Martí Mercadé" fill sizes="64px" className="object-cover" />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block text-[11px] font-semibold uppercase tracking-[0.25em] text-accent-lime">Parla amb el CEO</span>
+                  <span className="mt-1 block text-lg leading-snug text-white">Reserva 20 minuts amb en Martí</span>
+                  <span className="mt-0.5 block text-sm text-white/60">Videotrucada o cafè a l&apos;oficina.</span>
+                </span>
+                <span aria-hidden="true" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-lime text-black transition-transform group-hover:translate-x-1">→</span>
+              </a>
+              </div>
             </div>
           </div>
         </section>

@@ -39,7 +39,7 @@ export const ParlemEscena = () => {
 
 /** «Parlem.» lletra a lletra */
 export const ParlemTitol = ({ id }: { id: string }) => (
-  <h1 id={id} aria-label="Parlem." className="text-[4.5rem] font-light leading-[0.9] tracking-tight sm:text-[6.5rem] lg:text-[9rem]">
+  <h1 id={id} aria-label="Parlem." className="text-[4.5rem] font-light leading-[0.9] tracking-tight sm:text-[6.5rem] lg:text-[7.5rem]">
     {"Parlem.".split("").map((ch, i) => (
       <span key={i} aria-hidden="true" className="lletra-puja inline-block" style={{ animationDelay: `${150 + i * 70}ms` }}>
         {ch}
