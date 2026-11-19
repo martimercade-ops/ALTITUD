@@ -23,6 +23,16 @@ const web = (url: string): ProjectLink => ({
 
 export const projects: Project[] = [
   {
+    slug: "claudia-moncau",
+    name: "Clàudia Moncau",
+    sector: "Ioga i benestar",
+    summary: "Web i fotografia.",
+    about: "Instructora de ioga i meditació a Barcelona: classes privades, ioga per a empreses i tallers vivencials.",
+    services: ["Web", "Fotografia"],
+    links: [web("https://claudiamoncau.com/")],
+    image: `${P}/claudia-moncau.jpg`,
+  },
+  {
     slug: "medic-estetic",
     name: "Medic Estetic",
     sector: "Medicina estètica",
