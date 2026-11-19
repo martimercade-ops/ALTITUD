@@ -59,7 +59,7 @@ export const ParlemView = () => {
               <ParlemForm
                 services={services.map((s) => ({ slug: s.slug, label: s.name }))}
                 topSlugs={[]}
-                unsureLabel="Encara no ho tinc clar"
+                unsureLabel="No ho sé, assessoreu-me"
               />
             </div>
           </div>

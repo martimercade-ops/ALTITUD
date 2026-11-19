@@ -13,6 +13,31 @@ export interface ParlemFormProps {
 
 type Status = "idle" | "sending" | "sent" | "mailto" | "error";
 
+const BUDGETS = ["Encara no invertim", "Menys de 500 €/mes", "500 – 1.000 €/mes", "1.000 – 3.000 €/mes", "Més de 3.000 €/mes"];
+const REFERRALS = ["Boca-orella / recomanació", "Google", "Instagram / xarxes socials", "Anuncis (Meta o Google Ads)", "Ja som clients", "Altres"];
+
+const selectCls =
+  "h-12 w-full appearance-none rounded-xl border border-white/15 bg-white/[0.05] px-4 pr-10 text-[0.9rem] text-white outline-none transition-all duration-300 hover:border-white/30 focus:border-accent-lime";
+
+const Select = ({ id, label, options, value, onChange }: { id: string; label: string; options: string[]; value: string; onChange: (e: { target: { value: string } }) => void }) => (
+  <div>
+    <label htmlFor={id} className="mb-1.5 block text-[13px] text-white/60">
+      {label}
+    </label>
+    <div className="relative">
+      <select id={id} name={id} value={value} onChange={onChange} className={selectCls}>
+        <option value="" className="bg-[#0b1424]">Opcional</option>
+        {options.map((o) => (
+          <option key={o} value={o} className="bg-[#0b1424]">{o}</option>
+        ))}
+      </select>
+      <svg aria-hidden="true" viewBox="0 0 10 6" className="pointer-events-none absolute right-4 top-1/2 h-1.5 w-2.5 -translate-y-1/2 text-white/60">
+        <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </div>
+  </div>
+);
+
 const field =
   "peer h-14 w-full rounded-xl border border-white/15 bg-white/[0.05] px-4 pt-4 text-[0.95rem] text-white outline-none transition-all duration-300 placeholder:text-transparent hover:border-white/30 focus:border-accent-lime focus:bg-white/[0.08] focus:shadow-[0_0_0_4px_rgb(182_241_58/0.12)]";
 const floating =
@@ -34,7 +59,7 @@ const Input = ({
 );
 
 export const ParlemForm = ({ services, topSlugs, unsureLabel }: ParlemFormProps) => {
-  const empty = { name: "", company: "", email: "", phone: "", message: "", company_url: "" };
+  const empty = { name: "", company: "", email: "", phone: "", message: "", budget: "", referral: "", company_url: "" };
   const [values, setValues] = useState(empty);
   const [selected, setSelected] = useState<string[]>([]);
   const [extra, setExtra] = useState<string | null>(null);
@@ -142,7 +167,7 @@ export const ParlemForm = ({ services, topSlugs, unsureLabel }: ParlemFormProps)
       </div>
 
       <fieldset className="form-entra mt-3" style={{ animationDelay: "180ms" }}>
-        <legend className="mb-2.5 text-sm text-white/70">Quins serveis t&apos;interessen?</legend>
+        <legend className="mb-2.5 text-sm text-white/70">Quins serveis t&apos;interessen? <span className="text-white/35">· pots triar-ne més d&apos;un</span></legend>
         <div className="flex flex-wrap gap-2">
           {chips.map((label) => {
             const on = selected.includes(label);
@@ -181,6 +206,11 @@ export const ParlemForm = ({ services, topSlugs, unsureLabel }: ParlemFormProps)
         >
           Explica&apos;ns el teu projecte <span className="text-white/30">· opcional</span>
         </label>
+      </div>
+
+      <div className="form-entra mt-3 grid gap-3 sm:grid-cols-2" style={{ animationDelay: "270ms" }}>
+        <Select id="budget" label="Inversió en màrqueting" options={BUDGETS} value={values.budget} onChange={set("budget")} />
+        <Select id="referral" label="Com ens has conegut?" options={REFERRALS} value={values.referral} onChange={set("referral")} />
       </div>
 
       <div className="form-entra mt-3" style={{ animationDelay: "300ms" }}>

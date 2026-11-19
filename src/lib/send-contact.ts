@@ -10,6 +10,7 @@ export interface ContactPayload {
   website?: string;
   services?: string[];
   budget?: string;
+  referral?: string;
   message?: string;
   newsletter?: boolean;
   source?: string;
