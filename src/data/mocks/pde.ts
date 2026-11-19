@@ -7,11 +7,14 @@ export interface PdeSolution {
   /** Percentatge del cost subvencionat */
   pct: number;
   featured?: boolean;
+  /** Solucions que comparteixen el mateix ajut (no se sumen dues vegades) */
+  pack?: string;
 }
 
 /** Solucions del PDE que fem a Altitud Digital (font: andorra-digital.com/pde/solucions-digitalitzacio) */
 export const pdeSolutions: PdeSolution[] = [
-  { id: "ia", name: "Intel·ligència artificial", text: "Chatbots, assistents i automatització de tasques.", max: 3000, pct: 50, featured: true },
+  { id: "ia", name: "Intel·ligència artificial", text: "Chatbots, assistents i automatització de tasques.", max: 3000, pct: 50, featured: true, pack: "ia" },
+  { id: "xarxes-ia", name: "Xarxes socials amb IA", text: "Contingut i gestió de xarxes fets amb IA, dins el paquet d'IA.", max: 3000, pct: 50, featured: true, pack: "ia" },
   { id: "web", name: "Pàgina web", text: "Web nova o renovada, amb el teu catàleg i adaptada al mòbil.", max: 1500, pct: 30, featured: true },
   { id: "seo-sem", name: "Posicionament (SEO i SEM)", text: "Sortir més amunt a Google i campanyes d'anuncis.", max: 500, pct: 30, featured: true },
   { id: "botiga", name: "Botiga online", text: "Vendre els teus productes a internet.", max: 1500, pct: 30 },

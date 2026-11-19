@@ -11,6 +11,7 @@ import { siteConfig } from "@/lib/site";
 import { AdaptiveGrid } from "@/components/common/grid";
 import { ReducedMotion } from "@/components/common/reduced-motion";
 import { Guardia } from "@/components/common/guardia";
+import { WhatsappButton } from "@/components/common/whatsapp-button";
 import { ScrollLayout } from "@/layouts/scroll-layout";
 import { ConsentBanner } from "@/components/common/consent";
 
@@ -46,6 +47,7 @@ export default function RootLayout({
           <style>{`[data-preloader]{display:none}`}</style>
         </noscript>
         <Guardia />
+        <WhatsappButton />
         <ScrollLayout>
           <AdaptiveGrid coef={1} />
           <ReducedMotion />

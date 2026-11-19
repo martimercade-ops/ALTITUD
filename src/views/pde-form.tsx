@@ -8,9 +8,9 @@ import { formatEuros, type PdeSolution } from "@/data/mocks/pde";
 type Status = "idle" | "sending" | "sent" | "mailto" | "error";
 
 const field =
-  "peer h-14 w-full rounded-xl border border-black/15 bg-white px-4 pt-4 text-[15px] text-black outline-none transition-colors placeholder:text-transparent hover:border-black/30 focus:border-[#2f5bff]";
+  "peer h-13 w-full rounded-xl border border-black/15 bg-white px-4 pt-4 text-[15px] text-black outline-none transition-colors placeholder:text-transparent hover:border-black/30 focus:border-[#2f5bff]";
 const floating =
-  "pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[15px] text-black/45 transition-all duration-200 peer-focus:top-3.5 peer-focus:text-[11px] peer-focus:text-[#2f5bff] peer-[:not(:placeholder-shown)]:top-3.5 peer-[:not(:placeholder-shown)]:text-[11px]";
+  "pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[15px] text-black/45 transition-all duration-200 peer-focus:top-3 peer-focus:text-[11px] peer-focus:text-[#2f5bff] peer-[:not(:placeholder-shown)]:top-3 peer-[:not(:placeholder-shown)]:text-[11px]";
 
 const Input = ({
   id,
@@ -18,7 +18,7 @@ const Input = ({
   ...props
 }: React.InputHTMLAttributes<HTMLInputElement> & { id: string; label: string }) => (
   <div className="relative">
-    <input id={id} name={id} placeholder={label} className={field} {...props} />
+    <input id={id} name={id} placeholder={label} className={`${field} h-[3.25rem]`} {...props} />
     <label htmlFor={id} className={floating}>
       {label}
       {props.required ? "" : <span className="text-black/30"> · opcional</span>}
@@ -26,23 +26,18 @@ const Input = ({
   </div>
 );
 
-const Check = ({ on }: { on: boolean }) => (
-  <span
-    aria-hidden="true"
-    className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md border transition-colors ${
-      on ? "border-[#2f5bff] bg-[#2f5bff] text-white" : "border-black/25 bg-white"
-    }`}
-  >
-    {on && (
-      <svg viewBox="0 0 20 20" className="h-3.5 w-3.5">
-        <path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    )}
-  </span>
-);
+/** Import màxim sense comptar dues vegades les solucions del mateix paquet */
+const potentialAid = (chosen: PdeSolution[]) => {
+  const packs = new Map<string, number>();
+  for (const s of chosen) {
+    const key = s.pack ?? s.id;
+    packs.set(key, Math.max(packs.get(key) ?? 0, s.max));
+  }
+  return [...packs.values()].reduce((a, b) => a + b, 0);
+};
 
 export const PdeForm = ({ solutions }: { solutions: PdeSolution[] }) => {
-  const empty = { name: "", company: "", email: "", phone: "", message: "", company_url: "" };
+  const empty = { name: "", company: "", email: "", phone: "", company_url: "" };
   const [values, setValues] = useState(empty);
   const [selected, setSelected] = useState<string[]>([]);
   const [status, setStatus] = useState<Status>("idle");
@@ -51,26 +46,18 @@ export const PdeForm = ({ solutions }: { solutions: PdeSolution[] }) => {
   useEffect(() => {
     if (status === "sent") doneRef.current?.scrollIntoView({ block: "center", behavior: "smooth" });
   }, [status]);
-  const [missing, setMissing] = useState(false);
 
   const set = (key: keyof typeof empty) => (e: { target: { value: string } }) =>
     setValues((v) => ({ ...v, [key]: e.target.value }));
 
-  const toggle = (id: string) => {
-    setMissing(false);
+  const toggle = (id: string) =>
     setSelected((cur) => (cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id]));
-  };
 
   const chosen = solutions.filter((s) => selected.includes(s.id));
-  const total = chosen.reduce((sum, s) => sum + s.max, 0);
+  const total = potentialAid(chosen);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (selected.length === 0) {
-      setMissing(true);
-      document.getElementById("pde-solucions")?.scrollIntoView({ behavior: "smooth", block: "start" });
-      return;
-    }
     if (status === "sending") return;
     setStatus("sending");
     try {
@@ -79,9 +66,10 @@ export const PdeForm = ({ solutions }: { solutions: PdeSolution[] }) => {
         company: values.company,
         email: values.email,
         phone: values.phone,
-        message: values.message,
         company_url: values.company_url,
-        services: chosen.map((s) => `${s.name} (fins a ${formatEuros(s.max)})`),
+        services: chosen.length
+          ? chosen.map((s) => `${s.name} (fins a ${formatEuros(s.max)})`)
+          : ["Encara no ho sap: vol assessorament"],
         source: "Llista d'espera PDE",
         subject: `Llista d'espera PDE — ${values.company || values.name}`,
       });
@@ -93,162 +81,95 @@ export const PdeForm = ({ solutions }: { solutions: PdeSolution[] }) => {
 
   if (status === "sent" || status === "mailto") {
     return (
-      <div ref={doneRef} role="status" className="rounded-3xl border border-black/10 bg-white p-8 md:p-12">
+      <div ref={doneRef} role="status" className="rounded-3xl bg-white p-8 text-black shadow-2xl md:p-10">
         <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#2f5bff] text-white">
           <svg viewBox="0 0 20 20" aria-hidden="true" className="h-5 w-5">
             <path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </span>
-        <h3 className="mt-8 text-3xl font-light tracking-tight md:text-4xl">
-          {status === "sent" ? "Ja ets a la llista d'espera!" : "Ja gairebé està."}
-        </h3>
-        <p className="mt-4 max-w-lg text-black/65">
-          {status === "sent"
-            ? "Quan s'obri la nova convocatòria del PDE et contactarem de seguida perquè ho tinguis tot preparat i no perdis l'ajut."
-            : "Hem obert el teu correu amb la sol·licitud preparada. Només cal que l'enviïs per entrar a la llista d'espera."}
+        <h2 className="mt-6 text-3xl font-light tracking-tight">Ja ets a la llista d&apos;espera!</h2>
+        <p className="mt-3 text-black/65">
+          Et trucarem per preparar-ho tot i que no perdis l&apos;ajut quan s&apos;obri la convocatòria.
         </p>
-        <p className="mt-6 text-sm text-black/60">
+        <p className="mt-5 text-sm text-black/60">
           Si és urgent, truca&apos;ns al{" "}
           <a href="tel:+376670222" className="font-medium text-black underline underline-offset-4">+376 670 222</a>.
         </p>
-        <ul className="mt-8 flex flex-wrap gap-2">
-          {chosen.map((s) => (
-            <li key={s.id} className="rounded-full border border-black/15 px-4 py-1.5 text-sm">
-              {s.name}
-            </li>
-          ))}
-        </ul>
+        {chosen.length > 0 && (
+          <ul className="mt-6 flex flex-wrap gap-2">
+            {chosen.map((s) => (
+              <li key={s.id} className="rounded-full border border-black/15 px-3 py-1 text-sm">{s.name}</li>
+            ))}
+          </ul>
+        )}
       </div>
     );
   }
 
-  const featured = solutions.filter((s) => s.featured);
-  const others = solutions.filter((s) => !s.featured);
-
-  const Card = ({ s, big }: { s: PdeSolution; big?: boolean }) => {
-    const on = selected.includes(s.id);
-    return (
-      <button
-        type="button"
-        role="checkbox"
-        aria-checked={on}
-        onClick={() => toggle(s.id)}
-        className={`group relative flex w-full flex-col rounded-2xl border p-5 text-left transition-all duration-200 ${
-          on
-            ? "border-[#2f5bff] bg-[#2f5bff]/[0.04] shadow-[0_0_0_3px_rgb(47_91_255/0.12)]"
-            : "border-black/12 bg-white hover:border-black/30"
-        } ${big ? "md:p-6" : ""}`}
-      >
-        <span className="flex items-start justify-between gap-4">
-          <Check on={on} />
-          {big && (
-            <span className="rounded-full bg-accent-lime px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-black">
-              Més demanat
-            </span>
-          )}
-        </span>
-        <span className={`mt-5 block font-normal tracking-tight ${big ? "text-xl" : "text-lg"}`}>{s.name}</span>
-        <span className="mt-2 block text-[15px] leading-snug text-black/60">{s.text}</span>
-        <span className="mt-5 block border-t border-black/10 pt-4 text-sm text-black/55">
-          <strong className="font-semibold text-[#2f5bff]">{s.pct}%</strong> del cost · fins a{" "}
-          <strong className="text-lg font-semibold text-black">{formatEuros(s.max)}</strong>
-        </span>
-      </button>
-    );
-  };
-
   return (
-    <form onSubmit={onSubmit} className="flex flex-col gap-12">
-      <fieldset id="pde-solucions" className="scroll-mt-32">
-        <legend className="text-2xl font-light tracking-tight md:text-3xl">1. Tria les solucions que t&apos;interessen</legend>
-        <p className="mt-2 text-[15px] text-black/55">Pots marcar-ne tantes com vulguis.</p>
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
-          {featured.map((s) => (
-            <Card key={s.id} s={s} big />
-          ))}
-        </div>
-        <div className="mt-4 grid gap-4 md:grid-cols-3">
-          {others.map((s) => (
-            <Card key={s.id} s={s} />
-          ))}
-        </div>
-        <div
-          aria-live="polite"
-          className={`mt-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl px-5 py-4 transition-colors ${
-            missing ? "bg-red-50 text-red-700" : selected.length ? "bg-[#0b1424] text-white" : "bg-black/[0.04] text-black/55"
-          }`}
-        >
-          {missing ? (
-            <span className="text-[15px]">Tria almenys una solució per apuntar-te a la llista.</span>
-          ) : selected.length ? (
-            <>
-              <span className="text-[15px]">
-                {selected.length} {selected.length === 1 ? "solució triada" : "solucions triades"}
-              </span>
-              <span className="text-[15px]">
-                Ajut potencial: fins a <strong className="text-xl font-semibold text-accent-lime">{formatEuros(total)}</strong>
-              </span>
-            </>
-          ) : (
-            <span className="text-[15px]">Encara no has triat cap solució.</span>
-          )}
-        </div>
-      </fieldset>
+    <form onSubmit={onSubmit} className="rounded-3xl bg-white p-6 text-black shadow-2xl md:p-8">
+      <p className="text-2xl font-light tracking-tight">Reserva el teu lloc</p>
+      <p className="mt-1 text-sm text-black/55">Gratis i sense compromís. Et truquem nosaltres.</p>
 
-      <fieldset>
-        <legend className="text-2xl font-light tracking-tight md:text-3xl">2. Les teves dades</legend>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
-          <Input id="pde-name" label="Nom i cognoms" autoComplete="name" required value={values.name} onChange={set("name")} />
-          <Input id="pde-company" label="Empresa" autoComplete="organization" required value={values.company} onChange={set("company")} />
-          <Input id="pde-email" label="Correu electrònic" type="email" inputMode="email" autoComplete="email" required value={values.email} onChange={set("email")} />
-          <Input id="pde-phone" label="Telèfon" type="tel" inputMode="tel" autoComplete="tel" required value={values.phone} onChange={set("phone")} />
+      <fieldset className="mt-6">
+        <legend className="text-sm font-medium">Què t&apos;interessa? <span className="font-normal text-black/40">· opcional</span></legend>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {solutions.map((s) => {
+            const on = selected.includes(s.id);
+            return (
+              <button
+                key={s.id}
+                type="button"
+                role="checkbox"
+                aria-checked={on}
+                onClick={() => toggle(s.id)}
+                className={`rounded-full border px-3.5 py-2 text-sm transition-colors ${
+                  on ? "border-[#2f5bff] bg-[#2f5bff] text-white" : "border-black/15 hover:border-black/40"
+                }`}
+              >
+                {s.name}
+              </button>
+            );
+          })}
         </div>
-        <div className="relative mt-4">
-          <textarea
-            id="pde-message"
-            name="message"
-            rows={3}
-            placeholder="Comentari"
-            value={values.message}
-            onChange={set("message")}
-            className="peer w-full resize-none rounded-xl border border-black/15 bg-white px-4 pb-3 pt-7 text-[15px] outline-none transition-colors placeholder:text-transparent hover:border-black/30 focus:border-[#2f5bff]"
-          />
-          <label
-            htmlFor="pde-message"
-            className="pointer-events-none absolute left-4 top-5 text-[15px] text-black/45 transition-all duration-200 peer-focus:top-2.5 peer-focus:text-[11px] peer-focus:text-[#2f5bff] peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:text-[11px]"
-          >
-            Comentari <span className="text-black/30">· opcional</span>
-          </label>
-        </div>
-
-        <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
-          <label htmlFor="hp-zx-pde">Deixa-ho buit</label>
-          <input id="hp-zx-pde" name="hp-zx-pde" type="text" tabIndex={-1} autoComplete="new-password" data-lpignore="true" data-1p-ignore value={values.company_url} onChange={set("company_url")} />
-        </div>
-      </fieldset>
-
-      <div className="flex flex-col-reverse items-start gap-5 sm:flex-row sm:items-center sm:justify-between">
-        <p className="max-w-md text-xs leading-relaxed text-black/50">
-          Apuntar-te no té cap cost ni compromís. En enviar el formulari acceptes la{" "}
-          <Link href="/privacy-policy" className="underline underline-offset-2 hover:text-black">
-            política de privacitat
-          </Link>
-          .
-          {status === "error" && (
-            <span className="mt-2 block text-sm text-red-700">
-              No s&apos;ha pogut enviar. Escriu-nos a <a href={`mailto:${CONTACT_EMAIL}`} className="underline">{CONTACT_EMAIL}</a>.
-            </span>
+        <p aria-live="polite" className="mt-3 min-h-5 text-sm text-black/55">
+          {total > 0 && (
+            <>Ajut potencial: fins a <strong className="text-base font-semibold text-[#2f5bff]">{formatEuros(total)}</strong></>
           )}
         </p>
-        <button
-          type="submit"
-          disabled={status === "sending"}
-          className="group inline-flex h-14 shrink-0 items-center gap-3 rounded-full bg-[#2f5bff] pl-7 pr-2 text-[15px] font-semibold text-white transition-transform hover:scale-[1.02] disabled:opacity-60"
-        >
-          {status === "sending" ? "Enviant…" : "Apunta'm a la llista d'espera"}
-          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#2f5bff] transition-transform group-hover:translate-x-0.5">→</span>
-        </button>
+      </fieldset>
+
+      <div className="mt-3 grid gap-3 sm:grid-cols-2">
+        <Input id="pde-name" label="Nom" autoComplete="name" required value={values.name} onChange={set("name")} />
+        <Input id="pde-phone" label="Telèfon" type="tel" inputMode="tel" autoComplete="tel" required value={values.phone} onChange={set("phone")} />
+        <Input id="pde-email" label="Correu electrònic" type="email" inputMode="email" autoComplete="email" required value={values.email} onChange={set("email")} />
+        <Input id="pde-company" label="Empresa" autoComplete="organization" value={values.company} onChange={set("company")} />
       </div>
+
+      <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+        <label htmlFor="hp-zx-pde">Deixa-ho buit</label>
+        <input id="hp-zx-pde" name="hp-zx-pde" type="text" tabIndex={-1} autoComplete="new-password" data-lpignore="true" data-1p-ignore value={values.company_url} onChange={set("company_url")} />
+      </div>
+
+      <button
+        type="submit"
+        disabled={status === "sending"}
+        className="group mt-5 inline-flex h-14 w-full items-center justify-between rounded-full bg-[#2f5bff] pl-7 pr-2 text-[15px] font-semibold text-white transition-transform hover:scale-[1.01] disabled:opacity-60"
+      >
+        {status === "sending" ? "Enviant…" : "Apunta'm a la llista d'espera"}
+        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#2f5bff] transition-transform group-hover:translate-x-0.5">→</span>
+      </button>
+
+      {status === "error" && (
+        <p role="alert" className="mt-3 text-sm text-red-700">
+          No s&apos;ha pogut enviar. Truca&apos;ns al <a href="tel:+376670222" className="underline">+376 670 222</a> o escriu a{" "}
+          <a href={`mailto:${CONTACT_EMAIL}`} className="underline">{CONTACT_EMAIL}</a>.
+        </p>
+      )}
+      <p className="mt-4 text-xs leading-relaxed text-black/45">
+        En enviar acceptes la{" "}
+        <Link href="/privacy-policy" className="underline underline-offset-2 hover:text-black">política de privacitat</Link>.
+      </p>
     </form>
   );
 };
