@@ -8,13 +8,6 @@ import { services } from "@/data/mocks/services";
 import Image from "next/image";
 import { BOOKING_URL } from "@/lib/send-contact";
 
-const BUDGETS = [
-  "Menys de 500 €",
-  "500 € – 1.000 €",
-  "1.000 € – 3.000 €",
-  "Més de 3.000 €",
-  "Encara no ho sé",
-];
 
 const Icon = ({ d }: { d: string }) => (
   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5">
@@ -61,16 +54,24 @@ export const ParlemView = () => {
               >
                 Parlem.
               </h1>
-              <p className="mt-6 text-2xl font-light leading-snug text-white md:text-3xl">
-                Comença a marcar la diferència.
-              </p>
-              <p className="mt-6 max-w-md text-base leading-relaxed text-white/70">
-                Si ets aquí és perquè vols alguna cosa més que màrqueting. Explica&apos;ns en quin
-                punt és la teva marca, quins objectius tens i quins reptes vols resoldre. T&apos;assessorem
-                sense compromís.
+              <p className="mt-6 max-w-md text-xl font-light leading-snug text-white/85 md:text-2xl">
+                Explica&apos;ns el teu repte i et proposem un pla per créixer.
               </p>
 
-              <ul className="mt-10 flex flex-col gap-4 text-[0.95rem]">
+              <ul className="mt-8 flex flex-wrap gap-3 text-sm">
+                <li className="flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-4 py-2">
+                  <span className="text-[#fbbc04]">★★★★★</span>
+                  <span className="text-white/75">98 ressenyes a Google</span>
+                </li>
+                <li className="rounded-full border border-white/12 bg-white/[0.04] px-4 py-2 text-white/75">
+                  <strong className="font-semibold text-white">+100</strong> clients a Andorra
+                </li>
+                <li className="rounded-full border border-white/12 bg-white/[0.04] px-4 py-2 text-white/75">
+                  Resposta en <strong className="font-semibold text-white">24 h</strong>
+                </li>
+              </ul>
+
+              <ul className="mt-10 flex flex-col gap-3 text-[0.95rem]">
                 <li>
                   <a href={`mailto:${contact.email}`} className="group flex items-center gap-4 hover:text-accent-lime">
                     <Icon d={ICONS.mail} />
@@ -116,7 +117,7 @@ export const ParlemView = () => {
             <div className="lg:pt-4">
               <ParlemForm
                 services={services.map((s) => ({ slug: s.slug, label: s.name }))}
-                budgets={BUDGETS}
+                topSlugs={["consultoria", "web-ecommerce", "seo-sem", "xarxes-socials", "ia-automatitzacions", "branding"]}
                 unsureLabel="Encara no ho tinc clar"
               />
             </div>

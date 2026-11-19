@@ -419,3 +419,53 @@ img {
   .ressenyes-pista { animation: none; }
   .ressenyes-fila { overflow-x: auto; }
 }
+
+/* Formulari de Parlem: targeta de vidre amb una vora de llum que gira lentament */
+@property --aura-angle { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.form-aura {
+  position: relative;
+  border-radius: 1.75rem;
+  background: linear-gradient(160deg, rgb(255 255 255 / 0.07), rgb(255 255 255 / 0.025));
+  backdrop-filter: blur(18px);
+  box-shadow: 0 30px 80px -30px rgb(0 0 0 / 0.6), inset 0 1px 0 rgb(255 255 255 / 0.08);
+  isolation: isolate;
+}
+.form-aura::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: conic-gradient(from var(--aura-angle), rgb(255 255 255 / 0.08), rgb(182 241 58 / 0.65), rgb(47 91 255 / 0.55), rgb(255 255 255 / 0.08) 40%, rgb(255 255 255 / 0.08));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: aura-gira 9s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+.form-aura::after {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  z-index: -2;
+  background: radial-gradient(40% 35% at 80% 0%, rgb(182 241 58 / 0.10), transparent 70%), radial-gradient(45% 40% at 10% 100%, rgb(47 91 255 / 0.18), transparent 70%);
+  filter: blur(30px);
+  pointer-events: none;
+}
+@keyframes aura-gira { to { --aura-angle: 360deg; } }
+.form-entra { animation: form-entra 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+@keyframes form-entra { from { opacity: 0; transform: translateY(14px); filter: blur(4px); } to { opacity: 1; transform: none; filter: none; } }
+.boto-brilla::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.55) 50%, transparent 70%);
+  transform: translateX(-120%);
+  animation: boto-brilla 4.5s ease-in-out 1.5s infinite;
+  pointer-events: none;
+}
+@keyframes boto-brilla { 0%, 70% { transform: translateX(-120%); } 100% { transform: translateX(120%); } }
+@media (prefers-reduced-motion: reduce) {
+  .form-aura::before, .form-entra, .boto-brilla::after { animation: none; }
+}
