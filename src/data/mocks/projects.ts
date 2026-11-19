@@ -23,6 +23,26 @@ const web = (url: string): ProjectLink => ({
 
 export const projects: Project[] = [
   {
+    slug: "la-llotja",
+    name: "La Llotja",
+    sector: "Restauració",
+    summary: "Web, vídeo i fotografia.",
+    about: "Restaurant i peixateria a Escaldes-Engordany: tries el peix o el marisc fresc i te'l preparen al moment.",
+    services: ["Web", "Vídeo", "Fotografia"],
+    links: [web("https://lallotjarestaurant.com/")],
+    image: `${P}/la-llotja.jpg`,
+  },
+  {
+    slug: "la-casa",
+    name: "La Casa Gastrobar",
+    sector: "Restauració",
+    summary: "Web, fotografia, vídeo i motor de reserves.",
+    about: "Gastrobar al cor del casc antic d'Andorra la Vella, amb cuina oberta i terrassa d'estiu.",
+    services: ["Web", "Fotografia", "Vídeo", "Motor de reserves"],
+    links: [web("https://lacasa-andorra.com/")],
+    image: `${P}/la-casa.jpg`,
+  },
+  {
     slug: "claudia-moncau",
     name: "Clàudia Moncau",
     sector: "Ioga i benestar",
