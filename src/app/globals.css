@@ -469,3 +469,36 @@ img {
 @media (prefers-reduced-motion: reduce) {
   .form-aura::before, .form-entra, .boto-brilla::after { animation: none; }
 }
+
+/* Parlem: aurora, focus que segueix el ratolí i lletres que pugen */
+.parlem-escena { background: #0b1424; }
+.aurora {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.55;
+  will-change: transform;
+}
+.aurora--1 { width: 46vw; height: 46vw; left: -12vw; top: -18vw; background: #2f5bff; animation: aurora-a 18s ease-in-out infinite alternate; }
+.aurora--2 { width: 34vw; height: 34vw; right: -8vw; bottom: -14vw; background: #b6f13a; opacity: 0.22; animation: aurora-b 22s ease-in-out infinite alternate; }
+.aurora--3 { width: 28vw; height: 28vw; left: 38vw; top: 30%; background: #7c4dff; opacity: 0.28; animation: aurora-c 26s ease-in-out infinite alternate; }
+@keyframes aurora-a { to { transform: translate(18vw, 12vw) scale(1.15); } }
+@keyframes aurora-b { to { transform: translate(-16vw, -10vw) scale(1.2); } }
+@keyframes aurora-c { to { transform: translate(-14vw, 8vw) scale(0.85); } }
+.parlem-focus {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(420px circle at var(--fx, 70%) var(--fy, 40%), rgb(255 255 255 / 0.07), transparent 60%);
+  transition: background 0.2s;
+}
+.parlem-gra {
+  position: absolute;
+  inset: 0;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.lletra-puja { animation: lletra-puja 1s cubic-bezier(0.2, 0.75, 0.15, 1) both; }
+@keyframes lletra-puja { from { opacity: 0; transform: translateY(0.45em) rotate(6deg); filter: blur(8px); } to { opacity: 1; transform: none; filter: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .aurora, .lletra-puja { animation: none; }
+}

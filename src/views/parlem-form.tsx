@@ -121,12 +121,11 @@ export const ParlemForm = ({ services, topSlugs, unsureLabel }: ParlemFormProps)
   }
 
   return (
-    <form onSubmit={onSubmit} className="form-aura flex flex-col gap-3 p-6 md:p-9">
+    <form onSubmit={onSubmit} className="form-aura flex flex-col gap-3 p-7 md:p-10">
       <div className="form-entra" style={{ animationDelay: "0ms" }}>
         <p className="text-[1.65rem] font-light leading-tight tracking-tight md:text-3xl">
-          Rep la teva proposta <span className="text-accent-lime">en 24 h</span>.
+          Comencem?
         </p>
-        <p className="mt-1.5 text-sm text-white/55">Gratis, sense compromís. Et respon un consultor sènior.</p>
       </div>
 
       <div className="form-entra mt-4 grid gap-3 sm:grid-cols-2" style={{ animationDelay: "90ms" }}>
@@ -140,50 +139,6 @@ export const ParlemForm = ({ services, topSlugs, unsureLabel }: ParlemFormProps)
       <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
         <label htmlFor="hp-zx">Deixa-ho buit</label>
         <input id="hp-zx" name="hp-zx" type="text" tabIndex={-1} autoComplete="new-password" data-lpignore="true" data-1p-ignore value={values.company_url} onChange={set("company_url")} />
-      </div>
-
-      <fieldset className="form-entra mt-3" style={{ animationDelay: "180ms" }}>
-        <legend className="mb-2.5 text-sm text-white/70">
-          En què t&apos;ajudem? <span className="text-white/35">· opcional</span>
-        </legend>
-        <div className="flex flex-wrap gap-2">
-          {chips.map((label) => {
-            const on = selected.includes(label);
-            return (
-              <button
-                key={label}
-                type="button"
-                aria-pressed={on}
-                onClick={() => toggle(label)}
-                className={`rounded-full border px-3.5 py-1.5 text-sm transition-all duration-200 ${
-                  on
-                    ? "border-accent-lime bg-accent-lime text-black"
-                    : "border-white/20 text-white/80 hover:border-white/55 hover:text-white"
-                }`}
-              >
-                {label}
-              </button>
-            );
-          })}
-        </div>
-      </fieldset>
-
-      <div className="form-entra relative mt-3" style={{ animationDelay: "240ms" }}>
-        <textarea
-          id="message"
-          name="message"
-          rows={2}
-          placeholder="Explica'ns el teu repte"
-          value={values.message}
-          onChange={set("message")}
-          className="peer w-full resize-none rounded-xl border border-white/15 bg-white/[0.05] px-4 pb-3 pt-7 text-[0.95rem] text-white outline-none transition-all duration-300 placeholder:text-transparent hover:border-white/30 focus:border-accent-lime focus:bg-white/[0.08] focus:shadow-[0_0_0_4px_rgb(182_241_58/0.12)]"
-        />
-        <label
-          htmlFor="message"
-          className="pointer-events-none absolute left-4 top-5 text-[0.95rem] text-white/50 transition-all duration-200 peer-focus:top-2.5 peer-focus:text-[0.7rem] peer-focus:text-accent-lime peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:text-[0.7rem]"
-        >
-          Explica&apos;ns el teu repte <span className="text-white/30">· opcional</span>
-        </label>
       </div>
 
       <div className="form-entra mt-3" style={{ animationDelay: "300ms" }}>
@@ -201,9 +156,7 @@ export const ParlemForm = ({ services, topSlugs, unsureLabel }: ParlemFormProps)
             <a href={`mailto:${CONTACT_EMAIL}`} className="underline">{CONTACT_EMAIL}</a>.
           </p>
         )}
-        <p className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-white/50">
-          <span>✓ Resposta en menys de 24 h</span>
-          <span>✓ Sense compromís</span>
+        <p className="mt-4 text-xs text-white/45">
           <span>
             En enviar acceptes la{" "}
             <Link href="/privacy-policy" className="text-white/75 underline underline-offset-2 hover:text-white">política de privacitat</Link>.
