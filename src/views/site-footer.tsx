@@ -151,6 +151,7 @@ export const SiteFooter = ({ content }: SiteFooterProps) => {
               <a href={`mailto:${contact.email}`} className="hover:text-footer-fg">
                 {contact.email}
               </a>
+              <span className="whitespace-pre-line text-footer-fg/60">{contact.hours}</span>
             </address>
           </div>
 

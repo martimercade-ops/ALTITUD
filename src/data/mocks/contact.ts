@@ -45,6 +45,8 @@ export interface FooterContent {
     address: string;
     phone: string;
     email: string;
+    /** Horari d'oficina */
+    hours: string;
   };
   social: FooterNavGroup;
   copyright: string;
@@ -85,6 +87,7 @@ export const footerContent: FooterContent = {
     address: "Carrer Ciutat de Valls, 24\nAD500 Andorra la Vella",
     phone: "+376 670 222",
     email: "info@altitudigital.com",
+    hours: "Dl–Dj · 9–14 h i 15–18 h\nOficina amb cita prèvia",
   },
   social: {
     title: "Segueix-nos",

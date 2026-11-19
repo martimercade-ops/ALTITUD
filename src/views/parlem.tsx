@@ -29,6 +29,7 @@ const ICONS = {
   phone:
     "M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2",
   pin: "M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z M12 12.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z",
+  clock: "M12 21a9 9 0 100-18 9 9 0 000 18z M12 7v5l3 2",
 };
 
 export const ParlemView = () => {
@@ -87,6 +88,10 @@ export const ParlemView = () => {
                     <Icon d={ICONS.pin} />
                     <span className="whitespace-pre-line">{contact.address.replace("\n", ", ")}</span>
                   </a>
+                </li>
+                <li className="flex items-center gap-4 text-white/70">
+                  <Icon d={ICONS.clock} />
+                  <span>{contact.hours.replace("\n", " · ")}</span>
                 </li>
               </ul>
 
