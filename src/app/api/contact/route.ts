@@ -49,6 +49,9 @@ export const POST = handle(async (req) => {
   const input = contactSchema.parse(await req.json());
   const env = getServerEnv();
   const text = toText(input);
+  const ref = crypto.randomUUID().slice(0, 8);
+  // Registre de la sol·licitud als logs del servidor (Hostinger → Registros de tiempo de ejecución)
+  console.info(`[api/contact] sol·licitud ${ref} · ${input.source || "web"} · ${input.email}`);
 
   if (env.SMTP_HOST && env.SMTP_USER && env.SMTP_PASS) {
     const port = env.SMTP_PORT ?? 465;
@@ -60,18 +63,19 @@ export const POST = handle(async (req) => {
     });
     try {
       await transport.sendMail({
-        from: `"Web Altitud Digital" <${env.SMTP_USER}>`,
-        to: env.CONTACT_TO ?? "info@altitudigital.com",
-        replyTo: input.email,
+        from: `"Web Altitud Digital" <${env.SMTP_FROM ?? env.SMTP_USER}>`,
+        to: env.CONTACT_TO ?? "marti.mercade@altitudigital.com",
+        replyTo: { name: `${input.name} ${input.surname}`.trim(), address: input.email },
         subject: input.subject || `Nova sol·licitud de ${input.name} ${input.surname}`.trim(),
         text,
         html: `<pre style="font-family:inherit;font-size:14px;line-height:1.6">${escape(text)}</pre>`,
       });
     } catch (error) {
-      console.error("[api/contact] smtp error:", error);
+      console.error(`[api/contact] sol·licitud ${ref} NO enviada:`, error);
       throw new ApiError(502, "send_failed", "No s'ha pogut enviar el missatge.");
     }
-    return { sent: true };
+    console.info(`[api/contact] sol·licitud ${ref} enviada`);
+    return { sent: true, ref };
   }
 
   if (env.CONTACT_ENDPOINT) {

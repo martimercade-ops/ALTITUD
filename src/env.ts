@@ -12,6 +12,8 @@ const serverSchema = z.object({
   SMTP_USER: z.string().optional(),
   SMTP_PASS: z.string().optional(),
   CONTACT_TO: z.string().optional(),
+  /** Remitent tècnic (p. ex. web@altitudigital.com). Per defecte, SMTP_USER. */
+  SMTP_FROM: z.string().optional(),
 });
 
 export const publicEnv = publicSchema.parse({
@@ -28,6 +30,7 @@ export function getServerEnv() {
     SMTP_USER: process.env.SMTP_USER || undefined,
     SMTP_PASS: process.env.SMTP_PASS || undefined,
     CONTACT_TO: process.env.CONTACT_TO || undefined,
+    SMTP_FROM: process.env.SMTP_FROM || undefined,
     VERCEL_PROJECT_PRODUCTION_URL:
       process.env.VERCEL_PROJECT_PRODUCTION_URL || undefined,
   });

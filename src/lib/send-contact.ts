@@ -1,4 +1,4 @@
-import { ApiClientError, apiFetch } from "@/lib/api-client";
+import { apiFetch } from "@/lib/api-client";
 
 export interface ContactPayload {
   name: string;
@@ -20,6 +20,7 @@ export const CONTACT_EMAIL = "info@altitudigital.com";
 /** Agenda de Google per reservar reunions amb en Martí */
 export const BOOKING_URL = "https://calendar.app.google/qQwTx3KyvEzpvTT3A";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const mailtoBody = (p: ContactPayload) =>
   [
     `Nom: ${[p.name, p.surname].filter(Boolean).join(" ")}`,
@@ -35,24 +36,15 @@ const mailtoBody = (p: ContactPayload) =>
     .join("\n");
 
 /**
- * Envia el formulari al servidor. Si el correu encara no està configurat
- * al servidor, obre el client de correu del visitant amb el missatge preparat.
+ * Envia el formulari al servidor. Només retorna "sent" si el servidor
+ * ha registrat i enviat la sol·licitud; si no, llança un error.
  */
 export async function sendContact(
   payload: ContactPayload,
 ): Promise<"sent" | "mailto"> {
-  try {
-    await apiFetch("/api/contact", {
-      method: "POST",
-      body: JSON.stringify(payload),
-    });
-    return "sent";
-  } catch (error) {
-    if (error instanceof ApiClientError && error.code === "not_configured") {
-      const subject = payload.subject ?? `Demanda de pressupost — ${payload.name}`;
-      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(mailtoBody(payload))}`;
-      return "mailto";
-    }
-    throw error;
-  }
+  await apiFetch("/api/contact", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+  return "sent";
 }
