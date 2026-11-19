@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import type { ContactContent } from "@/data/mocks/contact";
 import { CONTACT_EMAIL, sendContact } from "@/lib/send-contact";
-import { PicEscena } from "@/views/pic-escena";
 
 export interface ContactFormProps {
   content: ContactContent;
@@ -86,33 +85,31 @@ export const ContactForm = ({ content }: ContactFormProps) => {
 
   const dot = (filled: boolean) =>
     `pointer-events-none absolute right-0 top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full ${
-      filled ? "bg-accent-lime shadow-[0_0_12px_rgb(182_241_58/0.8)]" : "bg-white/25"
+      filled ? "scale-100 bg-[#2f5bff] shadow-[0_0_0_4px_rgb(47_91_255/0.15)]" : "scale-75 bg-black/15"
     }`;
 
   const fieldWrap =
-    "isard-camp relative border-b border-white/25 pb-3 transition-colors focus-within:border-accent-lime";
+    "isard-camp relative border-b border-black/15 pb-3 transition-colors focus-within:border-black/30";
   const input =
-    "w-full bg-transparent pr-6 text-lg text-white outline-none placeholder:uppercase placeholder:tracking-wide placeholder:text-white/45";
+    "w-full bg-transparent pr-6 text-lg text-black outline-none transition-[padding] duration-300 placeholder:uppercase placeholder:tracking-[0.12em] placeholder:text-black/35 focus:pl-1";
 
   return (
     <section
       ref={ref}
       id="contact"
       aria-labelledby={labelId}
-      className={`isard ${on ? "isard--on" : ""} sticky top-0 z-10 isolate overflow-hidden bg-[#0b1424] text-white`}
+      className={`isard isard--clar ${on ? "isard--on" : ""} sticky top-0 z-10 isolate overflow-hidden bg-hero-page text-black`}
     >
-      <PicEscena />
-      <span aria-hidden="true" className="isard-estels" />
-      <span aria-hidden="true" className="isard-llum" />
+      <span aria-hidden="true" className="clar-halo" />
+      <span aria-hidden="true" className="clar-llum" />
 
-      <div className="relative z-10 grid min-h-[100svh] items-center gap-12 px-6 pb-24 pt-[112vw] md:px-12 lg:grid-cols-[0.8fr_1.2fr] lg:px-page-gutter lg:pb-16 lg:pt-28">
-        <div className="hidden lg:block" />
-        <div>
-          <p className="isard-entra mb-5 text-xs font-semibold uppercase tracking-[0.35em] text-white/55">
-            <span className="mr-2 inline-block h-1.5 w-1.5 -translate-y-[0.15em] rounded-full bg-accent-lime align-middle" />
+      <div className="relative z-10 mx-auto max-w-4xl px-6 pb-28 pt-24 md:px-12 md:pt-32">
+        <div className="text-center">
+          <p className="isard-entra mb-6 text-xs font-semibold uppercase tracking-[0.35em] text-muted-small">
+            <span className="mr-2 inline-block h-1.5 w-1.5 -translate-y-[0.15em] rounded-full bg-plum align-middle" />
             Parlem
           </p>
-          <h2 id={labelId} aria-label={heading} className="text-[2.2rem] font-light leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.6rem]">
+          <h2 id={labelId} aria-label={heading} className="mx-auto max-w-3xl text-[2rem] font-light leading-[1.1] tracking-tight sm:text-[2.6rem] lg:text-[3.1rem]">
             {heading.split(" ").map((w, i) => (
               <span key={i} aria-hidden="true" className="isard-paraula inline-block" style={{ ["--d" as string]: `${120 + i * 55}ms` }}>
                 {w}
@@ -120,6 +117,7 @@ export const ContactForm = ({ content }: ContactFormProps) => {
               </span>
             ))}
           </h2>
+        </div>
           <div className="isard-entra mt-14" style={{ animationDelay: "700ms" }}>
       <form onSubmit={onSubmit} className="flex flex-col gap-10">
         <div className="grid gap-10 md:grid-cols-2">
@@ -179,26 +177,25 @@ export const ContactForm = ({ content }: ContactFormProps) => {
           <span aria-hidden="true" className={dot(values.email.length > 0)} />
         </div>
 
-        <div className="mt-6 flex flex-col items-start gap-4">
+        <div className="mt-6 flex flex-col items-center gap-4">
           <button
             type="submit"
             disabled={status === "sending"}
-            className="boto-brilla group relative inline-flex h-14 items-center gap-4 overflow-hidden rounded-full bg-accent-lime pl-7 pr-2 text-[15px] font-semibold text-black transition-transform hover:scale-[1.02] disabled:opacity-60"
+            className="boto-brilla group relative inline-flex h-14 items-center gap-4 overflow-hidden rounded-full bg-black pl-7 pr-2 text-[15px] font-medium text-white shadow-[0_14px_40px_-14px_rgb(11_20_36/0.6)] transition-transform hover:scale-[1.02] disabled:opacity-60"
           >
             {cta}
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-black text-accent-lime transition-transform group-hover:translate-x-0.5">→</span>
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-lime text-black transition-transform group-hover:translate-x-0.5">→</span>
           </button>
           <p
             role="status"
             aria-live="polite"
-            className="min-h-5 text-sm text-white/70"
+            className="min-h-5 text-center text-sm text-black/60"
           >
             {statusText}
           </p>
         </div>
       </form>
           </div>
-        </div>
       </div>
     </section>
   );
