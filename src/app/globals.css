@@ -708,3 +708,32 @@ font { background: transparent !important; }
   .isard-foto { height: 92vw; }
   .isard-foto img { object-position: 32% 0%; }
 }
+/* Foto vertical de l'equip al cim (substitueix l'isard) */
+@media (min-width: 1024px) {
+  .isard-foto { width: 46%; -webkit-mask-image: linear-gradient(90deg, #000 60%, transparent 100%); mask-image: linear-gradient(90deg, #000 60%, transparent 100%); }
+  .isard-foto img { object-position: 50% 40%; }
+}
+@media (max-width: 1023px) {
+  .isard-foto { height: 110vw; }
+  .isard-foto img { object-position: 50% 38%; }
+}
+.isard-llum {
+  background:
+    radial-gradient(480px circle at var(--sx, 30%) var(--sy, 40%), rgb(255 170 90 / 0.16), transparent 60%),
+    radial-gradient(45% 55% at 0% 40%, rgb(255 140 60 / 0.18), transparent 70%),
+    radial-gradient(50% 60% at 100% 100%, rgb(47 91 255 / 0.18), transparent 70%);
+}
+@media (min-width: 1024px) {
+  .isard-foto {
+    width: 50%;
+    -webkit-mask-image: linear-gradient(90deg, #000 45%, rgb(0 0 0 / 0.6) 72%, rgb(0 0 0 / 0.15) 90%, transparent 100%);
+    mask-image: linear-gradient(90deg, #000 45%, rgb(0 0 0 / 0.6) 72%, rgb(0 0 0 / 0.15) 90%, transparent 100%);
+  }
+  .isard-foto img { object-position: 42% 40%; }
+}
+@media (min-width: 1024px) {
+  .isard-foto img {
+    transform: translate3d(calc(-6% + var(--mx) * -14px), calc((var(--p) - 0.5) * -60px), 0) scale(calc(1.12 + var(--p) * 0.06));
+    transform-origin: 50% 45%;
+  }
+}

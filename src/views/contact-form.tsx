@@ -102,12 +102,12 @@ export const ContactForm = ({ content }: ContactFormProps) => {
     >
       <div aria-hidden="true" className="isard-foto">
         { }
-        <img src="/assets/altitud/serveis/isard-1920.webp" srcSet="/assets/altitud/serveis/isard-960.webp 960w, /assets/altitud/serveis/isard-1920.webp 1920w" sizes="(max-width: 1024px) 100vw, 60vw" alt="" loading="lazy" decoding="async" />
+        <img src="/assets/altitud/cim-equip.webp" srcSet="/assets/altitud/cim-equip-720.webp 716w, /assets/altitud/cim-equip.webp 1074w" sizes="(max-width: 1024px) 100vw, 45vw" alt="" loading="lazy" decoding="async" />
       </div>
       <span aria-hidden="true" className="isard-estels" />
       <span aria-hidden="true" className="isard-llum" />
 
-      <div className="relative z-10 grid min-h-[100svh] items-center gap-12 px-6 pb-24 pt-[86vw] md:px-12 lg:grid-cols-[1fr_1.05fr] lg:px-page-gutter lg:pb-16 lg:pt-28">
+      <div className="relative z-10 grid min-h-[100svh] items-center gap-12 px-6 pb-24 pt-[100vw] md:px-12 lg:grid-cols-[0.85fr_1.15fr] lg:px-page-gutter lg:pb-16 lg:pt-28">
         <div className="hidden lg:block" />
         <div>
           <p className="isard-entra mb-5 text-xs font-semibold uppercase tracking-[0.35em] text-white/55">
