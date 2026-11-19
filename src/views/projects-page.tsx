@@ -44,17 +44,15 @@ const LOGOS: Record<string, string> = {
   "olympus-race": "olympus-race-andorra",
 };
 
-/** Portàtil i mòbil reals amb la web del client a les pantalles */
+/** Portàtil real, de cara, amb la web del client a la pantalla */
 const Dispositius = ({ src }: { src: string }) => (
-  <div className="relative w-full" style={{ aspectRatio: "1457 / 863" }}>
-    <div className="absolute overflow-hidden bg-black" style={{ left: "27.1%", top: "4.8%", width: "65.4%", height: "73%" }}>
-      <Image src={src} alt="" fill sizes="(max-width: 640px) 60vw, 22vw" className="object-cover object-top" />
+  <div className="relative w-full" style={{ aspectRatio: "1552 / 1081" }}>
+    <div className="illa-pantalla absolute overflow-hidden bg-black" style={{ left: "14.2%", top: "3.8%", width: "72.9%", height: "65.1%" }}>
+      <Image src={src} alt="" fill sizes="(max-width: 640px) 70vw, 24vw" className="object-cover object-top" />
+      <span aria-hidden="true" className="illa-reflex" />
     </div>
-    <div className="absolute overflow-hidden bg-black" style={{ left: "8%", top: "32.2%", width: "17.5%", height: "61%", borderRadius: "11% / 5.5%" }}>
-      <Image src={src} alt="" fill sizes="10vw" className="object-cover object-[18%_0%]" />
-    </div>
-    { }
-    <img src="/assets/altitud/mockup-dispositius.webp" alt="" className="relative h-full w-full select-none" draggable={false} />
+    {/* eslint-disable-next-line @next/next/no-img-element */}
+    <img src="/assets/altitud/portatil.webp" alt="" className="relative h-full w-full select-none" draggable={false} />
   </div>
 );
 
