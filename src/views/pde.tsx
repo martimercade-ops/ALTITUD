@@ -18,9 +18,19 @@ const POINTS = [
 ];
 
 const STEPS = [
-  { n: "01", title: "Pas 1: qüestionari", text: "Obligatori per demanar l'ajut. Ja està obert i el fas en uns minuts." },
+  {
+    n: "01",
+    title: "Pas 1: qüestionari",
+    text: "Qüestionari d'autodiagnòstic. Obligatori per demanar l'ajut, i ja està obert.",
+    link: { href: "https://andorra-digital.com/pde/questionari-maduresa-digital", label: "Fer el qüestionari" },
+  },
   { n: "02", title: "Reunió i pressupost", text: "Ens veiem, triem els paquets que t'interessen i et preparem el pressupost." },
-  { n: "03", title: "Pas 3: solucions", text: "Quan s'obri, presentem el pressupost el primer dia." },
+  {
+    n: "03",
+    title: "Pas 3: solucions",
+    text: "Solucions de digitalització. Quan s'obri, presentem el pressupost el primer dia.",
+    link: { href: "https://andorra-digital.com/pde/solucions-digitalitzacio", label: "Veure les solucions" },
+  },
 ];
 
 const Tick = () => (
@@ -111,6 +121,11 @@ export const PdeView = () => {
                 <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#2f5bff] text-sm font-semibold text-white">{s.n}</span>
                 <h3 className="mt-5 text-2xl font-light tracking-tight">{s.title}</h3>
                 <p className="mt-1 text-[15px] text-black/55">{s.text}</p>
+                {s.link && (
+                  <a href={s.link.href} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#2f5bff] underline-offset-4 hover:underline">
+                    {s.link.label} ↗
+                  </a>
+                )}
               </li>
             ))}
           </Reveal>
