@@ -1020,3 +1020,33 @@ font { background: transparent !important; }
   .gira:hover { transform: translateY(-10px) scale(1.03); z-index: 5; }
   .gira:hover .gira-cos { transform: rotateY(180deg); box-shadow: 0 40px 70px -30px rgb(11 20 36 / 0.6); }
 }
+
+/* Qui som: carrusel de rodatge */
+.rodatge-cinta { animation: rodatge-passa var(--dur, 40s) linear infinite; padding-left: 1.25rem; }
+.rodatge:hover .rodatge-cinta { animation-play-state: paused; }
+@keyframes rodatge-passa { to { transform: translateX(-50%); } }
+
+/* Qui som: valors que es creuen */
+.valors { --vx: 50%; --vy: 50%; --vp: 0; --vr: 0; }
+.valors-llum { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(420px circle at var(--vx) var(--vy), rgb(47 91 255 / calc(0.25 * var(--vr))), transparent 70%); transition: background 0.2s; }
+.valors-fila { overflow: hidden; white-space: nowrap; }
+.valors-fila--esq { transform: translateX(calc(var(--vp) * -40px)) rotate(-3deg); }
+.valors-fila--dre { transform: translateX(calc(var(--vp) * 40px)) rotate(3deg); margin-top: -0.2em; }
+.valors-fila { transition: transform 0.6s cubic-bezier(0.2, 0.75, 0.2, 1); }
+.valors-cinta { display: flex; width: max-content; animation: valors-esq 38s linear infinite; }
+.valors-fila--dre .valors-cinta { animation-name: valors-dre; }
+@keyframes valors-esq { to { transform: translateX(-50%); } }
+@keyframes valors-dre { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+.valors-paraula { display: inline-flex; align-items: center; font-size: clamp(3.5rem, 11vw, 9.5rem); font-weight: 600; line-height: 1.05; letter-spacing: -0.03em; color: transparent; -webkit-text-stroke: 1.5px rgb(255 255 255 / 0.18); padding-right: 0.35em; }
+.valors-paraula--plena { -webkit-text-stroke: 0; color: #ffffff; }
+.valors-paraula:nth-child(even).valors-paraula--plena { color: var(--accent-lime); }
+.valors-punt { font-size: 0.3em; margin-left: 0.35em; color: inherit; -webkit-text-stroke: 0; opacity: 0.6; }
+.valors-capa--plena {
+  position: absolute; inset: 0; pointer-events: none;
+  -webkit-mask-image: radial-gradient(calc(260px * var(--vr) + 1px) circle at var(--vx) calc(var(--vy) - 6rem), #000 55%, transparent 100%);
+  mask-image: radial-gradient(calc(260px * var(--vr) + 1px) circle at var(--vx) calc(var(--vy) - 6rem), #000 55%, transparent 100%);
+}
+.valor-item { opacity: 0.35; transform: translateY(8px); transition: opacity 0.6s, transform 0.6s; transition-delay: calc(var(--i) * 60ms); }
+.valors:hover .valor-item, .valor-item:hover { opacity: 1; transform: none; }
+@media (hover: none) { .valor-item { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .rodatge-cinta, .valors-cinta { animation: none; } }

@@ -271,14 +271,6 @@ export const homeContent: HomeContent = {
         projects: [{ name: "Nou Aire", logo: "nou-aire" }, { name: "Brainworks", slug: "brainworks-center", logo: "brainworks" }, { name: "Sicoris", logo: "sicoris-gestoria-s" }, { name: "ARK Immo", logo: "ark-icon" }, { name: "Ferreteria Principat", logo: "ferreteria-principat" }],
       },
       {
-        name: "Mariano",
-        role: "Editor de vídeo",
-        image: `${A}/equip/mariano.jpg`,
-        bio: "Edita els reels i vídeos perquè enganxin des del primer segon: ritme, color, so i subtítols.",
-        focus: ["Edició de vídeo", "Reels"],
-        projects: [{ name: "ARK Immo", logo: "ark-icon" }, { name: "Magnesi Arquitectes", logo: "magnesi-arquitectes" }, { name: "Ciutadans Compromesos", logo: "ciutadans-compromesos-cc" }, { name: "Brainworks", slug: "brainworks-center", logo: "brainworks" }],
-      },
-      {
         name: "Armando Arenea",
         role: "Disseny web i gràfic",
         image: `${A}/equip/armando.jpg`,
