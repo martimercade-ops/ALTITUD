@@ -57,16 +57,20 @@ const LOGOS: Record<string, string> = {
   "psicosalut": "psicosalut",
 };
 
-/** Portàtil real, de cara, amb la web del client a la pantalla */
+/** Portàtil dibuixat (vectorial, net a qualsevol mida) amb la web del client a la pantalla */
 const Dispositius = ({ src }: { src: string }) => (
-  <div className="illa-dispositiu relative w-full" style={{ aspectRatio: "1552 / 1081" }}>
-    <div className="illa-pantalla absolute overflow-hidden bg-black" style={{ left: "14.2%", top: "3.8%", width: "72.9%", height: "65.1%" }}>
-      <Image src={src} alt="" fill sizes="(max-width: 640px) 70vw, 24vw" className="object-cover object-top" />
-      <span aria-hidden="true" className="illa-reflex" />
-      <span aria-hidden="true" className="illa-vidre" />
+  <div className="illa-dispositiu portatil relative w-full" style={{ aspectRatio: "100 / 57" }}>
+    <div className="portatil-tapa">
+      <span className="portatil-camera" />
+      <div className="illa-pantalla portatil-pantalla">
+        <Image src={src} alt="" fill sizes="(max-width: 640px) 80vw, 28vw" className="object-cover object-top" />
+        <span aria-hidden="true" className="illa-reflex" />
+        <span aria-hidden="true" className="illa-vidre" />
+      </div>
     </div>
-    {/* eslint-disable-next-line @next/next/no-img-element */}
-    <img src="/assets/altitud/portatil.webp" alt="" className="relative h-full w-full select-none" draggable={false} />
+    <div className="portatil-base">
+      <span className="portatil-osca" />
+    </div>
   </div>
 );
 
@@ -91,7 +95,7 @@ const ProjectCard = ({ p }: { p: Project }) => {
     >
       <span aria-hidden="true" className="illa-llum" />
 
-      <div aria-hidden="true" className="illa-estudi relative aspect-[5/4] w-full">
+      <div aria-hidden="true" className="illa-estudi relative aspect-[16/11] w-full">
         <span className="illa-ombra" />
         <div className="illa-escenari">
           <div className="illa-portatil">
@@ -113,10 +117,11 @@ const ProjectCard = ({ p }: { p: Project }) => {
               )}
             </span>
           )}
-          <div className="min-w-0">
+          <div className="min-w-0 flex-1">
             <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-black/45">{p.sector}</p>
-            <h2 className="mt-1 truncate text-[1.45rem] font-normal leading-tight tracking-tight">{p.name}</h2>
+            <h2 className="mt-1 line-clamp-2 text-[1.3rem] font-normal leading-tight tracking-tight">{p.name}</h2>
           </div>
+          <span aria-hidden="true" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-black shadow-sm transition-colors group-hover:bg-black group-hover:text-accent-lime">↗</span>
         </div>
         <ul className="flex flex-wrap gap-1.5 border-t border-black/[0.07] pt-4" aria-label="Serveis">
           {p.services.map((s) => (
@@ -124,7 +129,6 @@ const ProjectCard = ({ p }: { p: Project }) => {
           ))}
         </ul>
       </div>
-      <span aria-hidden="true" className="absolute right-5 top-5 z-[3] flex h-10 w-10 items-center justify-center rounded-full bg-white text-black shadow-sm transition-colors group-hover:bg-black group-hover:text-accent-lime">↗</span>
     </Link>
   );
 };

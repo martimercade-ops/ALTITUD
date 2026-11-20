@@ -929,3 +929,34 @@ font { background: transparent !important; }
 .illa--clar .illa-ombra { top: 86%; left: 16%; right: 16%; height: 7%; }
 .illa--clar::before { height: 62%; }
 .illa--clar .illa-logo { opacity: 0.9; }
+
+/* Portàtil vectorial */
+.portatil-tapa {
+  position: absolute; left: 9.5%; right: 9.5%; top: 0; bottom: 6.2%;
+  border-radius: 4.2% / 6.4%;
+  background: linear-gradient(180deg, #2a2c31, #111215 40%);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.10), inset 0 1px 0 rgb(255 255 255 / 0.18);
+  padding: 2.2% 2.2% 2.9%;
+}
+.portatil-camera {
+  position: absolute; top: 1.1%; left: 50%; width: 0.9%; aspect-ratio: 1; transform: translateX(-50%);
+  border-radius: 50%; background: radial-gradient(circle at 40% 35%, #3a4a66, #0a0b0d 70%);
+}
+.portatil-pantalla { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 0.6%; background: #000; }
+.portatil-base {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 7%;
+  border-radius: 0.6% 0.6% 50% 50% / 10% 10% 100% 100%;
+  background: linear-gradient(180deg, #9fa3ab 0%, #6b6f77 18%, #45484e 55%, #2a2c30 100%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.55), inset 0 -2px 3px rgb(0 0 0 / 0.35);
+}
+.portatil-osca {
+  position: absolute; top: 0; left: 50%; width: 15%; height: 42%; transform: translateX(-50%);
+  border-radius: 0 0 40% 40% / 0 0 100% 100%;
+  background: linear-gradient(180deg, #3a3d42, #55585e);
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.5);
+}
+.illa--clar .illa-escenari { inset: 13% 6% 10% 6% !important; }
+.illa--clar .illa-ombra { top: 84%; left: 10%; right: 10%; height: 6%; }
+.illa-dispositiu { -webkit-box-reflect: unset; }
+.illa--clar .illa-escenari { inset: 10% 4% 9% 4% !important; }
+.illa--clar .illa-ombra { top: 86%; left: 8%; right: 8%; height: 6%; }
