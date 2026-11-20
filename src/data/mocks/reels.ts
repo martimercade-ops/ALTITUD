@@ -18,4 +18,5 @@ export const reels: Reel[] = [
   { slug: "erf-assegurances", client: "ERF Assegurances", sector: "Assegurances", video: `${R}/erf-assegurances.mp4`, poster: `${R}/erf-assegurances.webp`, logo: "erf-assegurances" },
   { slug: "tass-glass", client: "Tass Glass", sector: "Vidres d'automòbil", video: `${R}/tass-glass.mp4`, poster: `${R}/tass-glass.webp` },
   { slug: "auro-jardiners", client: "Auró Jardiners", sector: "Jardineria", video: `${R}/auro-jardiners.mp4`, poster: `${R}/auro-jardiners.webp`, logo: "auro-jardiners" },
+  { slug: "relaxia", client: "Relaxia", sector: "Descans i matalassos", video: `${R}/relaxia.mp4`, poster: `${R}/relaxia.webp`, logo: "relaxia-r" },
 ];
