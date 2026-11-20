@@ -240,7 +240,7 @@ export const SiteFooter = ({ content }: SiteFooterProps) => {
         </ul>
       </div>
       </div>
-      <img src="/assets/altitud/altitud-paraula.svg" alt="Altitud Digital" width="1600" height="245" className="peu-logo relative z-10 mt-8 px-1 opacity-90 md:px-0 md:opacity-100" />
+      <img loading="lazy" decoding="async" src="/assets/altitud/altitud-paraula.svg" alt="Altitud Digital" width="1600" height="245" className="peu-logo relative z-10 mt-8 px-1 opacity-90 md:px-0 md:opacity-100" />
     </footer>
   );
 };

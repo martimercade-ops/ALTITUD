@@ -62,12 +62,12 @@ const LOGOS: Record<string, string> = {
 };
 
 /** Portàtil dibuixat (vectorial, net a qualsevol mida) amb la web del client a la pantalla */
-const Dispositius = ({ src }: { src: string }) => (
+const Dispositius = ({ src, priority = false }: { src: string; priority?: boolean }) => (
   <div className="illa-dispositiu portatil relative w-full" style={{ aspectRatio: "100 / 60" }}>
     <div className="portatil-tapa">
       <span className="portatil-camera" />
       <div className="illa-pantalla portatil-pantalla">
-        <Image src={src} alt="" fill sizes="(max-width: 640px) 80vw, 28vw" className="object-cover object-top" />
+        <Image src={src} alt="" fill priority={priority} sizes="(max-width: 640px) 80vw, 28vw" className="object-cover object-top" />
         <span aria-hidden="true" className="illa-reflex" />
         <span aria-hidden="true" className="illa-vidre" />
       </div>
@@ -79,7 +79,7 @@ const Dispositius = ({ src }: { src: string }) => (
 );
 
 /** Targeta de projecte: en passar-hi el cursor surt el portàtil de perfil amb la web */
-const ProjectCard = ({ p }: { p: Project }) => {
+const ProjectCard = ({ p, priority = false }: { p: Project; priority?: boolean }) => {
   const onMove = (e: React.PointerEvent<HTMLAnchorElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
     e.currentTarget.style.setProperty("--tx", (((e.clientX - r.left) / r.width - 0.5) * 2).toFixed(3));
@@ -108,7 +108,7 @@ const ProjectCard = ({ p }: { p: Project }) => {
         ) : (
           <div className="illa-escenari">
             <div className="illa-portatil">
-              <Dispositius src={p.image} />
+              <Dispositius src={p.image} priority={priority} />
             </div>
           </div>
         )}
@@ -120,10 +120,10 @@ const ProjectCard = ({ p }: { p: Project }) => {
             <span aria-hidden="true" className="flex h-14 min-w-14 max-w-[7.5rem] shrink-0 items-center justify-center rounded-2xl bg-white px-2.5 py-2 shadow-[0_6px_18px_-8px_rgb(11_20_36/0.35)] ring-1 ring-black/5">
               {LOGOS_COLOR[p.slug] ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={`/assets/altitud/clients/color/${LOGOS_COLOR[p.slug]}.webp`} alt="" className="max-h-full max-w-full object-contain" />
+                <img loading="lazy" decoding="async" src={`/assets/altitud/clients/color/${LOGOS_COLOR[p.slug]}.webp`} alt="" className="max-h-full max-w-full object-contain" />
               ) : (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={`/assets/altitud/clients/color/${LOGOS[p.slug]}.webp`} alt="" className="max-h-full max-w-full object-contain" />
+                <img loading="lazy" decoding="async" src={`/assets/altitud/clients/color/${LOGOS[p.slug]}.webp`} alt="" className="max-h-full max-w-full object-contain" />
               )}
             </span>
           )}
@@ -204,7 +204,7 @@ export const ProjectsList = ({ projects }: { projects: Project[] }) => {
       <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
         {shown.map((p, i) => (
           <Reveal key={p.slug} as="li" className="reveal-up" style={{ transitionDelay: `${(i % 4) * 80}ms` }}>
-            <ProjectCard p={p} />
+            <ProjectCard p={p} priority={i < 3} />
           </Reveal>
         ))}
       </ul>

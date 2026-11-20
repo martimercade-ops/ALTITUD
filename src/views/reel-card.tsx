@@ -31,7 +31,7 @@ export const ReelCard = ({ r }: { r: Reel }) => {
       onMouseLeave={stop}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={r.poster} alt="" className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${playing ? "opacity-0" : "opacity-100"}`} />
+      <img loading="lazy" decoding="async" src={r.poster} alt="" className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${playing ? "opacity-0" : "opacity-100"}`} />
       <video
         ref={video}
         src={r.video}
@@ -71,7 +71,7 @@ export const ReelCard = ({ r }: { r: Reel }) => {
         {r.logo && (
           <span aria-hidden="true" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white p-1.5">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={`/assets/altitud/clients/color/${r.logo}.webp`} alt="" className="max-h-full max-w-full object-contain" />
+            <img loading="lazy" decoding="async" src={`/assets/altitud/clients/color/${r.logo}.webp`} alt="" className="max-h-full max-w-full object-contain" />
           </span>
         )}
         <div className="min-w-0">

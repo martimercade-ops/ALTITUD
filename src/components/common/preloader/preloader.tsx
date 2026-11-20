@@ -36,11 +36,11 @@ export interface PreloaderProps {
 }
 
 const HOLD_AT = 0.72;
-const MAX_WAIT = 4000;
+const MAX_WAIT = 2500;
 const WARM_BUDGET = 3000;
 
-const CARD_LEAD = 180;
-const CARD_INTERVAL = 240;
+const CARD_LEAD = 120;
+const CARD_INTERVAL = 170;
 const FINALE_HOLD = 280;
 
 const FILL_CONFIG = { tension: 60, friction: 30 };
@@ -70,7 +70,13 @@ export const Preloader = ({
   const [expanding, setExpanding] = useState(false);
   const [gone, setGone] = useState(false);
   useLayoutEffect(() => {
-    if (!isRobotView()) return;
+    // La introducció només es mostra la primera vegada de cada visita
+    let vist = false;
+    try {
+      vist = sessionStorage.getItem("altitud-intro") === "1";
+      sessionStorage.setItem("altitud-intro", "1");
+    } catch {}
+    if (!isRobotView() && !vist) return;
     markHandoff();
     setGone(true);
   }, []);

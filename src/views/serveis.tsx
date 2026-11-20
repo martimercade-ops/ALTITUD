@@ -98,6 +98,7 @@ export const ServeisView = () => {
                             alt=""
                             fill
                             sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 31vw"
+                            priority={n <= 3}
                             className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                           />
                           <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/10" />
