@@ -146,6 +146,19 @@ export const ProjectView = ({ project, prev, next }: ProjectViewProps) => {
           </dl>
         </section>
 
+        {project.gallery && project.gallery.length > 0 && (
+          <section aria-label="Fotografies del projecte" className="mx-auto max-w-6xl px-6 pb-20 md:px-10 md:pb-28">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-small">Fotografia</p>
+            <div className={`mt-8 grid gap-5 ${project.gallery.length > 1 ? "md:grid-cols-2" : "md:max-w-xl"}`}>
+              {project.gallery.map((g) => (
+                <figure key={g.src} className="relative aspect-[4/5] overflow-hidden rounded-3xl">
+                  <Image src={g.src} alt={g.alt} fill sizes="(max-width: 768px) 92vw, 50vw" className="object-cover" />
+                </figure>
+              ))}
+            </div>
+          </section>
+        )}
+
         <nav aria-label="Altres projectes" className="mx-auto max-w-6xl px-6 pb-24 md:px-10 md:pb-32">
           <div className="flex items-end justify-between gap-6">
             <h2 className="text-[1.75rem] font-light leading-[1.05] tracking-tight sm:text-[2.25rem]">Més projectes</h2>

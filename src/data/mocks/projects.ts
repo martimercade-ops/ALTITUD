@@ -14,6 +14,8 @@ export interface Project {
   image: string;
   /** La imatge ja és un muntatge (cartell, foto…): es mostra tal qual, sense portàtil */
   foto?: boolean;
+  /** Fotos de la feina feta (fotografia, plats, rodatges…) */
+  gallery?: { src: string; alt: string }[];
 }
 
 const P = "/assets/altitud/projectes";
@@ -114,6 +116,7 @@ const llista: Project[] = [
     services: ["Web", "Vídeo", "Fotografia"],
     links: [web("https://lallotjarestaurant.com/")],
     image: `${P}/la-llotja.jpg`,
+    gallery: [{ src: `${P}/galeria/la-llotja-musclos.jpg`, alt: "Musclos a la marinera servits en un plat negre a La Llotja" }],
   },
   {
     slug: "la-casa",
