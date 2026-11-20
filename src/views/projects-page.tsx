@@ -143,6 +143,8 @@ export const ProjectsList = ({ projects }: { projects: Project[] }) => {
     [XARXES]: [],
     Identitat: ["Identitat corporativa", "Branding"],
     Ecommerce: ["Botiga online"],
+    "Projectes amb IA": ["Chatbot amb IA", "IA", "Automatitzacions amb IA"],
+    "Publicitat exterior": ["Publicitat exterior"],
   };
   const tags = Object.keys(FILTRES);
   const [tag, setTag] = useState<string | null>(null);
@@ -166,22 +168,28 @@ export const ProjectsList = ({ projects }: { projects: Project[] }) => {
               }`}
             >
               {t}
-              <span className={`ml-2 ${on ? "text-white/60" : "text-black/35"}`}>
-                {compte(t)}
-              </span>
+              {compte(t) > 0 && (
+                <span className={`ml-2 ${on ? "text-white/60" : "text-black/35"}`}>
+                  {compte(t)}
+                </span>
+              )}
             </button>
           );
         })}
       </div>
 
       {tag === XARXES && reels.length > 0 && (
-        <ul className="mt-8 grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-4 lg:gap-6">
+        <ul className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5 lg:gap-5">
           {reels.map((r, i) => (
-            <Reveal key={r.slug} as="li" className="reveal-up" style={{ transitionDelay: `${(i % 4) * 80}ms` }}>
+            <Reveal key={r.slug} as="li" className="reveal-up" style={{ transitionDelay: `${(i % 5) * 70}ms` }}>
               <ReelCard r={r} />
             </Reveal>
           ))}
         </ul>
+      )}
+
+      {tag !== XARXES && shown.length === 0 && (
+        <p className="mt-10 rounded-[28px] bg-[#eceef2] px-6 py-16 text-center text-black/55">Aviat hi afegirem projectes d&apos;aquest servei.</p>
       )}
 
       {tag !== XARXES && (
