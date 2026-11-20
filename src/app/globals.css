@@ -1063,3 +1063,5 @@ font { background: transparent !important; }
 .membre-rol { display: inline-block; transition: transform 0.4s, letter-spacing 0.4s; }
 .membre:hover .membre-rol { transform: translateX(4px); }
 @media (prefers-reduced-motion: reduce) { .equip-entra { opacity: 1; transform: none; filter: none; } .membre { transform: none !important; } }
+.membre-brill { display: none; }
+.equip-entra { transition: opacity 1.4s, transform 1.7s cubic-bezier(0.2, 0.8, 0.2, 1), filter 1.4s; transition-delay: calc(var(--i) * 260ms); }
