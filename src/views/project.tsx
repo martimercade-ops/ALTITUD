@@ -80,9 +80,11 @@ export const ProjectView = ({ project, prev, next }: ProjectViewProps) => {
             </ul>
 
             <div className="mt-10 flex flex-wrap items-center gap-4">
-              <a href={main.url} target="_blank" rel="noopener noreferrer" className={PILL_LIGHT}>
-                Visitar el web ↗
-              </a>
+              {main && (
+                <a href={main.url} target="_blank" rel="noopener noreferrer" className={PILL_LIGHT}>
+                  Visitar el web ↗
+                </a>
+              )}
               <a href="#contact" className={PILL_OUTLINE}>
                 Parlem del teu projecte
               </a>
@@ -91,24 +93,30 @@ export const ProjectView = ({ project, prev, next }: ProjectViewProps) => {
         </section>
 
         <div className="relative z-10 mx-auto -mt-28 max-w-6xl px-4 md:-mt-40 md:px-10">
+          {project.foto || !main ? (
+            <figure className="relative aspect-[16/10] overflow-hidden rounded-3xl shadow-2xl">
+              <Image src={project.image} alt={`${project.name}: ${project.summary}`} fill priority sizes="(max-width: 1152px) 92vw, 1088px" className="object-cover" />
+            </figure>
+          ) : (
           <figure className="overflow-hidden rounded-3xl border border-black/5 bg-card-dark shadow-2xl">
-            <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
-              <span className="size-2.5 rounded-full bg-white/25" />
-              <span className="size-2.5 rounded-full bg-white/25" />
-              <span className="size-2.5 rounded-full bg-white/25" />
-              <span className="mx-auto truncate rounded-full bg-white/10 px-4 py-1 text-xs text-white/70">{main.label}</span>
-            </div>
-            <a href={main.url} target="_blank" rel="noopener noreferrer" className="relative block aspect-[16/10]">
-              <Image
-                src={project.image}
-                alt={`Pàgina d'inici del web de ${project.name}`}
-                fill
-                priority
-                sizes="(max-width: 1152px) 92vw, 1088px"
-                className="object-cover object-top"
-              />
-            </a>
-          </figure>
+              <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
+                <span className="size-2.5 rounded-full bg-white/25" />
+                <span className="size-2.5 rounded-full bg-white/25" />
+                <span className="size-2.5 rounded-full bg-white/25" />
+                <span className="mx-auto truncate rounded-full bg-white/10 px-4 py-1 text-xs text-white/70">{main.label}</span>
+              </div>
+              <a href={main.url} target="_blank" rel="noopener noreferrer" className="relative block aspect-[16/10]">
+                <Image
+                  src={project.image}
+                  alt={`Pàgina d'inici del web de ${project.name}`}
+                  fill
+                  priority
+                  sizes="(max-width: 1152px) 92vw, 1088px"
+                  className="object-cover object-top"
+                />
+              </a>
+            </figure>
+          )}
         </div>
 
         <section aria-label="Fitxa del projecte" className="mx-auto max-w-6xl px-6 py-20 md:px-10 md:py-28">

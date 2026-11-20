@@ -12,6 +12,8 @@ export interface Project {
   services: string[];
   links: ProjectLink[];
   image: string;
+  /** La imatge ja és un muntatge (cartell, foto…): es mostra tal qual, sense portàtil */
+  foto?: boolean;
 }
 
 const P = "/assets/altitud/projectes";
@@ -22,6 +24,17 @@ const web = (url: string): ProjectLink => ({
 });
 
 const llista: Project[] = [
+  {
+    slug: "projecte-vida",
+    name: "Projecte Vida",
+    sector: "Salut i prevenció",
+    summary: "Campanya de publicitat exterior a Andorra la Vella i Escaldes-Engordany.",
+    about: "Dues campanyes de cartells al carrer per a Projecte Vida, amb el Govern d'Andorra i el Comú d'Escaldes-Engordany: «El temps vola» (#modeavióandorra) i «L'addicció no té una cara concreta» (#trencalestigma).",
+    services: ["Publicitat exterior"],
+    links: [],
+    image: `${P}/projecte-vida.jpg`,
+    foto: true,
+  },
   {
     slug: "espai-dor",
     name: "Espai d'Or",

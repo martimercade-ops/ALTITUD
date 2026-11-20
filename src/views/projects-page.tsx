@@ -51,6 +51,7 @@ const LOGOS: Record<string, string> = {
   "hotel-niu": "hotel-niu",
   "olympus-race": "olympus-race-andorra",
   "la-casa": "la-casa-gastrobar",
+  "projecte-vida": "projecte-vida",
   "enzo-poulat": "enzo-poulat",
   "farmacia-guitart": "farmacia-guitart",
   "henkan": "henkan",
@@ -99,11 +100,17 @@ const ProjectCard = ({ p }: { p: Project }) => {
 
       <div aria-hidden="true" className="illa-estudi relative aspect-[16/11] w-full">
         <span className="illa-ombra" />
-        <div className="illa-escenari">
-          <div className="illa-portatil">
-            <Dispositius src={p.image} />
+        {p.foto ? (
+          <div className="absolute inset-4 overflow-hidden rounded-[20px] md:inset-5">
+            <Image src={p.image} alt="" fill sizes="(max-width: 640px) 92vw, 30vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
           </div>
-        </div>
+        ) : (
+          <div className="illa-escenari">
+            <div className="illa-portatil">
+              <Dispositius src={p.image} />
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="relative z-[3] mt-auto flex flex-col gap-4 px-6 pb-6 pt-1 md:px-7 md:pb-7">

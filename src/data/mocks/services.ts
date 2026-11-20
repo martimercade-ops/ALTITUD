@@ -274,7 +274,7 @@ export const services: Service[] = [
     headline: "La teva marca, on passa la gent.",
     intro:
       "Dissenyem i gestionem la publicitat que es veu al carrer: tanques, cartells, lones, aparadors, vehicles i pantalles. Campanyes pensades per a Andorra i coherents amb el que fas a les xarxes i a la web.",
-    image: `${A}/serveis/andorra-nit.jpg`,
+    image: `${A}/serveis/publicitat-exterior.jpg`,
     includes: [
       { title: "Tanques i cartells", text: "Disseny per a tanques, cartelleres i mupis, adaptat a cada format." },
       { title: "Lones i banderoles", text: "Per a façanes, obres, fires i esdeveniments." },
