@@ -14,4 +14,5 @@ const R = "/assets/altitud/reels";
 
 export const reels: Reel[] = [
   { slug: "nou-aire", client: "Nou Aire", sector: "Immobiliària", video: `${R}/nou-aire.mp4`, poster: `${R}/nou-aire.webp`, logo: "nou-aire" },
+  { slug: "sicoris-gestoria", client: "Sicoris Gestoria", sector: "Gestoria", video: `${R}/sicoris-gestoria.mp4`, poster: `${R}/sicoris-gestoria.webp`, logo: "sicoris-gestoria-s" },
 ];
