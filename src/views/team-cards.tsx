@@ -67,25 +67,22 @@ export const TeamCard = ({ m }: { m: TeamMember }) => {
             </button>
           </div>
 
-          {m.bio && <p className="mt-6 text-[15px] leading-relaxed text-white/80">{m.bio}</p>}
+          {m.bio && <p className="mt-5 text-[14px] leading-relaxed text-white/80">{m.bio}</p>}
 
           {m.projects && m.projects.length > 0 && (
-            <div className="mt-auto pt-6">
+            <div className="mt-auto pt-5">
               <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-white/45">Projectes</p>
-              <ul className="mt-3 flex flex-wrap gap-2">
+              <ul className="mt-3 flex flex-wrap gap-1.5">
                 {m.projects.map((pr) => {
-                  const inner = (
-                    <>
-                      {pr.logo && (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img src={`/assets/altitud/clients/color/${pr.logo}.webp`} alt="" className="h-5 w-auto max-w-[3.5rem] object-contain" />
-                      )}
-                      <span>{pr.name}</span>
-                    </>
+                  const inner = pr.logo ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={`/assets/altitud/clients/color/${pr.logo}.webp`} alt={pr.name} className="max-h-full max-w-full object-contain" />
+                  ) : (
+                    <span className="text-[11px] leading-tight">{pr.name}</span>
                   );
-                  const cls = "flex items-center gap-2 rounded-xl bg-white px-2.5 py-1.5 text-xs text-black/80";
+                  const cls = "flex h-11 min-w-11 max-w-[5.5rem] items-center justify-center rounded-xl bg-white px-2 py-1.5 text-center text-black/80";
                   return (
-                    <li key={pr.name}>
+                    <li key={pr.name} title={pr.name}>
                       {pr.slug ? (
                         <Link href={projectHref(pr.slug)} tabIndex={open ? 0 : -1} className={`${cls} hover:text-[#2f5bff]`}>{inner}</Link>
                       ) : (
