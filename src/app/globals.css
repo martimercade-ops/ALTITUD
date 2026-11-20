@@ -1006,3 +1006,13 @@ font { background: transparent !important; }
 .pj-titol .pj-muted { --tinta: #8d9bb8; }
 .pj-titol .n1-paraula { margin-right: 0.24em; } .pj-titol .n1-paraula:last-child { margin-right: 0; }
 .illa--foto::before, .illa--foto .illa-llum, .illa--foto .illa-ombra { display: none; }
+
+/* Qui som: targeta que es gira */
+.gira { perspective: 1600px; transition: transform 0.5s cubic-bezier(0.2, 0.75, 0.2, 1); }
+.gira:hover { transform: translateY(-4px); }
+.gira--on { transform: translateY(-10px) scale(1.04); z-index: 5; }
+.gira-cos { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.2, 0.75, 0.2, 1); border-radius: 28px; box-shadow: 0 20px 40px -24px rgb(11 20 36 / 0.45); }
+.gira--on .gira-cos { transform: rotateY(180deg); box-shadow: 0 40px 70px -30px rgb(11 20 36 / 0.6); }
+.gira-cara { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.gira-darrere { transform: rotateY(180deg); }
+@media (prefers-reduced-motion: reduce) { .gira-cos { transition: none; } }
