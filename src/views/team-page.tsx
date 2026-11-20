@@ -5,7 +5,6 @@ import { Reveal } from "@/components/common/reveal";
 import { footerContent } from "@/data/mocks/contact";
 import { homeContent, homeNav, PARLEM_HREF } from "@/data/mocks/home";
 import { TeamCard } from "@/views/team-cards";
-import { RodatgeCarrusel, Valors } from "@/views/team-extres";
 
 
 export const TeamPageView = () => {
@@ -39,17 +38,6 @@ export const TeamPageView = () => {
             ))}
           </ul>
         </section>
-
-        {/* Darrere la càmera: carrusel que passa sol */}
-        <section aria-labelledby="rodatge-title" className="pb-24">
-          <Reveal className="reveal-up mx-auto flex max-w-[88rem] flex-col justify-between gap-3 px-5 md:flex-row md:items-end md:px-8">
-            <h2 id="rodatge-title" className="text-[2rem] font-light leading-[1.08] tracking-tight md:text-[2.75rem]">Darrere la càmera.</h2>
-            <p className="max-w-md text-[15px] leading-relaxed text-black/55">Gravem a casa dels nostres clients: a la botiga, a la pista o on calgui.</p>
-          </Reveal>
-          <RodatgeCarrusel />
-        </section>
-
-        <Valors />
 
         {/* Crida */}
         <section className="px-6 pb-24 text-center md:pb-32">
