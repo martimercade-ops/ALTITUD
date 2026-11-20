@@ -186,9 +186,9 @@ export const ProjectsList = ({ projects }: { projects: Project[] }) => {
       </div>
 
       {tag === XARXES && reels.length > 0 && (
-        <ul className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5 lg:gap-5">
+        <ul className="mx-auto mt-10 grid max-w-[68rem] grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-8 sm:gap-y-12 lg:gap-x-14 lg:gap-y-16">
           {reels.map((r, i) => (
-            <Reveal key={r.slug} as="li" className="reveal-up" style={{ transitionDelay: `${(i % 5) * 70}ms` }}>
+            <Reveal key={r.slug} as="li" className="reveal-up" style={{ transitionDelay: `${(i % 3) * 90}ms` }}>
               <ReelCard r={r} />
             </Reveal>
           ))}

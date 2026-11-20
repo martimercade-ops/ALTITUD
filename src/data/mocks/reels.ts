@@ -31,4 +31,5 @@ export const reels: Reel[] = [
   { slug: "mobalpa", client: "Mobalpa", sector: "Cuines i interiorisme", video: `${R}/mobalpa.mp4`, poster: `${R}/mobalpa.webp`, logo: "mobalpa" },
   { slug: "brainworks", client: "Brainworks Center", sector: "Salut i benestar", video: `${R}/brainworks.mp4`, poster: `${R}/brainworks.webp`, logo: "brainworks" },
   { slug: "perfect-home", client: "Perfect Home", sector: "Immobiliària", video: `${R}/perfect-home.mp4`, poster: `${R}/perfect-home.webp`, logo: "perfect-home" },
+  { slug: "farmacia-guitart", client: "Farmàcia Guitart", sector: "Farmàcia", video: `${R}/farmacia-guitart.mp4`, poster: `${R}/farmacia-guitart.webp`, logo: "farmacia-guitart-g" },
 ];
