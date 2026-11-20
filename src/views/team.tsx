@@ -16,6 +16,8 @@ export interface TeamMember {
   highlights?: string[];
   /** Perfil de LinkedIn */
   linkedin?: string;
+  /** Correu de feina */
+  email?: string;
   /** Projectes en què ha treballat */
   projects?: { name: string; slug?: string; logo?: string }[];
 }

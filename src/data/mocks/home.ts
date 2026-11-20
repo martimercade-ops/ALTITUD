@@ -229,6 +229,7 @@ export const homeContent: HomeContent = {
     members: [
       {
         name: "Martí Mercadé",
+        email: "marti.mercade@altitudigital.com",
         role: "CEO",
         image: `${A}/equip/marti.jpg`,
         bio: "Fundador d'Altitud Digital. Lidera l'estratègia de l'agència i acompanya cada client des del primer cafè fins als resultats.",
@@ -242,6 +243,7 @@ export const homeContent: HomeContent = {
       },
       {
         name: "Eric Carrera",
+        email: "eric@altitudigital.com",
         role: "CTO",
         image: `${A}/equip/eric.jpg`,
         bio: "Responsable de la tecnologia: webs, automatitzacions i solucions d'IA que funcionen de veritat.",
@@ -250,6 +252,7 @@ export const homeContent: HomeContent = {
       },
       {
         name: "Andrea Ramos",
+        email: "andrea.ramos@altitudigital.com",
         role: "Project Manager",
         image: `${A}/equip/andrea.jpg`,
         bio: "Coordina els projectes perquè tot arribi a temps, amb ordre i comunicació clara amb cada client.",
@@ -259,6 +262,7 @@ export const homeContent: HomeContent = {
       },
       {
         name: "Maria Socias",
+        email: "maria.socias@altitudigital.com",
         role: "Content Creator",
         image: `${A}/equip/maria.jpg`,
         bio: "Crea el contingut que connecta: idees, reels i publicacions amb la veu de cada marca.",
