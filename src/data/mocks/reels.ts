@@ -29,4 +29,5 @@ export const reels: Reel[] = [
   { slug: "magnesi-arquitectes", client: "Magnesi Arquitectes", sector: "Arquitectura", video: `${R}/magnesi-arquitectes.mp4`, poster: `${R}/magnesi-arquitectes.webp`, logo: "magnesi-arquitectes" },
   { slug: "orada", client: "Orada Real Estate", sector: "Immobiliària", video: `${R}/orada.mp4`, poster: `${R}/orada.webp`, logo: "orada-o" },
   { slug: "mobalpa", client: "Mobalpa", sector: "Cuines i interiorisme", video: `${R}/mobalpa.mp4`, poster: `${R}/mobalpa.webp`, logo: "mobalpa" },
+  { slug: "brainworks", client: "Brainworks Center", sector: "Salut i benestar", video: `${R}/brainworks.mp4`, poster: `${R}/brainworks.webp`, logo: "brainworks" },
 ];
