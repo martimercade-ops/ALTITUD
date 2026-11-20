@@ -1,9 +1,8 @@
-import Link from "next/link";
 import { SiteNav } from "@/views/site-nav";
 import { SiteFooter } from "@/views/site-footer";
 import { Reveal } from "@/components/common/reveal";
 import { footerContent } from "@/data/mocks/contact";
-import { homeContent, homeNav, PARLEM_HREF } from "@/data/mocks/home";
+import { homeContent, homeNav } from "@/data/mocks/home";
 import { TeamGrid } from "@/views/team-grid";
 
 
@@ -39,13 +38,14 @@ export const TeamPageView = () => {
             <p className="mx-auto max-w-3xl text-[1.75rem] font-light leading-[1.15] tracking-tight md:text-[2.5rem]">
               Vols treballar amb nosaltres?
             </p>
-            <Link
-              href={PARLEM_HREF}
+            <a
+              href="mailto:info@altitudigital.com?subject=Vull%20treballar%20amb%20vosaltres"
               className="mt-10 inline-flex h-12 items-center gap-3 rounded-full bg-black pl-6 pr-2 text-sm font-medium text-white transition-transform hover:scale-[1.02]"
             >
-              Parlem
+              Envia&apos;ns el teu CV
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-black">→</span>
-            </Link>
+            </a>
+            <p className="mt-4 text-sm text-black/50">info@altitudigital.com</p>
           </Reveal>
         </section>
 
