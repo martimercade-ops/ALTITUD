@@ -32,6 +32,11 @@ export const Laptop = ({ src, alt, url }: { src: string; alt: string; url?: stri
   </div>
 );
 
+/** Logos en color (es mostren tal qual, sense passar-los a negre) */
+const LOGOS_COLOR: Record<string, string> = {
+  "la-rostisseria": "la-rostisseria",
+};
+
 const LOGOS: Record<string, string> = {
   "perfect-home": "perfect-home",
   "la-llotja": "restaurante-la-llotja",
@@ -43,6 +48,7 @@ const LOGOS: Record<string, string> = {
   "hotel-niu": "hotel-niu",
   "olympus-race": "olympus-race-andorra",
   "la-casa": "la-casa-gastrobar",
+  "henkan": "henkan",
   "erf-assegurances": "erf-assegurances",
   "beta-assegurances": "beta-assegurances",
   "psicosalut": "psicosalut",
@@ -93,10 +99,15 @@ const ProjectCard = ({ p }: { p: Project }) => {
 
       <div className="relative z-[3] mt-auto flex flex-col gap-4 px-6 pb-6 pt-1 md:px-7 md:pb-7">
         <div className="flex items-center gap-4">
-          {LOGOS[p.slug] && (
-            <span aria-hidden="true" className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white p-2 shadow-[0_6px_18px_-8px_rgb(11_20_36/0.35)] ring-1 ring-black/5">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={`/assets/altitud/clients/mono/${LOGOS[p.slug]}.webp`} alt="" className="illa-logo max-h-full max-w-full object-contain" />
+          {(LOGOS_COLOR[p.slug] || LOGOS[p.slug]) && (
+            <span aria-hidden="true" className="flex h-14 min-w-14 max-w-[7.5rem] shrink-0 items-center justify-center rounded-2xl bg-white px-2.5 py-2 shadow-[0_6px_18px_-8px_rgb(11_20_36/0.35)] ring-1 ring-black/5">
+              {LOGOS_COLOR[p.slug] ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={`/assets/altitud/clients/color/${LOGOS_COLOR[p.slug]}.webp`} alt="" className="max-h-full max-w-full object-contain" />
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={`/assets/altitud/clients/mono/${LOGOS[p.slug]}.webp`} alt="" className="illa-logo max-h-full max-w-full object-contain" />
+              )}
             </span>
           )}
           <div className="min-w-0">

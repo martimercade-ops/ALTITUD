@@ -23,6 +23,26 @@ const web = (url: string): ProjectLink => ({
 
 export const projects: Project[] = [
   {
+    slug: "henkan",
+    name: "Henkan Spaces",
+    sector: "Interiorisme",
+    summary: "Web, fotografia i SEO.",
+    about: "Estudi d'interiorisme a Andorra: dissenyen amb sentit i transformen amb encant.",
+    services: ["Web", "Fotografia", "SEO"],
+    links: [web("https://henkan-spaces.com/")],
+    image: `${P}/henkan.jpg`,
+  },
+  {
+    slug: "enzo-poulat",
+    name: "Enzo Poulat Coaching",
+    sector: "Entrenador personal",
+    summary: "Web.",
+    about: "Entrenador personal de força i rendiment, amb coaching en línia i presencial.",
+    services: ["Web"],
+    links: [web("https://enzopoulatcoaching.com/")],
+    image: `${P}/enzo-poulat.jpg`,
+  },
+  {
     slug: "perfect-home",
     name: "Perfect Home",
     sector: "Immobiliària",
