@@ -13,6 +13,7 @@ export type Reel = {
 const R = "/assets/altitud/reels";
 
 export const reels: Reel[] = [
+  { slug: "balanzen", client: "Balanzen", sector: "Nutrició i esport", video: `${R}/balanzen.mp4`, poster: `${R}/balanzen.webp`, logo: "balanzen-b" },
   { slug: "nou-aire", client: "Nou Aire", sector: "Immobiliària", video: `${R}/nou-aire.mp4`, poster: `${R}/nou-aire.webp`, logo: "nou-aire" },
   { slug: "sicoris-gestoria", client: "Sicoris Gestoria", sector: "Gestoria", video: `${R}/sicoris-gestoria.mp4`, poster: `${R}/sicoris-gestoria.webp`, logo: "sicoris-gestoria-s" },
   { slug: "erf-assegurances", client: "ERF Assegurances", sector: "Assegurances", video: `${R}/erf-assegurances.mp4`, poster: `${R}/erf-assegurances.webp`, logo: "erf-assegurances" },
@@ -23,4 +24,6 @@ export const reels: Reel[] = [
   { slug: "unique-pink-collagen", client: "Unique Pink Collagen", sector: "Meritxell Martí", video: `${R}/unique-pink-collagen.mp4`, poster: `${R}/unique-pink-collagen.webp` },
   { slug: "ciutadans-compromesos", client: "Ciutadans Compromesos", sector: "Partit polític", video: `${R}/ciutadans-compromesos.mp4`, poster: `${R}/ciutadans-compromesos.webp`, logo: "ciutadans-compromesos-cc" },
   { slug: "tribeca", client: "Tribeca Andorra", sector: "Cosmètica professional", video: `${R}/tribeca.mp4`, poster: `${R}/tribeca.webp` },
+  { slug: "pedro-martinez", client: "Pedro Martínez", sector: "Tennista", video: `${R}/pedro-martinez.mp4`, poster: `${R}/pedro-martinez.webp` },
+  { slug: "fah", client: "Federació Andorrana d'Handbol", sector: "Esport", video: `${R}/fah.mp4`, poster: `${R}/fah.webp`, logo: "fah-icon" },
 ];
