@@ -101,7 +101,7 @@ export const PdeView = () => {
                 <Stars />
                 <span>98 ressenyes a Google</span>
               </p>
-              <p className="mt-3 text-sm font-medium text-accent-lime">Places limitades: la convocatòria s&apos;esgota en pocs dies.</p>
+              <p className="mt-3 text-sm font-medium text-accent-lime">Prepara&apos;t per a la convocatòria 2027: l&apos;última es va esgotar en pocs dies.</p>
             </div>
 
             <div className="pde-entra lg:sticky lg:top-28" style={{ animationDelay: "150ms" }}>

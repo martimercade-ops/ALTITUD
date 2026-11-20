@@ -73,7 +73,7 @@ export const PdeHero = () => {
               Apunta&apos;m a la llista d&apos;espera
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white">↓</span>
             </a>
-            <p className="text-sm text-white/65">La convocatòria s&apos;esgota en pocs dies.</p>
+            <p className="text-sm text-white/65">Prepara&apos;t per a la convocatòria 2027.</p>
           </div>
         </div>
       </div>
