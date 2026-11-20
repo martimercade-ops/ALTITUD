@@ -39,4 +39,5 @@ export const reels: Reel[] = [
   { slug: "maison-carne", client: "Maison Carne", sector: "Restaurant", video: `${R}/maison-carne.mp4`, poster: `${R}/maison-carne.webp`, logo: "maison-carne" },
   { slug: "medic-estetic", client: "Medic Estetic", sector: "Medicina estètica", video: `${R}/medic-estetic.mp4`, poster: `${R}/medic-estetic.webp`, logo: "medic-estetic" },
   { slug: "mca-assessors", client: "MCA Assessors", sector: "Assessoria", video: `${R}/mca-assessors.mp4`, poster: `${R}/mca-assessors.webp`, logo: "mca-assessors" },
+  { slug: "princesport", client: "Princiesport", sector: "Gimnàs i salut", video: `${R}/princesport.mp4`, poster: `${R}/princesport.webp`, logo: "princesport-o" },
 ];
