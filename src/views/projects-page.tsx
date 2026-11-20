@@ -42,6 +42,10 @@ const LOGOS: Record<string, string> = {
   "brainworks-center": "brainworks",
   "hotel-niu": "hotel-niu",
   "olympus-race": "olympus-race-andorra",
+  "la-casa": "la-casa-gastrobar",
+  "erf-assegurances": "erf-assegurances",
+  "beta-assegurances": "beta-assegurances",
+  "psicosalut": "psicosalut",
 };
 
 /** Portàtil real, de cara, amb la web del client a la pantalla */
@@ -74,29 +78,33 @@ const ProjectCard = ({ p }: { p: Project }) => {
       aria-label={`Veure el projecte de ${p.name}`}
       onPointerMove={onMove}
       onPointerLeave={onLeave}
-      className="illa illa--clar group relative block aspect-[4/5] lg:aspect-[6/7] overflow-hidden rounded-[28px] bg-[#eceef2] text-black"
+      className="illa illa--clar group relative flex h-full flex-col overflow-hidden rounded-[28px] bg-[#eceef2] text-black"
     >
       <span aria-hidden="true" className="illa-llum" />
-      <span aria-hidden="true" className="illa-ombra" />
 
-      <div aria-hidden="true" className="illa-escenari">
-        <div className="illa-portatil">
-          <Dispositius src={p.image} />
+      <div aria-hidden="true" className="illa-estudi relative aspect-[5/4] w-full">
+        <span className="illa-ombra" />
+        <div className="illa-escenari">
+          <div className="illa-portatil">
+            <Dispositius src={p.image} />
+          </div>
         </div>
       </div>
 
-      <div className="absolute inset-x-0 bottom-0 z-[3] p-6">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-black/45">{p.sector}</p>
-        {LOGOS[p.slug] ? (
-          <h2 className="mt-3">
-            <span className="sr-only">{p.name}</span>
-            { }
-            <img src={`/assets/altitud/clients/mono/${LOGOS[p.slug]}.webp`} alt="" aria-hidden="true" className="illa-logo h-11 w-auto max-w-[70%] object-contain object-left md:h-12" />
-          </h2>
-        ) : (
-          <h2 className="mt-2 text-[1.7rem] font-light leading-[1.05] tracking-tight">{p.name}</h2>
-        )}
-        <ul className="mt-4 flex flex-wrap gap-1.5" aria-label="Serveis">
+      <div className="relative z-[3] mt-auto flex flex-col gap-4 px-6 pb-6 pt-1 md:px-7 md:pb-7">
+        <div className="flex items-center gap-4">
+          {LOGOS[p.slug] && (
+            <span aria-hidden="true" className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white p-2 shadow-[0_6px_18px_-8px_rgb(11_20_36/0.35)] ring-1 ring-black/5">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={`/assets/altitud/clients/mono/${LOGOS[p.slug]}.webp`} alt="" className="illa-logo max-h-full max-w-full object-contain" />
+            </span>
+          )}
+          <div className="min-w-0">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-black/45">{p.sector}</p>
+            <h2 className="mt-1 truncate text-[1.45rem] font-normal leading-tight tracking-tight">{p.name}</h2>
+          </div>
+        </div>
+        <ul className="flex flex-wrap gap-1.5 border-t border-black/[0.07] pt-4" aria-label="Serveis">
           {p.services.map((s) => (
             <li key={s} className="rounded-full border border-black/10 bg-white/70 px-3 py-1 text-xs text-black/70">{s}</li>
           ))}
@@ -139,7 +147,7 @@ export const ProjectsList = ({ projects }: { projects: Project[] }) => {
         })}
       </div>
 
-      <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
         {shown.map((p, i) => (
           <Reveal key={p.slug} as="li" className="reveal-up" style={{ transitionDelay: `${(i % 3) * 90}ms` }}>
             <ProjectCard p={p} />

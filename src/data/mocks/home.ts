@@ -109,6 +109,7 @@ export const homeContent: HomeContent = {
       { name: "Sicoris Gestoria", src: `${A}/clients/mono/sicoris-gestoria.webp`, width: 960, height: 240 },
       { name: "Nou Aire", src: `${A}/clients/mono/nou-aire.webp`, width: 1001, height: 240 },
       { name: "Orada Real Estate", src: `${A}/clients/mono/orada.webp`, width: 318, height: 240 },
+      { name: "La Casa Cafe & GastroBar", src: `${A}/clients/mono/la-casa-gastrobar.webp`, width: 240, height: 240 },
       { name: "Olympus Race Andorra", src: `${A}/clients/mono/olympus-race-andorra.webp`, width: 220, height: 240 },
       { name: "Patronat Dames de Meritxell", src: `${A}/clients/mono/patronat-dames-de-meritxell.webp`, width: 292, height: 240 },
       { name: "Perfect Home", src: `${A}/clients/mono/perfect-home.webp`, width: 198, height: 240 },

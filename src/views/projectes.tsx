@@ -30,7 +30,7 @@ export const ProjectesView = () => (
         </div>
       </section>
 
-      <section aria-label="Llistat de projectes" className="mx-auto max-w-6xl px-6 pb-24 pt-16 md:px-10 md:pt-20">
+      <section aria-label="Llistat de projectes" className="mx-auto max-w-[88rem] px-5 pb-24 pt-16 md:px-8 md:pt-20">
         <ProjectsList projects={projects} />
       </section>
 

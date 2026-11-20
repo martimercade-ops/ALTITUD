@@ -904,7 +904,7 @@ font { background: transparent !important; }
 .illa:hover .illa-reflex { background-position: -40% 0; }
 
 /* Projectes: portàtil més gran i premium */
-.illa--clar .illa-escenari { inset: 9% 7% 35% 7% !important; }
+.illa--clar .illa-escenari { inset: 5% 9% 44% 9% !important; }
 .illa--clar::before {
   content: ""; position: absolute; z-index: 0; left: 10%; right: 10%; top: 2%; height: 58%; pointer-events: none;
   background: radial-gradient(closest-side, rgb(255 255 255 / 0.95), rgb(255 255 255 / 0) 100%);
@@ -923,3 +923,9 @@ font { background: transparent !important; }
   box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.05);
 }
 .illa--clar .illa-ombra { top: 58%; left: 14%; right: 14%; }
+
+/* Projectes: estudi fix a dalt + peu amb nom */
+.illa--clar .illa-escenari { inset: 11% 8% 9% 8% !important; }
+.illa--clar .illa-ombra { top: 86%; left: 16%; right: 16%; height: 7%; }
+.illa--clar::before { height: 62%; }
+.illa--clar .illa-logo { opacity: 0.9; }
