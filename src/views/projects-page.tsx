@@ -186,9 +186,9 @@ export const ProjectsList = ({ projects }: { projects: Project[] }) => {
       </div>
 
       {tag === XARXES && reels.length > 0 && (
-        <ul className="mx-auto mt-10 grid max-w-[68rem] grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-8 sm:gap-y-12 lg:gap-x-14 lg:gap-y-16">
+        <ul className="mx-auto mt-10 grid max-w-[76rem] grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-8 sm:gap-y-12 lg:grid-cols-4 lg:gap-x-10 lg:gap-y-14">
           {reels.map((r, i) => (
-            <Reveal key={r.slug} as="li" className="reveal-up" style={{ transitionDelay: `${(i % 3) * 90}ms` }}>
+            <Reveal key={r.slug} as="li" className="reveal-up" style={{ transitionDelay: `${(i % 4) * 80}ms` }}>
               <ReelCard r={r} />
             </Reveal>
           ))}
@@ -202,7 +202,7 @@ export const ProjectsList = ({ projects }: { projects: Project[] }) => {
       {tag !== XARXES && (
       <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
         {shown.map((p, i) => (
-          <Reveal key={p.slug} as="li" className="reveal-up" style={{ transitionDelay: `${(i % 3) * 90}ms` }}>
+          <Reveal key={p.slug} as="li" className="reveal-up" style={{ transitionDelay: `${(i % 4) * 80}ms` }}>
             <ProjectCard p={p} />
           </Reveal>
         ))}
