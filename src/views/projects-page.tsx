@@ -35,6 +35,7 @@ export const Laptop = ({ src, alt, url }: { src: string; alt: string; url?: stri
 /** Logos en color (es mostren tal qual, sense passar-los a negre) */
 const LOGOS_COLOR: Record<string, string> = {
   "la-rostisseria": "la-rostisseria",
+  "espai-dor": "espai-dor",
 };
 
 const LOGOS: Record<string, string> = {

@@ -23,6 +23,16 @@ const web = (url: string): ProjectLink => ({
 
 const llista: Project[] = [
   {
+    slug: "espai-dor",
+    name: "Espai d'Or",
+    sector: "Perruqueria i estètica",
+    summary: "Web amb botiga online, chatbot amb IA que reserva cites i SEO.",
+    about: "Perruqueria, barberia i estètica a Andorra la Vella, amb botiga online i un assistent amb IA que reserva cites.",
+    services: ["Web", "Botiga online", "Chatbot amb IA", "SEO"],
+    links: [web("https://espaidor.com/")],
+    image: `${P}/espai-dor.jpg`,
+  },
+  {
     slug: "henkan",
     name: "Henkan Spaces",
     sector: "Interiorisme",
