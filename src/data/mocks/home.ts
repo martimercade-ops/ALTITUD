@@ -246,7 +246,7 @@ export const homeContent: HomeContent = {
         image: `${A}/equip/eric.jpg`,
         bio: "Responsable de la tecnologia: webs, automatitzacions i solucions d'IA que funcionen de veritat.",
         focus: ["Desenvolupament web", "Automatitzacions", "IA"],
-        projects: [{ name: "Beta Assegurances", slug: "beta-assegurances", logo: "beta-assegurances" }, { name: "ERF", slug: "erf-assegurances", logo: "erf-assegurances" }, { name: "Relaxia", logo: "relaxia-r" }, { name: "El Rato", logo: "el-rato" }, { name: "Brainworks", slug: "brainworks-center", logo: "brainworks" }],
+        projects: [{ name: "Beta Assegurances", slug: "beta-assegurances", logo: "beta-assegurances" }, { name: "ERF", slug: "erf-assegurances", logo: "erf-assegurances" }, { name: "Relaxia", logo: "relaxia-r" }, { name: "El Rato", slug: "el-rato", logo: "el-rato" }, { name: "Brainworks", slug: "brainworks-center", logo: "brainworks" }],
       },
       {
         name: "Andrea Ramos",

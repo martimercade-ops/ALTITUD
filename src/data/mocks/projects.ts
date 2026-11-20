@@ -25,6 +25,16 @@ const web = (url: string): ProjectLink => ({
 
 const llista: Project[] = [
   {
+    slug: "el-rato",
+    name: "El Rato Barre House",
+    sector: "Fitness i benestar",
+    summary: "Web, xarxes socials i motor de reserves.",
+    about: "El primer estudi boutique de barre d'Andorra, al carrer Antic Carrer Major d'Andorra la Vella. Web amb reserva de classes i compra de bons en línia, i gestió de les xarxes socials.",
+    services: ["Web", "Xarxes socials", "Motor de reserves"],
+    links: [web("https://elratobarrehouse.com/")],
+    image: `${P}/el-rato.jpg`,
+  },
+  {
     slug: "projecte-vida",
     name: "Projecte Vida",
     sector: "Salut i prevenció",
