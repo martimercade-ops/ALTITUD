@@ -982,3 +982,17 @@ font { background: transparent !important; }
   box-shadow: inset 0 2px 2px rgb(0 0 0 / 0.22);
 }
 .illa--clar .illa-escenari { inset: 12% 5% 8% 5% !important; }
+
+/* Reels: mòbil dibuixat */
+.reel-mobil {
+  aspect-ratio: 9 / 19;
+  border-radius: 16% / 7.6%;
+  padding: 3.2%;
+  background: linear-gradient(145deg, #3a3c41, #111215 45%, #2a2c31);
+  box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.14), 0 2px 3px rgb(11 20 36 / 0.25), 0 30px 40px -12px rgb(11 20 36 / 0.35);
+  transition: transform 0.7s cubic-bezier(0.2, 0.75, 0.2, 1), box-shadow 0.7s;
+}
+.reel:hover .reel-mobil { transform: translateY(-3%) scale(1.03); box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.14), 0 3px 4px rgb(11 20 36 / 0.25), 0 44px 50px -14px rgb(11 20 36 / 0.42); }
+.reel-pantalla { position: relative; display: block; width: 100%; height: 100%; overflow: hidden; border-radius: 13% / 6.2%; background: #000; }
+.reel-illa { position: absolute; top: 2.2%; left: 50%; width: 30%; height: 3.4%; transform: translateX(-50%); border-radius: 999px; background: #000; }
+.reel-ombra { position: absolute; bottom: 3%; left: 30%; right: 30%; height: 18px; border-radius: 50%; background: radial-gradient(closest-side, rgb(11 20 36 / 0.28), transparent); filter: blur(4px); }

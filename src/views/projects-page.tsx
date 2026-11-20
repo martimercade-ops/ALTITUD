@@ -1,6 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { reels } from "@/data/mocks/reels";
+import { ReelCard } from "./reel-card";
 import Image from "next/image";
 import Link from "next/link";
 import { projectHref, type Project } from "@/data/mocks/projects";
@@ -140,30 +142,42 @@ export const ProjectsList = ({ projects }: { projects: Project[] }) => {
   }, [projects]);
   const [tag, setTag] = useState<string | null>(null);
   const shown = tag ? projects.filter((p) => p.services.includes(tag)) : projects;
+  const XARXES = "Xarxes socials";
+  const compte = (t: string) => projects.filter((p) => p.services.includes(t)).length + (t === XARXES ? reels.length : 0);
 
   return (
     <>
       <div role="group" aria-label="Filtra per servei" className="filtres -mx-5 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
-        {[null, ...tags].map((t) => {
+        {tags.map((t) => {
           const on = t === tag;
           return (
             <button
-              key={t ?? "tots"}
+              key={t}
               type="button"
               aria-pressed={on}
-              onClick={() => setTag(t)}
+              onClick={() => setTag(on ? null : t)}
               className={`shrink-0 whitespace-nowrap rounded-full border px-4 py-2 text-sm sm:px-5 sm:py-2.5 transition-colors ${
                 on ? "border-black bg-black text-white" : "border-black/15 text-black/75 hover:border-black/40"
               }`}
             >
-              {t ?? "Tots"}
+              {t}
               <span className={`ml-2 ${on ? "text-white/60" : "text-black/35"}`}>
-                {t ? projects.filter((p) => p.services.includes(t)).length : projects.length}
+                {compte(t)}
               </span>
             </button>
           );
         })}
       </div>
+
+      {tag === XARXES && reels.length > 0 && (
+        <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6 xl:grid-cols-4">
+          {reels.map((r, i) => (
+            <Reveal key={r.slug} as="li" className="reveal-up" style={{ transitionDelay: `${(i % 4) * 90}ms` }}>
+              <ReelCard r={r} />
+            </Reveal>
+          ))}
+        </ul>
+      )}
 
       <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
         {shown.map((p, i) => (
