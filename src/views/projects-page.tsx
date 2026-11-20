@@ -170,11 +170,11 @@ export const ProjectsList = ({ projects }: { projects: Project[] }) => {
       </div>
 
       {tag === XARXES && reels.length > 0 && (
-        <ul className="-mx-5 mt-8 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-6 [scrollbar-width:none] sm:mx-0 sm:px-0">
-          {reels.map((r) => (
-            <li key={r.slug} className="w-[72vw] max-w-[300px] shrink-0 snap-start sm:w-[280px]">
+        <ul className="mt-8 grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-4 lg:gap-6">
+          {reels.map((r, i) => (
+            <Reveal key={r.slug} as="li" className="reveal-up" style={{ transitionDelay: `${(i % 4) * 80}ms` }}>
               <ReelCard r={r} />
-            </li>
+            </Reveal>
           ))}
         </ul>
       )}
