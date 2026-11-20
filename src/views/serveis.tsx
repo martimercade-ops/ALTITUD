@@ -21,39 +21,41 @@ export const ServeisView = () => {
       <SiteNav {...homeNav} homeHref="/" navLabel="Principal" />
       <main id="top" className="w-full bg-hero-page text-[#171717]">
         {/* Capçalera */}
-        <section
-          aria-labelledby="serveis-title"
-          className="relative overflow-hidden bg-[#0b1424] px-6 pb-24 pt-36 text-white md:px-10 md:pb-32 md:pt-44 lg:px-12"
-        >
-          <Image
-            src="/assets/altitud/serveis/cim-fita.jpg"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="pde-zoom object-cover opacity-55"
-          />
-          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-[#0b1424]/70 via-[#0b1424]/30 to-[#0b1424]" />
-          <div className="relative z-10 mx-auto max-w-6xl">
-            <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.35em] text-white/70">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent-lime" />
-              Serveis
-            </p>
-            <h1
-              id="serveis-title"
-              className="mt-6 max-w-[16ch] text-[2.5rem] font-light leading-[1.02] tracking-tight sm:text-6xl lg:text-[4.5rem]"
-            >
-              Tot el que necessites per arribar al cim.
+        <section aria-labelledby="serveis-title" className="relative overflow-hidden bg-[#0b1424] px-5 pb-10 pt-32 text-white md:px-8 md:pb-12 md:pt-36">
+          <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(55%_90%_at_85%_0%,rgb(47_91_255/0.3),transparent_70%)]" />
+          <div className="relative z-10 mx-auto flex max-w-[88rem] flex-wrap items-end justify-between gap-x-8 gap-y-6">
+            <h1 id="serveis-title" aria-label="Tot el que necessites per arribar al cim." className="pj-titol text-[2.4rem] font-light leading-[1.04] tracking-tight sm:text-6xl lg:text-[4.5rem]">
+              <span aria-hidden="true" className="n1-paraula inline-block" style={{ ["--d" as string]: "120ms" }}>
+                Tot
+              </span>
+              <span aria-hidden="true" className="n1-paraula inline-block" style={{ ["--d" as string]: "200ms" }}>
+                el
+              </span>
+              <span aria-hidden="true" className="n1-paraula inline-block" style={{ ["--d" as string]: "280ms" }}>
+                que
+              </span>
+              <span aria-hidden="true" className="n1-paraula inline-block" style={{ ["--d" as string]: "360ms" }}>
+                necessites
+              </span>
+              <span aria-hidden="true" className="n1-paraula inline-block" style={{ ["--d" as string]: "440ms" }}>
+                per
+              </span>
+              <span aria-hidden="true" className="n1-paraula inline-block pj-muted" style={{ ["--d" as string]: "520ms" }}>
+                arribar
+              </span>
+              <span aria-hidden="true" className="n1-paraula inline-block pj-muted" style={{ ["--d" as string]: "600ms" }}>
+                al
+              </span>
+              <span aria-hidden="true" className="n1-paraula inline-block pj-muted" style={{ ["--d" as string]: "680ms" }}>
+                cim.
+              </span>
             </h1>
-            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/80">
-              {services.length} serveis, un sol equip. Tria el que necessites o deixa&apos;ns muntar-te el pla complet.
-            </p>
-            <nav aria-label="Grups de serveis" className="mt-10 flex flex-wrap gap-3">
+            <nav aria-label="Grups de serveis" className="flex flex-wrap gap-2 pb-2">
               {GROUPS.map((g) => (
                 <a
                   key={g.id}
                   href={`#${g.id}`}
-                  className="inline-flex h-11 items-center rounded-full border border-white/30 px-5 text-sm text-white/90 backdrop-blur hover:border-white/70 hover:text-white"
+                  className="inline-flex h-10 items-center rounded-full border border-white/25 px-4 text-sm text-white/85 hover:border-white/60 hover:text-white"
                 >
                   {SERVICE_GROUP_LABEL[g.id]}
                 </a>
