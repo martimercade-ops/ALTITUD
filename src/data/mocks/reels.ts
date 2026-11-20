@@ -26,4 +26,5 @@ export const reels: Reel[] = [
   { slug: "tribeca", client: "Tribeca Andorra", sector: "Cosmètica professional", video: `${R}/tribeca.mp4`, poster: `${R}/tribeca.webp` },
   { slug: "pedro-martinez", client: "Pedro Martínez", sector: "Tennista", video: `${R}/pedro-martinez.mp4`, poster: `${R}/pedro-martinez.webp` },
   { slug: "fah", client: "Federació Andorrana d'Handbol", sector: "Esport", video: `${R}/fah.mp4`, poster: `${R}/fah.webp`, logo: "fah-icon" },
+  { slug: "magnesi-arquitectes", client: "Magnesi Arquitectes", sector: "Arquitectura", video: `${R}/magnesi-arquitectes.mp4`, poster: `${R}/magnesi-arquitectes.webp`, logo: "magnesi-arquitectes" },
 ];
