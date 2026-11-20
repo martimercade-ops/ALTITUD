@@ -27,4 +27,5 @@ export const reels: Reel[] = [
   { slug: "pedro-martinez", client: "Pedro Martínez", sector: "Tennista", video: `${R}/pedro-martinez.mp4`, poster: `${R}/pedro-martinez.webp` },
   { slug: "fah", client: "Federació Andorrana d'Handbol", sector: "Esport", video: `${R}/fah.mp4`, poster: `${R}/fah.webp`, logo: "fah-icon" },
   { slug: "magnesi-arquitectes", client: "Magnesi Arquitectes", sector: "Arquitectura", video: `${R}/magnesi-arquitectes.mp4`, poster: `${R}/magnesi-arquitectes.webp`, logo: "magnesi-arquitectes" },
+  { slug: "orada", client: "Orada Real Estate", sector: "Immobiliària", video: `${R}/orada.mp4`, poster: `${R}/orada.webp`, logo: "orada-o" },
 ];
