@@ -21,7 +21,7 @@ const web = (url: string): ProjectLink => ({
   url,
 });
 
-export const projects: Project[] = [
+const llista: Project[] = [
   {
     slug: "henkan",
     name: "Henkan Spaces",
@@ -156,9 +156,9 @@ export const projects: Project[] = [
     slug: "farmacia-guitart",
     name: "Farmàcia Guitart",
     sector: "Farmàcia",
-    summary: "Web amb botiga en línia.",
+    summary: "Web amb botiga en línia i identitat corporativa.",
     about: "Farmàcia i parafarmàcia amb botiga en línia i consell farmacèutic.",
-    services: ["Web"],
+    services: ["Web", "Identitat corporativa"],
     links: [web("https://farmaciaguitart.com/")],
     image: `${P}/farmacia-guitart.jpg`,
   },
@@ -203,6 +203,9 @@ export const projects: Project[] = [
     image: `${P}/olympus-race.jpg`,
   },
 ];
+
+/** Projectes per ordre alfabètic */
+export const projects: Project[] = [...llista].sort((a, b) => a.name.localeCompare(b.name, "ca", { sensitivity: "base" }));
 
 export const projectHref = (slug: string) => `/projectes/${slug}`;
 

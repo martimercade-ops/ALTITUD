@@ -11,26 +11,22 @@ export const ProjectesView = () => (
   <>
     <SiteNav {...homeNav} homeHref="/" navLabel="Principal" />
     <main id="top" className="w-full bg-hero-page text-[#171717]">
-      <section aria-labelledby="projectes-title" className="relative overflow-hidden bg-[#0b1424] px-6 pb-20 pt-36 text-white md:px-10 md:pb-24 md:pt-44 lg:px-12">
-        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(55%_70%_at_85%_0%,rgb(47_91_255/0.3),transparent_70%)]" />
-        <div className="relative z-10 mx-auto max-w-6xl">
+      <section aria-labelledby="projectes-title" className="relative overflow-hidden bg-[#0b1424] px-5 pb-10 pt-32 text-white md:px-8 md:pb-12 md:pt-36">
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(55%_90%_at_85%_0%,rgb(47_91_255/0.3),transparent_70%)]" />
+        <div className="relative z-10 mx-auto flex max-w-[88rem] flex-wrap items-end justify-between gap-x-8 gap-y-3">
           <Reveal className="reveal-up">
-            <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.35em] text-white/60">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent-lime" />
-              Projectes
-            </p>
-            <h1 id="projectes-title" className="mt-6 max-w-[18ch] text-[2.75rem] font-light leading-[1] tracking-tight sm:text-6xl lg:text-[4.5rem]">
-              Feina feta per a empreses d&apos;aquí.
+            <h1 id="projectes-title" className="text-[2.1rem] font-light leading-[1.05] tracking-tight sm:text-5xl lg:text-[3.25rem]">
+              Projectes que parlen per nosaltres.
             </h1>
-            <p className="mt-8 max-w-xl text-lg leading-relaxed text-white/75">
-              Webs, botigues online, posicionament i xarxes socials per a negocis d&apos;Andorra. Tria un servei per
-              veure els projectes on l&apos;hem fet.
-            </p>
           </Reveal>
+          <p className="flex items-center gap-2 pb-2 text-xs font-semibold uppercase tracking-[0.3em] text-white/55">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent-lime" />
+            {projects.length} projectes
+          </p>
         </div>
       </section>
 
-      <section aria-label="Llistat de projectes" className="mx-auto max-w-[88rem] px-5 pb-24 pt-16 md:px-8 md:pt-20">
+      <section aria-label="Llistat de projectes" className="mx-auto max-w-[88rem] px-5 pb-24 pt-8 md:px-8 md:pt-10">
         <ProjectsList projects={projects} />
       </section>
 

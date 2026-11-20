@@ -48,6 +48,7 @@ const LOGOS: Record<string, string> = {
   "hotel-niu": "hotel-niu",
   "olympus-race": "olympus-race-andorra",
   "la-casa": "la-casa-gastrobar",
+  "farmacia-guitart": "farmacia-guitart",
   "henkan": "henkan",
   "erf-assegurances": "erf-assegurances",
   "beta-assegurances": "beta-assegurances",
@@ -136,7 +137,7 @@ export const ProjectsList = ({ projects }: { projects: Project[] }) => {
 
   return (
     <>
-      <div role="group" aria-label="Filtra per servei" className="flex flex-wrap gap-2">
+      <div role="group" aria-label="Filtra per servei" className="filtres -mx-5 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
         {[null, ...tags].map((t) => {
           const on = t === tag;
           return (
@@ -145,7 +146,7 @@ export const ProjectsList = ({ projects }: { projects: Project[] }) => {
               type="button"
               aria-pressed={on}
               onClick={() => setTag(t)}
-              className={`rounded-full border px-5 py-2.5 text-sm transition-colors ${
+              className={`shrink-0 whitespace-nowrap rounded-full border px-4 py-2 text-sm sm:px-5 sm:py-2.5 transition-colors ${
                 on ? "border-black bg-black text-white" : "border-black/15 text-black/75 hover:border-black/40"
               }`}
             >
@@ -158,7 +159,7 @@ export const ProjectsList = ({ projects }: { projects: Project[] }) => {
         })}
       </div>
 
-      <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+      <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
         {shown.map((p, i) => (
           <Reveal key={p.slug} as="li" className="reveal-up" style={{ transitionDelay: `${(i % 3) * 90}ms` }}>
             <ProjectCard p={p} />
