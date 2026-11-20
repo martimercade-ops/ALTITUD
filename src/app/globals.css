@@ -1005,3 +1005,4 @@ font { background: transparent !important; }
 }
 .pj-titol .pj-muted { --tinta: #8d9bb8; }
 .pj-titol .n1-paraula { margin-right: 0.24em; } .pj-titol .n1-paraula:last-child { margin-right: 0; }
+.illa--foto::before, .illa--foto .illa-llum, .illa--foto .illa-ombra { display: none; }

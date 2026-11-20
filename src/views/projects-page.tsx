@@ -94,14 +94,14 @@ const ProjectCard = ({ p }: { p: Project }) => {
       aria-label={`Veure el projecte de ${p.name}`}
       onPointerMove={onMove}
       onPointerLeave={onLeave}
-      className="illa illa--clar group relative flex h-full flex-col overflow-hidden rounded-[28px] bg-[#eceef2] text-black"
+      className={`illa illa--clar ${p.foto ? "illa--foto" : ""} group relative flex h-full flex-col overflow-hidden rounded-[28px] bg-[#eceef2] text-black`}
     >
       <span aria-hidden="true" className="illa-llum" />
 
       <div aria-hidden="true" className="illa-estudi relative aspect-[16/11] w-full">
         <span className="illa-ombra" />
         {p.foto ? (
-          <div className="absolute inset-4 overflow-hidden rounded-[20px] md:inset-5">
+          <div className="absolute inset-4 z-[2] overflow-hidden rounded-[20px] md:inset-5">
             <Image src={p.image} alt="" fill sizes="(max-width: 640px) 92vw, 30vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
           </div>
         ) : (
