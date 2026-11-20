@@ -34,4 +34,9 @@ export const reels: Reel[] = [
   { slug: "farmacia-guitart", client: "Farmàcia Guitart", sector: "Farmàcia", video: `${R}/farmacia-guitart.mp4`, poster: `${R}/farmacia-guitart.webp`, logo: "farmacia-guitart-g" },
   { slug: "ark-real-estate", client: "ARK Immo Real Estate", sector: "Immobiliària", video: `${R}/ark-real-estate.mp4`, poster: `${R}/ark-real-estate.webp`, logo: "ark-icon" },
   { slug: "el-rato", client: "El Rato Barre House", sector: "Fitness i benestar", video: `${R}/el-rato.mp4`, poster: `${R}/el-rato.webp`, logo: "el-rato" },
+  { slug: "el-rollo", client: "Rollo Coffee & Bar", sector: "Cafeteria", video: `${R}/el-rollo.mp4`, poster: `${R}/el-rollo.webp`, logo: "el-rollo" },
+  { slug: "hotel-niu", client: "Hotel Niu", sector: "Hotel", video: `${R}/hotel-niu.mp4`, poster: `${R}/hotel-niu.webp`, logo: "hotel-niu" },
+  { slug: "maison-carne", client: "Maison Carne", sector: "Restaurant", video: `${R}/maison-carne.mp4`, poster: `${R}/maison-carne.webp`, logo: "maison-carne" },
+  { slug: "medic-estetic", client: "Medic Estetic", sector: "Medicina estètica", video: `${R}/medic-estetic.mp4`, poster: `${R}/medic-estetic.webp`, logo: "medic-estetic" },
+  { slug: "mca-assessors", client: "MCA Assessors", sector: "Assessoria", video: `${R}/mca-assessors.mp4`, poster: `${R}/mca-assessors.webp`, logo: "mca-assessors" },
 ];
