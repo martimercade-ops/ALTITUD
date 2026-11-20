@@ -16,7 +16,7 @@ export const ProjectesView = () => (
         <div className="relative z-10 mx-auto flex max-w-[88rem] flex-wrap items-end justify-between gap-x-8 gap-y-3">
           <Reveal className="reveal-up">
             <h1 id="projectes-title" className="text-[2.1rem] font-light leading-[1.05] tracking-tight sm:text-5xl lg:text-[3.25rem]">
-              Projectes que parlen per nosaltres.
+              Marques que hem ajudat a créixer.
             </h1>
           </Reveal>
           <p className="flex items-center gap-2 pb-2 text-xs font-semibold uppercase tracking-[0.3em] text-white/55">

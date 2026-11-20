@@ -48,6 +48,7 @@ const LOGOS: Record<string, string> = {
   "hotel-niu": "hotel-niu",
   "olympus-race": "olympus-race-andorra",
   "la-casa": "la-casa-gastrobar",
+  "enzo-poulat": "enzo-poulat",
   "farmacia-guitart": "farmacia-guitart",
   "henkan": "henkan",
   "erf-assegurances": "erf-assegurances",
