@@ -21,4 +21,5 @@ export const reels: Reel[] = [
   { slug: "relaxia", client: "Relaxia", sector: "Descans i matalassos", video: `${R}/relaxia.mp4`, poster: `${R}/relaxia.webp`, logo: "relaxia-r" },
   { slug: "ferreteria-principat", client: "Ferreteria Principat", sector: "Ferreteria", video: `${R}/ferreteria-principat.mp4`, poster: `${R}/ferreteria-principat.webp`, logo: "ferreteria-principat" },
   { slug: "unique-pink-collagen", client: "Unique Pink Collagen", sector: "Meritxell Martí", video: `${R}/unique-pink-collagen.mp4`, poster: `${R}/unique-pink-collagen.webp` },
+  { slug: "ciutadans-compromesos", client: "Ciutadans Compromesos", sector: "Partit polític", video: `${R}/ciutadans-compromesos.mp4`, poster: `${R}/ciutadans-compromesos.webp`, logo: "ciutadans-compromesos-cc" },
 ];
