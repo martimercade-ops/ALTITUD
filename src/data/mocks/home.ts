@@ -253,6 +253,7 @@ export const homeContent: HomeContent = {
       {
         name: "Andrea Ramos",
         email: "andrea.ramos@altitudigital.com",
+        linkedin: "https://ad.linkedin.com/in/andrea-ramos-merino-700932213",
         role: "Project Manager",
         image: `${A}/equip/andrea.jpg`,
         bio: "Coordina els projectes perquè tot arribi a temps, amb ordre i comunicació clara amb cada client.",
