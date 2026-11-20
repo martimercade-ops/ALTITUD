@@ -89,7 +89,7 @@ export const PdeForm = ({ solutions }: { solutions: PdeSolution[] }) => {
         </span>
         <h2 className="mt-6 text-3xl font-light tracking-tight">Ja ets a la llista d&apos;espera!</h2>
         <p className="mt-3 text-black/65">
-          Et trucarem per resoldre dubtes i preparar-te el pressupost, perquè el presentem el primer dia del pas 3.
+          Et trucarem per fer una reunió, triar els paquets que t&apos;interessen i preparar-te el pressupost, perquè el presentem el primer dia del pas 3.
         </p>
         <a
           href="https://andorra-digital.com/pde/questionari-maduresa-digital"
@@ -98,7 +98,7 @@ export const PdeForm = ({ solutions }: { solutions: PdeSolution[] }) => {
           className="mt-5 flex items-center justify-between gap-3 rounded-2xl bg-[#eef3ff] p-4 text-[15px] leading-snug"
         >
           <span>
-            <strong className="text-[#2f5bff]">Mentrestant, fes el pas 1:</strong> el qüestionari de maduresa digital del Govern.
+            <strong className="text-[#2f5bff]">Important: fes el pas 1.</strong> El qüestionari de maduresa digital és obligatori per demanar l&apos;ajut.
           </span>
           <span className="shrink-0 rounded-full bg-[#2f5bff] px-4 py-2 text-sm font-semibold text-white">Fer-lo ↗</span>
         </a>

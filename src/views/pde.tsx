@@ -18,9 +18,9 @@ const POINTS = [
 ];
 
 const STEPS = [
-  { n: "01", title: "Fas el pas 1", text: "El qüestionari de maduresa digital del Govern. Ja està obert." },
-  { n: "02", title: "Et truquem", text: "Resolem dubtes, triem les solucions i et fem el pressupost." },
-  { n: "03", title: "Ajut demanat", text: "Quan s'obri el pas 3, presentem el pressupost el primer dia." },
+  { n: "01", title: "Pas 1: qüestionari", text: "Obligatori per demanar l'ajut. Ja està obert i el fas en uns minuts." },
+  { n: "02", title: "Reunió i pressupost", text: "Ens veiem, triem els paquets que t'interessen i et preparem el pressupost." },
+  { n: "03", title: "Pas 3: solucions", text: "Quan s'obri, presentem el pressupost el primer dia." },
 ];
 
 const Tick = () => (

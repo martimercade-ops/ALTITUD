@@ -12,8 +12,8 @@ export const Pas1Banner = ({ dark = false }: { dark?: boolean }) => (
     }`}
   >
     <p className="text-[15px] leading-snug">
-      <strong className={dark ? "text-accent-lime" : "text-[#2f5bff]"}>El pas 1 ja està obert.</strong>{" "}
-      Fes ara el qüestionari de maduresa digital del Govern (uns 10 minuts) i aniràs més ràpid que la resta.
+      <strong className={dark ? "text-accent-lime" : "text-[#2f5bff]"}>El pas 1 és obligatori i ja està obert.</strong>{" "}
+      Sense el qüestionari de maduresa digital del Govern no es pot demanar l&apos;ajut. Fes-lo ara i aniràs més ràpid que la resta.
     </p>
     <a
       href={PAS1_URL}
@@ -71,14 +71,14 @@ export const Pas1Popup = () => {
         </button>
         <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-[#2f5bff]">
           <span className="h-1.5 w-1.5 rounded-full bg-[#2f5bff]" />
-          PDE · Pas 1 obert
+          PDE · Pas 1 obligatori
         </p>
         <h2 id="pas1-titol" className="mt-4 text-[1.75rem] font-light leading-tight tracking-tight">
           Avança&apos;t a la resta.
         </h2>
         <p className="mt-3 text-[15px] leading-relaxed text-black/65">
-          El primer pas de l&apos;ajut ja es pot fer: el <strong className="text-black">qüestionari de maduresa digital</strong> del Govern.
-          Fes-lo ara i, quan s&apos;obri el pas 3, presentarem el teu pressupost el primer dia.
+          Per demanar l&apos;ajut és obligatori fer el <strong className="text-black">qüestionari de maduresa digital</strong> del Govern, i ja està obert.
+          Fes-lo ara: després ens reunim, triem els paquets i et preparem el pressupost per presentar-lo el primer dia del pas 3.
         </p>
         <div className="mt-6 flex flex-col gap-3">
           <a href={PAS1_URL} target="_blank" rel="noopener noreferrer" onClick={tanca} className="inline-flex h-12 items-center justify-center rounded-full bg-[#2f5bff] text-sm font-semibold text-white">
