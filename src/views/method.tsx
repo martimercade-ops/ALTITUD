@@ -98,8 +98,12 @@ export const Method = ({ content, route }: MethodProps) => {
 
         <header className="relative z-10 px-[24px] pt-[92px] text-center lg:pt-28">
           <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/50 lg:text-xs lg:tracking-[0.35em]">{eyebrow}</p>
-          <h2 id="method-title" className="mt-[10px] text-[26px] font-light leading-[1.15] tracking-tight lg:mt-4 lg:text-[3rem]">
-            {heading.text} <strong className="font-semibold">{heading.strong}</strong>
+          <h2 id="method-title" aria-label={`${heading.text} ${heading.strong}`} className="pj-titol mt-[10px] text-[30px] font-light leading-[1.08] tracking-tight lg:mt-4 lg:text-[4rem]">
+            {[...heading.text.split(" ").map((w) => ({ w, m: false })), ...heading.strong.split(" ").map((w) => ({ w, m: true }))].map(({ w, m }, i) => (
+              <span key={i} aria-hidden="true" className={`n1-paraula inline-block${m ? " pj-muted" : ""}`} style={{ ["--d" as string]: `${120 + i * 90}ms` }}>
+                {w}
+              </span>
+            ))}
           </h2>
         </header>
 
