@@ -59,7 +59,7 @@ const LOGOS: Record<string, string> = {
 
 /** Portàtil dibuixat (vectorial, net a qualsevol mida) amb la web del client a la pantalla */
 const Dispositius = ({ src }: { src: string }) => (
-  <div className="illa-dispositiu portatil relative w-full" style={{ aspectRatio: "100 / 57" }}>
+  <div className="illa-dispositiu portatil relative w-full" style={{ aspectRatio: "100 / 60" }}>
     <div className="portatil-tapa">
       <span className="portatil-camera" />
       <div className="illa-pantalla portatil-pantalla">
