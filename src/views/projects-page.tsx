@@ -109,7 +109,7 @@ const ProjectCard = ({ p }: { p: Project }) => {
                 <img src={`/assets/altitud/clients/color/${LOGOS_COLOR[p.slug]}.webp`} alt="" className="max-h-full max-w-full object-contain" />
               ) : (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={`/assets/altitud/clients/mono/${LOGOS[p.slug]}.webp`} alt="" className="illa-logo max-h-full max-w-full object-contain" />
+                <img src={`/assets/altitud/clients/color/${LOGOS[p.slug]}.webp`} alt="" className="max-h-full max-w-full object-contain" />
               )}
             </span>
           )}
