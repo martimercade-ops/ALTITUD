@@ -14,6 +14,10 @@ export interface TeamMember {
   focus?: string[];
   /** Formació i experiència destacades */
   highlights?: string[];
+  /** Perfil de LinkedIn */
+  linkedin?: string;
+  /** Projectes en què ha treballat */
+  projects?: { name: string; slug?: string; logo?: string }[];
 }
 
 export interface TeamContent {

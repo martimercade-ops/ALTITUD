@@ -5,8 +5,13 @@ import { SiteFooter } from "@/views/site-footer";
 import { Reveal } from "@/components/common/reveal";
 import { footerContent } from "@/data/mocks/contact";
 import { homeContent, homeNav, PARLEM_HREF } from "@/data/mocks/home";
+import { projectHref } from "@/data/mocks/projects";
 
-const pad = (n: number) => String(n).padStart(2, "0");
+const LinkedIn = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4 fill-current">
+    <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
+  </svg>
+);
 
 export const TeamPageView = () => {
   const { members } = homeContent.team;
@@ -16,112 +21,103 @@ export const TeamPageView = () => {
       <SiteNav {...homeNav} homeHref="/" navLabel="Principal" />
       <main id="top" className="w-full bg-hero-page text-[#171717]">
         {/* Capçalera */}
-        <section
-          aria-labelledby="equip-title"
-          className="relative overflow-hidden bg-[#0b1424] px-6 pb-28 pt-36 text-white md:px-10 md:pb-36 md:pt-44 lg:px-12"
-        >
-          <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(60%_80%_at_85%_10%,rgb(43_114_226/0.35),transparent_70%)]" />
-          <div className="relative z-10 mx-auto max-w-6xl">
-            <Reveal className="reveal-up">
-              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.35em] text-white/60">
-                <span className="h-1.5 w-1.5 rounded-full bg-accent-lime" />
-                Qui som
-              </p>
-            </Reveal>
-            <Reveal className="reveal-up" style={{ transitionDelay: "120ms" }}>
-              <h1 id="equip-title" className="mt-6 max-w-[16ch] text-[2.75rem] font-light leading-[1] tracking-tight sm:text-6xl lg:text-[5rem]">
-                Un equip creatiu i compromès.
-              </h1>
-            </Reveal>
-            <Reveal className="reveal-up" style={{ transitionDelay: "240ms" }}>
-              <p className="mt-8 max-w-xl text-lg leading-relaxed text-white/75">
-                Darrere de cada projecte hi ha un equip petit i proper, que coneix el mercat local i
-                treballa colze a colze amb cada client.
-              </p>
-            </Reveal>
-
-            {/* Miniatures de l'equip */}
-            <Reveal as="ul" className="reveal-stagger mt-14 flex flex-wrap gap-3">
-              {members.map((m, i) => (
-                <li key={m.name} style={{ transitionDelay: `${300 + i * 80}ms` }}>
-                  <a
-                    href={`#membre-${i + 1}`}
-                    className="group flex items-center gap-3 rounded-full border border-white/15 bg-white/5 py-1.5 pl-1.5 pr-5 text-sm backdrop-blur transition-colors hover:border-white/40"
-                  >
-                    <span className="relative block h-9 w-9 overflow-hidden rounded-full">
-                      <Image src={m.image} alt="" fill sizes="36px" className="object-cover" />
-                    </span>
-                    {m.name.split(" ")[0]}
-                  </a>
-                </li>
+        <section aria-labelledby="equip-title" className="relative overflow-hidden bg-[#0b1424] px-5 pb-12 pt-32 text-white md:px-8 md:pb-14 md:pt-36">
+          <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(55%_90%_at_85%_0%,rgb(47_91_255/0.3),transparent_70%)]" />
+          <div className="relative z-10 mx-auto max-w-[88rem]">
+            <h1 id="equip-title" aria-label="Un equip petit, proper i compromès." className="pj-titol text-[2.4rem] font-light leading-[1.04] tracking-tight sm:text-6xl lg:text-[4.5rem]">
+              {["Un", "equip", "petit,", "proper", "i", "compromès."].map((w, i) => (
+                <span key={i} aria-hidden="true" className={`n1-paraula inline-block${i >= 4 ? " pj-muted" : ""}`} style={{ ["--d" as string]: `${120 + i * 90}ms` }}>
+                  {w}
+                </span>
               ))}
-            </Reveal>
+            </h1>
           </div>
         </section>
 
-        {/* Presentació un per un */}
-        <section aria-label="Membres de l'equip" className="px-6 md:px-10 lg:px-12">
-          <ol className="mx-auto max-w-6xl">
-            {members.map((m, i) => {
-              const flip = i % 2 === 1;
-              return (
-                <li
-                  key={m.name}
-                  id={`membre-${i + 1}`}
-                  className="grid scroll-mt-28 items-center gap-10 border-b border-black/10 py-20 md:grid-cols-12 md:gap-12 md:py-28"
-                >
-                  <Reveal
-                    className={`reveal-photo relative aspect-[4/5] overflow-hidden rounded-3xl md:col-span-5 ${
-                      flip ? "md:order-2 md:col-start-8" : ""
-                    }`}
-                  >
+        {/* L'equip en una fila */}
+        <section aria-label="Membres de l'equip" className="mx-auto max-w-[88rem] px-5 pb-24 pt-10 md:px-8 md:pt-14">
+          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+            {members.map((m, i) => (
+              <Reveal key={m.name} as="li" className="reveal-up" style={{ transitionDelay: `${i * 80}ms` }}>
+                <article className="group flex h-full flex-col overflow-hidden rounded-[28px] bg-[#eceef2]">
+                  <div className="relative aspect-[4/5] overflow-hidden">
                     <Image
                       src={m.image}
                       alt={`${m.name}, ${m.role} d'Altitud Digital`}
                       fill
-                      sizes="(max-width: 768px) 92vw, 40vw"
+                      sizes="(max-width: 640px) 92vw, (max-width: 1280px) 30vw, 18vw"
                       quality={90}
-                      className="object-cover"
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                     />
-                  </Reveal>
+                    {m.linkedin && (
+                      <a
+                        href={m.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`LinkedIn de ${m.name}`}
+                        className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#0a66c2] shadow-sm transition-transform hover:scale-110"
+                      >
+                        <LinkedIn />
+                      </a>
+                    )}
+                  </div>
 
-                  <Reveal
-                    className={`reveal-text md:col-span-6 ${flip ? "md:order-1 md:col-start-1" : "md:col-start-7"}`}
-                  >
-                    <p className="text-sm font-medium tracking-[0.2em] text-black/35">
-                      {pad(i + 1)} <span className="text-black/20">/ {pad(members.length)}</span>
-                    </p>
-                    <h2 className="mt-6 text-[2.5rem] font-light leading-[1] tracking-tight md:text-[3.5rem]">{m.name}</h2>
-                    <p className="mt-3 text-lg text-[#2f5bff]">{m.role}</p>
-                    {m.bio && <p className="mt-8 max-w-md text-lg leading-relaxed text-black/65">{m.bio}</p>}
-                    {m.highlights && (
-                      <ul className="mt-8 flex flex-col gap-3 border-l-2 border-[#2f5bff] pl-5" aria-label="Formació i experiència">
-                        {m.highlights.map((h) => (
-                          <li key={h} className="text-[15px] leading-snug text-black/75">{h}</li>
-                        ))}
-                      </ul>
-                    )}
+                  <div className="flex flex-1 flex-col p-5">
+                    <h2 className="text-[1.35rem] font-normal leading-tight tracking-tight">{m.name}</h2>
+                    <p className="mt-1 text-sm font-medium text-[#2f5bff]">{m.role}</p>
+                    {m.bio && <p className="mt-3 text-[14px] leading-relaxed text-black/60">{m.bio}</p>}
+
                     {m.focus && (
-                      <ul className="mt-8 flex flex-wrap gap-2" aria-label="Especialitats">
-                        {m.focus.map((f) => (
-                          <li key={f} className="rounded-full border border-black/15 px-4 py-1.5 text-sm text-black/75">
-                            {f}
-                          </li>
-                        ))}
-                      </ul>
+                      <>
+                        <p className="mt-5 text-[10px] font-semibold uppercase tracking-[0.25em] text-black/40">Què fa</p>
+                        <ul className="mt-2 flex flex-wrap gap-1.5" aria-label="Tasques">
+                          {m.focus.map((f) => (
+                            <li key={f} className="rounded-full border border-black/10 bg-white/70 px-3 py-1 text-xs text-black/70">{f}</li>
+                          ))}
+                        </ul>
+                      </>
                     )}
-                  </Reveal>
-                </li>
-              );
-            })}
-          </ol>
+
+                    {m.projects && m.projects.length > 0 && (
+                      <div className="mt-auto pt-5">
+                        <p className="border-t border-black/[0.07] pt-4 text-[10px] font-semibold uppercase tracking-[0.25em] text-black/40">Projectes</p>
+                        <ul className="mt-2 flex flex-wrap gap-2" aria-label="Projectes">
+                          {m.projects.map((pr) => {
+                            const inner = (
+                              <>
+                                {pr.logo && (
+                                  // eslint-disable-next-line @next/next/no-img-element
+                                  <img src={`/assets/altitud/clients/color/${pr.logo}.webp`} alt="" className="h-5 w-auto max-w-[3.5rem] object-contain" />
+                                )}
+                                <span>{pr.name}</span>
+                              </>
+                            );
+                            const cls = "flex items-center gap-2 rounded-xl bg-white px-2.5 py-1.5 text-xs text-black/75 shadow-[0_1px_2px_rgba(0,0,0,0.06)]";
+                            return (
+                              <li key={pr.name}>
+                                {pr.slug ? (
+                                  <Link href={projectHref(pr.slug)} className={`${cls} transition-colors hover:text-[#2f5bff]`}>{inner}</Link>
+                                ) : (
+                                  <span className={cls}>{inner}</span>
+                                )}
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </ul>
         </section>
 
         {/* Crida */}
-        <section className="px-6 py-24 text-center md:py-32">
+        <section className="px-6 pb-24 text-center md:pb-32">
           <Reveal className="reveal-up">
             <p className="mx-auto max-w-3xl text-[1.75rem] font-light leading-[1.15] tracking-tight md:text-[2.5rem]">
-              Un equip petit, proper i sempre a l&apos;altura del teu projecte.
+              Vols treballar amb nosaltres?
             </p>
             <Link
               href={PARLEM_HREF}

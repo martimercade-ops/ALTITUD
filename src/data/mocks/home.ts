@@ -238,6 +238,7 @@ export const homeContent: HomeContent = {
           "Experiència a Havas Media amb clients com UNICEF, JDE i Banca March",
         ],
         focus: ["Estratègia", "Desenvolupament de negoci", "IA"],
+        projects: [{ name: "Olympus Race", slug: "olympus-race", logo: "olympus-race-andorra" }, { name: "FAE", slug: "federacio-andorrana-d-esqui", logo: "fae" }],
       },
       {
         name: "Eric Carrera",
@@ -245,6 +246,7 @@ export const homeContent: HomeContent = {
         image: `${A}/equip/eric.jpg`,
         bio: "Responsable de la tecnologia: webs, automatitzacions i solucions d'IA que funcionen de veritat.",
         focus: ["Desenvolupament web", "Automatitzacions", "IA"],
+        projects: [{ name: "PlexiFoto", slug: "plexifoto" }, { name: "Brainworks", slug: "brainworks-center", logo: "brainworks" }],
       },
       {
         name: "Andrea Ramos",
@@ -253,6 +255,7 @@ export const homeContent: HomeContent = {
         bio: "Coordina els projectes perquè tot arribi a temps, amb ordre i comunicació clara amb cada client.",
         highlights: ["Màster en màrqueting"],
         focus: ["Gestió de projectes", "Atenció al client", "Planificació"],
+        projects: [{ name: "Nou Aire", logo: "nou-aire" }],
       },
       {
         name: "Maria Socias",
@@ -260,6 +263,7 @@ export const homeContent: HomeContent = {
         image: `${A}/equip/maria.jpg`,
         bio: "Crea el contingut que connecta: idees, reels i publicacions amb la veu de cada marca.",
         focus: ["Xarxes socials", "Reels", "Copywriting"],
+        projects: [{ name: "Nou Aire", logo: "nou-aire" }, { name: "Brainworks", slug: "brainworks-center", logo: "brainworks" }],
       },
       {
         name: "Armando Arenea",
@@ -267,6 +271,7 @@ export const homeContent: HomeContent = {
         image: `${A}/equip/armando.jpg`,
         bio: "Dona forma visual a les marques: identitats, webs i peces gràfiques amb personalitat.",
         focus: ["Branding", "Disseny web", "Disseny gràfic"],
+        projects: [{ name: "Brainworks", slug: "brainworks-center", logo: "brainworks" }],
       },
     ],
   },
