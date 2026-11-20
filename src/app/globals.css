@@ -1050,3 +1050,16 @@ font { background: transparent !important; }
 .valors:hover .valor-item, .valor-item:hover { opacity: 1; transform: none; }
 @media (hover: none) { .valor-item { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .rodatge-cinta, .valors-cinta { animation: none; } }
+
+/* Qui som: entrada d'un en un i targetes vives */
+.equip-entra { opacity: 0; transform: translateY(60px) rotate(calc((var(--i) - 2) * 2deg)) scale(0.92); filter: blur(10px); transition: opacity 0.9s, transform 1.1s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.9s; transition-delay: calc(var(--i) * 140ms); }
+.equip-graella--on .equip-entra { opacity: 1; transform: none; filter: none; }
+.membre { --tx: 0; --ty: 0; transform: perspective(900px) rotateY(calc(var(--tx) * 6deg)) rotateX(calc(var(--ty) * -6deg)); transition: transform 0.5s cubic-bezier(0.2, 0.75, 0.2, 1), box-shadow 0.5s, background 0.5s; }
+.membre:hover { transform: perspective(900px) translateY(-8px) rotateY(calc(var(--tx) * 6deg)) rotateX(calc(var(--ty) * -6deg)); box-shadow: 0 30px 60px -28px rgb(11 20 36 / 0.45); background: #fff; }
+.membre-foto { transition: transform 1s cubic-bezier(0.2, 0.75, 0.2, 1), filter 0.6s; filter: grayscale(0.25); }
+.membre:hover .membre-foto { transform: scale(1.08) translate(calc(var(--tx) * -6px), calc(var(--ty) * -6px)); filter: none; }
+.membre-brill { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(240px circle at calc(50% + var(--tx) * 50%) calc(50% + var(--ty) * 50%), rgb(255 255 255 / 0.28), transparent 70%); opacity: 0; transition: opacity 0.4s; }
+.membre:hover .membre-brill { opacity: 1; }
+.membre-rol { display: inline-block; transition: transform 0.4s, letter-spacing 0.4s; }
+.membre:hover .membre-rol { transform: translateX(4px); }
+@media (prefers-reduced-motion: reduce) { .equip-entra { opacity: 1; transform: none; filter: none; } .membre { transform: none !important; } }

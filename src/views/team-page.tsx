@@ -4,7 +4,7 @@ import { SiteFooter } from "@/views/site-footer";
 import { Reveal } from "@/components/common/reveal";
 import { footerContent } from "@/data/mocks/contact";
 import { homeContent, homeNav, PARLEM_HREF } from "@/data/mocks/home";
-import { TeamCard } from "@/views/team-cards";
+import { TeamGrid } from "@/views/team-grid";
 
 
 export const TeamPageView = () => {
@@ -30,13 +30,7 @@ export const TeamPageView = () => {
 
         {/* L'equip en una fila */}
         <section aria-label="Membres de l'equip" className="mx-auto max-w-[88rem] px-5 pb-24 pt-10 md:px-8 md:pt-14">
-          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-            {members.map((m, i) => (
-              <Reveal key={m.name} as="li" className="reveal-up" style={{ transitionDelay: `${i * 80}ms` }}>
-                <TeamCard m={m} />
-              </Reveal>
-            ))}
-          </ul>
+          <TeamGrid members={members} />
         </section>
 
         {/* Crida */}
