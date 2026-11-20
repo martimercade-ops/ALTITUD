@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { reels } from "@/data/mocks/reels";
 import { ReelCard } from "./reel-card";
 import Image from "next/image";
@@ -136,18 +136,23 @@ const ProjectCard = ({ p }: { p: Project }) => {
 };
 
 export const ProjectsList = ({ projects }: { projects: Project[] }) => {
-  const tags = useMemo(() => {
-    const all = projects.flatMap((p) => p.services);
-    return [...new Set(all)].sort((a, b) => all.filter((x) => x === b).length - all.filter((x) => x === a).length);
-  }, [projects]);
-  const [tag, setTag] = useState<string | null>(null);
-  const shown = tag ? projects.filter((p) => p.services.includes(tag)) : projects;
   const XARXES = "Xarxes socials";
-  const compte = (t: string) => (t === XARXES ? reels.length : projects.filter((p) => p.services.includes(t)).length);
+  /** Filtres fixos: cada un agrupa les etiquetes dels projectes que hi entren */
+  const FILTRES: Record<string, string[]> = {
+    Web: ["Web"],
+    [XARXES]: [],
+    Identitat: ["Identitat corporativa", "Branding"],
+    Ecommerce: ["Botiga online"],
+  };
+  const tags = Object.keys(FILTRES);
+  const [tag, setTag] = useState<string | null>(null);
+  const entra = (p: Project, t: string) => FILTRES[t].some((x) => p.services.includes(x));
+  const shown = tag ? projects.filter((p) => entra(p, tag)) : projects;
+  const compte = (t: string) => (t === XARXES ? reels.length : projects.filter((p) => entra(p, t)).length);
 
   return (
     <>
-      <div role="group" aria-label="Filtra per servei" className="filtres -mx-5 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
+      <div role="group" aria-label="Filtra per servei" className="filtres -mx-5 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] sm:mx-0 sm:px-0">
         {tags.map((t) => {
           const on = t === tag;
           return (
