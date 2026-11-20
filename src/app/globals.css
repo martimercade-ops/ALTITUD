@@ -996,3 +996,12 @@ font { background: transparent !important; }
 .reel-pantalla { position: relative; display: block; width: 100%; height: 100%; overflow: hidden; border-radius: 13% / 6.2%; background: #000; }
 .reel-illa { position: absolute; top: 2.2%; left: 50%; width: 30%; height: 3.4%; transform: translateX(-50%); border-radius: 999px; background: #000; }
 .reel-ombra { position: absolute; bottom: 3%; left: 30%; right: 30%; height: 18px; border-radius: 50%; background: radial-gradient(closest-side, rgb(11 20 36 / 0.28), transparent); filter: blur(4px); }
+
+/* Títol de Projectes: mateix efecte que «Més que una agència», sobre fosc */
+.pj-titol .n1-paraula {
+  background-image: linear-gradient(100deg, var(--tinta, #ffffff) 0%, var(--tinta, #ffffff) 40%, #b6f13a 50%, var(--tinta, #ffffff) 60%, var(--tinta, #ffffff) 100%);
+  animation: lletra-puja 1s cubic-bezier(0.2, 0.75, 0.15, 1) both, n1-llum 7s ease-in-out infinite;
+  animation-delay: var(--d, 0ms), calc(var(--d, 0ms) + 1600ms);
+}
+.pj-titol .pj-muted { --tinta: #8d9bb8; }
+.pj-titol .n1-paraula { margin-right: 0.24em; } .pj-titol .n1-paraula:last-child { margin-right: 0; }

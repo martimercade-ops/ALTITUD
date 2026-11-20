@@ -143,7 +143,7 @@ export const ProjectsList = ({ projects }: { projects: Project[] }) => {
   const [tag, setTag] = useState<string | null>(null);
   const shown = tag ? projects.filter((p) => p.services.includes(tag)) : projects;
   const XARXES = "Xarxes socials";
-  const compte = (t: string) => projects.filter((p) => p.services.includes(t)).length + (t === XARXES ? reels.length : 0);
+  const compte = (t: string) => (t === XARXES ? reels.length : projects.filter((p) => p.services.includes(t)).length);
 
   return (
     <>
@@ -170,15 +170,16 @@ export const ProjectsList = ({ projects }: { projects: Project[] }) => {
       </div>
 
       {tag === XARXES && reels.length > 0 && (
-        <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6 xl:grid-cols-4">
-          {reels.map((r, i) => (
-            <Reveal key={r.slug} as="li" className="reveal-up" style={{ transitionDelay: `${(i % 4) * 90}ms` }}>
+        <ul className="-mx-5 mt-8 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-6 [scrollbar-width:none] sm:mx-0 sm:px-0">
+          {reels.map((r) => (
+            <li key={r.slug} className="w-[72vw] max-w-[300px] shrink-0 snap-start sm:w-[280px]">
               <ReelCard r={r} />
-            </Reveal>
+            </li>
           ))}
         </ul>
       )}
 
+      {tag !== XARXES && (
       <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
         {shown.map((p, i) => (
           <Reveal key={p.slug} as="li" className="reveal-up" style={{ transitionDelay: `${(i % 3) * 90}ms` }}>
@@ -186,6 +187,7 @@ export const ProjectsList = ({ projects }: { projects: Project[] }) => {
           </Reveal>
         ))}
       </ul>
+      )}
     </>
   );
 };
