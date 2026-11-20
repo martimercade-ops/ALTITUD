@@ -30,7 +30,7 @@ export const TeamPageView = () => {
 
         {/* L'equip en una fila */}
         <section aria-label="Membres de l'equip" className="mx-auto max-w-[88rem] px-5 pb-24 pt-10 md:px-8 md:pt-14">
-          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          <ul className="mx-auto grid max-w-[72rem] gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
             {members.map((m, i) => (
               <Reveal key={m.name} as="li" className="reveal-up" style={{ transitionDelay: `${i * 80}ms` }}>
                 <TeamCard m={m} />

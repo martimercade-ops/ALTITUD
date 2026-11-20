@@ -16,7 +16,7 @@ const LinkedIn = () => (
 export const TeamCard = ({ m }: { m: TeamMember }) => {
   const [open, setOpen] = useState(false);
   return (
-    <div className={`gira group relative aspect-[3/4.4] w-full ${open ? "gira--on" : ""}`}>
+    <div className={`gira group relative aspect-[3/4.6] w-full ${open ? "gira--on" : ""}`} onMouseLeave={() => setOpen(false)}>
       <div className="gira-cos">
         {/* Davant */}
         <button

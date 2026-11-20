@@ -1016,3 +1016,7 @@ font { background: transparent !important; }
 .gira-cara { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
 .gira-darrere { transform: rotateY(180deg); }
 @media (prefers-reduced-motion: reduce) { .gira-cos { transition: none; } }
+@media (hover: hover) and (pointer: fine) {
+  .gira:hover { transform: translateY(-10px) scale(1.03); z-index: 5; }
+  .gira:hover .gira-cos { transform: rotateY(180deg); box-shadow: 0 40px 70px -30px rgb(11 20 36 / 0.6); }
+}
