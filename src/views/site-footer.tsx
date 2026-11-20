@@ -43,6 +43,7 @@ export const SiteFooter = ({ content }: SiteFooterProps) => {
     >
       <Image src={content.image} alt="" fill sizes="100vw" quality={90} className="object-cover" />
       <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgb(11_20_36/0.45),transparent_40%,rgb(11_20_36/0.82))]" />
+      <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,transparent_35%,rgb(11_20_36/0.92)_60%,rgb(11_20_36)_100%)] md:hidden" />
 
       <div className="relative z-10 flex flex-1 flex-col">
       <div className="flex flex-col items-center text-center">
@@ -111,9 +112,60 @@ export const SiteFooter = ({ content }: SiteFooterProps) => {
 
       <div className="flex-1" />
 
+      {/* Peu al mòbil */}
+      <nav aria-label="Footer" className="mt-14 flex flex-col gap-8 md:hidden">
+        <div className="grid grid-cols-2 gap-2">
+          <a
+            href={`tel:${contact.phone.replace(/[^+\d]/g, "")}`}
+            className="flex h-12 items-center justify-center gap-2 rounded-full bg-footer-fg text-sm font-medium text-footer"
+          >
+            Truca&apos;ns
+          </a>
+          <a href={`mailto:${contact.email}`} className="flex h-12 items-center justify-center gap-2 rounded-full border border-footer-fg/25 text-sm font-medium">
+            Escriu-nos
+          </a>
+        </div>
+
+        <div>
+          <h3 className={colTitle}>{sitemap.title}</h3>
+          <ul className="grid grid-cols-2 gap-2">
+            {sitemap.links.map((link) => (
+              <li key={link.label}>
+                <a {...linkProps(link)} className="flex h-11 items-center rounded-2xl border border-footer-fg/12 bg-footer-fg/[0.04] px-4 text-sm text-footer-fg/90">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 className={colTitle}>{contact.title}</h3>
+          <address className="flex flex-col divide-y divide-footer-fg/10 rounded-2xl border border-footer-fg/12 bg-footer-fg/[0.04] text-sm not-italic text-footer-fg/85">
+            <span className="whitespace-pre-line px-4 py-3">{contact.address}</span>
+            <a href={`tel:${contact.phone.replace(/[^+\d]/g, "")}`} className="px-4 py-3">{contact.phone}</a>
+            <a href={`mailto:${contact.email}`} className="px-4 py-3">{contact.email}</a>
+            <span className="whitespace-pre-line px-4 py-3 text-footer-fg/60">{contact.hours}</span>
+          </address>
+        </div>
+
+        <div className="flex items-center justify-between">
+          <h3 className="text-xs font-medium uppercase tracking-wide text-footer-muted">{social.title}</h3>
+          <ul className="flex gap-2">
+            {social.links.map((link) => (
+              <li key={link.label}>
+                <a {...linkProps(link)} className="flex h-10 items-center rounded-full border border-footer-fg/20 px-4 text-sm">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </nav>
+
       <nav
         aria-label="Footer"
-        className="-mx-6 mt-16 flex flex-col gap-10 border-t border-footer-fg/15 px-6 pt-12 md:-mx-10 md:mt-12 md:flex-row md:justify-between md:px-10 lg:-mx-12 lg:px-12"
+        className="-mx-6 mt-16 hidden flex-col gap-10 border-t border-footer-fg/15 px-6 pt-12 md:-mx-10 md:mt-12 md:flex md:flex-row md:justify-between md:px-10 lg:-mx-12 lg:px-12"
       >
         <div className="flex gap-12 sm:gap-20">
           <div>
@@ -170,11 +222,11 @@ export const SiteFooter = ({ content }: SiteFooterProps) => {
         </div>
       </nav>
 
-      <div className="-mx-6 mt-12 flex flex-col gap-4 border-t border-footer-fg/15 px-6 pt-6 text-xs text-footer-fg/55 md:-mx-10 md:flex-row md:items-center md:justify-between md:px-10 lg:-mx-12 lg:px-12">
+      <div className="-mx-6 mt-10 flex flex-col items-center gap-4 border-t border-footer-fg/15 px-6 pt-6 text-center text-xs text-footer-fg/55 md:mt-12 md:items-stretch md:text-left md:-mx-10 md:flex-row md:items-center md:justify-between md:px-10 lg:-mx-12 lg:px-12">
         <p>
           {content.copyright} NRT F-222591-D
         </p>
-        <ul className="flex flex-wrap gap-x-6 gap-y-2">
+        <ul className="flex flex-wrap justify-center gap-x-5 gap-y-2 md:justify-start">
           {legalPages.map((p) => (
             <li key={p.slug}>
               <Link href={p.href} className="hover:text-footer-fg">
@@ -188,7 +240,7 @@ export const SiteFooter = ({ content }: SiteFooterProps) => {
         </ul>
       </div>
       </div>
-      <img src="/assets/altitud/altitud-paraula.svg" alt="Altitud Digital" width="1600" height="245" className="peu-logo relative z-10 mt-8" />
+      <img src="/assets/altitud/altitud-paraula.svg" alt="Altitud Digital" width="1600" height="245" className="peu-logo relative z-10 mt-8 px-1 opacity-90 md:px-0 md:opacity-100" />
     </footer>
   );
 };
