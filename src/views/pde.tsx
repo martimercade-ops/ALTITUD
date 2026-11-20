@@ -9,6 +9,7 @@ import { ReviewToasts } from "@/views/pde-extres";
 import { GoogleMark } from "@/views/reviews";
 import { WHATSAPP_URL } from "@/components/common/whatsapp-button";
 import { formatEuros, pdeSolutions } from "@/data/mocks/pde";
+import { Pas1Banner, Pas1Popup } from "@/views/pde-pas1";
 
 const POINTS = [
   "Fins al 50% del cost pagat pel Govern",
@@ -17,9 +18,9 @@ const POINTS = [
 ];
 
 const STEPS = [
-  { n: "01", title: "T'apuntes", text: "1 minut, sense compromís." },
-  { n: "02", title: "Et truquem", text: "Triem juntes les solucions." },
-  { n: "03", title: "Ajut demanat", text: "El primer dia de la convocatòria." },
+  { n: "01", title: "Fas el pas 1", text: "El qüestionari de maduresa digital del Govern. Ja està obert." },
+  { n: "02", title: "Et truquem", text: "Resolem dubtes, triem les solucions i et fem el pressupost." },
+  { n: "03", title: "Ajut demanat", text: "Quan s'obri el pas 3, presentem el pressupost el primer dia." },
 ];
 
 const Tick = () => (
@@ -63,7 +64,11 @@ export const PdeView = () => {
                 Digitalitza&apos;t amb fins al <strong className="font-semibold text-accent-lime">50%</strong> subvencionat.
               </h1>
 
-              <ul className="mt-8 flex flex-col gap-3">
+              <div className="mt-7">
+                <Pas1Banner dark />
+              </div>
+
+              <ul className="mt-7 flex flex-col gap-3">
                 {POINTS.map((p) => (
                   <li key={p} className="flex items-start gap-3 text-[17px] text-white/90">
                     <Tick />
@@ -109,7 +114,10 @@ export const PdeView = () => {
               </li>
             ))}
           </Reveal>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <div className="mx-auto mt-8 max-w-3xl">
+            <Pas1Banner />
+          </div>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <a
               href="#llista"
               className="inline-flex h-12 items-center gap-3 rounded-full bg-[#2f5bff] pl-6 pr-2 text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
@@ -127,6 +135,7 @@ export const PdeView = () => {
         </section>
 
         <SiteFooter content={footerContent} />
+        <Pas1Popup />
         <ReviewToasts items={homeContent.reviews.items.filter((r) => r.text.length < 190)} />
       </main>
     </>
