@@ -168,7 +168,7 @@ const llista: Project[] = [
     sector: "Farmàcia",
     summary: "Web amb botiga en línia i identitat corporativa.",
     about: "Farmàcia i parafarmàcia amb botiga en línia i consell farmacèutic.",
-    services: ["Web", "Identitat corporativa"],
+    services: ["Web", "Botiga online", "Identitat corporativa"],
     links: [web("https://farmaciaguitart.com/")],
     image: `${P}/farmacia-guitart.jpg`,
   },
