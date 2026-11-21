@@ -12,8 +12,8 @@ export default async function Panell() {
   return (
     <>
       <Barra usuari={s.usuari} />
-      <main className="mx-auto max-w-7xl px-4 py-8 md:px-8">
-        <Tauler leads={leads} />
+      <main>
+        <Tauler leads={leads} usuari={s.usuari} />
       </main>
     </>
   );

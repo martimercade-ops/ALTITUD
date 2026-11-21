@@ -10,7 +10,7 @@ export default async function Nou() {
   const s = await requereixSessio();
   return (
     <>
-      <Barra usuari={s.usuari} />
+      <Barra usuari={s.usuari} actiu="/panell/nou" />
       <main className="mx-auto max-w-4xl px-4 py-8 md:px-8">
         <h1 className="mb-6 text-2xl font-semibold tracking-tight">Nou lead</h1>
         <FormLead accio={nouLead} boto="Crear lead" />

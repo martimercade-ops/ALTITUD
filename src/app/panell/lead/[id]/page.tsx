@@ -24,25 +24,34 @@ export default async function FitxaLead({ params }: { params: Promise<{ id: stri
 
   return (
     <>
-      <Barra usuari={s.usuari} />
+      <Barra usuari={s.usuari} actiu="" />
+      <section className="pa-hero relative overflow-hidden text-white">
+        <span aria-hidden="true" className="pa-graella" />
+        <div className="relative mx-auto max-w-6xl px-4 py-10 md:px-8">
+          <Link href="/panell" className="text-sm text-white/50 hover:text-white">← Tots els leads</Link>
+          <div className="mt-4 flex flex-wrap items-center gap-4">
+            <span className="grid size-14 place-items-center rounded-2xl bg-white/10 text-lg font-semibold">
+              {(lead.empresa || lead.contacte || "·").split(/\s+/).slice(0, 2).map((w) => w[0]).join("").toUpperCase()}
+            </span>
+            <div>
+              <h1 className="text-3xl font-semibold tracking-tight">{lead.empresa || lead.contacte || "Lead"}</h1>
+              <p className="mt-1 text-sm text-white/55">
+                {lead.contacte && lead.empresa ? `${lead.contacte} · ` : ""}Entrat el {dataHora(lead.creat)}{lead.origen ? ` · ${lead.origen}` : ""}
+              </p>
+            </div>
+            <span className="rounded-full px-3 py-1 text-xs font-semibold" style={{ background: `${colorEstat(lead.estat)}30`, color: "#fff" }}>● {nomEstat(lead.estat)}</span>
+            <span className="rounded-full bg-white/10 px-3 py-1 text-xs">{nomTipus(lead.tipus)}</span>
+          </div>
+          <div className="mt-6 flex flex-wrap gap-2 text-sm">
+            {lead.email && <a href={`mailto:${lead.email}`} className="rounded-full border border-white/15 px-4 py-2 hover:border-white/40">✉ {lead.email}</a>}
+            {lead.telefon && <a href={`tel:${lead.telefon.replace(/\s/g, "")}`} className="rounded-full border border-white/15 px-4 py-2 hover:border-white/40">☎ {lead.telefon}</a>}
+            {lead.telefon && (
+              <a href={`https://wa.me/${lead.telefon.replace(/\D/g, "").replace(/^(?=\d{6}$)/, "376")}`} target="_blank" rel="noopener noreferrer" className="rounded-full bg-[#25d366] px-4 py-2 font-medium text-white hover:bg-[#1fb957]">WhatsApp</a>
+            )}
+          </div>
+        </div>
+      </section>
       <main className="mx-auto max-w-6xl px-4 py-8 md:px-8">
-        <Link href="/panell" className="text-sm text-black/50 hover:text-black">← Tots els leads</Link>
-        <div className="mt-3 flex flex-wrap items-center gap-3">
-          <h1 className="text-2xl font-semibold tracking-tight">{lead.empresa || lead.contacte || "Lead"}</h1>
-          <span className="rounded-full px-2.5 py-1 text-xs font-medium" style={{ background: `${colorEstat(lead.estat)}18`, color: colorEstat(lead.estat) }}>{nomEstat(lead.estat)}</span>
-          <span className="rounded-full bg-black/5 px-2.5 py-1 text-xs">{nomTipus(lead.tipus)}</span>
-        </div>
-        <p className="mt-1 text-sm text-black/50">
-          Entrat el {dataHora(lead.creat)}{lead.origen ? ` · ${lead.origen}` : ""}
-        </p>
-        <div className="mt-3 flex flex-wrap gap-2 text-sm">
-          {lead.email && <a href={`mailto:${lead.email}`} className="panell-boto panell-boto--clar !py-1.5">✉ {lead.email}</a>}
-          {lead.telefon && <a href={`tel:${lead.telefon.replace(/\s/g, "")}`} className="panell-boto panell-boto--clar !py-1.5">☎ {lead.telefon}</a>}
-          {lead.telefon && (
-            <a href={`https://wa.me/${lead.telefon.replace(/\D/g, "").replace(/^(?=\d{6}$)/, "376")}`} target="_blank" rel="noopener noreferrer" className="panell-boto panell-boto--clar !py-1.5">WhatsApp</a>
-          )}
-        </div>
-
         <div className="mt-8 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
           <FormLead lead={lead} accio={desaLead.bind(null, id)} boto="Desar canvis" />
           <aside className="flex flex-col gap-4">

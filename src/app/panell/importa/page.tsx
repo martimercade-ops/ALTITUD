@@ -9,7 +9,7 @@ export default async function Importa() {
   const s = await requereixSessio();
   return (
     <>
-      <Barra usuari={s.usuari} />
+      <Barra usuari={s.usuari} actiu="/panell/importa" />
       <main className="mx-auto max-w-2xl px-4 py-8 md:px-8">
         <h1 className="text-2xl font-semibold tracking-tight">Importar leads</h1>
         <p className="mt-2 text-sm text-black/55">

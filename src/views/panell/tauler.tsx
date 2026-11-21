@@ -9,6 +9,25 @@ const data = (s: string) => new Date(s.replace(" ", "T") + "Z").toLocaleDateStri
 const euros = (n: number) => n.toLocaleString("ca-ES", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
 const avui = () => new Date().toISOString().slice(0, 10);
 
+const PALETA = ["#2b72e2", "#7c5cd6", "#0f9aa8", "#d48a1c", "#c2410c", "#15803d", "#db2777", "#4f46e5"];
+const colorDe = (s: string) => PALETA[[...s].reduce((a, c) => a + c.charCodeAt(0), 0) % PALETA.length];
+const inicials = (s: string) =>
+  s.split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0]).join("").toUpperCase() || "·";
+const Avatar = ({ nom, mida = "size-9" }: { nom: string; mida?: string }) => (
+  <span className={`grid ${mida} shrink-0 place-items-center rounded-xl text-xs font-semibold text-white`} style={{ background: colorDe(nom) }}>
+    {inicials(nom)}
+  </span>
+);
+const Tipus = ({ t }: { t: string }) => (
+  <span className={`inline-flex whitespace-nowrap rounded-full px-2.5 py-0.5 text-[0.7rem] font-medium ${t === "ajuts" ? "bg-[#b6f13a]/30 text-[#3d5a00]" : "bg-[#2b72e2]/10 text-[#1d4ed8]"}`}>
+    {nomTipus(t)}
+  </span>
+);
+const salutacio = () => {
+  const h = Number(new Date().toLocaleString("en-GB", { hour: "2-digit", hour12: false, timeZone: "Europe/Andorra" }));
+  return h < 13 ? "Bon dia" : h < 20 ? "Bona tarda" : "Bona nit";
+};
+
 const Pastilla = ({ estat }: { estat: string }) => (
   <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-2.5 py-1 text-xs font-medium" style={{ background: `${colorEstat(estat)}18`, color: colorEstat(estat) }}>
     <span className="size-1.5 rounded-full" style={{ background: colorEstat(estat) }} />
@@ -16,7 +35,7 @@ const Pastilla = ({ estat }: { estat: string }) => (
   </span>
 );
 
-export const Tauler = ({ leads }: { leads: Lead[] }) => {
+export const Tauler = ({ leads, usuari }: { leads: Lead[]; usuari: string }) => {
   const [vista, setVista] = useState<"taula" | "columnes">("taula");
   const [tipus, setTipus] = useState("tots");
   const [estat, setEstat] = useState("tots");
@@ -56,45 +75,81 @@ export const Tauler = ({ leads }: { leads: Lead[] }) => {
     });
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Leads</h1>
-          <p className="text-sm text-black/50">{optim.length} en total</p>
-        </div>
-        <Link href="/panell/nou" className="panell-boto">+ Nou lead</Link>
-      </div>
-
-      <section className="grid grid-cols-2 gap-3 md:grid-cols-5">
-        {[
-          ["Nous per contactar", kpi.nous],
-          ["Entrats aquest mes", kpi.mes],
-          ["En curs", kpi.actius],
-          ["Guanyats", kpi.guanyats],
-          ["En cartera", euros(kpi.cartera)],
-        ].map(([k, v]) => (
-          <div key={k} className="panell-targeta p-4">
-            <p className="text-xs text-black/50">{k}</p>
-            <p className="mt-1 text-2xl font-semibold tracking-tight">{v}</p>
+    <div>
+      <section className="pa-hero relative overflow-hidden text-white">
+        <span aria-hidden="true" className="pa-llum pa-llum--a !opacity-40" />
+        <span aria-hidden="true" className="pa-graella" />
+        <div className="relative mx-auto max-w-7xl px-4 pb-10 pt-10 md:px-8 md:pb-14 md:pt-14">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div className="pa-entra">
+              <p className="text-sm text-white/50">{new Date().toLocaleDateString("ca-ES", { weekday: "long", day: "numeric", month: "long" })}</p>
+              <h1 className="mt-1 text-[2.4rem] font-semibold leading-tight tracking-tight md:text-5xl">
+                {salutacio()}, <span className="capitalize text-[#b6f13a]">{usuari}</span>.
+              </h1>
+              <p className="mt-2 text-white/60">
+                {kpi.nous ? `Tens ${kpi.nous} ${kpi.nous === 1 ? "lead nou" : "leads nous"} per contactar.` : "Tot al dia. Cap lead pendent de contactar."}
+              </p>
+            </div>
+            <Link href="/panell/nou" className="pa-entra inline-flex items-center gap-2 rounded-full bg-[#b6f13a] px-5 py-3 text-sm font-semibold text-[#0b1424] transition-transform hover:scale-[1.03]">
+              + Nou lead
+            </Link>
           </div>
-        ))}
+
+          <div className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-5">
+            {[
+              ["Per contactar", kpi.nous, "#b6f13a"],
+              ["Aquest mes", kpi.mes, "#60a5fa"],
+              ["En curs", kpi.actius, "#a78bfa"],
+              ["Guanyats", kpi.guanyats, "#34d399"],
+              ["En cartera", euros(kpi.cartera), "#fbbf24"],
+            ].map(([k, v, c], i) => (
+              <div key={String(k)} className="pa-kpi pa-entra rounded-2xl p-5" style={{ "--i": i + 1 } as React.CSSProperties}>
+                <p className="flex items-center gap-2 text-xs text-white/55">
+                  <span className="size-1.5 rounded-full" style={{ background: String(c) }} />
+                  {k}
+                </p>
+                <p className="mt-2 text-3xl font-semibold tracking-tight">{v}</p>
+              </div>
+            ))}
+          </div>
+
+          {optim.length > 0 && (
+            <div className="pa-entra mt-8" style={{ "--i": 6 } as React.CSSProperties}>
+              <p className="mb-2 text-xs text-white/45">Embut de vendes</p>
+              <div className="flex h-2.5 overflow-hidden rounded-full bg-white/10">
+                {ESTATS.map((e) => {
+                  const n = optim.filter((l) => l.estat === e.id).length;
+                  return n ? <span key={e.id} title={`${e.nom}: ${n}`} style={{ width: `${(n / optim.length) * 100}%`, background: e.color }} /> : null;
+                })}
+              </div>
+              <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-xs text-white/55">
+                {ESTATS.map((e) => (
+                  <span key={e.id} className="flex items-center gap-1.5">
+                    <span className="size-2 rounded-full" style={{ background: e.color }} />
+                    {e.nom} <span className="text-white/35">{optim.filter((l) => l.estat === e.id).length}</span>
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       </section>
 
-      {kpi.seguiments.length > 0 && (
-        <section className="panell-targeta border-amber-200 bg-amber-50 p-4">
-          <p className="text-sm font-medium text-amber-900">Seguiments pendents ({kpi.seguiments.length})</p>
-          <ul className="mt-2 flex flex-wrap gap-2">
-            {kpi.seguiments.map((l) => (
-              <li key={l.id}>
-                <Link href={`/panell/lead/${l.id}`} className="inline-flex rounded-full bg-white px-3 py-1 text-sm text-amber-900 ring-1 ring-amber-200 hover:ring-amber-400">
-                  {l.empresa || l.contacte} · {data(l.seguiment!)}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
+      <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-8 md:px-8">
+        {kpi.seguiments.length > 0 && (
+          <section className="flex flex-wrap items-center gap-3 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4">
+            <p className="text-sm font-semibold text-amber-900">⏰ Seguiments per fer ({kpi.seguiments.length})</p>
+            <ul className="flex flex-wrap gap-2">
+              {kpi.seguiments.map((l) => (
+                <li key={l.id}>
+                  <Link href={`/panell/lead/${l.id}`} className="inline-flex rounded-full bg-white px-3 py-1 text-sm text-amber-900 ring-1 ring-amber-200 hover:ring-amber-400">
+                    {l.empresa || l.contacte} · {data(l.seguiment!)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       <section className="flex flex-wrap items-center gap-2">
         <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Cerca empresa, persona, correu…" className="panell-camp !w-auto min-w-[16rem] flex-1" />
         <select value={tipus} onChange={(e) => setTipus(e.target.value)} className="panell-camp !w-auto">
@@ -116,7 +171,7 @@ export const Tauler = ({ leads }: { leads: Lead[] }) => {
 
       {vista === "taula" ? (
         <div className="panell-targeta overflow-x-auto">
-          <table className="w-full min-w-[56rem] text-left text-sm">
+          <table className="w-full min-w-[60rem] text-left text-sm">
             <thead className="border-b border-black/5 text-xs uppercase tracking-wide text-black/45">
               <tr>
                 {["Data", "Empresa", "Contacte", "Serveis", "Tipus", "Estat", "Seguiment"].map((h) => (
@@ -126,19 +181,22 @@ export const Tauler = ({ leads }: { leads: Lead[] }) => {
             </thead>
             <tbody>
               {filtrats.map((l) => (
-                <tr key={l.id} className="border-b border-black/[0.04] last:border-0 hover:bg-black/[0.02]">
+                <tr key={l.id} className="border-b border-black/[0.04] transition-colors last:border-0 hover:bg-[#2b72e2]/[0.03]">
                   <td className="whitespace-nowrap px-4 py-3 text-black/55">{data(l.creat)}</td>
                   <td className="px-4 py-3">
-                    <Link href={`/panell/lead/${l.id}`} className="font-medium hover:underline">{l.empresa || "—"}</Link>
+                    <Link href={`/panell/lead/${l.id}`} className="flex items-center gap-3 font-medium hover:underline">
+                      <Avatar nom={l.empresa || l.contacte} />
+                      {l.empresa || "—"}
+                    </Link>
                   </td>
                   <td className="px-4 py-3">
                     <div>{l.contacte}</div>
                     <div className="text-xs text-black/45">{l.email}{l.telefon ? ` · ${l.telefon}` : ""}</div>
                   </td>
                   <td className="max-w-[14rem] px-4 py-3 text-xs text-black/60">{l.serveis}</td>
-                  <td className="whitespace-nowrap px-4 py-3 text-xs">{nomTipus(l.tipus)}</td>
+                  <td className="whitespace-nowrap px-4 py-3"><Tipus t={l.tipus} /></td>
                   <td className="px-4 py-3">
-                    <select value={l.estat} onChange={(e) => mouA(l.id, e.target.value)} className="rounded-full border-0 bg-transparent text-xs font-medium focus:ring-2" style={{ color: colorEstat(l.estat) }} aria-label="Estat">
+                    <select value={l.estat} onChange={(e) => mouA(l.id, e.target.value)} className="cursor-pointer rounded-full border-0 px-3 py-1.5 text-xs font-semibold outline-none focus:ring-2" style={{ color: colorEstat(l.estat), background: `${colorEstat(l.estat)}14` }} aria-label="Estat">
                       {ESTATS.map((e) => <option key={e.id} value={e.id}>{e.nom}</option>)}
                     </select>
                   </td>
@@ -163,7 +221,7 @@ export const Tauler = ({ leads }: { leads: Lead[] }) => {
                   const id = Number(ev.dataTransfer.getData("text/plain"));
                   if (id) mouA(id, e.id);
                 }}
-                className="flex w-64 shrink-0 flex-col rounded-2xl bg-black/[0.035] p-2"
+                className="flex w-72 shrink-0 flex-col rounded-2xl bg-white/60 p-2 ring-1 ring-black/5"
               >
                 <p className="flex items-center justify-between px-2 py-2 text-sm font-medium">
                   <Pastilla estat={e.id} />
@@ -176,12 +234,18 @@ export const Tauler = ({ leads }: { leads: Lead[] }) => {
                       href={`/panell/lead/${l.id}`}
                       draggable
                       onDragStart={(ev) => ev.dataTransfer.setData("text/plain", String(l.id))}
-                      className="panell-targeta block cursor-grab p-3 text-sm hover:shadow-md active:cursor-grabbing"
+                      className="panell-targeta block cursor-grab border-l-4 p-3 text-sm transition-shadow hover:shadow-lg active:cursor-grabbing"
+                      style={{ borderLeftColor: e.color }}
                     >
-                      <p className="font-medium">{l.empresa || l.contacte || "—"}</p>
-                      <p className="mt-0.5 text-xs text-black/50">{l.contacte}</p>
-                      <p className="mt-2 flex flex-wrap items-center gap-1.5 text-[0.7rem] text-black/45">
-                        <span className="rounded-full bg-black/5 px-2 py-0.5">{nomTipus(l.tipus)}</span>
+                      <span className="flex items-center gap-2.5">
+                        <Avatar nom={l.empresa || l.contacte} mida="size-8" />
+                        <span className="min-w-0">
+                          <span className="block truncate font-medium">{l.empresa || l.contacte || "—"}</span>
+                          <span className="block truncate text-xs text-black/50">{l.contacte}</span>
+                        </span>
+                      </span>
+                      <p className="mt-2.5 flex flex-wrap items-center gap-1.5 text-[0.7rem] text-black/45">
+                        <Tipus t={l.tipus} />
                         {l.valor ? <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-emerald-700">{euros(l.valor)}</span> : null}
                         <span>{data(l.creat)}</span>
                       </p>
@@ -193,6 +257,7 @@ export const Tauler = ({ leads }: { leads: Lead[] }) => {
           })}
         </div>
       )}
+      </div>
     </div>
   );
 };
