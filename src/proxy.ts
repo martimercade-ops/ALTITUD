@@ -7,6 +7,15 @@ export function proxy(request: NextRequest) {
   const rechazo = filtrarPeticion(request);
   if (rechazo) return rechazo;
 
+  // Pàgines brossa que es van colar a l'antic WordPress (casinos, ?p=…): 410 perquè Google les oblidi
+  const ruta = request.nextUrl.pathname.toLowerCase();
+  if (/casino|apuesta|slot|bet365|poker/.test(ruta) || (ruta === "/" && request.nextUrl.searchParams.has("p"))) {
+    return new NextResponse("Aquesta pàgina ja no existeix.", {
+      status: 410,
+      headers: { "Content-Type": "text/plain; charset=utf-8", "X-Robots-Tag": "noindex" },
+    });
+  }
+
   const bot = isBotUserAgent(request.headers.get("user-agent"));
   const { pathname } = request.nextUrl;
   if (pathname === "/" && bot) {
