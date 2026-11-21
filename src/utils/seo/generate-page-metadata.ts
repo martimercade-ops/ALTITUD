@@ -10,6 +10,9 @@ interface MetadataProps {
   twitterHandle?: string;
   author?: string;
   siteName?: string;
+  /** Versions en altres idiomes (hreflang): { ca: "/", es: "/es" } */
+  languages?: Record<string, string>;
+  locale?: string;
 }
 
 export function generateMetadata({
@@ -20,6 +23,8 @@ export function generateMetadata({
   twitterHandle = siteConfig.twitterHandle,
   author = siteConfig.author,
   siteName = siteConfig.name,
+  languages,
+  locale = "ca_ES",
 }: MetadataProps = {}): Metadata {
   return {
     metadataBase: new URL(siteConfig.url),
@@ -32,6 +37,7 @@ export function generateMetadata({
     publisher: author,
     alternates: {
       canonical: url,
+      ...(languages ? { languages: { ...languages, "x-default": languages.ca ?? url } } : {}),
     },
     openGraph: {
       title,
@@ -41,7 +47,7 @@ export function generateMetadata({
       images: [
         { url: ogImage, width: 1200, height: 630, alt: siteConfig.ogImageAlt },
       ],
-      locale: "ca_ES",
+      locale,
       type: "website",
     },
     twitter: {

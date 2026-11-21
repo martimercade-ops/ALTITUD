@@ -3,6 +3,7 @@ import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site";
 import { projectHref, projects } from "@/data/mocks/projects";
 import { serviceHref, services } from "@/data/mocks/services";
+import { landingEsHref, landingsEs } from "@/data/landings-es";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -71,6 +72,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.9,
+    })),
+    ...landingsEs.map((l) => ({
+      url: `${siteConfig.url}${landingEsHref(l.slug)}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: l.slug ? 0.9 : 1,
     })),
     ...projects.map((p) => ({
       url: `${siteConfig.url}${projectHref(p.slug)}`,

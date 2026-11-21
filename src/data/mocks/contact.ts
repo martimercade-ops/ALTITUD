@@ -80,6 +80,7 @@ export const footerContent: FooterContent = {
       { label: "Projectes", href: "/projectes" },
       { label: "Ajuts PDE", href: "/ajuts-pde" },
       { label: "Parlem", href: "/parlem" },
+      { label: "Versión en castellano", href: "/es" },
     ],
   },
   contact: {

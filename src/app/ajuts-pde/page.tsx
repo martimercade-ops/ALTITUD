@@ -6,6 +6,7 @@ export const metadata = pageMetadata({
   description:
     "El Programa de Digitalització d'Empreses (PDE) subvenciona entre el 30% i el 50% de la digitalització de la teva empresa. Apunta't a la llista d'espera i tingues-ho tot preparat per a la propera convocatòria.",
   url: "/ajuts-pde",
+  languages: { ca: "/ajuts-pde", es: "/es/ayudas-pde-andorra" },
 });
 
 export default function AjutsPdePage() {
