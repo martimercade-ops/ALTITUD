@@ -10,6 +10,7 @@ import { SiteFooter } from "@/views/site-footer";
 import { SiteNav } from "@/views/site-nav";
 import { Reviews } from "@/views/reviews";
 import { Team } from "@/views/team";
+import { Diferencial } from "@/views/diferencial";
 import { Method } from "@/views/method";
 import { methodContent } from "@/data/mocks/method";
 import { contactContent, footerContent } from "@/data/mocks/contact";
@@ -43,6 +44,7 @@ export const HomeView = ({ content = homeContent, robot = false }: HomeViewProps
       <Works content={works} />
       <Method content={T(methodContent)} />
       <Agencia360 />
+      <Diferencial />
       <Team content={team} />
       <div className="relative">
         <ContactForm content={T(contactContent)} />

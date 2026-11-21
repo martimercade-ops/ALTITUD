@@ -6,6 +6,7 @@ import { Reveal } from "@/components/common/reveal";
 import { footerContent } from "@/data/mocks/contact";
 import { homeContent, homeNav } from "@/data/mocks/home";
 import { TeamGrid } from "@/views/team-grid";
+import { Diferencial } from "@/views/diferencial";
 
 
 export const TeamPageView = () => {
@@ -36,8 +37,11 @@ export const TeamPageView = () => {
           <TeamGrid members={members} />
         </section>
 
+        <Diferencial />
+
         {/* Crida */}
-        <section className="px-6 pb-24 text-center md:pb-32">
+
+        <section className="px-6 py-24 text-center md:py-32">
           <Reveal className="reveal-up">
             <p className="mx-auto max-w-3xl text-[1.75rem] font-light leading-[1.15] tracking-tight md:text-[2.5rem]">
               <Tx>Vols treballar amb nosaltres?</Tx>
