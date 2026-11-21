@@ -41,4 +41,5 @@ export const reels: Reel[] = [
   { slug: "mca-assessors", client: "MCA Assessors", sector: "Assessoria", video: `${R}/mca-assessors.mp4`, poster: `${R}/mca-assessors.webp`, logo: "mca-assessors" },
   { slug: "princesport", client: "Princiesport", sector: "Gimnàs i salut", video: `${R}/princesport.mp4`, poster: `${R}/princesport.webp`, logo: "princesport-o" },
   { slug: "la-casa", client: "La Casa Gastrobar", sector: "Restaurant", video: `${R}/la-casa.mp4`, poster: `${R}/la-casa.webp`, logo: "la-casa-gastrobar" },
+  { slug: "the-fucking-cheesecake", client: "The Fucking Cheesecake", sector: "Pastisseria", video: `${R}/the-fucking-cheesecake.mp4`, poster: `${R}/the-fucking-cheesecake.webp`, logo: "the-fucking-cheesecake" },
 ];
