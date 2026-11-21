@@ -16,6 +16,7 @@ export const MetodologiaView = () => (
     <main id="top" className="w-full bg-hero-page text-[#171717]">
       {/* La ruta amb altímetre */}
       <Method
+        h1
         content={methodContent}
         route={[
           { name: "Andorra la Vella", alt: 1023, note: "Sortim de l'oficina." },

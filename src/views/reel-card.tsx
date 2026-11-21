@@ -31,7 +31,7 @@ export const ReelCard = ({ r }: { r: Reel }) => {
       onMouseLeave={stop}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img loading="lazy" decoding="async" src={r.poster} alt="" className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${playing ? "opacity-0" : "opacity-100"}`} />
+      <img loading="lazy" decoding="async" src={r.poster} alt={`Reel d'Altitud Digital per a ${r.client}`} className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${playing ? "opacity-0" : "opacity-100"}`} />
       <video
         ref={video}
         src={r.video}

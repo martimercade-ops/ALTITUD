@@ -9,6 +9,8 @@ export interface MethodProps {
   content: typeof MethodData;
   /** Altímetre: punt de sortida i una parada per fase (nom i altitud en m) */
   route?: { name: string; alt: number; note?: string }[];
+  /** A la pàgina pròpia de metodologia el títol és l'H1 */
+  h1?: boolean;
 }
 
 const RATIO = 3402 / 3456;
@@ -36,8 +38,9 @@ const FLAG_COLORS = ["#2e9bff", "#b6f13a", "#d7d1f2", "#ff9f5a"];
 
 const fmt = (n: number) => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
-export const Method = ({ content, route }: MethodProps) => {
+export const Method = ({ content, route, h1 = false }: MethodProps) => {
   const { eyebrow, heading, image, start, phases } = content;
+  const Titol = h1 ? "h1" : "h2";
   const sectionRef = useRef<HTMLElement>(null);
   const pathRefs = useRef<(SVGPathElement | null)[]>([]);
   const altRef = useRef<HTMLSpanElement>(null);
@@ -98,13 +101,13 @@ export const Method = ({ content, route }: MethodProps) => {
 
         <header className="relative z-10 px-[24px] pt-[92px] text-center lg:pt-28">
           <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/50 lg:text-xs lg:tracking-[0.35em]">{eyebrow}</p>
-          <h2 id="method-title" aria-label={`${heading.text} ${heading.strong}`} className="pj-titol mt-[10px] text-[30px] font-light leading-[1.08] tracking-tight lg:mt-4 lg:text-[4rem]">
+          <Titol id="method-title" aria-label={`${heading.text} ${heading.strong}`} className="pj-titol mt-[10px] text-[30px] font-light leading-[1.08] tracking-tight lg:mt-4 lg:text-[4rem]">
             {[...heading.text.split(" ").map((w) => ({ w, m: false })), ...heading.strong.split(" ").map((w) => ({ w, m: true }))].map(({ w, m }, i) => (
               <span key={i} aria-hidden="true" className={`n1-paraula inline-block${m ? " pj-muted" : ""}`} style={{ ["--d" as string]: `${120 + i * 90}ms` }}>
                 {w}
               </span>
             ))}
-          </h2>
+          </Titol>
         </header>
 
         {route && (

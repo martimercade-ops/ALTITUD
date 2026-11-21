@@ -66,7 +66,8 @@ const Row = ({
             >
               <img
                 src={logo.src}
-                alt=""
+                alt={copy === 0 ? `${logo.name}, client d'Altitud Digital` : ""}
+                aria-hidden={copy === 1 ? true : undefined}
                 width={size.width}
                 height={size.height}
                 loading="lazy"
