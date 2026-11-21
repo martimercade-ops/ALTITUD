@@ -215,16 +215,16 @@ export const Hero = ({ content }: HeroProps) => {
             </ul>
             )}
 
-            <div className="max-w-lg">
+            <div className="max-w-xl">
               <animated.p
                 style={revealStyle(3)}
-                className="text-xl font-medium leading-snug [will-change:transform,opacity]"
+                className="text-2xl font-medium leading-snug sm:text-[1.75rem] lg:text-[2rem] lg:leading-tight [will-change:transform,opacity]"
               >
                 {insightTitle}
               </animated.p>
               <animated.p
                 style={revealStyle(4)}
-                className="mt-4 hidden text-base leading-relaxed text-white/80 sm:block [will-change:transform,opacity]"
+                className="mt-4 hidden text-base leading-relaxed text-white/80 sm:block lg:text-lg [will-change:transform,opacity]"
               >
                 {insightBody}
               </animated.p>
@@ -234,13 +234,13 @@ export const Hero = ({ content }: HeroProps) => {
               >
                 <a
                   href={cta.href}
-                  className="rounded-full bg-white px-6 py-3 text-sm font-medium text-black hover:bg-white/90"
+                  className="rounded-full bg-white px-8 py-3.5 text-base font-medium text-black hover:bg-white/90"
                 >
                   {cta.label}
                 </a>
                 <a
                   href={secondaryCta.href}
-                  className="text-sm text-white underline underline-offset-4 hover:text-white/80"
+                  className="rounded-full border border-white/40 px-7 py-3.5 text-base text-white hover:border-white hover:bg-white/10"
                 >
                   {secondaryCta.label}
                 </a>
