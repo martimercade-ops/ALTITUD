@@ -1,36 +1,27 @@
 import Image from "next/image";
 import Link from "next/link";
-import { SiteNav, type SiteNavContent } from "@/views/site-nav";
+import { SiteNav } from "@/views/site-nav";
+import { SiteFooter } from "@/views/site-footer";
+import { getI18n } from "@/i18n/server";
+import { footerContent } from "@/data/mocks/contact";
+import { homeNav } from "@/data/mocks/home";
 import { FormEs } from "@/views/form-es";
 import { projectHref, projects } from "@/data/mocks/projects";
 import { landingEsHref, landingsEs, type LandingEs } from "@/data/landings-es";
-import { GOOGLE_REVIEWS, MAPS } from "@/data/mocks/home";
+import { GOOGLE_REVIEWS } from "@/data/mocks/home";
 
-const WHATSAPP_ES =
-  "https://wa.me/376670222?text=" + encodeURIComponent("¡Hola! Vengo de la web de Altitud Digital y me gustaría más información.");
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
-export const navEs: SiteNavContent = {
-  brand: "Altitud Digital",
-  items: [
-    { label: "Inicio", href: "/es" },
-    {
-      label: "Servicios",
-      href: "/es#servicios",
-      children: landingsEs.filter((l) => l.slug && l.slug !== "ayudas-pde-andorra").map((l) => ({ label: l.nom, href: landingEsHref(l.slug) })),
-    },
-    { label: "Proyectos", href: "/projectes" },
-    { label: "Ayudas PDE", href: "/es/ayudas-pde-andorra" },
-  ],
-  cta: { label: "Contacto", href: "#contacto" },
-};
 
-export const LandingEsView = ({ l }: { l: LandingEs }) => {
-  const related = l.projectes
+export const LandingEsView = ({ l: lEs }: { l: LandingEs }) => {
+  const { t, T, h, lang } = getI18n();
+  const l = T(lEs);
+  const whatsapp = "https://wa.me/376670222?text=" + encodeURIComponent(t("¡Hola! Vengo de la web de Altitud Digital y me gustaría más información."));
+  const related = lEs.projectes
     .map((s) => projects.find((p) => p.slug === s))
     .filter((p): p is (typeof projects)[number] => Boolean(p));
-  const others = landingsEs.filter((x) => x.slug !== l.slug);
+  const others = lang === "es" ? landingsEs.filter((x) => x.slug !== lEs.slug) : [];
   const faqLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -38,9 +29,9 @@ export const LandingEsView = ({ l }: { l: LandingEs }) => {
   };
 
   return (
-    <div lang="es">
+    <div lang={lang}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd).replace(/</g, "\\u003c") }} />
-      <SiteNav {...navEs} homeHref="/es" navLabel="Principal" />
+      <SiteNav {...T(homeNav)} homeHref={h("/")} navLabel={t("Principal")} cta={{ label: t("Contacto"), href: "#contacto" }} />
       <main id="top" className="w-full bg-hero-page text-[#171717]">
         {/* Capçalera amb formulari */}
         <section aria-labelledby="es-title" className="relative overflow-hidden bg-[#0b1424] px-6 pb-20 pt-32 text-white md:px-10 md:pb-28 md:pt-40 lg:px-12">
@@ -58,11 +49,11 @@ export const LandingEsView = ({ l }: { l: LandingEs }) => {
               <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/80">{l.intro}</p>
               <a href={GOOGLE_REVIEWS} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center gap-3 text-sm text-white/80 hover:text-white">
                 <span className="text-accent-lime" aria-hidden="true">★★★★★</span>
-                4,9 en Google · +100 empresas de Andorra
+                {t("4,9 en Google · +100 empresas de Andorra")}
               </a>
               <div className="mt-8 flex flex-wrap gap-4">
-                <a href={WHATSAPP_ES} target="_blank" rel="noopener noreferrer" className="inline-flex h-12 items-center rounded-full border border-white/30 px-6 text-sm font-medium text-white/90 hover:border-white/70 hover:text-white">
-                  Escríbenos por WhatsApp
+                <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex h-12 items-center rounded-full border border-white/30 px-6 text-sm font-medium text-white/90 hover:border-white/70 hover:text-white">
+                  {t("Escríbenos por WhatsApp")}
                 </a>
                 <a href="tel:+376670222" className="inline-flex h-12 items-center rounded-full border border-white/30 px-6 text-sm font-medium text-white/90 hover:border-white/70 hover:text-white">
                   +376 670 222
@@ -70,16 +61,16 @@ export const LandingEsView = ({ l }: { l: LandingEs }) => {
               </div>
             </div>
             <div id="contacto" className="scroll-mt-28">
-              <FormEs origen={l.nom} servei={l.servei} />
+              <FormEs origen={lEs.nom} servei={lEs.servei} />
             </div>
           </div>
         </section>
 
         {/* Què inclou */}
         <section id="servicios" aria-labelledby="incluye-title" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-24 md:px-10 md:py-32">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-small">Qué hacemos</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-small">{t("Qué hacemos")}</p>
           <h2 id="incluye-title" className="mt-4 max-w-[24ch] text-[2rem] font-light leading-[1.08] tracking-tight md:text-[2.75rem]">
-            Todo lo que necesitas, con un solo equipo.
+            {t("Todo lo que necesitas, con un solo equipo.")}
           </h2>
           <ul className="mt-14 grid gap-px overflow-hidden rounded-3xl border border-black/10 bg-black/10 sm:grid-cols-2 lg:grid-cols-3">
             {l.incluye.map((item, i) => (
@@ -112,17 +103,17 @@ export const LandingEsView = ({ l }: { l: LandingEs }) => {
           <section aria-labelledby="proyectos-title" className="mx-auto max-w-6xl px-6 py-24 md:px-10 md:py-32">
             <div className="flex items-end justify-between gap-6">
               <h2 id="proyectos-title" className="text-[2rem] font-light leading-[1.08] tracking-tight md:text-[2.75rem]">
-                Algunos proyectos en Andorra
+                {t("Algunos proyectos en Andorra")}
               </h2>
               <Link href="/projectes" className="hidden whitespace-nowrap rounded-full border border-black/15 px-5 py-2.5 text-sm font-medium hover:border-black/50 sm:inline-flex">
-                Ver todos
+                {t("Ver todos")}
               </Link>
             </div>
             <div className="mt-12 grid gap-8 md:grid-cols-3">
               {related.map((p) => (
                 <Link key={p.slug} href={projectHref(p.slug)} className="group flex flex-col gap-4">
                   <span className="relative block aspect-[16/11] overflow-hidden rounded-2xl bg-card-gray">
-                    <Image src={p.image} alt={`Proyecto de ${p.name}`} fill sizes="(max-width: 768px) 92vw, 30vw" className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]" />
+                    <Image src={p.image} alt={`${t("Proyecto de")} ${p.name}`} fill sizes="(max-width: 768px) 92vw, 30vw" className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]" />
                   </span>
                   <span className="block text-xl font-light tracking-tight group-hover:underline group-hover:underline-offset-4">{p.name}</span>
                 </Link>
@@ -133,8 +124,8 @@ export const LandingEsView = ({ l }: { l: LandingEs }) => {
 
         {/* Preguntes freqüents */}
         <section aria-labelledby="faq-title" className="mx-auto max-w-4xl px-6 pb-24 md:px-10 md:pb-32">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-small">Preguntas frecuentes</p>
-          <h2 id="faq-title" className="mt-4 text-[2rem] font-light leading-[1.08] tracking-tight md:text-[2.75rem]">Lo que nos suelen preguntar</h2>
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-small">{t("Preguntas frecuentes")}</p>
+          <h2 id="faq-title" className="mt-4 text-[2rem] font-light leading-[1.08] tracking-tight md:text-[2.75rem]">{t("Lo que nos suelen preguntar")}</h2>
           <div className="mt-10 divide-y divide-black/10 border-y border-black/10">
             {l.faqs.map((f) => (
               <details key={f.q} className="group py-6">
@@ -153,9 +144,9 @@ export const LandingEsView = ({ l }: { l: LandingEs }) => {
           <div className="relative mx-auto max-w-6xl overflow-hidden rounded-3xl bg-[#2f5bff] px-8 py-16 text-white md:px-16 md:py-20">
             <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(50%_80%_at_100%_0%,rgb(182_241_58/0.25),transparent_70%)]" />
             <div className="relative flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-              <h2 className="max-w-[20ch] text-[2rem] font-light leading-[1.08] tracking-tight md:text-[2.75rem]">¿Hablamos de tu proyecto?</h2>
+              <h2 className="max-w-[20ch] text-[2rem] font-light leading-[1.08] tracking-tight md:text-[2.75rem]">{t("¿Hablamos de tu proyecto?")}</h2>
               <a href="#contacto" className="inline-flex h-12 shrink-0 items-center gap-3 self-start rounded-full bg-white pl-6 pr-2 text-sm font-semibold text-black transition-transform hover:scale-[1.02] md:self-auto">
-                Pide presupuesto
+                {t("Pide presupuesto")}
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white">→</span>
               </a>
             </div>
@@ -163,8 +154,8 @@ export const LandingEsView = ({ l }: { l: LandingEs }) => {
         </section>
 
         {/* Altres pàgines */}
-        <nav aria-label="Más servicios" className="mx-auto max-w-6xl px-6 pb-20 md:px-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-small">También te puede interesar</p>
+        <nav aria-label={t("Más servicios")} className="mx-auto max-w-6xl px-6 pb-20 md:px-10">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-small">{t("También te puede interesar")}</p>
           <ul className="mt-6 flex flex-wrap gap-3">
             {others.map((s) => (
               <li key={s.slug}>
@@ -177,32 +168,7 @@ export const LandingEsView = ({ l }: { l: LandingEs }) => {
           </ul>
         </nav>
 
-        {/* Peu en castellà */}
-        <footer className="bg-[#0b1424] px-6 py-16 text-white md:px-10">
-          <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-4">
-            <div className="md:col-span-2">
-              <img src="/assets/altitud/altitud-logo-h.svg" alt="Altitud Digital" width={160} height={20} className="h-5 w-auto" />
-              <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/60">Agencia de marketing digital en Andorra. Web, SEO, redes sociales, publicidad e IA para empresas del país.</p>
-            </div>
-            <address className="not-italic text-sm leading-relaxed text-white/70">
-              <span className="block font-medium text-white">Oficina</span>
-              Carrer Ciutat de Valls, 24<br />AD500 Andorra la Vella<br />
-              <a href="tel:+376670222" className="hover:text-white">+376 670 222</a><br />
-              <a href="mailto:info@altitudigital.com" className="hover:text-white">info@altitudigital.com</a><br />
-              <a href={MAPS} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-white">Cómo llegar</a>
-            </address>
-            <div className="text-sm leading-relaxed text-white/70">
-              <span className="block font-medium text-white">Horario</span>
-              Lunes a jueves<br />9–14 h y 15–18 h<br />Visitas con cita previa
-              {l.ca && (
-                <Link href={l.ca} hrefLang="ca" className="mt-4 block underline underline-offset-4 hover:text-white">Versió en català</Link>
-              )}
-            </div>
-          </div>
-          <p className="mx-auto mt-12 max-w-6xl text-xs text-white/40">
-            © 2026 Altitud Digital · <Link href="/avis-legal" className="hover:text-white">Aviso legal</Link> · <Link href="/privacy-policy" className="hover:text-white">Privacidad</Link>
-          </p>
-        </footer>
+        <SiteFooter content={T(footerContent)} />
       </main>
     </div>
   );

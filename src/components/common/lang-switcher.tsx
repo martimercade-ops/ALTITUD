@@ -1,134 +1,62 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import { LANGS, LANG_LABEL, langFromPath, switchHref } from "@/i18n/config";
 
-const LANGS = [
-  { code: "ca", label: "Català" },
-  { code: "es", label: "Español" },
-  { code: "fr", label: "Français" },
-  { code: "en", label: "English" },
-] as const;
-type Code = (typeof LANGS)[number]["code"];
+/** Selector d'idioma: porta a la mateixa pàgina traduïda (o a la portada de l'idioma) */
+export const LangSwitcher = ({ variant = "pill" }: { variant?: "pill" | "row" }) => {
+  const path = usePathname() ?? "/";
+  const actual = langFromPath(path);
 
-const readLang = (): Code => {
-  const m = document.cookie.match(/(?:^|;\s*)googtrans=\/ca\/(es|fr|en)/);
-  return (m?.[1] as Code) ?? "ca";
-};
-
-const writeLang = (code: Code) => {
-  const host = window.location.hostname;
-  const domains = ["", host, `.${host.replace(/^www\./, "")}`];
-  for (const d of domains) {
-    const dom = d ? `; domain=${d}` : "";
-    document.cookie =
-      code === "ca"
-        ? `googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT${dom}`
-        : `googtrans=/ca/${code}; path=/${dom}`;
+  if (variant === "row") {
+    return (
+      <ul className="flex gap-2">
+        {LANGS.map((l) => (
+          <li key={l}>
+            <a
+              href={switchHref(path, l)}
+              hrefLang={l}
+              lang={l}
+              aria-current={l === actual ? "true" : undefined}
+              className={`inline-flex h-10 min-w-12 items-center justify-center rounded-full border px-3 text-sm uppercase ${
+                l === actual ? "border-accent-lime text-accent-lime" : "border-white/20 text-white/75 hover:border-white/60 hover:text-white"
+              }`}
+            >
+              {l}
+            </a>
+          </li>
+        ))}
+      </ul>
+    );
   }
-};
-
-/** Evita que React es trenqui quan Google Translate canvia els textos de la pàgina */
-const protectReactDom = () => {
-  const w = window as unknown as { __gtPatched?: boolean };
-  if (w.__gtPatched) return;
-  w.__gtPatched = true;
-  const remove = Node.prototype.removeChild;
-  Node.prototype.removeChild = function <T extends Node>(this: Node, child: T): T {
-    if (child.parentNode !== this) return child;
-    return remove.call(this, child) as T;
-  };
-  const insert = Node.prototype.insertBefore;
-  Node.prototype.insertBefore = function <T extends Node>(this: Node, node: T, ref: Node | null): T {
-    if (ref && ref.parentNode !== this) return insert.call(this, node, null) as T;
-    return insert.call(this, node, ref) as T;
-  };
-};
-
-/** Carrega el traductor de Google només si el visitant ha triat un altre idioma */
-const loadTranslator = () => {
-  if (document.getElementById("gt-script")) return;
-  protectReactDom();
-  const host = document.createElement("div");
-  host.id = "google_translate_element";
-  host.style.display = "none";
-  document.body.appendChild(host);
-  const w = window as unknown as {
-    googleTranslateElementInit?: () => void;
-    google?: { translate: { TranslateElement: new (o: object, id: string) => unknown } };
-  };
-  w.googleTranslateElementInit = () => {
-    new w.google!.translate.TranslateElement({ pageLanguage: "ca", includedLanguages: "ca,es,fr,en", autoDisplay: false }, "google_translate_element");
-  };
-  const s = document.createElement("script");
-  s.id = "gt-script";
-  s.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-  s.async = true;
-  document.body.appendChild(s);
-};
-
-export const LangSwitcher = () => {
-  const [lang, setLang] = useState<Code>("ca");
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const current = readLang();
-    setLang(current);
-    if (current !== "ca") {
-      document.documentElement.lang = current;
-      loadTranslator();
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!open) return;
-    const close = (e: PointerEvent) => {
-      if (!ref.current?.contains(e.target as Node)) setOpen(false);
-    };
-    document.addEventListener("pointerdown", close);
-    return () => document.removeEventListener("pointerdown", close);
-  }, [open]);
-
-  const choose = (code: Code) => {
-    setOpen(false);
-    if (code === lang) return;
-    writeLang(code);
-    window.location.reload();
-  };
 
   return (
-    <div ref={ref} className="notranslate relative" translate="no">
-      <button
-        type="button"
-        aria-haspopup="listbox"
-        aria-expanded={open}
-        aria-label="Idioma"
-        onClick={() => setOpen((o) => !o)}
-        className="inline-flex h-[56px] items-center gap-1.5 rounded-full border border-white/15 bg-[#0b1424]/70 px-4 text-[14px] font-medium uppercase text-white backdrop-blur-md hover:border-white/40 md:h-[60px] md:px-5"
+    <details className="group relative hidden md:block">
+      <summary
+        aria-label={LANG_LABEL[actual]}
+        className="flex h-[60px] cursor-pointer list-none items-center gap-1.5 rounded-full border border-white/10 bg-[#0b1424]/85 px-[20px] text-[14px] font-medium uppercase text-white/85 shadow-[0_8px_30px_rgb(0_0_0/0.12)] backdrop-blur-md hover:text-white [&::-webkit-details-marker]:hidden"
       >
-        {lang}
-        <svg viewBox="0 0 10 6" aria-hidden="true" className={`h-1.5 w-2.5 transition-transform ${open ? "rotate-180" : ""}`}>
-          <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        {actual}
+        <svg viewBox="0 0 10 6" aria-hidden="true" className="h-1.5 w-2.5 transition-transform group-open:rotate-180">
+          <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
-      </button>
-      {open && (
-        <ul role="listbox" aria-label="Idioma" className="absolute right-0 top-full mt-2 w-40 overflow-hidden rounded-2xl border border-white/10 bg-[#0b1424]/95 py-1.5 text-white shadow-2xl backdrop-blur-xl">
-          {LANGS.map((l) => (
-            <li key={l.code}>
-              <button
-                type="button"
-                role="option"
-                aria-selected={l.code === lang}
-                onClick={() => choose(l.code)}
-                className={`flex w-full items-center justify-between px-4 py-2.5 text-left text-sm hover:bg-white/10 ${l.code === lang ? "text-accent-lime" : ""}`}
-              >
-                {l.label}
-                <span className="text-xs uppercase text-white/40">{l.code}</span>
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+      </summary>
+      <ul className="absolute right-0 top-[68px] min-w-40 overflow-hidden rounded-2xl border border-white/10 bg-[#0b1424]/95 p-1.5 text-white shadow-[0_20px_60px_rgb(0_0_0/0.35)] backdrop-blur-xl">
+        {LANGS.map((l) => (
+          <li key={l}>
+            <a
+              href={switchHref(path, l)}
+              hrefLang={l}
+              lang={l}
+              aria-current={l === actual ? "true" : undefined}
+              className={`flex items-center justify-between gap-4 rounded-xl px-3.5 py-2.5 text-[14px] hover:bg-white/10 ${l === actual ? "text-accent-lime" : "text-white/85"}`}
+            >
+              {LANG_LABEL[l]}
+              <span className="text-xs uppercase text-white/40">{l}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </details>
   );
 };

@@ -1,5 +1,6 @@
 "use client";
 
+import { Tx } from "@/i18n/client";
 import { AnimatedHeading } from "@/components/common/animated-heading";
 import { Reveal } from "@/components/common/reveal";
 import { ReviewsHeader } from "@/views/reviews-header";
@@ -66,7 +67,7 @@ const Card = ({ item, i }: { item: ReviewItem; i: number }) => (
       )}
       <span className="min-w-0 flex-1">
         <span className="block truncate text-[15px] font-medium text-[#202124]">{item.name}</span>
-        <span className="block text-xs text-[#5f6368]">Ressenya de Google</span>
+        <span className="block text-xs text-[#5f6368]"><Tx>Ressenya de Google</Tx></span>
       </span>
       <GoogleMark />
     </figcaption>

@@ -1,5 +1,6 @@
 "use client";
 
+import { Tx } from "@/i18n/client";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -129,7 +130,7 @@ const Accordion = ({ items }: { items: ShowcaseItem[] }) => {
               <span className="mt-4 block max-w-[34ch] text-base leading-snug text-white/85">{item.description}</span>
               {item.href && (
                 <span className="mt-6 inline-flex items-center gap-3 rounded-full bg-accent-lime px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-black transition-transform duration-300 group-hover:translate-x-1">
-                  Veure servei <span aria-hidden="true">→</span>
+                  <Tx>Veure servei</Tx> <span aria-hidden="true">→</span>
                 </span>
               )}
             </div>

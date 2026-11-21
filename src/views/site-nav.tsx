@@ -1,6 +1,6 @@
+import { Tx } from "@/i18n/client";
 import { MobileMenu } from "@/views/mobile-menu";
-// Selector d'idioma amagat fins que hi hagi traduccions revisades
-// import { LangSwitcher } from "@/components/common/lang-switcher";
+import { LangSwitcher } from "@/components/common/lang-switcher";
 
 export interface SiteNavLink {
   label: string;
@@ -81,7 +81,7 @@ export const SiteNav = ({
                     <div key={g.key} className="min-w-60">
                       {g.key && (
                         <p className="px-4 pb-1 pt-3 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-white/40">
-                          {GROUP_LABEL[g.key] ?? g.key}
+                          <Tx>{GROUP_LABEL[g.key] ?? g.key}</Tx>
                         </p>
                       )}
                       <ul>
@@ -122,6 +122,7 @@ export const SiteNav = ({
       </nav>
     </div>
     <div className="flex items-center gap-[8px]">
+      <LangSwitcher />
       <a
         href={cta.href}
         className="inline-flex h-[56px] items-center rounded-full bg-white px-[24px] text-[15px] font-medium text-plum md:h-[60px] md:px-[30px] border border-black/10 shadow-[0_8px_30px_rgb(0_0_0/0.12)] hover:bg-white/90"

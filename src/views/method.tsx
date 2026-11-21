@@ -1,4 +1,5 @@
 "use client";
+import { useI18n } from "@/i18n/client";
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
@@ -39,6 +40,7 @@ const FLAG_COLORS = ["#2e9bff", "#b6f13a", "#d7d1f2", "#ff9f5a"];
 const fmt = (n: number) => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 export const Method = ({ content, route, h1 = false }: MethodProps) => {
+  const { t } = useI18n();
   const { eyebrow, heading, image, start, phases } = content;
   const Titol = h1 ? "h1" : "h2";
   const sectionRef = useRef<HTMLElement>(null);
@@ -129,7 +131,7 @@ export const Method = ({ content, route, h1 = false }: MethodProps) => {
           <div className="metode-caixa relative shrink-0" style={{ aspectRatio: `${RATIO}`, ["--r" as string]: RATIO }}>
             <Image
               src={image}
-              alt="Muntanya nevada amb la ruta de les quatre fases de la metodologia"
+              alt={t("Muntanya nevada amb la ruta de les quatre fases de la metodologia")}
               fill
               sizes="(max-width: 768px) 100vw, 80vh"
               quality={85}

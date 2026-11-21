@@ -4,6 +4,7 @@ import { siteConfig } from "@/lib/site";
 import { projectHref, projects } from "@/data/mocks/projects";
 import { serviceHref, services } from "@/data/mocks/services";
 import { landingEsHref, landingsEs } from "@/data/landings-es";
+import { alternates } from "@/i18n/config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -73,6 +74,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.9,
     })),
+    // Versions traduïdes (castellà, francès i anglès) de les pàgines clau
+    ...["/", "/serveis", "/equip", "/parlem", "/ajuts-pde", ...services.map((x) => serviceHref(x.slug))]
+      .flatMap((ca) => Object.entries(alternates(ca)).filter(([l]) => l !== "ca").map(([, u]) => u!))
+      .filter((u) => !u.startsWith("/es/") || !landingsEs.some((l) => landingEsHref(l.slug) === u))
+      .map((u) => ({
+        url: `${siteConfig.url}${u}`,
+        lastModified: new Date(),
+        changeFrequency: "monthly" as const,
+        priority: u.split("/").length <= 2 ? 0.9 : 0.8,
+      })),
     ...landingsEs.map((l) => ({
       url: `${siteConfig.url}${landingEsHref(l.slug)}`,
       lastModified: new Date(),

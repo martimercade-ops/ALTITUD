@@ -1,3 +1,4 @@
+import { alternates } from "@/i18n/config";
 import { ParlemView } from "@/views/parlem";
 import { generateMetadata as pageMetadata } from "@/utils/seo/generate-page-metadata";
 
@@ -6,6 +7,7 @@ export const metadata = pageMetadata({
   description:
     "Explica'ns el teu projecte i t'assessorem sense compromís. Agència de màrqueting 360° a Andorra la Vella.",
   url: "/parlem",
+  languages: alternates("/parlem") as Record<string, string>,
 });
 
 export default function ParlemPage() {

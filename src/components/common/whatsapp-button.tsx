@@ -1,14 +1,20 @@
+"use client";
+
+import { useLayoutText } from "@/i18n/layout";
+
 export const WHATSAPP_URL =
   "https://wa.me/376670222?text=" + encodeURIComponent("Hola! Vinc de la web d'Altitud Digital i voldria més informació.");
 
 /** Botó flotant per contactar per WhatsApp (+376 670 222) */
-export const WhatsappButton = () => (
+export const WhatsappButton = () => {
+  const tx = useLayoutText();
+  return (
   <a
-    href={WHATSAPP_URL}
+    href={"https://wa.me/376670222?text=" + encodeURIComponent(tx("wa"))}
     target="_blank"
     rel="noopener noreferrer"
-    aria-label="Contactar per WhatsApp"
-    title="Contactar per WhatsApp"
+    aria-label={tx("waLabel")}
+    title={tx("waLabel")}
     className="group fixed bottom-5 right-5 z-40 flex h-11 w-11 items-center justify-center rounded-full bg-[#25d366]/90 text-white shadow-[0_4px_16px_rgba(0,0,0,0.2)] transition-all hover:bg-[#25d366] md:bottom-6 md:right-6"
   >
     <svg viewBox="0 0 32 32" aria-hidden="true" className="h-5 w-5 fill-current">
@@ -19,3 +25,4 @@ export const WhatsappButton = () => (
     </span>
   </a>
 );
+};

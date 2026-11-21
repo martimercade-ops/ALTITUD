@@ -1,5 +1,6 @@
 "use client";
 
+import { Tx, useI18n } from "@/i18n/client";
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { animated, useSpring } from "@react-spring/web";
@@ -52,6 +53,7 @@ const cardFrame = (i: number, v: number) => {
 const scrimOpacity = (i: number, v: number) => Math.min(0.35, Math.abs(i - v) * 0.22);
 
 export const Works = ({ content }: WorksProps) => {
+  const { t } = useI18n();
   const { items, heading, eyebrow, viewLabel, viewHref } = content;
   const count = items.length;
   const sectionRef = useRef<HTMLElement>(null);
@@ -139,7 +141,7 @@ export const Works = ({ content }: WorksProps) => {
             <animated.a
               key={item.name}
               href={item.href}
-              aria-label={`Veure el projecte ${item.name}`}
+              aria-label={`${t("Veure el projecte")} ${item.name}`}
               suppressHydrationWarning
               className="group absolute left-1/2 top-1/2 block aspect-[16/10] w-[90vw] max-w-[46rem] overflow-hidden rounded-3xl bg-card-dark shadow-2xl [backface-visibility:hidden] [will-change:transform]"
               style={{
@@ -164,7 +166,7 @@ export const Works = ({ content }: WorksProps) => {
                 <p className="text-xs uppercase tracking-[0.2em] text-white/70">{item.sector}</p>
                 <p className="mt-1 text-sm leading-snug sm:text-base">{item.description}</p>
                 <p className="mt-2 text-xs font-medium text-white/80 underline-offset-4 group-hover:text-white group-hover:underline">
-                  Veure el projecte →
+                  <Tx>Veure el projecte →</Tx>
                 </p>
               </div>
             </animated.a>

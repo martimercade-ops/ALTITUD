@@ -16,6 +16,7 @@ import { contactContent, footerContent } from "@/data/mocks/contact";
 import { homeContent, preloaderContent, type HomeContent } from "@/data/mocks/home";
 import { Preloader } from "@/components/common/preloader";
 import { RobotProvider, RobotView } from "@/components/common/robot-view";
+import { getI18n } from "@/i18n/server";
 
 export interface HomeViewProps {
   content?: HomeContent;
@@ -23,12 +24,15 @@ export interface HomeViewProps {
 }
 
 export const HomeView = ({ content = homeContent, robot = false }: HomeViewProps) => {
-  const { hero, logos, about, showcase, works, nav, reviews, team } = content;
+  const { T, t } = getI18n();
+  const { hero, logos, about, showcase, works, nav, team } = T(content);
+  // Les ressenyes són paraules dels clients: es mostren tal com les van escriure
+  const reviews = { ...T({ ...content.reviews, items: [] }), items: content.reviews.items };
   return (
     <RobotProvider robot={robot}>
       {robot && <RobotView />}
-      <Preloader markSrc="/assets/altitud/simbol.svg" label="Carregant" {...preloaderContent} />
-      <SiteNav {...nav} navLabel="Principal" />
+      <Preloader markSrc="/assets/altitud/simbol.svg" label={t("Carregant")} {...preloaderContent} />
+      <SiteNav {...nav} navLabel={t("Principal")} />
       <main id="top" className="w-full bg-hero-page">
         <Hero content={hero} />
       <LogoMarquee content={logos} />
@@ -37,12 +41,12 @@ export const HomeView = ({ content = homeContent, robot = false }: HomeViewProps
       <Showcase content={showcase} />
       <Eines />
       <Works content={works} />
-      <Method content={methodContent} />
+      <Method content={T(methodContent)} />
       <Agencia360 />
       <Team content={team} />
       <div className="relative">
-        <ContactForm content={contactContent} />
-        <SiteFooter content={footerContent} />
+        <ContactForm content={T(contactContent)} />
+        <SiteFooter content={T(footerContent)} />
       </div>
       </main>
     </RobotProvider>

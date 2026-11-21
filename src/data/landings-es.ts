@@ -32,43 +32,6 @@ export interface LandingEs {
 
 export const landingsEs: LandingEs[] = [
   {
-    slug: "",
-    ca: "/",
-    nom: "Agencia de marketing",
-    title: "Agencia de marketing digital en Andorra | Altitud Digital",
-    description:
-      "Agencia de marketing digital en Andorra la Vella: diseño web, SEO, redes sociales, publicidad online e IA para empresas de Andorra. Más de 100 clientes y 4,9★ en Google.",
-    eyebrow: "Agencia de marketing · Andorra la Vella",
-    h1: "Agencia de marketing digital en Andorra.",
-    intro:
-      "Somos Altitud Digital, un equipo de Andorra que ayuda a empresas del país a conseguir más clientes: webs que venden, SEO, redes sociales, publicidad online, vídeo e inteligencia artificial. Todo con un mismo equipo y una sola persona de contacto.",
-    image: `${A}/oficina.jpg`,
-    imageAlt: "Oficina de Altitud Digital en Andorra la Vella",
-    incluye: [
-      { title: "Diseño web y tiendas online", text: "Webs rápidas, fáciles de gestionar y pensadas para convertir visitas en clientes. WordPress, Shopify, WooCommerce o a medida." },
-      { title: "SEO y posicionamiento", text: "Que te encuentren cuando buscan lo que haces en Andorra. SEO técnico, contenidos y SEO local en Google Maps." },
-      { title: "Redes sociales", text: "Contenido, reels, fotografía y gestión de Instagram, Facebook, TikTok y LinkedIn con un plan mensual claro." },
-      { title: "Publicidad online", text: "Campañas en Google Ads y Meta Ads medidas al euro: sabes cuánto inviertes y cuánto te devuelve." },
-      { title: "Branding y vídeo", text: "Logotipos, identidad corporativa, fotografía de producto y vídeo para que tu marca se vea como se merece." },
-      { title: "IA y automatizaciones", text: "Chatbots que atienden a tus clientes 24 h, stock automático y procesos que te ahorran horas cada semana." },
-    ],
-    porQue: {
-      title: "Por qué una agencia de aquí",
-      paragraphs: [
-        "Andorra es un mercado pequeño y muy particular: mucho turismo, mucho comercio, clientes que buscan en catalán, castellano y francés, y una competencia que se conoce entre sí. Llevamos más de seis años trabajando aquí y hemos ayudado a más de cien empresas de todas las parroquias, desde tiendas de Andorra la Vella y restaurantes de Escaldes hasta inmobiliarias, clínicas y federaciones deportivas.",
-        "Trabajamos con un método en cuatro fases: diagnóstico, estrategia, ejecución y resultados. Primero entendemos tu negocio y a tu competencia, después decidimos qué canales tienen sentido y, al final de cada mes, te enseñamos los números. Sin permanencias imposibles ni informes que no se entienden.",
-        "Y si quieres conocernos, ven a tomar un café a la oficina de la calle Ciutat de Valls, 24, en Andorra la Vella.",
-      ],
-    },
-    projectes: ["la-casa", "auro-jardiners", "espai-dor"],
-    faqs: [
-      { q: "¿Qué hace una agencia de marketing digital en Andorra?", a: "Te ayuda a conseguir clientes por internet: diseña tu web, la posiciona en Google, gestiona tus redes sociales y tus campañas de publicidad, y mide los resultados. En Altitud Digital lo hacemos todo desde un mismo equipo, en Andorra la Vella." },
-      { q: "¿Cuánto cuesta contratar una agencia de marketing?", a: "Depende de los servicios y del volumen de trabajo. Tenemos packs cerrados para redes sociales e identidad visual, y presupuestos a medida para webs y campañas. La primera reunión y la propuesta son sin compromiso." },
-      { q: "¿Trabajáis con empresas pequeñas?", a: "Sí, la mayoría de nuestros clientes son pymes y comercios de Andorra. Adaptamos el plan al tamaño y a los objetivos de cada negocio." },
-      { q: "¿Puedo pedir las ayudas PDE del Govern para digitalizarme?", a: "Sí. El Programa de Digitalització d'Empreses subvenciona entre el 30% y el 50% de muchos de nuestros servicios. Te ayudamos con los trámites y preparamos el presupuesto para la convocatoria." },
-    ],
-  },
-  {
     slug: "agencia-seo-andorra",
     ca: "/serveis/seo-sem",
     nom: "Agencia SEO",

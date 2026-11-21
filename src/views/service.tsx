@@ -1,3 +1,5 @@
+import { getI18n } from "@/i18n/server";
+import { Tx } from "@/i18n/client";
 import Image from "next/image";
 import Link from "next/link";
 import { SiteNav } from "@/views/site-nav";
@@ -14,16 +16,18 @@ export interface ServiceViewProps {
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
-export const ServiceView = ({ service }: ServiceViewProps) => {
-  const related = service.projectTags
-    ? projects.filter((p) => p.services.some((s) => service.projectTags!.includes(s))).slice(0, 3)
+export const ServiceView = ({ service: serviceCa }: ServiceViewProps) => {
+  const { t, T, h } = getI18n();
+  const service = T(serviceCa);
+  const related = serviceCa.projectTags
+    ? projects.filter((p) => p.services.some((s) => serviceCa.projectTags!.includes(s))).slice(0, 3)
     : [];
-  const others = services.filter((s) => s.slug !== service.slug);
-  const parlem = `${PARLEM_HREF}?servei=${service.slug}`;
+  const others = T(services.filter((s) => s.slug !== service.slug));
+  const parlem = h(`${PARLEM_HREF}?servei=${service.slug}`);
 
   return (
     <>
-      <SiteNav {...homeNav} homeHref="/" navLabel="Principal" />
+      <SiteNav {...T(homeNav)} homeHref={h("/")} navLabel={t("Principal")} />
       <main id="top" className="w-full bg-hero-page text-[#171717]">
         {/* Capçalera */}
         <section
@@ -35,7 +39,7 @@ export const ServiceView = ({ service }: ServiceViewProps) => {
           <div className="relative z-10 mx-auto max-w-6xl">
             <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.35em] text-white/70">
               <span className="h-1.5 w-1.5 rounded-full bg-accent-lime" />
-              {SERVICE_GROUP_LABEL[service.group]} · {service.name}
+              {t(SERVICE_GROUP_LABEL[service.group])} · {service.name}
             </p>
             <h1
               id="service-title"
@@ -49,14 +53,14 @@ export const ServiceView = ({ service }: ServiceViewProps) => {
                 href={parlem}
                 className="inline-flex h-12 items-center gap-3 rounded-full bg-accent-lime pl-6 pr-2 text-sm font-semibold text-black transition-transform hover:scale-[1.02]"
               >
-                Demana pressupost
+                <Tx>Demana pressupost</Tx>
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-accent-lime">→</span>
               </Link>
               <Link
                 href="/projectes"
                 className="inline-flex h-12 items-center rounded-full border border-white/30 px-6 text-sm font-medium text-white/90 hover:border-white/70 hover:text-white"
               >
-                Veure projectes
+                <Tx>Veure projectes</Tx>
               </Link>
             </div>
           </div>
@@ -77,9 +81,9 @@ export const ServiceView = ({ service }: ServiceViewProps) => {
 
         {/* Què fem */}
         <section aria-labelledby="includes-title" className="mx-auto max-w-6xl px-6 py-24 md:px-10 md:py-32">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-small">Què inclou</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-small"><Tx>Què inclou</Tx></p>
           <h2 id="includes-title" className="mt-4 max-w-[22ch] text-[2rem] font-light leading-[1.08] tracking-tight md:text-[2.75rem]">
-            Tot el que necessites, en un sol equip.
+            <Tx>Tot el que necessites, en un sol equip.</Tx>
           </h2>
           <ul className="mt-14 grid gap-px overflow-hidden rounded-3xl border border-black/10 bg-black/10 sm:grid-cols-2 lg:grid-cols-3">
             {service.includes.map((item, i) => (
@@ -93,9 +97,9 @@ export const ServiceView = ({ service }: ServiceViewProps) => {
         </section>
 
         {service.tools && service.tools.length > 0 && (
-          <section aria-label="Eines" className="mx-auto -mt-12 max-w-6xl px-6 pb-24 md:-mt-16 md:px-10 md:pb-28">
+          <section aria-label={t("Eines")} className="mx-auto -mt-12 max-w-6xl px-6 pb-24 md:-mt-16 md:px-10 md:pb-28">
             <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2 border-t border-black/10 pt-6">
-              <span className="text-xs font-semibold uppercase tracking-[0.25em] text-black/40">Treballem amb</span>
+              <span className="text-xs font-semibold uppercase tracking-[0.25em] text-black/40"><Tx>Treballem amb</Tx></span>
               {service.tools.map((t) => (
                 <span key={t} className="text-[15px] text-black/55">{t}</span>
               ))}
@@ -106,9 +110,9 @@ export const ServiceView = ({ service }: ServiceViewProps) => {
         {/* Feina recent */}
         {service.gallery && service.gallery.length > 0 && (
           <section aria-labelledby="gallery-title" className="mx-auto max-w-6xl px-6 pb-24 md:px-10 md:pb-32">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-small">Feina recent</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-small"><Tx>Feina recent</Tx></p>
             <h2 id="gallery-title" className="mt-4 text-[2rem] font-light leading-[1.08] tracking-tight md:text-[2.75rem]">
-              Fet per l&apos;equip, per a clients d&apos;aquí.
+              <Tx>Fet per l&apos;equip, per a clients d&apos;aquí.</Tx>
             </h2>
             <div className={`mt-12 grid gap-6 ${service.gallery.length > 1 ? "md:grid-cols-2" : "md:max-w-md"}`}>
               {service.gallery.map((g) => (
@@ -135,9 +139,9 @@ export const ServiceView = ({ service }: ServiceViewProps) => {
         {/* Com treballem */}
         <section aria-labelledby="steps-title" className="bg-[#0b1424] px-6 py-24 text-white md:px-10 md:py-32">
           <div className="mx-auto max-w-6xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/50">Com treballem</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/50"><Tx>Com treballem</Tx></p>
             <h2 id="steps-title" className="mt-4 max-w-[22ch] text-[2rem] font-light leading-[1.08] tracking-tight md:text-[2.75rem]">
-              Un procés clar, de la idea als resultats.
+              <Tx>Un procés clar, de la idea als resultats.</Tx>
             </h2>
             <ol className="mt-14 grid gap-10 md:grid-cols-2 lg:grid-cols-4">
               {service.steps.map((step, i) => (
@@ -156,10 +160,10 @@ export const ServiceView = ({ service }: ServiceViewProps) => {
           <section aria-labelledby="related-title" className="mx-auto max-w-6xl px-6 py-24 md:px-10 md:py-32">
             <div className="flex items-end justify-between gap-6">
               <h2 id="related-title" className="text-[2rem] font-light leading-[1.08] tracking-tight md:text-[2.75rem]">
-                Projectes on ho hem fet
+                <Tx>Projectes on ho hem fet</Tx>
               </h2>
               <Link href="/projectes" className="hidden whitespace-nowrap rounded-full border border-black/15 px-5 py-2.5 text-sm font-medium hover:border-black/50 sm:inline-flex">
-                Tots els projectes
+                <Tx>Tots els projectes</Tx>
               </Link>
             </div>
             <div className="mt-12 grid gap-8 md:grid-cols-3">
@@ -192,14 +196,14 @@ export const ServiceView = ({ service }: ServiceViewProps) => {
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">{service.name}</p>
                 <h2 className="mt-4 max-w-[18ch] text-[2rem] font-light leading-[1.08] tracking-tight md:text-[2.75rem]">
-                  Parlem del teu projecte?
+                  <Tx>Parlem del teu projecte?</Tx>
                 </h2>
               </div>
               <Link
                 href={parlem}
                 className="inline-flex h-12 shrink-0 items-center gap-3 self-start rounded-full bg-white pl-6 pr-2 text-sm font-semibold text-black transition-transform hover:scale-[1.02] md:self-auto"
               >
-                Demana pressupost
+                <Tx>Demana pressupost</Tx>
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white">→</span>
               </Link>
             </div>
@@ -207,13 +211,13 @@ export const ServiceView = ({ service }: ServiceViewProps) => {
         </section>
 
         {/* Altres serveis */}
-        <nav aria-label="Altres serveis" className="mx-auto max-w-6xl px-6 pb-24 md:px-10 md:pb-32">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-small">Altres serveis</p>
+        <nav aria-label={t("Altres serveis")} className="mx-auto max-w-6xl px-6 pb-24 md:px-10 md:pb-32">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-small"><Tx>Altres serveis</Tx></p>
           <ul className="mt-6 flex flex-wrap gap-3">
             {others.map((s) => (
               <li key={s.slug}>
                 <Link
-                  href={serviceHref(s.slug)}
+                  href={h(serviceHref(s.slug))}
                   className="group inline-flex items-center gap-2 rounded-full border border-black/15 px-5 py-2.5 text-sm transition-colors hover:border-black hover:bg-black hover:text-white"
                 >
                   {s.name}
@@ -224,7 +228,7 @@ export const ServiceView = ({ service }: ServiceViewProps) => {
           </ul>
         </nav>
 
-        <SiteFooter content={footerContent} />
+        <SiteFooter content={T(footerContent)} />
       </main>
     </>
   );

@@ -1,4 +1,5 @@
 "use client";
+import { useI18n } from "@/i18n/client";
 
 import { useEffect, useRef } from "react";
 
@@ -38,12 +39,26 @@ export const ParlemEscena = () => {
 };
 
 /** «Parlem.» lletra a lletra */
-export const ParlemTitol = ({ id }: { id: string }) => (
-  <h1 id={id} aria-label="Parlem." className="text-[4.5rem] font-light leading-[0.9] tracking-tight sm:text-[6.5rem] lg:text-[7.5rem]">
-    {"Parlem.".split("").map((ch, i) => (
-      <span key={i} aria-hidden="true" className="lletra-puja inline-block" style={{ animationDelay: `${150 + i * 70}ms` }}>
-        {ch}
-      </span>
-    ))}
-  </h1>
-);
+export const ParlemTitol = ({ id }: { id: string }) => {
+  const text = useI18n().t("Parlem.");
+  const llarg = text.length > 8;
+  let n = 0;
+  return (
+    <h1
+      id={id}
+      aria-label={text}
+      className={`font-light leading-[0.9] tracking-tight ${llarg ? "text-[3.6rem] sm:text-[5.25rem] lg:text-[5.75rem]" : "text-[4.5rem] sm:text-[6.5rem] lg:text-[7.5rem]"}`}
+    >
+      {text.split(" ").map((paraula, w) => (
+        <span key={w} className="inline-block whitespace-nowrap">
+          {paraula.split("").map((ch) => (
+            <span key={n} aria-hidden="true" className="lletra-puja inline-block" style={{ animationDelay: `${150 + n++ * 70}ms` }}>
+              {ch}
+            </span>
+          ))}
+          {w < text.split(" ").length - 1 ? "\u00a0" : ""}
+        </span>
+      ))}
+    </h1>
+  );
+};

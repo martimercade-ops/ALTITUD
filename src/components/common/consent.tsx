@@ -1,4 +1,5 @@
 "use client";
+import { useLayoutText } from "@/i18n/layout";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -48,6 +49,7 @@ export const useConsent = create<ConsentState>((set) => ({
 
 /** Banner discret a la cantonada inferior */
 export const ConsentBanner = () => {
+  const tx = useLayoutText();
   const { hydrated, open, hydrate, decide } = useConsent();
   const [shown, setShown] = useState(false);
 
@@ -68,7 +70,7 @@ export const ConsentBanner = () => {
     <div
       role="dialog"
       aria-live="polite"
-      aria-label="Galetes"
+      aria-label={tx("galetes")}
       className={`fixed inset-x-[12px] bottom-[12px] z-[70] transition-all duration-500 sm:inset-x-auto sm:bottom-[24px] sm:left-[24px] sm:w-[400px] ${
         shown ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
       }`}
@@ -88,10 +90,9 @@ export const ConsentBanner = () => {
             <circle cx="9.5" cy="16" r="0.9" fill="currentColor" />
           </svg>
           <p className="text-[14px] leading-[1.5] text-white/80">
-            Fem servir només les galetes necessàries. Si ho acceptes, també carregarem el mapa de Google, que en
-            pot desar de pròpies.{" "}
+            {tx("banner")}{" "}
             <Link href="/politica-de-galetes" className="text-white underline underline-offset-2 hover:text-accent-lime">
-              Més informació
+              {tx("mes")}
             </Link>
           </p>
         </div>
@@ -101,14 +102,14 @@ export const ConsentBanner = () => {
             onClick={() => decide(false)}
             className="h-[44px] flex-1 rounded-full border border-white/20 text-[14px] text-white/85 transition-colors hover:border-white/50 hover:text-white"
           >
-            Només necessàries
+            {tx("nomes")}
           </button>
           <button
             type="button"
             onClick={() => decide(true)}
             className="h-[44px] flex-1 rounded-full bg-accent-lime text-[14px] font-semibold text-black transition-transform hover:scale-[1.02]"
           >
-            Acceptar
+            {tx("acceptar")}
           </button>
         </div>
       </div>
@@ -119,9 +120,10 @@ export const ConsentBanner = () => {
 /** Enllaç «Configurar galetes» del peu */
 export const ConsentSettingsLink = ({ className = "" }: { className?: string }) => {
   const reopen = useConsent((s) => s.reopen);
+  const tx = useLayoutText();
   return (
     <button type="button" onClick={reopen} className={className}>
-      Configurar galetes
+      {tx("configurar")}
     </button>
   );
 };

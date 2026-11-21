@@ -56,6 +56,11 @@ const nextConfig: NextConfig = {
       { source: "/preguntas-frecuentes", destination: "/parlem", permanent: true },
       { source: "/serveis/programari-a-mida", destination: "/serveis/crm-erp-a-mida", permanent: true },
       { source: "/serveis/estoc-automatic-ia", destination: "/serveis/crm-erp-a-mida", permanent: true },
+      { source: "/es/servicios/seo-sem", destination: "/es/agencia-seo-andorra", permanent: true },
+      { source: "/es/servicios/web-ecommerce", destination: "/es/diseno-web-andorra", permanent: true },
+      { source: "/es/servicios/xarxes-socials", destination: "/es/redes-sociales-andorra", permanent: true },
+      { source: "/es/servicios/branding", destination: "/es/branding-andorra", permanent: true },
+      { source: "/es/servicios/chatbots-ia", destination: "/es/chatbots-ia-andorra", permanent: true },
     ];
   },
 

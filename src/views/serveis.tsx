@@ -1,3 +1,5 @@
+import { getI18n } from "@/i18n/server";
+import { Tx } from "@/i18n/client";
 import Image from "next/image";
 import Link from "next/link";
 import { SiteNav } from "@/views/site-nav";
@@ -15,49 +17,32 @@ const GROUPS: { id: ServiceGroup; intro: string }[] = [
 ];
 
 export const ServeisView = () => {
+  const { t, T, h } = getI18n();
+  const titol = t("Tot el que necessites per arribar al cim.");
   let n = 0;
   return (
     <>
-      <SiteNav {...homeNav} homeHref="/" navLabel="Principal" />
+      <SiteNav {...T(homeNav)} homeHref={h("/")} navLabel={t("Principal")} />
       <main id="top" className="w-full bg-hero-page text-[#171717]">
         {/* Capçalera */}
         <section aria-labelledby="serveis-title" className="relative overflow-hidden bg-[#0b1424] px-5 pb-10 pt-32 text-white md:px-8 md:pb-12 md:pt-36">
           <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(55%_90%_at_85%_0%,rgb(47_91_255/0.3),transparent_70%)]" />
           <div className="relative z-10 mx-auto flex max-w-[88rem] flex-wrap items-end justify-between gap-x-8 gap-y-6">
-            <h1 id="serveis-title" aria-label="Tot el que necessites per arribar al cim." className="pj-titol text-[2.4rem] font-light leading-[1.04] tracking-tight sm:text-6xl lg:text-[4.5rem]">
-              <span aria-hidden="true" className="n1-paraula inline-block" style={{ ["--d" as string]: "120ms" }}>
-                Tot
-              </span>
-              <span aria-hidden="true" className="n1-paraula inline-block" style={{ ["--d" as string]: "200ms" }}>
-                el
-              </span>
-              <span aria-hidden="true" className="n1-paraula inline-block" style={{ ["--d" as string]: "280ms" }}>
-                que
-              </span>
-              <span aria-hidden="true" className="n1-paraula inline-block" style={{ ["--d" as string]: "360ms" }}>
-                necessites
-              </span>
-              <span aria-hidden="true" className="n1-paraula inline-block" style={{ ["--d" as string]: "440ms" }}>
-                per
-              </span>
-              <span aria-hidden="true" className="n1-paraula inline-block pj-muted" style={{ ["--d" as string]: "520ms" }}>
-                arribar
-              </span>
-              <span aria-hidden="true" className="n1-paraula inline-block pj-muted" style={{ ["--d" as string]: "600ms" }}>
-                al
-              </span>
-              <span aria-hidden="true" className="n1-paraula inline-block pj-muted" style={{ ["--d" as string]: "680ms" }}>
-                cim.
-              </span>
+            <h1 id="serveis-title" aria-label={titol} className="pj-titol text-[2.4rem] font-light leading-[1.04] tracking-tight sm:text-6xl lg:text-[4.5rem]">
+              {titol.split(" ").map((w, i, all) => (
+                <span key={i} aria-hidden="true" className={`n1-paraula inline-block${i >= all.length - 3 ? " pj-muted" : ""}`} style={{ ["--d" as string]: `${120 + i * 80}ms` }}>
+                  {w}
+                </span>
+              ))}
             </h1>
-            <nav aria-label="Grups de serveis" className="flex flex-wrap gap-2 pb-2">
+            <nav aria-label={t("Grups de serveis")} className="flex flex-wrap gap-2 pb-2">
               {GROUPS.map((g) => (
                 <a
                   key={g.id}
                   href={`#${g.id}`}
                   className="inline-flex h-10 items-center rounded-full border border-white/25 px-4 text-sm text-white/85 hover:border-white/60 hover:text-white"
                 >
-                  {SERVICE_GROUP_LABEL[g.id]}
+                  {t(SERVICE_GROUP_LABEL[g.id])}
                 </a>
               ))}
             </nav>
@@ -65,7 +50,7 @@ export const ServeisView = () => {
         </section>
 
         {GROUPS.map((g) => {
-          const list = services.filter((s) => s.group === g.id);
+          const list = T(services.filter((s) => s.group === g.id));
           return (
             <section
               key={g.id}
@@ -79,9 +64,9 @@ export const ServeisView = () => {
                     id={`${g.id}-title`}
                     className="text-[2rem] font-light leading-[1.05] tracking-tight md:text-[2.75rem]"
                   >
-                    {SERVICE_GROUP_LABEL[g.id]}
+                    {t(SERVICE_GROUP_LABEL[g.id])}
                   </h2>
-                  <p className="max-w-md text-base leading-relaxed text-black/60">{g.intro}</p>
+                  <p className="max-w-md text-base leading-relaxed text-black/60">{t(g.intro)}</p>
                 </Reveal>
 
                 <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -90,7 +75,7 @@ export const ServeisView = () => {
                     return (
                       <Reveal key={s.slug} as="li" className="reveal-up" style={{ transitionDelay: `${(i % 3) * 80}ms` }}>
                         <Link
-                          href={serviceHref(s.slug)}
+                          href={h(serviceHref(s.slug))}
                           className="group relative flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-3xl bg-[#0b1424] p-6 text-white"
                         >
                           <Image
@@ -133,19 +118,19 @@ export const ServeisView = () => {
         <section className="px-6 pb-28 pt-8 text-center">
           <Reveal className="reveal-up">
             <p className="mx-auto max-w-3xl text-[1.9rem] font-light leading-[1.12] tracking-tight md:text-[2.75rem]">
-              No saps per on començar? T&apos;ho diem en un cafè.
+              <Tx>No saps per on començar? T&apos;ho diem en un cafè.</Tx>
             </p>
             <Link
-              href={PARLEM_HREF}
+              href={h(PARLEM_HREF)}
               className="mt-10 inline-flex h-12 items-center gap-3 rounded-full bg-black pl-6 pr-2 text-sm font-medium text-white transition-transform hover:scale-[1.02]"
             >
-              Parlem
+              <Tx>Parlem</Tx>
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-black">→</span>
             </Link>
           </Reveal>
         </section>
 
-        <SiteFooter content={footerContent} />
+        <SiteFooter content={T(footerContent)} />
       </main>
     </>
   );

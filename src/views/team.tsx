@@ -1,5 +1,6 @@
 "use client";
 
+import { Tx, useI18n } from "@/i18n/client";
 import Image from "next/image";
 import Link from "next/link";
 import { animated } from "@react-spring/web";
@@ -32,6 +33,7 @@ const CARD_RISE = 24;
 const CARD_BLUR = 12;
 
 export const Team = ({ content }: { content: TeamContent }) => {
+  const { h } = useI18n();
   const { eyebrow, heading, members } = content;
   const { p, rootRef, localProg } = useRevealCascade<HTMLUListElement>(members.length);
   const cardStyle = (i: number) => ({
@@ -68,10 +70,10 @@ export const Team = ({ content }: { content: TeamContent }) => {
       </ul>
       <div className="mt-14 flex justify-center">
         <Link
-          href="/equip"
+          href={h("/equip")}
           className="group inline-flex items-center gap-2 rounded-full border border-black/20 px-6 py-3 text-sm font-medium hover:border-black hover:bg-black hover:text-white"
         >
-          Coneix l&apos;equip
+          <Tx>Coneix l&apos;equip</Tx>
           <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">→</span>
         </Link>
       </div>

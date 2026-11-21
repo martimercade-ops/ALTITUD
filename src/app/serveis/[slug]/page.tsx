@@ -2,12 +2,7 @@ import { notFound } from "next/navigation";
 import { ServiceView } from "@/views/service";
 import { findService, serviceHref, services } from "@/data/mocks/services";
 import { generateMetadata as pageMetadata } from "@/utils/seo/generate-page-metadata";
-import { ALTERNATES_ES } from "@/app/es/meta";
-
-const esDe = (ruta: string) => {
-  const slug = Object.keys(ALTERNATES_ES).find((k) => ALTERNATES_ES[k] === ruta);
-  return slug === undefined ? undefined : slug ? `/es/${slug}` : "/es";
-};
+import { alternates } from "@/i18n/config";
 
 export const dynamicParams = false;
 
@@ -36,7 +31,7 @@ export async function generateMetadata({ params }: Props) {
     title: TITOLS[service.slug] ?? `${service.name} a Andorra | Altitud Digital`,
     description: service.intro,
     url: serviceHref(service.slug),
-    ...(esDe(serviceHref(service.slug)) ? { languages: { ca: serviceHref(service.slug), es: esDe(serviceHref(service.slug))! } } : {}),
+    languages: alternates(serviceHref(service.slug)) as Record<string, string>,
   });
 }
 

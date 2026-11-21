@@ -1,3 +1,4 @@
+import { Tx } from "@/i18n/client";
 import { Reveal } from "@/components/common/reveal";
 import { andorraMap, andorraNet, toolIcons } from "@/data/mocks/arrels";
 
@@ -77,7 +78,7 @@ export const Arrels = () => (
           <Reveal className="reveal-up">
             <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-white/55">
               <span className="h-1.5 w-1.5 rounded-full bg-accent-lime" />
-              Negoci local
+              <Tx>Negoci local</Tx>
             </p>
             <h2 id="arrels-title" className="mt-5 text-[2rem] font-light leading-[1.1] tracking-tight md:text-[2.75rem]">
               D&apos;Andorra, per a <strong className="font-semibold">empreses d&apos;Andorra.</strong>
@@ -119,7 +120,7 @@ export const Talent = () => (
     <section aria-labelledby="talent-title" className="bg-[#0e1116] px-6 py-24 text-white md:px-10 md:py-32 lg:px-12">
       <div className="mx-auto max-w-6xl">
         <Reveal className="reveal-up">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/55">Talent i experiència</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/55"><Tx>Talent i experiència</Tx></p>
           <h2 id="talent-title" className="mt-5 max-w-[24ch] text-[2rem] font-light leading-[1.1] tracking-tight md:text-[2.75rem]">
             Apostem pel <strong className="font-semibold">talent andorrà</strong>, amb formació i ofici.
           </h2>
@@ -127,23 +128,23 @@ export const Talent = () => (
         <div className="mt-14 grid gap-4 md:grid-cols-3">
           <Reveal className="reveal-up rounded-3xl border border-white/10 bg-white/[0.03] p-8">
             <p className="text-[3rem] font-extralight leading-none">+6</p>
-            <p className="mt-5 text-lg">anys fent màrqueting</p>
+            <p className="mt-5 text-lg"><Tx>anys fent màrqueting</Tx></p>
             <p className="mt-2 text-[15px] leading-relaxed text-white/55">
-              Estratègia, contingut, web i publicitat per a empreses de sectors molt diferents.
+              <Tx>Estratègia, contingut, web i publicitat per a empreses de sectors molt diferents.</Tx>
             </p>
           </Reveal>
           <Reveal className="reveal-up rounded-3xl border border-white/10 bg-white/[0.03] p-8" style={{ transitionDelay: "120ms" }}>
-            <p className="text-[3rem] font-extralight leading-none">Màster</p>
-            <p className="mt-5 text-lg">en màrqueting</p>
+            <p className="text-[3rem] font-extralight leading-none"><Tx>Màster</Tx></p>
+            <p className="mt-5 text-lg"><Tx>en màrqueting</Tx></p>
             <p className="mt-2 text-[15px] leading-relaxed text-white/55">
-              L&apos;Andrea, la nostra project manager, té un màster en màrqueting: cada projecte, ben planificat.
+              <Tx>L&apos;Andrea, la nostra project manager, té un màster en màrqueting: cada projecte, ben planificat.</Tx>
             </p>
           </Reveal>
           <Reveal className="reveal-up rounded-3xl border border-white/10 bg-white/[0.03] p-8" style={{ transitionDelay: "240ms" }}>
             <p className="text-[3rem] font-extralight leading-none">AD</p>
-            <p className="mt-5 text-lg">talent d&apos;aquí</p>
+            <p className="mt-5 text-lg"><Tx>talent d&apos;aquí</Tx></p>
             <p className="mt-2 text-[15px] leading-relaxed text-white/55">
-              Creiem en la gent del país i hi apostem: coneixem el mercat perquè hi vivim.
+              <Tx>Creiem en la gent del país i hi apostem: coneixem el mercat perquè hi vivim.</Tx>
             </p>
           </Reveal>
         </div>
@@ -151,21 +152,21 @@ export const Talent = () => (
         {/* Martí */}
         <Reveal className="reveal-up mt-4 grid gap-8 rounded-3xl border border-white/10 bg-[linear-gradient(135deg,rgb(47_91_255/0.14),rgb(255_255_255/0.02)_55%)] p-8 md:grid-cols-12 md:p-10">
           <div className="md:col-span-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-white/50">Fundador i CEO</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-white/50"><Tx>Fundador i CEO</Tx></p>
             <p className="mt-3 text-[1.75rem] font-light tracking-tight">Martí Mercadé</p>
           </div>
           <ul className="grid gap-6 text-[15px] leading-relaxed text-white/70 sm:grid-cols-3 md:col-span-8">
             <li>
-              <span className="block text-white">Doble grau a ESIC</span>
-              Màrqueting i Negocis Digitals, cinc anys de formació.
+              <span className="block text-white"><Tx>Doble grau a ESIC</Tx></span>
+              <Tx>Màrqueting i Negocis Digitals, cinc anys de formació.</Tx>
             </li>
             <li>
-              <span className="block text-white">Projectes premiats</span>
-              Diversos premis en projectes durant la universitat.
+              <span className="block text-white"><Tx>Projectes premiats</Tx></span>
+              <Tx>Diversos premis en projectes durant la universitat.</Tx>
             </li>
             <li>
               <span className="block text-white">Havas Media</span>
-              Experiència amb clients com UNICEF, JDE i Banca March.
+              <Tx>Experiència amb clients com UNICEF, JDE i Banca March.</Tx>
             </li>
           </ul>
         </Reveal>
@@ -191,7 +192,7 @@ export const Eines = () => {
   return (
     <section aria-labelledby="eines-title" className="bg-[#0a0c10] py-12 text-white md:py-14">
       <h2 id="eines-title" className="px-6 text-center text-[1.35rem] font-light leading-[1.2] tracking-tight md:text-[1.75rem]">
-        Les eines amb què <strong className="font-semibold">treballem cada dia</strong>
+        <Tx>Les eines amb què</Tx> <strong className="font-semibold"><Tx>treballem cada dia</Tx></strong>
       </h2>
       <ul className="sr-only">
         {tools.map((t) => (

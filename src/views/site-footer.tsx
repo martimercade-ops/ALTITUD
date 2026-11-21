@@ -1,3 +1,4 @@
+import { Tx } from "@/i18n/client";
 import type { FooterContent, FooterLink } from "@/data/mocks/contact";
 import Image from "next/image";
 import Link from "next/link";
@@ -71,7 +72,7 @@ export const SiteFooter = ({ content }: SiteFooterProps) => {
               className="block h-16 w-24 shrink-0 rounded-xl object-cover sm:h-20 sm:w-28"
             />
             <span className="min-w-0 flex-1 text-sm leading-snug text-footer-fg/85">
-              <span className="block text-xs font-medium uppercase tracking-wide text-footer-muted">Cafè a l&apos;oficina</span>
+              <span className="block text-xs font-medium uppercase tracking-wide text-footer-muted"><Tx>Cafè a l&apos;oficina</Tx></span>
               <span className="mt-1 block whitespace-pre-line">{contact.address}</span>
             </span>
             <a
@@ -92,10 +93,10 @@ export const SiteFooter = ({ content }: SiteFooterProps) => {
               <path d="M14 30h36v10a14 14 0 01-14 14h-8a14 14 0 01-14-14z" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinejoin="round" />
               <path d="M50 33h3a6 6 0 010 12h-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
             </svg>
-            <p className="mt-6 text-xs font-medium uppercase tracking-wide text-footer-muted">Cafè virtual</p>
-            <p className="mt-2 text-2xl font-light leading-tight tracking-tight">No pots venir? Fem el cafè per videotrucada.</p>
+            <p className="mt-6 text-xs font-medium uppercase tracking-wide text-footer-muted"><Tx>Cafè virtual</Tx></p>
+            <p className="mt-2 text-2xl font-light leading-tight tracking-tight"><Tx>No pots venir? Fem el cafè per videotrucada.</Tx></p>
             <p className="mt-3 text-sm leading-relaxed text-footer-fg/70">
-              Vint minuts, cadascú amb el seu cafè, per conèixer el teu projecte i veure com et podem ajudar. Tria el dia i l&apos;hora que et vagi bé.
+              <Tx>Vint minuts, cadascú amb el seu cafè, per conèixer el teu projecte i veure com et podem ajudar. Tria el dia i l&apos;hora que et vagi bé.</Tx>
             </p>
           </div>
           <a
@@ -104,7 +105,7 @@ export const SiteFooter = ({ content }: SiteFooterProps) => {
             rel="noopener"
             className="mt-8 inline-flex h-12 items-center justify-between gap-3 rounded-full bg-accent-lime pl-6 pr-2 text-sm font-semibold text-black transition-transform hover:scale-[1.02]"
           >
-            Reserva un cafè virtual
+            <Tx>Reserva un cafè virtual</Tx>
             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-accent-lime">→</span>
           </a>
         </Reveal>
@@ -119,10 +120,10 @@ export const SiteFooter = ({ content }: SiteFooterProps) => {
             href={`tel:${contact.phone.replace(/[^+\d]/g, "")}`}
             className="flex h-12 items-center justify-center gap-2 rounded-full bg-footer-fg text-sm font-medium text-footer"
           >
-            Truca&apos;ns
+            <Tx>Truca&apos;ns</Tx>
           </a>
           <a href={`mailto:${contact.email}`} className="flex h-12 items-center justify-center gap-2 rounded-full border border-footer-fg/25 text-sm font-medium">
-            Escriu-nos
+            <Tx>Escriu-nos</Tx>
           </a>
         </div>
 

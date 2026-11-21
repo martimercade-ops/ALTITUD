@@ -1,5 +1,6 @@
 "use client";
 
+import { Tx, useI18n } from "@/i18n/client";
 import { useEffect, useMemo, useRef, useState, type FormEvent, type KeyboardEvent } from "react";
 import Link from "next/link";
 import { CONTACT_EMAIL, sendContact } from "@/lib/send-contact";
@@ -65,6 +66,7 @@ const Chip = ({ on, onClick, children, big }: { on: boolean; onClick: () => void
 );
 
 export const ParlemForm = ({ services, topSlugs, unsureLabel }: ParlemFormProps) => {
+  const { t, lang } = useI18n();
   const empty = { name: "", company: "", email: "", phone: "", message: "", company_url: "" };
   const [values, setValues] = useState(empty);
   const [selected, setSelected] = useState<string[]>([]);
@@ -86,7 +88,7 @@ export const ParlemForm = ({ services, topSlugs, unsureLabel }: ParlemFormProps)
     const match = services.find((s) => s.slug === params.get("servei"));
     if (match) setSelected([match.label]);
     if (params.get("cafe") === "virtual") {
-      setValues((v) => ({ ...v, message: v.message || "M'agradaria fer un cafè virtual (videotrucada de 20 minuts)." }));
+      setValues((v) => ({ ...v, message: v.message || t("M'agradaria fer un cafè virtual (videotrucada de 20 minuts).") }));
     }
   }, [services]);
 
@@ -130,7 +132,7 @@ export const ParlemForm = ({ services, topSlugs, unsureLabel }: ParlemFormProps)
         services: selected,
         budget,
         referral,
-        source: "Pàgina Parlem",
+        source: lang === "ca" ? "Pàgina Parlem" : `Pàgina Parlem (${lang.toUpperCase()})`,
         subject: `Nova sol·licitud de ${values.name}${values.company ? ` (${values.company})` : ""}`,
       });
       setStatus(result);
@@ -156,15 +158,15 @@ export const ParlemForm = ({ services, topSlugs, unsureLabel }: ParlemFormProps)
           </svg>
         </span>
         <h2 className="mt-8 text-3xl font-light tracking-tight md:text-4xl">
-          Gràcies{values.name ? `, ${values.name.split(" ")[0]}` : ""}! Missatge rebut.
+          {t("Gràcies")}{values.name ? `, ${values.name.split(" ")[0]}` : ""}! {t("Missatge rebut.")}
         </h2>
-        <p className="mt-4 max-w-md text-white/70">Et contactarem en menys de 24 hores amb una primera proposta.</p>
+        <p className="mt-4 max-w-md text-white/70"><Tx>Et contactarem en menys de 24 hores amb una primera proposta.</Tx></p>
         <p className="mt-6 text-sm text-white/60">
-          Si és urgent, truca&apos;ns al{" "}
+          <Tx>Si és urgent, truca&apos;ns al</Tx>{" "}
           <a href="tel:+376670222" className="font-medium text-white underline underline-offset-4">+376 670 222</a>.
         </p>
-        <Link href="/" className="mt-10 inline-flex h-11 items-center rounded-full border border-white/25 px-6 text-sm text-white/90 hover:border-white/60">
-          Tornar a l&apos;inici
+        <Link href={lang === "ca" ? "/" : `/${lang}`} className="mt-10 inline-flex h-11 items-center rounded-full border border-white/25 px-6 text-sm text-white/90 hover:border-white/60">
+          <Tx>Tornar a l&apos;inici</Tx>
         </Link>
       </div>
     );
@@ -177,17 +179,17 @@ export const ParlemForm = ({ services, topSlugs, unsureLabel }: ParlemFormProps)
       {/* Progrés */}
       <div className="flex items-center justify-between text-xs font-medium uppercase tracking-[0.2em] text-white/45">
         <span>
-          Pas <span className="text-accent-lime">{step + 1}</span> de {STEPS.length}
+          <Tx>Pas</Tx> <span className="text-accent-lime">{step + 1}</span> {t("de")} {STEPS.length}
         </span>
-        <span>{step === 2 ? "Últim pas" : step === 1 ? "Quasi" : "1 minut"}</span>
+        <span>{t(step === 2 ? "Últim pas" : step === 1 ? "Quasi" : "1 minut")}</span>
       </div>
       <div className="mt-3 h-1 overflow-hidden rounded-full bg-white/10">
         <div className="h-full rounded-full bg-gradient-to-r from-[#2f5bff] to-accent-lime transition-[width] duration-700 ease-out" style={{ width: `${progress}%` }} />
       </div>
 
       <div ref={stepRef} key={step} className={`pas-entra flex flex-1 flex-col pt-7 ${dir === 1 ? "" : "pas-entra--enrere"}`}>
-        <p className="text-[1.75rem] font-light leading-tight tracking-tight md:text-[2.1rem]">{STEPS[step].title}</p>
-        <p className="mt-1.5 text-sm text-white/55">{STEPS[step].hint}</p>
+        <p className="text-[1.75rem] font-light leading-tight tracking-tight md:text-[2.1rem]">{t(STEPS[step].title)}</p>
+        <p className="mt-1.5 text-sm text-white/55">{t(STEPS[step].hint)}</p>
 
         {step === 0 && (
           <div className="mt-6 flex flex-wrap gap-2.5">
@@ -203,28 +205,28 @@ export const ParlemForm = ({ services, topSlugs, unsureLabel }: ParlemFormProps)
 
         {step === 1 && (
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
-            <Input id="name" label="Nom" autoComplete="name" required value={values.name} onChange={set("name")} />
-            <Input id="company" label="Empresa" autoComplete="organization" required value={values.company} onChange={set("company")} />
-            <Input id="email" label="Correu electrònic" type="email" inputMode="email" autoComplete="email" required value={values.email} onChange={set("email")} />
-            <Input id="phone" label="Telèfon" type="tel" inputMode="tel" autoComplete="tel" required value={values.phone} onChange={set("phone")} />
+            <Input id="name" label={t("Nom")} autoComplete="name" required value={values.name} onChange={set("name")} />
+            <Input id="company" label={t("Empresa")} autoComplete="organization" required value={values.company} onChange={set("company")} />
+            <Input id="email" label={t("Correu electrònic")} type="email" inputMode="email" autoComplete="email" required value={values.email} onChange={set("email")} />
+            <Input id="phone" label={t("Telèfon")} type="tel" inputMode="tel" autoComplete="tel" required value={values.phone} onChange={set("phone")} />
           </div>
         )}
 
         {step === 2 && (
           <div className="mt-5 flex flex-col gap-5">
             <div>
-              <p className="mb-2 text-[13px] text-white/60">Quant inverteixes ara en màrqueting?</p>
+              <p className="mb-2 text-[13px] text-white/60"><Tx>Quant inverteixes ara en màrqueting?</Tx></p>
               <div className="flex flex-wrap gap-2">
                 {BUDGETS.map((b) => (
-                  <Chip key={b} on={budget === b} onClick={() => setBudget(budget === b ? "" : b)}>{b}</Chip>
+                  <Chip key={b} on={budget === b} onClick={() => setBudget(budget === b ? "" : b)}>{t(b)}</Chip>
                 ))}
               </div>
             </div>
             <div>
-              <p className="mb-2 text-[13px] text-white/60">Com ens has conegut?</p>
+              <p className="mb-2 text-[13px] text-white/60"><Tx>Com ens has conegut?</Tx></p>
               <div className="flex flex-wrap gap-2">
                 {REFERRALS.map((r) => (
-                  <Chip key={r} on={referral === r} onClick={() => setReferral(referral === r ? "" : r)}>{r}</Chip>
+                  <Chip key={r} on={referral === r} onClick={() => setReferral(referral === r ? "" : r)}>{t(r)}</Chip>
                 ))}
               </div>
             </div>
@@ -233,7 +235,7 @@ export const ParlemForm = ({ services, topSlugs, unsureLabel }: ParlemFormProps)
                 id="message"
                 name="message"
                 rows={2}
-                placeholder="Alguna cosa més?"
+                placeholder={t("Alguna cosa més?")}
                 value={values.message}
                 onChange={set("message")}
                 className="peer w-full resize-none rounded-2xl border border-white/15 bg-white/[0.05] px-4 pb-3 pt-7 text-[1rem] text-white outline-none transition-all duration-300 placeholder:text-transparent hover:border-white/30 focus:border-accent-lime focus:bg-white/[0.08] focus:shadow-[0_0_0_4px_rgb(182_241_58/0.12)]"
@@ -242,7 +244,7 @@ export const ParlemForm = ({ services, topSlugs, unsureLabel }: ParlemFormProps)
                 htmlFor="message"
                 className="pointer-events-none absolute left-4 top-5 text-[1rem] text-white/50 transition-all duration-200 peer-focus:top-2.5 peer-focus:text-[0.7rem] peer-focus:text-accent-lime peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:text-[0.7rem]"
               >
-                Alguna cosa més? Explica&apos;ns el projecte
+                <Tx>Alguna cosa més? Explica&apos;ns el projecte</Tx>
               </label>
             </div>
           </div>
@@ -251,7 +253,7 @@ export const ParlemForm = ({ services, topSlugs, unsureLabel }: ParlemFormProps)
 
       {/* Camp trampa contra robots: invisible per a les persones */}
       <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
-        <label htmlFor="hp-zx">Deixa-ho buit</label>
+        <label htmlFor="hp-zx"><Tx>Deixa-ho buit</Tx></label>
         <input id="hp-zx" name="hp-zx" type="text" tabIndex={-1} autoComplete="new-password" data-lpignore="true" data-1p-ignore value={values.company_url} onChange={set("company_url")} />
       </div>
 
@@ -260,7 +262,7 @@ export const ParlemForm = ({ services, topSlugs, unsureLabel }: ParlemFormProps)
           <button
             type="button"
             onClick={() => go(step - 1)}
-            aria-label="Pas anterior"
+            aria-label={t("Pas anterior")}
             className="grid h-14 w-14 shrink-0 place-items-center rounded-full border border-white/20 text-white/80 transition-colors hover:border-white/60 hover:text-white"
           >
             ←
@@ -272,27 +274,27 @@ export const ParlemForm = ({ services, topSlugs, unsureLabel }: ParlemFormProps)
           className="boto-brilla group relative inline-flex h-14 flex-1 items-center justify-between overflow-hidden rounded-full bg-accent-lime pl-7 pr-2 text-[15px] font-semibold text-black transition-transform hover:scale-[1.01] disabled:opacity-60"
         >
           {status === "sending"
-            ? "Enviant…"
+            ? t("Enviant…")
             : step === 0
               ? selected.length
-                ? `Continuar · ${selected.length} ${selected.length === 1 ? "servei" : "serveis"}`
-                : "Continuar"
+                ? `${t("Continuar")} · ${selected.length} ${t(selected.length === 1 ? "servei" : "serveis")}`
+                : t("Continuar")
               : step === 1
-                ? "Continuar"
-                : "Enviar i rebre proposta"}
+                ? t("Continuar")
+                : t("Enviar i rebre proposta")}
           <span className="flex h-10 w-10 items-center justify-center rounded-full bg-black text-accent-lime transition-transform group-hover:translate-x-0.5">→</span>
         </button>
       </div>
 
       {status === "error" && (
         <p role="alert" className="mt-3 text-sm text-red-300">
-          No s&apos;ha pogut enviar. Truca&apos;ns al <a href="tel:+376670222" className="underline">+376 670 222</a> o escriu a{" "}
+          <Tx>No s&apos;ha pogut enviar. Truca&apos;ns al</Tx> <a href="tel:+376670222" className="underline">+376 670 222</a> <Tx>o escriu a</Tx>{" "}
           <a href={`mailto:${CONTACT_EMAIL}`} className="underline">{CONTACT_EMAIL}</a>.
         </p>
       )}
       <p className="mt-4 text-xs text-white/40">
-        Sense compromís · En enviar acceptes la{" "}
-        <Link href="/privacy-policy" className="text-white/70 underline underline-offset-2 hover:text-white">política de privacitat</Link>.
+        <Tx>Sense compromís · En enviar acceptes la</Tx>{" "}
+        <Link href="/privacy-policy" className="text-white/70 underline underline-offset-2 hover:text-white"><Tx>política de privacitat</Tx></Link>.
       </p>
     </form>
   );

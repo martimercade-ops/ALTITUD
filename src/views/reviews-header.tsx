@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useI18n } from "@/i18n/client";
 
-const FRASE = "Cada cim comença amb un primer pas.".split(" ");
+const FRASE_CA = "Cada cim comença amb un primer pas.";
 
 /** Capçalera de les ressenyes: títol amb llum que hi passa i xifres que compten */
 export const ReviewsHeader = () => {
+  const FRASE = useI18n().t(FRASE_CA).split(" ");
   const ref = useRef<HTMLDivElement>(null);
   const [run, setRun] = useState(false);
   useEffect(() => {

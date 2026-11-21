@@ -1,3 +1,5 @@
+import { getI18n } from "@/i18n/server";
+import { Tx } from "@/i18n/client";
 import { SiteNav } from "@/views/site-nav";
 import { SiteFooter } from "@/views/site-footer";
 import { LogoMarquee } from "@/views/logo-marquee";
@@ -12,11 +14,12 @@ import { BOOKING_URL } from "@/lib/send-contact";
 
 
 export const ParlemView = () => {
+  const { t, T, h } = getI18n();
   const { contact } = footerContent;
   const tel = contact.phone.replace(/\s/g, "");
   return (
     <>
-      <SiteNav {...homeNav} homeHref="/" navLabel="Principal" />
+      <SiteNav {...T(homeNav)} homeHref={h("/")} navLabel={t("Principal")} />
       <main id="top" className="w-full bg-[#0b1424] text-white">
         <section
           aria-labelledby="parlem-title"
@@ -28,7 +31,7 @@ export const ParlemView = () => {
             <div>
               <ParlemTitol id="parlem-title" />
               <p className="form-entra mt-8 max-w-sm text-xl font-light leading-snug text-white/75 md:text-2xl" style={{ animationDelay: "700ms" }}>
-                Explica&apos;ns el teu repte. Et responem en 24 h.
+                <Tx>Explica&apos;ns el teu repte. Et responem en 24 h.</Tx>
               </p>
               <div className="form-entra mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-white/60" style={{ animationDelay: "850ms" }}>
                 <a href={`tel:${tel}`} className="hover:text-accent-lime">{contact.phone}</a>
@@ -48,9 +51,9 @@ export const ParlemView = () => {
                   <Image src="/assets/altitud/equip/marti.jpg" alt="Martí Mercadé" fill sizes="64px" className="object-cover" />
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block text-[11px] font-semibold uppercase tracking-[0.25em] text-accent-lime">Parla amb el CEO</span>
-                  <span className="mt-1 block text-lg leading-snug text-white">Reserva 20 minuts amb en Martí</span>
-                  <span className="mt-0.5 block text-sm text-white/60">Videotrucada o cafè a l&apos;oficina.</span>
+                  <span className="block text-[11px] font-semibold uppercase tracking-[0.25em] text-accent-lime"><Tx>Parla amb el CEO</Tx></span>
+                  <span className="mt-1 block text-lg leading-snug text-white"><Tx>Reserva 20 minuts amb en Martí</Tx></span>
+                  <span className="mt-0.5 block text-sm text-white/60"><Tx>Videotrucada o cafè a l&apos;oficina.</Tx></span>
                 </span>
                 <span aria-hidden="true" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-lime text-black transition-transform group-hover:translate-x-1">→</span>
               </a>
@@ -59,9 +62,9 @@ export const ParlemView = () => {
 
             <div>
               <ParlemForm
-                services={services.map((s) => ({ slug: s.slug, label: s.name }))}
+                services={services.map((s) => ({ slug: s.slug, label: t(s.name) }))}
                 topSlugs={[]}
-                unsureLabel="No ho sé, assessoreu-me"
+                unsureLabel={t("No ho sé, assessoreu-me")}
               />
               <div className="lg:hidden">
               <a
@@ -75,9 +78,9 @@ export const ParlemView = () => {
                   <Image src="/assets/altitud/equip/marti.jpg" alt="Martí Mercadé" fill sizes="64px" className="object-cover" />
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block text-[11px] font-semibold uppercase tracking-[0.25em] text-accent-lime">Parla amb el CEO</span>
-                  <span className="mt-1 block text-lg leading-snug text-white">Reserva 20 minuts amb en Martí</span>
-                  <span className="mt-0.5 block text-sm text-white/60">Videotrucada o cafè a l&apos;oficina.</span>
+                  <span className="block text-[11px] font-semibold uppercase tracking-[0.25em] text-accent-lime"><Tx>Parla amb el CEO</Tx></span>
+                  <span className="mt-1 block text-lg leading-snug text-white"><Tx>Reserva 20 minuts amb en Martí</Tx></span>
+                  <span className="mt-0.5 block text-sm text-white/60"><Tx>Videotrucada o cafè a l&apos;oficina.</Tx></span>
                 </span>
                 <span aria-hidden="true" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-lime text-black transition-transform group-hover:translate-x-1">→</span>
               </a>
@@ -88,13 +91,13 @@ export const ParlemView = () => {
 
         <section className="border-t border-white/10 px-6 pt-20 text-center md:pt-28">
           <p className="mx-auto max-w-3xl text-[1.6rem] font-light leading-[1.25] tracking-tight md:text-[2.25rem]">
-            Som el partner de confiança de les empreses que aposten per{" "}
-            <span className="text-accent-lime">créixer de manera contínua</span>.
+            <Tx>Som el partner de confiança de les empreses que aposten per</Tx>{" "}
+            <span className="text-accent-lime"><Tx>créixer de manera contínua</Tx></span>.
           </p>
         </section>
-        <LogoMarquee content={homeContent.logos} />
+        <LogoMarquee content={T(homeContent.logos)} />
 
-        <SiteFooter content={footerContent} />
+        <SiteFooter content={T(footerContent)} />
         <ReviewToasts side="left" items={homeContent.reviews.items.filter((r) => r.text.length < 190)} />
       </main>
     </>

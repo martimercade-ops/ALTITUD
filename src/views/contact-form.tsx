@@ -1,5 +1,6 @@
 "use client";
 
+import { Tx, useI18n } from "@/i18n/client";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import type { ContactContent } from "@/data/mocks/contact";
 import { CONTACT_EMAIL, sendContact } from "@/lib/send-contact";
@@ -9,6 +10,7 @@ export interface ContactFormProps {
 }
 
 export const ContactForm = ({ content }: ContactFormProps) => {
+  const { t, lang } = useI18n();
   const { labelId, heading, fields, cta } = content;
   const [values, setValues] = useState({ name: "", phone: "", email: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "mailto" | "error">("idle");
@@ -66,7 +68,7 @@ export const ContactForm = ({ content }: ContactFormProps) => {
         name: values.name,
         email: values.email,
         phone: values.phone,
-        source: "Portada",
+        source: lang === "ca" ? "Portada" : `Portada (${lang.toUpperCase()})`,
       });
       setStatus(result);
       if (result === "sent") setValues({ name: "", phone: "", email: "" });
@@ -77,10 +79,10 @@ export const ContactForm = ({ content }: ContactFormProps) => {
 
   const statusText = {
     idle: "",
-    sending: "Enviant…",
-    sent: "Gràcies! Hem rebut el teu missatge i et contactarem aviat. Si és urgent, truca'ns al +376 670 222.",
-    mailto: "Hem obert el teu correu amb el missatge preparat.",
-    error: `No s'ha pogut enviar. Escriu-nos a ${CONTACT_EMAIL}.`,
+    sending: t("Enviant…"),
+    sent: t("Gràcies! Hem rebut el teu missatge i et contactarem aviat. Si és urgent, truca'ns al +376 670 222."),
+    mailto: t("Hem obert el teu correu amb el missatge preparat."),
+    error: `${t("No s'ha pogut enviar. Escriu-nos a")} ${CONTACT_EMAIL}.`,
   }[status];
 
   const dot = (filled: boolean) =>
@@ -107,7 +109,7 @@ export const ContactForm = ({ content }: ContactFormProps) => {
         <div className="text-center">
           <p className="isard-entra mb-6 text-xs font-semibold uppercase tracking-[0.35em] text-muted-small">
             <span className="mr-2 inline-block h-1.5 w-1.5 -translate-y-[0.15em] rounded-full bg-plum align-middle" />
-            Parlem
+            <Tx>Parlem</Tx>
           </p>
           <h2 id={labelId} aria-label={heading} className="mx-auto max-w-3xl text-[2rem] font-light leading-[1.1] tracking-tight sm:text-[2.6rem] lg:text-[3.1rem]">
             {heading.split(" ").map((w, i) => (

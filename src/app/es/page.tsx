@@ -1,13 +1,7 @@
-import { notFound } from "next/navigation";
-import { LandingEsView } from "@/views/landing-es";
-import { findLandingEs } from "@/data/landings-es";
-import { metaLandingEs } from "@/app/es/meta";
+import { PaginaInici, metaPagina } from "@/i18n/pages";
 
-const l = findLandingEs("");
+export const metadata = metaPagina("es", "/");
 
-export const metadata = l ? metaLandingEs(l) : {};
-
-export default function EsPage() {
-  if (!l) notFound();
-  return <LandingEsView l={l} />;
+export default function Page() {
+  return <PaginaInici lang="es" />;
 }

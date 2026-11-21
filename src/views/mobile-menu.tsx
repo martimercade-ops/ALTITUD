@@ -1,5 +1,7 @@
 "use client";
+import { LangSwitcher } from "@/components/common/lang-switcher";
 
+import { Tx, useI18n } from "@/i18n/client";
 import { useEffect, useId, useState } from "react";
 import { useScroll } from "@/hooks/smooth-scroll/use-scroll";
 import type { SiteNavItem, SiteNavLink } from "@/views/site-nav";
@@ -11,6 +13,7 @@ export interface MobileMenuProps {
 }
 
 export const MobileMenu = ({ items, cta, label }: MobileMenuProps) => {
+  const { t, h } = useI18n();
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
   const panelId = useId();
@@ -38,7 +41,7 @@ export const MobileMenu = ({ items, cta, label }: MobileMenuProps) => {
         type="button"
         aria-expanded={open}
         aria-controls={panelId}
-        aria-label={open ? "Tancar el menú" : "Obrir el menú"}
+        aria-label={open ? t("Tancar el menú") : t("Obrir el menú")}
         onClick={() => setOpen((v) => !v)}
         className="relative z-[60] flex h-[56px] w-[56px] items-center justify-center rounded-full border border-white/10 bg-[#0b1424]/85 shadow-[0_8px_30px_rgb(0_0_0/0.12)] backdrop-blur-md"
       >
@@ -105,12 +108,12 @@ export const MobileMenu = ({ items, cta, label }: MobileMenuProps) => {
                         <ul className="grid grid-cols-2 gap-2 overflow-hidden">
                           <li className="col-span-2">
                             <a
-                              href={item.href.startsWith("#") || item.href.startsWith("/#") ? "/serveis" : item.href}
+                              href={item.href.startsWith("#") || item.href.startsWith("/#") ? h("/serveis") : item.href}
                               onClick={close}
                               tabIndex={isOpen ? 0 : -1}
                               className="flex items-center justify-between rounded-2xl bg-accent-lime px-4 py-3 text-[15px] font-medium text-black"
                             >
-                              Veure tots els serveis <span aria-hidden="true">→</span>
+                              <Tx>Veure tots els serveis</Tx> <span aria-hidden="true">→</span>
                             </a>
                           </li>
                           {item.children!.map((child) => (
@@ -151,6 +154,9 @@ export const MobileMenu = ({ items, cta, label }: MobileMenuProps) => {
         >
           {cta.label}
         </a>
+        <div className="mt-[20px] flex justify-center">
+          <LangSwitcher variant="row" />
+        </div>
       </div>
     </div>
   );
