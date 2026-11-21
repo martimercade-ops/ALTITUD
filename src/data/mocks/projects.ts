@@ -450,7 +450,7 @@ const llista: Project[] = [
   {
     slug: "brainworks-center",
     lloc: "Escaldes-Engordany",
-    ux: [{ src: "/assets/altitud/projectes/ux/brainworks-1.webp", nom: "Serveis", alt: "Disseny mòbil de la pàgina de serveis de Brainworks a Figma", format: "mobil" }, { src: "/assets/altitud/projectes/ux/brainworks-2.webp", nom: "Blog", alt: "Disseny mòbil del blog de Brainworks", format: "mobil" }, { src: "/assets/altitud/projectes/ux/brainworks-3.webp", nom: "Contacte", alt: "Disseny mòbil de la pàgina de contacte de Brainworks", format: "mobil" }],
+    ux: [{ src: "/assets/altitud/projectes/ux/brainworks-1.webp", nom: "Inici", alt: "Disseny de la pàgina d'inici de Brainworks a Figma", format: "web" }, { src: "/assets/altitud/projectes/ux/brainworks-2.webp", nom: "Serveis", alt: "Disseny de la pàgina de serveis de Brainworks a Figma", format: "web" }, { src: "/assets/altitud/projectes/ux/brainworks-3.webp", nom: "El centre", alt: "Disseny de la pàgina El centre de Brainworks a Figma", format: "web" }],
     name: "Brainworks Center",
     sector: "Salut i benestar",
     summary: "Web, xarxes socials i identitat corporativa.",
