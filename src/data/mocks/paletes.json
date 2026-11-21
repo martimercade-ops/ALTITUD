@@ -188,6 +188,16 @@
   ],
   "accent": "#513225"
  },
+ "paula-ayet": {
+  "colors": [
+   "#e9ead8",
+   "#c5c7c5",
+   "#93999d",
+   "#726e6b",
+   "#0c1911"
+  ],
+  "accent": null
+ },
  "perfect-home": {
   "colors": [
    "#ffffff",

@@ -145,7 +145,8 @@ const VisualWeb = ({ p, c }: { p: Project; c: string[] }) => (
  */
 const VisualUX = ({ p, c }: { p: Project; c: string[] }) => {
   const logo = logoDe(p.slug);
-  const pantalles = (p.ux?.length ? p.ux : [0, 1, 2].map(() => ({ src: p.image, alt: "" }))).slice(0, 3);
+  const pantalles = (p.ux?.length ? p.ux : [0, 1, 2].map(() => ({ src: p.image, alt: "", format: "mobil" as const }))).slice(0, 3);
+  const web = pantalles[0]?.format === "web";
   const posicions = ["50% 0%", "30% 45%", "70% 90%"];
   return (
     <div
@@ -155,13 +156,13 @@ const VisualUX = ({ p, c }: { p: Project; c: string[] }) => {
       <span aria-hidden="true" className="cas-iso-diagonal" />
       <div className="cas-iso-pla">
         {pantalles.map((u, i) => (
-          <figure key={i} className="cas-iso-mobil" style={{ "--i": i } as CSSProperties}>
-            <div className="relative h-full w-full overflow-hidden rounded-[1.1rem] bg-white">
+          <figure key={i} className={`cas-iso-mobil ${web ? "cas-iso-mobil--web" : ""}`} style={{ "--i": i } as CSSProperties}>
+            <div className={`relative h-full w-full overflow-hidden bg-white ${web ? "rounded-[0.6rem]" : "rounded-[1.1rem]"}`}>
               <Image
                 src={u.src}
                 alt={u.alt || (i === 0 ? `Pantalles de ${p.name}` : "")}
                 fill
-                sizes="220px"
+                sizes="300px"
                 className="object-cover"
                 style={{ objectPosition: p.ux?.length ? "50% 0%" : posicions[i] }}
               />
@@ -463,6 +464,62 @@ const visualDe = (t: Tipus, p: Project, c: string[]): ReactNode => {
   }
 };
 
+
+/** Detalls destacats: captura gran + explicació (funcionalitats concretes del projecte) */
+const Destacats = ({ p, c }: { p: Project; c: string[] }) =>
+  p.destacats?.length ? (
+    <section aria-labelledby="destacats" className="cas-destacats relative overflow-hidden bg-footer py-24 text-white md:py-32">
+      <span aria-hidden="true" className="cas-taca cas-taca--a opacity-30" />
+      <div className="relative mx-auto max-w-6xl px-6 md:px-10">
+        <p className={`${EYEBROW} text-white/55`}>A fons</p>
+        <h2 id="destacats" className="mt-4 max-w-2xl text-[2rem] font-light leading-tight tracking-tight sm:text-[2.75rem]">
+          Els detalls que fan la diferència
+        </h2>
+        <div className="mt-16 flex flex-col gap-24 md:gap-32">
+          {p.destacats.map((d, i) => (
+            <article key={d.titol} className="cas-destacat grid items-center gap-10 lg:grid-cols-[1.25fr_1fr] lg:gap-16">
+              <figure className={`cas-visual group relative ${i % 2 ? "lg:order-2" : ""}`}>
+                <span aria-hidden="true" className="absolute -inset-4 rounded-[2rem] opacity-40 blur-2xl transition-opacity duration-700 group-hover:opacity-70" style={{ background: c[3] }} />
+                <div className="relative overflow-hidden rounded-2xl bg-white shadow-[0_40px_80px_-30px_rgb(0_0_0/0.6)] ring-1 ring-white/10 transition-transform duration-700 group-hover:-translate-y-1">
+                  <div className="flex items-center gap-1.5 border-b border-black/5 bg-[#f3f4f6] px-4 py-2.5">
+                    <span className="size-2.5 rounded-full bg-[#ff5f57]" />
+                    <span className="size-2.5 rounded-full bg-[#febc2e]" />
+                    <span className="size-2.5 rounded-full bg-[#28c840]" />
+                    {p.links[0] && <span className="mx-auto truncate rounded-md bg-white px-4 py-0.5 text-[0.7rem] text-black/50">{p.links[0].label}</span>}
+                  </div>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={d.imatge} alt={d.alt} loading="lazy" decoding="async" className="block w-full" />
+                </div>
+              </figure>
+              <div className={i % 2 ? "lg:order-1" : ""}>
+                <p className="flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.25em] text-white/50">
+                  <span>{pad(i + 1)}</span>
+                  {d.etiqueta && (
+                    <>
+                      <span className="h-px w-8 bg-white/25" />
+                      <span>{d.etiqueta}</span>
+                    </>
+                  )}
+                </p>
+                <h3 className="mt-5 text-[1.75rem] font-light leading-tight tracking-tight sm:text-[2.25rem]">{d.titol}</h3>
+                <p className="mt-5 text-lg leading-relaxed text-white/70">{d.text}</p>
+                {d.punts && (
+                  <ul className="mt-7 flex flex-wrap gap-2">
+                    {d.punts.map((pt) => (
+                      <li key={pt} className="rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-sm text-white/85">
+                        {pt}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  ) : null;
+
 /* ------------------------------------------------------------------ */
 /* Pàgina                                                               */
 /* ------------------------------------------------------------------ */
@@ -474,8 +531,9 @@ export const ProjectView = ({ project: p, prev, next }: ProjectViewProps) => {
   const logo = logoDe(p.slug);
 
   // Capítols: un per servei (+ UX/UI si hi ha pantalles de Figma i no surt als serveis)
-  const serveis = [...p.services];
-  if (p.ux?.length && !serveis.some((s) => tipusDe(s) === "ux")) serveis.splice(1, 0, "Disseny UX/UI");
+  const serveis = p.services.filter((s) => tipusDe(s) !== "ux");
+  const ux = p.services.find((s) => tipusDe(s) === "ux") ?? (p.ux?.length ? "Disseny UX/UI" : null);
+  if (ux) serveis.splice(serveis[0] && tipusDe(serveis[0]) === "web" ? 1 : 0, 0, ux);
   // Fotografia i vídeo comparteixen visual: n'agrupem el títol
   const capitols: { titol: string; tipus: Tipus; text: string }[] = [];
   for (const s of serveis) {
@@ -616,6 +674,8 @@ export const ProjectView = ({ project: p, prev, next }: ProjectViewProps) => {
             ))}
           </div>
         </section>
+
+        <Destacats p={p} c={c} />
 
         {/* ── Galeria a sang (si hi ha fotos i no s'han fet servir al capítol de foto) ── */}
         {p.gallery && p.gallery.length > 0 && !capitols.some((k) => k.tipus === "foto") && (

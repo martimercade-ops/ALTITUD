@@ -23,6 +23,7 @@ export const LOGOS: Record<string, string> = {
   "erf-assegurances": "erf-assegurances",
   "beta-assegurances": "beta-assegurances",
   "psicosalut": "psicosalut",
+  "paula-ayet": "paula-ayet",
 };
 
 /** Logo del client (en color) per a un projecte, si en tenim */

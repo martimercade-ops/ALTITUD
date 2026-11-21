@@ -1139,6 +1139,10 @@ font { background: transparent !important; }
   transform: translateZ(calc(20px + var(--i) * 18px));
   transition: transform .7s cubic-bezier(.2,.7,.2,1);
 }
+.cas-iso-mobil--web {
+  width: 230px; height: 368px; padding: 5px; border-radius: .9rem;
+  left: calc(90px + var(--i) * 235px); top: calc(60px - var(--i) * 10px);
+}
 .cas-iso:hover .cas-iso-mobil { transform: translateZ(calc(40px + var(--i) * 30px)); }
 .cas-iso-targeta {
   position: absolute; border-radius: 1rem; background: #fff; padding: 14px;

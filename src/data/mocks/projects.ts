@@ -23,8 +23,10 @@ export interface Project {
   enfoc?: string;
   /** Text propi per a un servei concret (clau = nom del servei, p. ex. "Web") */
   capitols?: Record<string, string>;
-  /** Pantalles de disseny UX/UI (exportades de Figma) */
-  ux?: { src: string; alt: string }[];
+  /** Pantalles de disseny UX/UI (de Figma). format: "mobil" (pantalla de mòbil) o "web" (pàgina d'escriptori) */
+  ux?: { src: string; alt: string; format?: "mobil" | "web" }[];
+  /** Detalls destacats del projecte (funcionalitats concretes, amb captura) */
+  destacats?: { etiqueta?: string; titol: string; text: string; imatge: string; alt: string; punts?: string[] }[];
   /** Color d'accent de la marca (si el que s'extreu de la captura no és bo) */
   color?: string;
   /** Any del projecte */
@@ -41,11 +43,13 @@ const web = (url: string): ProjectLink => ({
 const llista: Project[] = [
   {
     slug: "el-rato",
+    color: "#d9572b",
+    ux: [{ src: "/assets/altitud/projectes/ux/el-rato-1.webp", alt: "Disseny de la pàgina d'inici d'El Rato a Figma", format: "web" }, { src: "/assets/altitud/projectes/ux/el-rato-2.webp", alt: "Disseny de la pàgina Barre House d'El Rato", format: "web" }, { src: "/assets/altitud/projectes/ux/el-rato-3.webp", alt: "Disseny de la pàgina de tarifes d'El Rato", format: "web" }],
     name: "El Rato Barre House",
     sector: "Fitness i benestar",
     summary: "Web, xarxes socials i motor de reserves.",
     about: "El primer estudi boutique de barre d'Andorra, al carrer Antic Carrer Major d'Andorra la Vella. Web amb reserva de classes i compra de bons en línia, i gestió de les xarxes socials.",
-    services: ["Web", "Xarxes socials", "Motor de reserves"],
+    services: ["Web", "Xarxes socials", "Motor de reserves", "Disseny UX/UI"],
     links: [web("https://elratobarrehouse.com/")],
     image: `${P}/el-rato.jpg`,
   },
@@ -73,11 +77,13 @@ const llista: Project[] = [
   },
   {
     slug: "henkan",
+    color: "#9a7452",
+    ux: [{ src: "/assets/altitud/projectes/ux/henkan-1.webp", alt: "Disseny de la pàgina d'inici de Henkan a Figma", format: "web" }, { src: "/assets/altitud/projectes/ux/henkan-2.webp", alt: "Disseny de la pàgina de projectes de Henkan", format: "web" }, { src: "/assets/altitud/projectes/ux/henkan-3.webp", alt: "Disseny de la pàgina Nosaltres de Henkan", format: "web" }],
     name: "Henkan Spaces",
     sector: "Interiorisme",
     summary: "Web, fotografia i SEO.",
     about: "Estudi d'interiorisme a Andorra: dissenyen amb sentit i transformen amb encant.",
-    services: ["Web", "Fotografia", "SEO"],
+    services: ["Web", "Fotografia", "SEO", "Disseny UX/UI"],
     links: [web("https://henkan-spaces.com/")],
     image: `${P}/henkan.jpg`,
   },
@@ -90,6 +96,19 @@ const llista: Project[] = [
     services: ["Web"],
     links: [web("https://enzopoulatcoaching.com/")],
     image: `${P}/enzo-poulat.jpg`,
+  },
+  {
+    slug: "paula-ayet",
+    name: "Paula Ayet Yoga",
+    sector: "Ioga",
+    summary: "Web i disseny UX/UI.",
+    about: "Professora de Jivamukti Yoga a Andorra: classes, mentories, retirs i un estudi online.",
+    repte: "Una marca personal molt cuidada, amb classes, mentories i retirs, que necessitava un web a l'altura: calmat, elegant i fàcil de recórrer des del mòbil.",
+    services: ["Web", "Disseny UX/UI"],
+    color: "#7d93a0",
+    ux: [{ src: "/assets/altitud/projectes/ux/paula-ayet-1.webp", alt: "Disseny mòbil de la pàgina d'inici de Paula Ayet Yoga a Figma", format: "mobil" }, { src: "/assets/altitud/projectes/ux/paula-ayet-2.webp", alt: "Disseny mòbil de la pàgina Let's work together", format: "mobil" }, { src: "/assets/altitud/projectes/ux/paula-ayet-3.webp", alt: "Disseny mòbil d'una pàgina de curs de Paula Ayet Yoga", format: "mobil" }],
+    links: [web("https://www.paulaayet.com/")],
+    image: `${P}/paula-ayet.jpg`,
   },
   {
     slug: "blue-ozone",
@@ -194,11 +213,51 @@ const llista: Project[] = [
   },
   {
     slug: "auro-jardiners",
+    color: "#3f6b3a",
     name: "Auró Jardiners",
     sector: "Jardineria",
     summary: "Web, SEO i xarxes socials.",
     about: "Empresa de jardineria a Andorra: disseny, construcció i manteniment d'espais verds.",
     services: ["Web", "SEO", "Xarxes socials"],
+    repte: "Un centre de jardineria amb més d'un centenar d'espècies i obres arreu del país, però amb una web que no ho ensenyava. Volien que el client pogués consultar les plantes des de casa i veure la feina que fan cada dia.",
+    enfoc: "Vam convertir el web en una eina: una biblioteca de plantes amb fitxa per a cada espècie i una secció de projectes que explica les obres, fins i tot fase a fase.",
+    capitols: {
+      Web: "Hem redissenyat el web d'Auró perquè faci de botiga i d'aparador alhora: biblioteca de plantes, botiga online, serveis i un portfoli d'obres reals per parròquia.",
+    },
+    destacats: [
+      {
+        etiqueta: "Biblioteca de plantes",
+        titol: "113 espècies, a un clic",
+        text: "Una cosa poc habitual en un centre de jardineria d'Andorra: tot el catàleg viu, consultable des del mòbil. Cada planta té la seva imatge, nom comú i científic, i es pot filtrar entre exterior i interior o buscar pel nom.",
+        imatge: "/assets/altitud/projectes/detalls/auro-cataleg.webp",
+        alt: "Biblioteca de plantes del web d'Auró Jardiners amb una graella de plantes en test",
+        punts: ["Filtres exterior / interior", "Cercador instantani", "Nom comú i científic"],
+      },
+      {
+        etiqueta: "Fitxa de cada planta",
+        titol: "Tot el que cal saber abans de comprar",
+        text: "En clicar una planta s'obre la seva fitxa: descripció, alçada, floració, sol, reg, resistència al fred i creixement, amb consells de cura. I un botó per demanar-la directament per WhatsApp.",
+        imatge: "/assets/altitud/projectes/detalls/auro-fitxa.webp",
+        alt: "Fitxa del cirerer japonès al web d'Auró Jardiners amb dades de cultiu i consells de cura",
+        punts: ["Alçada, floració, sol i reg", "Resistència al fred", "Consells de cura", "Consulta per WhatsApp"],
+      },
+      {
+        etiqueta: "Projectes",
+        titol: "La feina del dia a dia, explicada",
+        text: "Parcs, places, jardins privats i cobertes vegetals de tot Andorra, cadascun amb la seva fitxa: on és, què s'hi ha fet i les fotos de l'obra. Les obres en marxa també hi surten.",
+        imatge: "/assets/altitud/projectes/detalls/auro-projectes.webp",
+        alt: "Pàgina de projectes del web d'Auró Jardiners amb obres a Encamp i Andorra la Vella",
+        punts: ["Obres públiques i privades", "Localització de cada obra", "Projectes en curs"],
+      },
+      {
+        etiqueta: "Línia del temps",
+        titol: "Una obra, fase a fase",
+        text: "Per a les obres llargues, com els jardins de Casa de la Vall, hem creat una línia del temps: el client i els veïns poden seguir l'evolució des del moviment de terres fins al resultat final.",
+        imatge: "/assets/altitud/projectes/detalls/auro-timeline.webp",
+        alt: "Línia del temps de l'obra dels jardins de Casa de la Vall al web d'Auró Jardiners",
+        punts: ["Fases amb data i estat", "Galeria de cada fase", "S'actualitza a mesura que avança l'obra"],
+      },
+    ],
     links: [web("https://aurojardiners.com/")],
     image: `${P}/auro-jardiners.jpg`,
   },
@@ -214,11 +273,12 @@ const llista: Project[] = [
   },
   {
     slug: "brainworks-center",
+    ux: [{ src: "/assets/altitud/projectes/ux/brainworks-1.webp", alt: "Disseny mòbil de la pàgina de serveis de Brainworks a Figma", format: "mobil" }, { src: "/assets/altitud/projectes/ux/brainworks-2.webp", alt: "Disseny mòbil del blog de Brainworks", format: "mobil" }, { src: "/assets/altitud/projectes/ux/brainworks-3.webp", alt: "Disseny mòbil de la pàgina de contacte de Brainworks", format: "mobil" }],
     name: "Brainworks Center",
     sector: "Salut i benestar",
     summary: "Web, xarxes socials i identitat corporativa.",
     about: "Centre d'Andorra per entrenar el cervell i millorar el benestar i el rendiment.",
-    services: ["Web", "Xarxes socials", "Identitat corporativa"],
+    services: ["Web", "Xarxes socials", "Identitat corporativa", "Disseny UX/UI"],
     links: [web("https://brainworkscenter.com/")],
     image: `${P}/brainworks.jpg`,
   },
