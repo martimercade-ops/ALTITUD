@@ -52,8 +52,56 @@ const Dispositius = ({ src, priority = false }: { src: string; priority?: boolea
   </div>
 );
 
+/**
+ * Mockup UX/UI per a la miniatura: llenç de Figma amb les pantalles del projecte,
+ * la central seleccionada (marc blau, nanses i mides) i un cursor de col·laboració.
+ */
+const MockupUX = ({ p }: { p: Project }) => {
+  const pantalles = (p.ux ?? []).slice(0, 3);
+  const web = pantalles[0]?.format === "web";
+  const nom = web ? "Desktop" : "iPhone";
+  const color = p.color ?? "#2b72e2";
+  return (
+    <div
+      className="ux-llenc absolute inset-3 z-[2] overflow-hidden rounded-[20px] md:inset-4"
+      style={{ background: `color-mix(in srgb, ${color} 16%, #f4f4f2)`, ["--ux" as string]: color }}
+    >
+      <span aria-hidden="true" className="ux-graella" />
+      <div className={`ux-pantalles ${web ? "ux-pantalles--web" : ""}`}>
+        {pantalles.map((u, i) => (
+          <figure key={u.src} className={`ux-pantalla ${i === 1 ? "ux-pantalla--sel" : ""}`} style={{ ["--i" as string]: i }}>
+            <figcaption className="ux-etiqueta">
+              {nom} — {String(i + 1).padStart(2, "0")}
+            </figcaption>
+            <div className="ux-marc">
+              <Image src={u.src} alt="" fill sizes="(max-width: 640px) 30vw, 10vw" className="object-cover object-top" />
+            </div>
+            {i === 1 && (
+              <>
+                <span className="ux-nansa ux-nansa--a" />
+                <span className="ux-nansa ux-nansa--b" />
+                <span className="ux-nansa ux-nansa--c" />
+                <span className="ux-nansa ux-nansa--d" />
+                <span className="ux-mida">{web ? "1440 × 2300" : "390 × 844"}</span>
+              </>
+            )}
+          </figure>
+        ))}
+      </div>
+      <span className="ux-cursor">
+        <svg viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M1 1l5.2 13.2 2-5.6 5.6-2z" />
+        </svg>
+        <span>Altitud</span>
+      </span>
+      <span className="ux-figma">Figma</span>
+    </div>
+  );
+};
+
 /** Targeta de projecte: en passar-hi el cursor surt el portàtil de perfil amb la web */
-const ProjectCard = ({ p, priority = false }: { p: Project; priority?: boolean }) => {
+const ProjectCard = ({ p, priority = false, ux = false }: { p: Project; priority?: boolean; ux?: boolean }) => {
+  const modeUX = ux && !!p.ux?.length;
   const onMove = (e: React.PointerEvent<HTMLAnchorElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
     e.currentTarget.style.setProperty("--tx", (((e.clientX - r.left) / r.width - 0.5) * 2).toFixed(3));
@@ -65,8 +113,8 @@ const ProjectCard = ({ p, priority = false }: { p: Project; priority?: boolean }
   };
   return (
     <Link
-      href={projectHref(p.slug)}
-      aria-label={`Veure el projecte de ${p.name}`}
+      href={modeUX ? `${projectHref(p.slug)}#ux-ui` : projectHref(p.slug)}
+      aria-label={modeUX ? `Veure el disseny UX/UI de ${p.name}` : `Veure el projecte de ${p.name}`}
       onPointerMove={onMove}
       onPointerLeave={onLeave}
       className={`illa illa--clar ${p.foto ? "illa--foto" : ""} group relative flex h-full flex-col overflow-hidden rounded-[28px] bg-[#eceef2] text-black`}
@@ -75,7 +123,9 @@ const ProjectCard = ({ p, priority = false }: { p: Project; priority?: boolean }
 
       <div aria-hidden="true" className="illa-estudi relative aspect-[16/11] w-full">
         <span className="illa-ombra" />
-        {p.foto ? (
+        {modeUX ? (
+          <MockupUX p={p} />
+        ) : p.foto ? (
           <div className="absolute inset-4 z-[2] overflow-hidden rounded-[20px] md:inset-5">
             <Image src={p.image} alt="" fill sizes="(max-width: 640px) 92vw, 30vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
           </div>
@@ -191,7 +241,7 @@ export const ProjectsList = ({ projects }: { projects: Project[] }) => {
       <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
         {shown.map((p, i) => (
           <Reveal key={p.slug} as="li" className="reveal-up" style={{ transitionDelay: `${(i % 4) * 80}ms` }}>
-            <ProjectCard p={p} priority={i < 3} />
+            <ProjectCard p={p} priority={i < 3} ux={tag === "UX/UI"} />
           </Reveal>
         ))}
       </ul>

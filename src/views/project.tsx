@@ -753,7 +753,8 @@ export const ProjectView = ({ project: p, prev, next }: ProjectViewProps) => {
             {capitols.map((k, i) => (
               <article
                 key={k.titol}
-                className={`cas-capitol grid items-center gap-10 border-t border-black/10 py-16 md:py-24 ${k.tipus === "ux" ? "" : "lg:grid-cols-2 lg:gap-20"}`}
+                id={k.tipus === "ux" ? "ux-ui" : undefined}
+                className={`cas-capitol scroll-mt-24 grid items-center gap-10 border-t border-black/10 py-16 md:py-24 ${k.tipus === "ux" ? "" : "lg:grid-cols-2 lg:gap-20"}`}
               >
                 <div className={k.tipus === "ux" ? "max-w-2xl" : i % 2 ? "lg:order-2" : ""}>
                   <span className="cas-num block text-[5rem] font-extralight leading-none tracking-tighter md:text-[7rem]">{pad(i + 1)}</span>

@@ -82,12 +82,9 @@ function ScrollController() {
         lenis?.scrollTo(0, { immediate: true, force: true });
         window.scrollTo(0, 0);
       }
-      if (pathname.includes("#")) {
-        const hash = pathname.split("#").pop();
-        if (hash) {
-          setHash(hash);
-        }
-      }
+      // Enllaç amb àncora (p. ex. /projectes/x#ux-ui): baixar fins a la secció
+      const hash = window.location.hash.slice(1);
+      if (hash) setHash(hash);
     }
   }, [pathname, setHash, lenis]);
 
