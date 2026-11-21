@@ -47,7 +47,7 @@ export const EditorFases = ({ projecteId, fases }: { projecteId: number; fases: 
                 <input
                   defaultValue={f.nom}
                   onBlur={(ev) => ev.target.value.trim() && ev.target.value !== f.nom && start(() => canviaFase(projecteId, f.id, { nom: ev.target.value }))}
-                  className={`min-w-0 flex-1 rounded-md bg-transparent px-1 py-0.5 text-[0.95rem] outline-none focus:bg-black/5 ${f.estat === "fet" ? "text-black/45 line-through" : "font-medium"}`}
+                  className={`min-w-0 flex-1 basis-full rounded-md bg-transparent px-1 py-0.5 text-[0.95rem] sm:basis-auto outline-none focus:bg-black/5 ${f.estat === "fet" ? "text-black/45 line-through" : "font-medium"}`}
                   aria-label="Nom de la fase"
                 />
                 <span className="rounded-full px-2 py-0.5 text-[0.7rem] font-semibold" style={{ background: `${e.color}18`, color: e.color }}>{e.nom}</span>

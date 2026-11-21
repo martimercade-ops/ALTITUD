@@ -11,24 +11,24 @@ const ENLLACOS = [
 
 export const Barra = ({ usuari, actiu = "/panell" }: { usuari: string; actiu?: string }) => (
   <header className="sticky top-0 z-30 border-b border-white/10 bg-[#0b1424]/95 text-white backdrop-blur">
-    <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-8 gap-y-2 px-4 py-3.5 md:px-8">
+    <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-8 gap-y-3 px-4 py-3 md:flex-nowrap md:px-8 md:py-3.5">
       <Link href="/panell" className="flex items-center gap-3">
         <img src="/assets/altitud/altitud-logo-h.svg" alt="Altitud Digital" className="h-[18px] w-auto" />
         <span className="rounded-full bg-[#b6f13a] px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wider text-[#0b1424]">Panell</span>
       </Link>
-      <nav className="flex flex-1 flex-wrap items-center gap-1 text-sm">
+      <nav className="order-last -mx-4 flex w-[calc(100%+2rem)] items-center gap-1 overflow-x-auto px-4 text-sm [scrollbar-width:none] md:order-none md:mx-0 md:w-auto md:flex-1 md:overflow-visible md:px-0">
         {ENLLACOS.map((e) => (
           <Link
             key={e.href}
             href={e.href}
-            className={`rounded-full px-3.5 py-1.5 transition-colors ${actiu === e.href ? "bg-white/10 text-white" : "text-white/60 hover:text-white"}`}
+            className={`shrink-0 whitespace-nowrap rounded-full px-3.5 py-1.5 transition-colors ${actiu === e.href ? "bg-white/10 text-white" : "text-white/60 hover:text-white"}`}
           >
             {e.nom}
           </Link>
         ))}
-        <a href="/api/panell/exporta" className="rounded-full px-3.5 py-1.5 text-white/60 hover:text-white">Exportar</a>
+        <a href="/api/panell/exporta" className="shrink-0 whitespace-nowrap rounded-full px-3.5 py-1.5 text-white/60 hover:text-white">Exportar</a>
       </nav>
-      <form action={sortir} className="flex items-center gap-3 text-sm">
+      <form action={sortir} className="ml-auto flex items-center gap-3 text-sm">
         <span className="hidden items-center gap-2 text-white/60 sm:flex">
           <span className="grid size-7 place-items-center rounded-full bg-[#b6f13a] text-xs font-semibold uppercase text-[#0b1424]">{usuari.slice(0, 1)}</span>
           {usuari}

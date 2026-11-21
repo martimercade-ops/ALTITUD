@@ -83,7 +83,7 @@ export const Tauler = ({ leads, usuari }: { leads: Lead[]; usuari: string }) => 
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div className="pa-entra">
               <p className="text-sm text-white/50">{new Date().toLocaleDateString("ca-ES", { weekday: "long", day: "numeric", month: "long" })}</p>
-              <h1 className="mt-1 text-[2.4rem] font-semibold leading-tight tracking-tight md:text-5xl">
+              <h1 className="mt-1 text-[2rem] font-semibold leading-tight tracking-tight md:text-5xl">
                 {salutacio()}, <span className="capitalize text-[#b6f13a]">{usuari}</span>.
               </h1>
               <p className="mt-2 text-white/60">
@@ -103,12 +103,12 @@ export const Tauler = ({ leads, usuari }: { leads: Lead[]; usuari: string }) => 
               ["Guanyats", kpi.guanyats, "#34d399"],
               ["En cartera", euros(kpi.cartera), "#fbbf24"],
             ].map(([k, v, c], i) => (
-              <div key={String(k)} className="pa-kpi pa-entra rounded-2xl p-5" style={{ "--i": i + 1 } as React.CSSProperties}>
+              <div key={String(k)} className="pa-kpi pa-entra rounded-2xl p-4 md:p-5" style={{ "--i": i + 1 } as React.CSSProperties}>
                 <p className="flex items-center gap-2 text-xs text-white/55">
                   <span className="size-1.5 rounded-full" style={{ background: String(c) }} />
                   {k}
                 </p>
-                <p className="mt-2 text-3xl font-semibold tracking-tight">{v}</p>
+                <p className="mt-1.5 text-2xl font-semibold tracking-tight md:mt-2 md:text-3xl">{v}</p>
               </div>
             ))}
           </div>
@@ -151,12 +151,12 @@ export const Tauler = ({ leads, usuari }: { leads: Lead[]; usuari: string }) => 
           </section>
         )}
       <section className="flex flex-wrap items-center gap-2">
-        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Cerca empresa, persona, correu…" className="panell-camp !w-auto min-w-[16rem] flex-1" />
-        <select value={tipus} onChange={(e) => setTipus(e.target.value)} className="panell-camp !w-auto">
+        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Cerca empresa, persona, correu…" className="panell-camp !w-full md:!w-auto md:min-w-[16rem] md:flex-1" />
+        <select value={tipus} onChange={(e) => setTipus(e.target.value)} className="panell-camp !w-auto flex-1 md:flex-none">
           <option value="tots">Tots els tipus</option>
           {TIPUS.map((t) => <option key={t.id} value={t.id}>{t.nom}</option>)}
         </select>
-        <select value={estat} onChange={(e) => setEstat(e.target.value)} className="panell-camp !w-auto">
+        <select value={estat} onChange={(e) => setEstat(e.target.value)} className="panell-camp !w-auto flex-1 md:flex-none">
           <option value="tots">Tots els estats</option>
           {ESTATS.map((e) => <option key={e.id} value={e.id}>{e.nom}</option>)}
         </select>
@@ -170,7 +170,27 @@ export const Tauler = ({ leads, usuari }: { leads: Lead[]; usuari: string }) => 
       </section>
 
       {vista === "taula" ? (
-        <div className="panell-targeta overflow-x-auto">
+        <>
+        <ul className="flex flex-col gap-2 md:hidden">
+          {filtrats.map((l) => (
+            <li key={l.id}>
+              <Link href={`/panell/lead/${l.id}`} className="panell-targeta flex items-center gap-3 p-3.5">
+                <Avatar nom={l.empresa || l.contacte} />
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate font-medium">{l.empresa || l.contacte || "—"}</span>
+                  <span className="block truncate text-xs text-black/50">{l.contacte}{l.serveis ? ` · ${l.serveis}` : ""}</span>
+                  <span className="mt-1.5 flex flex-wrap items-center gap-1.5">
+                    <Pastilla estat={l.estat} />
+                    <Tipus t={l.tipus} />
+                    <span className="text-[0.7rem] text-black/40">{data(l.creat)}</span>
+                  </span>
+                </span>
+              </Link>
+            </li>
+          ))}
+          {!filtrats.length && <li className="panell-targeta p-8 text-center text-sm text-black/45">Cap lead amb aquests filtres.</li>}
+        </ul>
+        <div className="panell-targeta hidden overflow-x-auto md:block">
           <table className="w-full min-w-[60rem] text-left text-sm">
             <thead className="border-b border-black/5 text-xs uppercase tracking-wide text-black/45">
               <tr>
@@ -209,6 +229,7 @@ export const Tauler = ({ leads, usuari }: { leads: Lead[]; usuari: string }) => 
             </tbody>
           </table>
         </div>
+        </>
       ) : (
         <div className="flex gap-3 overflow-x-auto pb-4">
           {ESTATS.map((e) => {

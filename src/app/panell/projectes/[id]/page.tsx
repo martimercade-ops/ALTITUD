@@ -37,10 +37,10 @@ export default async function FitxaProjecte({ params }: { params: Promise<{ id: 
           <Link href="/panell/projectes" className="text-sm text-white/50 hover:text-white">← Tots els projectes</Link>
           <p className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-[#b6f13a]">{p.client}</p>
           <div className="mt-1 flex flex-wrap items-center gap-3">
-            <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">{p.nom}</h1>
+            <h1 className="text-2xl font-semibold tracking-tight md:text-4xl">{p.nom}</h1>
             <span className="rounded-full px-3 py-1 text-xs font-semibold" style={{ background: `${colorEstatProjecte(p.estat)}40` }}>● {nomEstatProjecte(p.estat)}</span>
           </div>
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 grid grid-cols-2 gap-3 lg:grid-cols-4">
             <div className="pa-kpi rounded-2xl p-4">
               <p className="text-xs text-white/55">Progrés</p>
               <p className="mt-1 text-2xl font-semibold">{pct}%</p>
