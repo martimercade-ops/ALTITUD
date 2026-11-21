@@ -481,12 +481,14 @@ const Destacats = ({ p, c }: { p: Project; c: string[] }) =>
               <figure className={`cas-visual group relative ${i % 2 ? "lg:order-2" : ""}`}>
                 <span aria-hidden="true" className="absolute -inset-4 rounded-[2rem] opacity-40 blur-2xl transition-opacity duration-700 group-hover:opacity-70" style={{ background: c[3] }} />
                 <div className="relative overflow-hidden rounded-2xl bg-white shadow-[0_40px_80px_-30px_rgb(0_0_0/0.6)] ring-1 ring-white/10 transition-transform duration-700 group-hover:-translate-y-1">
+                  {!d.foto && (
                   <div className="flex items-center gap-1.5 border-b border-black/5 bg-[#f3f4f6] px-4 py-2.5">
                     <span className="size-2.5 rounded-full bg-[#ff5f57]" />
                     <span className="size-2.5 rounded-full bg-[#febc2e]" />
                     <span className="size-2.5 rounded-full bg-[#28c840]" />
                     {p.links[0] && <span className="mx-auto truncate rounded-md bg-white px-4 py-0.5 text-[0.7rem] text-black/50">{p.links[0].label}</span>}
                   </div>
+                  )}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={d.imatge} alt={d.alt} loading="lazy" decoding="async" className="block w-full" />
                 </div>

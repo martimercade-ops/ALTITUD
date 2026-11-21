@@ -26,7 +26,7 @@ export interface Project {
   /** Pantalles de disseny UX/UI (de Figma). format: "mobil" (pantalla de mòbil) o "web" (pàgina d'escriptori) */
   ux?: { src: string; alt: string; format?: "mobil" | "web" }[];
   /** Detalls destacats del projecte (funcionalitats concretes, amb captura) */
-  destacats?: { etiqueta?: string; titol: string; text: string; imatge: string; alt: string; punts?: string[] }[];
+  destacats?: { etiqueta?: string; titol: string; text: string; imatge: string; alt: string; punts?: string[]; /** imatge sense marc de navegador (fotos, mockups) */ foto?: boolean }[];
   /** Color d'accent de la marca (si el que s'extreu de la captura no és bo) */
   color?: string;
   /** On és el client (si no hi és: "Andorra") */
@@ -337,6 +337,45 @@ const llista: Project[] = [
     summary: "Web amb botiga en línia i identitat corporativa.",
     about: "Farmàcia i parafarmàcia amb botiga en línia i consell farmacèutic.",
     services: ["Web", "Botiga online", "Identitat corporativa"],
+    color: "#1f5134",
+    repte: "La farmàcia tenia un logo genèric, una creu vermella com la de qualsevol altra. Volien una marca pròpia, que transmetés confiança i proximitat i que es pogués aplicar a tot: rètol, bates, bosses i botiga online.",
+    enfoc: "Vam crear una G que amaga una creu de farmàcia, en un verd profund i elegant, i la vam portar a tots els suports.",
+    destacats: [
+      {
+        etiqueta: "El canvi",
+        titol: "D'una creu qualsevol a una marca pròpia",
+        text: "La nova G integra la creu de farmàcia dins la inicial de Guitart: es reconeix d'un cop d'ull i no es confon amb cap altra. El verd substitueix el vermell per transmetre calma, salut i confiança.",
+        imatge: "/assets/altitud/projectes/detalls/guitart-abans-despres.webp",
+        alt: "Logotip antic de la Farmàcia Guitart, una creu vermella de punts, al costat del logotip nou amb la G verda",
+        foto: true,
+        punts: ["Símbol propi", "Verd corporatiu", "Tipografia neta i espaiada"],
+      },
+      {
+        etiqueta: "Senyalètica",
+        titol: "La marca, a la paret",
+        text: "El logotip en volum darrere el taulell: el primer que veu el client quan entra a la farmàcia.",
+        imatge: "/assets/altitud/projectes/detalls/guitart-retol.webp",
+        alt: "Rètol de la Farmàcia Guitart en lletres verdes en volum sobre una paret clara i un taulell de fusta",
+        foto: true,
+      },
+      {
+        etiqueta: "Papereria",
+        titol: "Cada peça parla igual",
+        text: "Carta, sobre i targetes de visita amb el mateix sistema: el símbol sol sobre verd, o la marca completa sobre crema.",
+        imatge: "/assets/altitud/projectes/detalls/guitart-papereria.webp",
+        alt: "Papereria de la Farmàcia Guitart: carta, sobre i dues targetes de visita, una verda i una crema",
+        foto: true,
+        punts: ["Carta i sobre", "Targetes de visita", "Dues versions de color"],
+      },
+      {
+        etiqueta: "Packaging",
+        titol: "La marca surt al carrer",
+        text: "Bosses i targetes regal amb el verd de la marca: cada compra fa de publicitat.",
+        imatge: "/assets/altitud/projectes/detalls/guitart-bossa.webp",
+        alt: "Bossa de paper de la Farmàcia Guitart amb nanses verdes i dues targetes amb el logotip",
+        foto: true,
+      },
+    ],
     links: [web("https://farmaciaguitart.com/")],
     image: `${P}/farmacia-guitart.jpg`,
   },
