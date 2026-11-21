@@ -4,7 +4,8 @@ import { sortir } from "@/app/panell/accions";
 
 const ENLLACOS = [
   { href: "/panell", nom: "Leads" },
-  { href: "/panell/nou", nom: "Nou lead" },
+  { href: "/panell/projectes", nom: "Projectes" },
+  { href: "/panell/equip", nom: "Equip" },
   { href: "/panell/importa", nom: "Importar" },
 ];
 

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export const BotoEsborrar = ({ accio }: { accio: () => Promise<void> }) => {
+export const BotoEsborrar = ({ accio, text = "Esborrar lead" }: { accio: () => Promise<void>; text?: string }) => {
   const [segur, setSegur] = useState(false);
   return segur ? (
     <form action={accio} className="flex items-center gap-2 text-sm">
@@ -11,6 +11,6 @@ export const BotoEsborrar = ({ accio }: { accio: () => Promise<void> }) => {
       <button type="button" onClick={() => setSegur(false)} className="panell-boto panell-boto--clar">No</button>
     </form>
   ) : (
-    <button type="button" onClick={() => setSegur(true)} className="self-start text-sm text-red-600 hover:underline">Esborrar lead</button>
+    <button type="button" onClick={() => setSegur(true)} className="self-start text-sm text-red-600 hover:underline">{text}</button>
   );
 };

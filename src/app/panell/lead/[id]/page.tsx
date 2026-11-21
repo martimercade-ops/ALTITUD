@@ -4,7 +4,7 @@ import { dbConfigurada } from "@/lib/panell/db";
 import { notesDe, obtéLead } from "@/lib/panell/leads";
 import { requereixSessio } from "@/lib/panell/seguretat";
 import { colorEstat, nomEstat, nomTipus } from "@/lib/panell/tipus";
-import { desaLead, esborra, nota } from "@/app/panell/accions";
+import { desaLead, esborra, nota, projecteDesDeLead } from "@/app/panell/accions";
 import { Barra } from "@/views/panell/barra";
 import { FormLead } from "@/views/panell/form-lead";
 import { SenseDb } from "@/views/panell/sense-db";
@@ -55,6 +55,15 @@ export default async function FitxaLead({ params }: { params: Promise<{ id: stri
         <div className="mt-8 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
           <FormLead lead={lead} accio={desaLead.bind(null, id)} boto="Desar canvis" />
           <aside className="flex flex-col gap-4">
+            <form action={projecteDesDeLead.bind(null, id)}>
+              <button type="submit" className="flex w-full items-center justify-between rounded-2xl bg-[#0b1424] px-5 py-4 text-left text-white transition-transform hover:scale-[1.01]">
+                <span>
+                  <span className="block text-sm font-semibold">Convertir en projecte</span>
+                  <span className="block text-xs text-white/55">Crea el projecte amb les dades d&apos;aquest lead</span>
+                </span>
+                <span className="text-[#b6f13a]">→</span>
+              </button>
+            </form>
             <form action={nota.bind(null, id)} className="panell-targeta p-5">
               <label>
                 <span className="panell-etiqueta">Nova nota</span>

@@ -58,6 +58,48 @@ const ESQUEMA = [
     text TEXT NOT NULL,
     INDEX (lead_id)
   ) CHARACTER SET utf8mb4`,
+  `CREATE TABLE IF NOT EXISTS panell_invitacio (
+    id CHAR(64) PRIMARY KEY,
+    caduca DATETIME NOT NULL,
+    creada_per VARCHAR(80) NOT NULL DEFAULT '',
+    usada TINYINT NOT NULL DEFAULT 0
+  ) CHARACTER SET utf8mb4`,
+  `CREATE TABLE IF NOT EXISTS projectes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    creat DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    actualitzat DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    client VARCHAR(200) NOT NULL DEFAULT '',
+    nom VARCHAR(200) NOT NULL DEFAULT '',
+    descripcio TEXT NULL,
+    estat VARCHAR(20) NOT NULL DEFAULT 'actiu',
+    responsable VARCHAR(80) NOT NULL DEFAULT '',
+    inici DATE NULL,
+    entrega DATE NULL,
+    preu_client DECIMAL(10,2) NULL,
+    cost_extern DECIMAL(10,2) NULL,
+    cost_pagat TINYINT NOT NULL DEFAULT 0,
+    cost_data_pagament DATE NULL,
+    web VARCHAR(200) NOT NULL DEFAULT '',
+    lead_id INT NULL,
+    INDEX (estat)
+  ) CHARACTER SET utf8mb4`,
+  `CREATE TABLE IF NOT EXISTS projecte_fases (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    projecte_id INT NOT NULL,
+    ordre INT NOT NULL DEFAULT 0,
+    nom VARCHAR(200) NOT NULL,
+    estat VARCHAR(20) NOT NULL DEFAULT 'pendent',
+    data_limit DATE NULL,
+    INDEX (projecte_id)
+  ) CHARACTER SET utf8mb4`,
+  `CREATE TABLE IF NOT EXISTS projecte_notes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    projecte_id INT NOT NULL,
+    quan DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    autor VARCHAR(80) NOT NULL DEFAULT '',
+    text TEXT NOT NULL,
+    INDEX (projecte_id)
+  ) CHARACTER SET utf8mb4`,
 ];
 
 export const db = async (): Promise<Pool> => {

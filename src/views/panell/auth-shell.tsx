@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 const PUNTS = [
-  ["Tots els leads en un lloc.", "Ajuts PDE, formularis de la web, Meta i els que afegeixis a mà."],
-  ["Seguiment fins al sí.", "Estats, notes, pressupostos i recordatoris de cada contacte."],
+  ["Leads.", "Ajuts PDE, formularis de la web i Meta, amb seguiment fins al sí."],
+  ["Projectes.", "Fases, dates d'entrega, preus i pagaments de cada projecte obert."],
   ["Accés blindat.", "Contrasenya xifrada i codi del mòbil a cada entrada."],
 ];
 
@@ -14,12 +14,12 @@ export const AuthShell = ({ children }: { children: React.ReactNode }) => (
       <img src="/assets/altitud/altitud-logo-h.svg" alt="Altitud Digital" className="relative h-6 w-auto self-start" />
       <div className="relative max-w-xl">
         <h1 className="text-[3.4rem] font-semibold leading-[1.02] tracking-tight">
-          Els teus leads,
+          La feina,
           <br />
           <span className="text-[#b6f13a]">en directe.</span>
         </h1>
         <p className="mt-6 max-w-md text-lg leading-relaxed text-white/65">
-          El panell privat d&apos;Altitud Digital per convertir cada sol·licitud en un client.
+          El panell privat de l&apos;equip d&apos;Altitud Digital: de la primera sol·licitud a l&apos;entrega final.
         </p>
         <ul className="mt-12 flex flex-col gap-4">
           {PUNTS.map(([t, d]) => (
