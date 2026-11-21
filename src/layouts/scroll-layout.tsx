@@ -75,7 +75,13 @@ function ScrollController() {
 
   useEffect(() => {
     if (savedPathname.current !== pathname) {
+      const primeraCarrega = savedPathname.current === "";
       savedPathname.current = pathname;
+      // Canvi de pàgina: tornar a dalt (Lenis manté la posició antiga si no li diem)
+      if (!primeraCarrega && !window.location.hash) {
+        lenis?.scrollTo(0, { immediate: true, force: true });
+        window.scrollTo(0, 0);
+      }
       if (pathname.includes("#")) {
         const hash = pathname.split("#").pop();
         if (hash) {
@@ -83,7 +89,7 @@ function ScrollController() {
         }
       }
     }
-  }, [pathname, setHash]);
+  }, [pathname, setHash, lenis]);
 
   return null;
 }
