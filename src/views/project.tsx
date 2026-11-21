@@ -561,7 +561,7 @@ export const ProjectView = ({ project: p, prev, next }: ProjectViewProps) => {
           <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1fr_1.1fr]">
             <div>
               <p className={`${EYEBROW} text-white/60`}>
-                Cas d&apos;estudi · {pad(index)}/{pad(projects.length)}
+                Cas d&apos;estudi · {pad(index)}/{pad(projects.length)} · {p.lloc ?? "Andorra"}{p.any ? ` · ${p.any}` : ""}
               </p>
               <h1 id="project-title" className="cas-titol mt-6 text-[2.75rem] font-light leading-[0.98] tracking-tight sm:text-6xl lg:text-[5rem]">
                 {p.name}
@@ -626,6 +626,7 @@ export const ProjectView = ({ project: p, prev, next }: ProjectViewProps) => {
             {[
               ["Client", p.name],
               ["Sector", p.sector],
+              ["Localització", p.lloc ?? "Andorra"],
               ...(p.any ? [["Any", p.any]] : []),
               ["Serveis", p.services.join(" · ")],
             ].map(([k, v]) => (

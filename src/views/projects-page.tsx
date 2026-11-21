@@ -104,6 +104,16 @@ const ProjectCard = ({ p, priority = false }: { p: Project; priority?: boolean }
           <div className="min-w-0 flex-1">
             <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-black/45">{p.sector}</p>
             <h2 className="mt-1 line-clamp-2 text-[1.3rem] font-normal leading-tight tracking-tight">{p.name}</h2>
+            <p className="mt-1.5 flex items-center gap-1 text-xs text-black/50">
+              <svg aria-hidden="true" viewBox="0 0 24 24" className="size-3.5 shrink-0 fill-none stroke-current" strokeWidth="2">
+                <path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z" />
+                <circle cx="12" cy="9.5" r="2.5" />
+              </svg>
+              <span className="truncate">
+                {p.lloc ?? "Andorra"}
+                {p.any ? ` · ${p.any}` : ""}
+              </span>
+            </p>
           </div>
           <span aria-hidden="true" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-black shadow-sm transition-colors group-hover:bg-black group-hover:text-accent-lime">↗</span>
         </div>

@@ -29,6 +29,8 @@ export interface Project {
   destacats?: { etiqueta?: string; titol: string; text: string; imatge: string; alt: string; punts?: string[] }[];
   /** Color d'accent de la marca (si el que s'extreu de la captura no és bo) */
   color?: string;
+  /** On és el client (si no hi és: "Andorra") */
+  lloc?: string;
   /** Any del projecte */
   any?: string;
 }
@@ -43,6 +45,7 @@ const web = (url: string): ProjectLink => ({
 const llista: Project[] = [
   {
     slug: "el-rato",
+    lloc: "Andorra la Vella",
     color: "#d9572b",
     ux: [{ src: "/assets/altitud/projectes/ux/el-rato-1.webp", alt: "Disseny de la pàgina d'inici d'El Rato a Figma", format: "web" }, { src: "/assets/altitud/projectes/ux/el-rato-2.webp", alt: "Disseny de la pàgina Barre House d'El Rato", format: "web" }, { src: "/assets/altitud/projectes/ux/el-rato-3.webp", alt: "Disseny de la pàgina de tarifes d'El Rato", format: "web" }],
     name: "El Rato Barre House",
@@ -55,6 +58,7 @@ const llista: Project[] = [
   },
   {
     slug: "projecte-vida",
+    lloc: "Andorra la Vella i Escaldes-Engordany",
     name: "Projecte Vida",
     sector: "Salut i prevenció",
     summary: "Campanya de publicitat exterior a Andorra la Vella i Escaldes-Engordany.",
@@ -66,6 +70,7 @@ const llista: Project[] = [
   },
   {
     slug: "espai-dor",
+    lloc: "Andorra la Vella",
     color: "#c9a227",
     name: "Espai d'Or",
     sector: "Perruqueria i estètica",
@@ -112,6 +117,7 @@ const llista: Project[] = [
   },
   {
     slug: "blue-ozone",
+    lloc: "Escaldes-Engordany",
     name: "Blue Ozone",
     sector: "Clínica de longevitat",
     summary: "Web.",
@@ -122,6 +128,7 @@ const llista: Project[] = [
   },
   {
     slug: "hostel-andes",
+    lloc: "Escaldes-Engordany",
     name: "Hostel Andes",
     sector: "Alberg",
     summary: "Web.",
@@ -142,6 +149,7 @@ const llista: Project[] = [
   },
   {
     slug: "la-rostisseria",
+    lloc: "Andorra la Vella",
     name: "La Rostisseria",
     sector: "Restauració",
     summary: "Web, fotografia, xarxes socials i targetes de visita.",
@@ -152,6 +160,7 @@ const llista: Project[] = [
   },
   {
     slug: "erf-assegurances",
+    lloc: "Escaldes-Engordany",
     name: "ERF Assegurances",
     sector: "Assegurances",
     summary: "Web.",
@@ -162,6 +171,7 @@ const llista: Project[] = [
   },
   {
     slug: "la-llotja",
+    lloc: "Escaldes-Engordany",
     name: "La Llotja",
     sector: "Restauració",
     summary: "Web, vídeo i fotografia.",
@@ -173,6 +183,7 @@ const llista: Project[] = [
   },
   {
     slug: "la-casa",
+    lloc: "Andorra la Vella",
     name: "La Casa Gastrobar",
     sector: "Restauració",
     summary: "Web, fotografia, vídeo i motor de reserves.",
@@ -215,6 +226,7 @@ const llista: Project[] = [
   },
   {
     slug: "claudia-moncau",
+    lloc: "Barcelona",
     name: "Clàudia Moncau",
     sector: "Ioga i benestar",
     summary: "Web i fotografia.",
@@ -245,6 +257,7 @@ const llista: Project[] = [
   },
   {
     slug: "auro-jardiners",
+    lloc: "Santa Coloma, Andorra la Vella",
     color: "#3f6b3a",
     name: "Auró Jardiners",
     sector: "Jardineria",
@@ -305,6 +318,7 @@ const llista: Project[] = [
   },
   {
     slug: "brainworks-center",
+    lloc: "Escaldes-Engordany",
     ux: [{ src: "/assets/altitud/projectes/ux/brainworks-1.webp", alt: "Disseny mòbil de la pàgina de serveis de Brainworks a Figma", format: "mobil" }, { src: "/assets/altitud/projectes/ux/brainworks-2.webp", alt: "Disseny mòbil del blog de Brainworks", format: "mobil" }, { src: "/assets/altitud/projectes/ux/brainworks-3.webp", alt: "Disseny mòbil de la pàgina de contacte de Brainworks", format: "mobil" }],
     name: "Brainworks Center",
     sector: "Salut i benestar",
@@ -326,6 +340,7 @@ const llista: Project[] = [
   },
   {
     slug: "hotel-niu",
+    lloc: "Encamp",
     name: "Hotel Niu",
     sector: "Hoteleria",
     summary: "Web.",
@@ -336,6 +351,7 @@ const llista: Project[] = [
   },
   {
     slug: "beta-assegurances",
+    lloc: "La Massana",
     name: "Beta Assegurances",
     sector: "Assegurances",
     summary: "Web.",
@@ -356,6 +372,7 @@ const llista: Project[] = [
   },
   {
     slug: "olympus-race",
+    lloc: "Canillo",
     name: "Olympus Race",
     sector: "Esdeveniments esportius",
     summary: "Web i SEO.",
