@@ -21,6 +21,10 @@ export const siteConfig = {
   keywords: [
     "Altitud Digital",
     "agència de màrqueting Andorra",
+    "agencia de marketing Andorra",
+    "agencia marketing digital Andorra",
+    "agencia SEO Andorra",
+    "disseny web Andorra",
     "màrqueting digital",
     "SEO",
     "disseny web",

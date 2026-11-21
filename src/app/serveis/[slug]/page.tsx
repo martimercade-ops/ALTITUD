@@ -9,6 +9,17 @@ export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
 }
 
+/** Títols pensats per a les cerques reals de Google (Search Console) */
+const TITOLS: Record<string, string> = {
+  "seo-sem": "Agència SEO i SEM a Andorra: posicionament web i Google Ads | Altitud Digital",
+  "web-ecommerce": "Disseny web i botigues online a Andorra | Altitud Digital",
+  "xarxes-socials": "Gestió de xarxes socials a Andorra: Instagram i Meta Ads | Altitud Digital",
+  "branding": "Branding, logotips i disseny gràfic a Andorra | Altitud Digital",
+  "consultoria": "Consultoria de màrqueting digital a Andorra | Altitud Digital",
+  "chatbots-ia": "Chatbots amb IA per a empreses d'Andorra | Altitud Digital",
+  "formacions-ia": "Formacions d'IA i màrqueting a Andorra | Altitud Digital",
+};
+
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props) {
@@ -16,7 +27,7 @@ export async function generateMetadata({ params }: Props) {
   const service = findService(slug);
   if (!service) return {};
   return pageMetadata({
-    title: `${service.name} a Andorra — Altitud Digital`,
+    title: TITOLS[service.slug] ?? `${service.name} a Andorra | Altitud Digital`,
     description: service.intro,
     url: serviceHref(service.slug),
   });

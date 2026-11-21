@@ -25,7 +25,9 @@ const inter = localFont({
 });
 
 export const metadata: Metadata = generateMetadata({
-  title: `${siteConfig.name} — ${siteConfig.tagline}`,
+  title: "Agència de màrqueting digital a Andorra | Altitud Digital",
+  description:
+    "Agència de màrqueting digital a Andorra la Vella: webs, SEO, xarxes socials, publicitat i IA per a empreses d'Andorra. Més de 100 clients. Parlem?",
 });
 export const viewport: Viewport = generateViewport();
 

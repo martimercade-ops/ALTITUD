@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props) {
   const project = findProject(slug);
   if (!project) return {};
   return pageMetadata({
-    title: `${project.name} — Projectes d'Altitud Digital`,
+    title: `${project.name}: cas d'èxit | Altitud Digital`,
     description: `${project.about} ${project.services.join(", ")}.`,
     url: projectHref(project.slug),
   });
