@@ -1172,3 +1172,16 @@ font { background: transparent !important; }
 @media (prefers-reduced-motion: reduce) {
   .cas-taca, .cas-flota, .cas-segell, .cas-orbita, .cas-punt { animation: none; }
 }
+
+/* Panell: sense elements de la web pública */
+body:has(.panell-app) [aria-label="Contactar per WhatsApp"],
+body:has(.panell-app) [role="dialog"][aria-live="polite"] { display: none !important; }
+.panell-app input, .panell-app select, .panell-app textarea { font: inherit; }
+.panell-camp { width: 100%; border-radius: .75rem; border: 1px solid rgb(0 0 0 / .12); background: #fff; padding: .65rem .85rem; font-size: .9rem; outline: none; transition: border-color .15s, box-shadow .15s; }
+.panell-camp:focus { border-color: #2b72e2; box-shadow: 0 0 0 3px rgb(43 114 226 / .15); }
+.panell-etiqueta { display: block; margin-bottom: .35rem; font-size: .72rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: rgb(0 0 0 / .5); }
+.panell-boto { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; border-radius: 9999px; background: #111827; color: #fff; padding: .6rem 1.15rem; font-size: .875rem; font-weight: 500; transition: background .15s; }
+.panell-boto:hover { background: #000; }
+.panell-boto--clar { background: #fff; color: #111827; border: 1px solid rgb(0 0 0 / .12); }
+.panell-boto--clar:hover { background: #f3f4f6; }
+.panell-targeta { border-radius: 1.25rem; background: #fff; border: 1px solid rgb(0 0 0 / .06); box-shadow: 0 1px 2px rgb(0 0 0 / .04); }

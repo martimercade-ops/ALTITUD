@@ -3,6 +3,8 @@ import { z } from "zod";
 
 import { getServerEnv } from "@/env";
 import { ApiError, handle } from "@/lib/api";
+import { dbConfigurada } from "@/lib/panell/db";
+import { creaLead } from "@/lib/panell/leads";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1).max(100),
@@ -55,6 +57,29 @@ export const POST = handle(async (req) => {
   // Registre de la sol·licitud als logs del servidor (Hostinger → Registros de tiempo de ejecución)
   console.info(`[api/contact] sol·licitud ${ref} · ${input.source || "web"} · ${input.email}`);
 
+  // Desa la sol·licitud al panell (CRM). Si falla, el correu s'envia igualment.
+  let desada = false;
+  if (dbConfigurada()) {
+    try {
+      await creaLead({
+        tipus: /pde/i.test(input.source) ? "ajuts" : "altres",
+        empresa: input.company,
+        contacte: `${input.name} ${input.surname}`.trim(),
+        email: input.email,
+        telefon: input.phone,
+        web: input.website,
+        serveis: input.services.join(", ").slice(0, 500),
+        canal: input.referral,
+        origen: input.source || "Web",
+        estat: "nou",
+        missatge: [input.message, input.budget ? `Inversió mensual: ${input.budget}` : ""].filter(Boolean).join("\n\n") || null,
+      });
+      desada = true;
+    } catch (error) {
+      console.error(`[api/contact] sol·licitud ${ref} no desada al panell:`, error);
+    }
+  }
+
   if (env.SMTP_HOST && env.SMTP_USER && env.SMTP_PASS) {
     const port = env.SMTP_PORT ?? 465;
     const transport = nodemailer.createTransport({
@@ -92,5 +117,6 @@ export const POST = handle(async (req) => {
     return { sent: true };
   }
 
+  if (desada) return { sent: true, ref };
   throw new ApiError(503, "not_configured", "L'enviament de correu no està configurat.");
 });
