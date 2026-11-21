@@ -16,6 +16,7 @@ export interface Lead {
   valor: number | null;
   seguiment: string | null;
   missatge: string | null;
+  esborrat: string | null;
 }
 
 export interface Nota {

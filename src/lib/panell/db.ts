@@ -102,6 +102,9 @@ const ESQUEMA = [
   ) CHARACTER SET utf8mb4`,
 ];
 
+/** Canvis sobre taules ja creades (s'ignoren si ja s'han aplicat) */
+const MIGRACIONS = ["ALTER TABLE leads ADD COLUMN esborrat DATETIME NULL"];
+
 export const db = async (): Promise<Pool> => {
   if (!dbConfigurada()) throw new Error("db_no_configurada");
   if (!pool) {
@@ -124,6 +127,14 @@ export const db = async (): Promise<Pool> => {
   }
   preparada ??= (async () => {
     for (const sql of ESQUEMA) await pool!.query(sql);
+    for (const sql of MIGRACIONS) {
+      try {
+        await pool!.query(sql);
+      } catch (err) {
+        // columna ja existent (ER_DUP_FIELDNAME) → ja migrat
+        if ((err as { code?: string }).code !== "ER_DUP_FIELDNAME") throw err;
+      }
+    }
   })().catch((err) => {
     preparada = null;
     throw err;

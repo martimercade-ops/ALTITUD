@@ -5,8 +5,15 @@ import { ESTATS, TIPUS, type Lead, type Nota } from "./tipus";
 
 type LeadRow = RowDataPacket & Lead;
 
-export const llistaLeads = async () =>
-  (await consulta<LeadRow>("SELECT * FROM leads ORDER BY creat DESC")).map(net);
+/** Tots els leads, inclosos els de la paperera (els de fa més de 30 dies s'esborren del tot) */
+export const llistaLeads = async () => {
+  await executa("DELETE FROM lead_notes WHERE lead_id IN (SELECT id FROM leads WHERE esborrat < UTC_TIMESTAMP() - INTERVAL 30 DAY)");
+  await executa("DELETE FROM leads WHERE esborrat < UTC_TIMESTAMP() - INTERVAL 30 DAY");
+  return (await consulta<LeadRow>("SELECT * FROM leads ORDER BY creat DESC")).map(net);
+};
+
+export const aLaPaperera = async (id: number, si: boolean) =>
+  executa(`UPDATE leads SET esborrat = ${si ? "UTC_TIMESTAMP()" : "NULL"} WHERE id = ?`, [id]);
 
 export const obtéLead = async (id: number) => {
   const [l] = await consulta<LeadRow>("SELECT * FROM leads WHERE id = ?", [id]);
@@ -35,6 +42,7 @@ const net = (l: LeadRow): Lead => ({
   valor: l.valor === null ? null : Number(l.valor),
   seguiment: l.seguiment,
   missatge: l.missatge,
+  esborrat: l.esborrat ?? null,
 });
 
 const CAMPS = ["tipus", "empresa", "contacte", "email", "telefon", "web", "serveis", "canal", "origen", "estat", "valor", "seguiment", "missatge"] as const;

@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 
 export async function GET() {
   if (!dbConfigurada() || !(await sessioActual())) return new Response("No autoritzat", { status: 401 });
-  const csv = aCsv(await llistaLeads());
+  const csv = aCsv((await llistaLeads()).filter((l) => !l.esborrat));
   const dia = new Date().toISOString().slice(0, 10);
   return new Response(csv, {
     headers: {

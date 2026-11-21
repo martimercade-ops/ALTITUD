@@ -18,7 +18,7 @@ import {
   verificaContrasenya,
   verificaTotp,
 } from "@/lib/panell/seguretat";
-import { actualitzaLead, afegeixNota, creaLead, esborraLead, type DadesLead } from "@/lib/panell/leads";
+import { actualitzaLead, afegeixNota, aLaPaperera, creaLead, esborraLead, type DadesLead } from "@/lib/panell/leads";
 import { llegeixCsv } from "@/lib/panell/csv";
 import {
   actualitzaFase,
@@ -153,6 +153,18 @@ export async function nota(id: number, f: FormData) {
   const t = txt(f, "text", 5000);
   if (t) await afegeixNota(id, t);
   revalidatePath(`/panell/lead/${id}`);
+}
+
+export async function paperera(id: number, si: boolean) {
+  await requereixSessio();
+  await aLaPaperera(id, si);
+  revalidatePath("/panell");
+  revalidatePath(`/panell/lead/${id}`);
+}
+
+export async function enviaAPaperera(id: number) {
+  await paperera(id, true);
+  redirect("/panell");
 }
 
 export async function esborra(id: number) {

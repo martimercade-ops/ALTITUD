@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useOptimistic, useState, useTransition } from "react";
-import { canviaEstat } from "@/app/panell/accions";
+import { canviaEstat, esborra, paperera } from "@/app/panell/accions";
 import { ESTATS, TIPUS, colorEstat, nomEstat, nomTipus, type Lead } from "@/lib/panell/tipus";
 
 const data = (s: string) => new Date(s.replace(" ", "T") + "Z").toLocaleDateString("ca-ES", { day: "2-digit", month: "short", year: "numeric" });
@@ -41,19 +41,39 @@ export const Tauler = ({ leads, usuari }: { leads: Lead[]; usuari: string }) => 
   const [estat, setEstat] = useState("tots");
   const [q, setQ] = useState("");
   const [, startTransition] = useTransition();
-  const [optim, mou] = useOptimistic(leads, (ls: Lead[], c: { id: number; estat: string }) =>
-    ls.map((l) => (l.id === c.id ? { ...l, estat: c.estat } : l)),
+  const [veurePaperera, setVeurePaperera] = useState(false);
+  const [segur, setSegur] = useState<number | null>(null);
+  const [totsOptim, mou] = useOptimistic(leads, (ls: Lead[], c: { id: number; estat?: string; esborrat?: string | null; fora?: boolean }) =>
+    c.fora ? ls.filter((l) => l.id !== c.id) : ls.map((l) => (l.id === c.id ? { ...l, ...(c.estat ? { estat: c.estat } : {}), ...(c.esborrat !== undefined ? { esborrat: c.esborrat } : {}) } : l)),
   );
+  const optim = useMemo(() => totsOptim.filter((l) => !l.esborrat), [totsOptim]);
+  const aPaperera = useMemo(() => totsOptim.filter((l) => l.esborrat), [totsOptim]);
+  const llenca = (id: number) =>
+    startTransition(async () => {
+      mou({ id, esborrat: new Date().toISOString() });
+      await paperera(id, true);
+    });
+  const recupera = (id: number) =>
+    startTransition(async () => {
+      mou({ id, esborrat: null });
+      await paperera(id, false);
+    });
+  const elimina = (id: number) =>
+    startTransition(async () => {
+      mou({ id, fora: true });
+      setSegur(null);
+      await esborra(id).catch(() => {});
+    });
 
   const filtrats = useMemo(() => {
     const t = q.trim().toLowerCase();
-    return optim.filter(
+    return (veurePaperera ? aPaperera : optim).filter(
       (l) =>
         (tipus === "tots" || l.tipus === tipus) &&
         (estat === "tots" || l.estat === estat) &&
         (!t || [l.empresa, l.contacte, l.email, l.telefon, l.serveis].join(" ").toLowerCase().includes(t)),
     );
-  }, [optim, tipus, estat, q]);
+  }, [optim, aPaperera, veurePaperera, tipus, estat, q]);
 
   const kpi = useMemo(() => {
     const mes = new Date().toISOString().slice(0, 7);
@@ -160,6 +180,14 @@ export const Tauler = ({ leads, usuari }: { leads: Lead[]; usuari: string }) => 
           <option value="tots">Tots els estats</option>
           {ESTATS.map((e) => <option key={e.id} value={e.id}>{e.nom}</option>)}
         </select>
+        <button
+          type="button"
+          onClick={() => setVeurePaperera((v) => !v)}
+          className={`flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm transition-colors ${veurePaperera ? "bg-red-600 text-white" : "bg-black/5 text-black/60 hover:text-black"}`}
+        >
+          🗑 Paperera{aPaperera.length ? ` (${aPaperera.length})` : ""}
+        </button>
+        {!veurePaperera && (
         <div className="flex rounded-full bg-black/5 p-1 text-sm">
           {(["taula", "columnes"] as const).map((v) => (
             <button key={v} type="button" onClick={() => setVista(v)} className={`rounded-full px-3 py-1.5 ${vista === v ? "bg-white shadow-sm" : "text-black/55"}`}>
@@ -167,9 +195,32 @@ export const Tauler = ({ leads, usuari }: { leads: Lead[]; usuari: string }) => 
             </button>
           ))}
         </div>
+        )}
       </section>
 
-      {vista === "taula" ? (
+      {veurePaperera ? (
+        <div className="panell-targeta">
+          <p className="border-b border-black/5 px-5 py-3 text-xs text-black/50">Els leads de la paperera s&apos;esborren del tot passats 30 dies.</p>
+          <ul className="divide-y divide-black/5">
+            {filtrats.map((l) => (
+              <li key={l.id} className="flex flex-wrap items-center gap-3 px-5 py-3.5">
+                <Avatar nom={l.empresa || l.contacte} />
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate font-medium text-black/70">{l.empresa || l.contacte || "—"}</span>
+                  <span className="block truncate text-xs text-black/45">{l.contacte} · {l.email}</span>
+                </span>
+                <button type="button" onClick={() => recupera(l.id)} className="panell-boto panell-boto--clar !py-1.5">↩ Recuperar</button>
+                {segur === l.id ? (
+                  <button type="button" onClick={() => elimina(l.id)} className="panell-boto !bg-red-600 !py-1.5">Segur? Esborrar per sempre</button>
+                ) : (
+                  <button type="button" onClick={() => setSegur(l.id)} className="text-sm text-red-600 hover:underline">Esborrar per sempre</button>
+                )}
+              </li>
+            ))}
+            {!filtrats.length && <li className="px-5 py-12 text-center text-sm text-black/45">La paperera és buida.</li>}
+          </ul>
+        </div>
+      ) : vista === "taula" ? (
         <>
         <ul className="flex flex-col gap-2 md:hidden">
           {filtrats.map((l) => (
@@ -194,7 +245,7 @@ export const Tauler = ({ leads, usuari }: { leads: Lead[]; usuari: string }) => 
           <table className="w-full min-w-[60rem] text-left text-sm">
             <thead className="border-b border-black/5 text-xs uppercase tracking-wide text-black/45">
               <tr>
-                {["Data", "Empresa", "Contacte", "Serveis", "Tipus", "Estat", "Seguiment"].map((h) => (
+                {["Data", "Empresa", "Contacte", "Serveis", "Tipus", "Estat", "Seguiment", ""].map((h) => (
                   <th key={h} className="px-4 py-3 font-medium">{h}</th>
                 ))}
               </tr>
@@ -221,10 +272,13 @@ export const Tauler = ({ leads, usuari }: { leads: Lead[]; usuari: string }) => 
                     </select>
                   </td>
                   <td className="whitespace-nowrap px-4 py-3 text-xs text-black/55">{l.seguiment ? data(l.seguiment) : ""}</td>
+                  <td className="px-2 py-3">
+                    <button type="button" onClick={() => llenca(l.id)} title="Enviar a la paperera" aria-label="Enviar a la paperera" className="grid size-8 place-items-center rounded-full text-black/30 hover:bg-red-50 hover:text-red-600">🗑</button>
+                  </td>
                 </tr>
               ))}
               {!filtrats.length && (
-                <tr><td colSpan={7} className="px-4 py-12 text-center text-black/45">Cap lead amb aquests filtres.</td></tr>
+                <tr><td colSpan={8} className="px-4 py-12 text-center text-black/45">Cap lead amb aquests filtres.</td></tr>
               )}
             </tbody>
           </table>

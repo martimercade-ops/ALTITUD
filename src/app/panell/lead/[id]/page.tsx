@@ -4,11 +4,10 @@ import { dbConfigurada } from "@/lib/panell/db";
 import { notesDe, obtéLead } from "@/lib/panell/leads";
 import { requereixSessio } from "@/lib/panell/seguretat";
 import { colorEstat, nomEstat, nomTipus } from "@/lib/panell/tipus";
-import { desaLead, esborra, nota, projecteDesDeLead } from "@/app/panell/accions";
+import { desaLead, enviaAPaperera, nota, paperera, projecteDesDeLead } from "@/app/panell/accions";
 import { Barra } from "@/views/panell/barra";
 import { FormLead } from "@/views/panell/form-lead";
 import { SenseDb } from "@/views/panell/sense-db";
-import { BotoEsborrar } from "@/views/panell/boto-esborrar";
 
 const dataHora = (s: string) =>
   new Date(s.replace(" ", "T") + "Z").toLocaleString("ca-ES", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
@@ -25,6 +24,9 @@ export default async function FitxaLead({ params }: { params: Promise<{ id: stri
   return (
     <>
       <Barra usuari={s.usuari} actiu="" />
+      {lead.esborrat && (
+        <div className="bg-red-600 px-4 py-2 text-center text-sm text-white">Aquest lead és a la paperera. S&apos;esborrarà del tot passats 30 dies.</div>
+      )}
       <section className="pa-hero relative overflow-hidden text-white">
         <span aria-hidden="true" className="pa-graella" />
         <div className="relative mx-auto max-w-6xl px-4 py-10 md:px-8">
@@ -86,7 +88,15 @@ export default async function FitxaLead({ params }: { params: Promise<{ id: stri
                 <p className="mt-2 text-sm text-black/45">Encara no hi ha notes.</p>
               )}
             </div>
-            <BotoEsborrar accio={esborra.bind(null, id)} />
+            {lead.esborrat ? (
+              <form action={paperera.bind(null, id, false)}>
+                <button type="submit" className="text-sm text-black/60 hover:text-black">↩ Treure de la paperera</button>
+              </form>
+            ) : (
+              <form action={enviaAPaperera.bind(null, id)}>
+                <button type="submit" className="text-sm text-red-600 hover:underline">🗑 Enviar a la paperera</button>
+              </form>
+            )}
           </aside>
         </div>
       </main>
