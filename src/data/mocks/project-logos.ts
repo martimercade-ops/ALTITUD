@@ -24,6 +24,7 @@ export const LOGOS: Record<string, string> = {
   "beta-assegurances": "beta-assegurances",
   "psicosalut": "psicosalut",
   "paula-ayet": "paula-ayet",
+  "blue-ozone": "blue-ozone",
 };
 
 /** Logo del client (en color) per a un projecte, si en tenim */

@@ -547,7 +547,14 @@ const llista: Project[] = [
 ];
 
 /** Projectes per ordre alfabètic */
-export const projects: Project[] = [...llista].sort((a, b) => a.name.localeCompare(b.name, "ca", { sensitivity: "base" }));
+/** Projectes que van primer (en aquest ordre); la resta, per ordre alfabètic */
+const PRIMERS = ["federacio-andorrana-d-esqui"];
+
+export const projects: Project[] = [...llista].sort((a, b) => {
+  const pa = PRIMERS.indexOf(a.slug), pb = PRIMERS.indexOf(b.slug);
+  if (pa !== -1 || pb !== -1) return (pa === -1 ? 99 : pa) - (pb === -1 ? 99 : pb);
+  return a.name.localeCompare(b.name, "ca", { sensitivity: "base" });
+});
 
 export const projectHref = (slug: string) => `/projectes/${slug}`;
 
