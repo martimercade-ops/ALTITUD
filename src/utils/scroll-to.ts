@@ -37,6 +37,6 @@ export const scrollTo = (id?: string | number, immediate?: boolean) => {
   function getDistanceFromTop(element: HTMLElement) {
     const rect = element.getBoundingClientRect();
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    return rect.top + scrollTop;
+    return rect.top + scrollTop - 110;
   }
 };

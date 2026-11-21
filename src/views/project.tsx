@@ -442,7 +442,7 @@ const visualDe = (t: Tipus, p: Project, c: string[]): ReactNode => {
     case "web":
       return p.foto ? <VisualExterior p={p} /> : <VisualWeb p={p} c={c} />;
     case "ux":
-      return <VisualUX p={p} c={c} />;
+      return <FigmaUX p={p} c={c} />;
     case "foto":
       return <VisualFoto p={p} />;
     case "seo":
@@ -464,6 +464,145 @@ const visualDe = (t: Tipus, p: Project, c: string[]): ReactNode => {
   }
 };
 
+
+/**
+ * UX/UI espectacular: una finestra de Figma (barra superior, capes, llenç i inspector)
+ * amb les pantalles reals del projecte, selecció, cursors de col·laboració i, a sota,
+ * les pantalles a mida gran per llegir-les.
+ */
+const FigmaUX = ({ p, c }: { p: Project; c: string[] }) => {
+  const pantalles = (p.ux ?? []).slice(0, 3);
+  if (!pantalles.length) return <VisualUX p={p} c={c} />;
+  const web = pantalles[0]?.format === "web";
+  const mida = web ? "1440 × 2300" : "390 × 844";
+  const paraules = p.name.split(" ");
+  const client = paraules[0].length <= 3 ? paraules.slice(0, 2).join(" ") : paraules[0];
+  const colors = (p.paleta ?? c).filter((x) => x.startsWith("#")).slice(0, 6);
+  return (
+    <div className="fg">
+      <div className="fg-finestra" style={{ ["--fg-accent" as string]: c[3] }}>
+        {/* Barra superior */}
+        <div className="fg-barra">
+          <span className="fg-semafor" aria-hidden="true">
+            <i /> <i /> <i />
+          </span>
+          <span className="fg-eines" aria-hidden="true">
+            <span className="fg-logo" />
+            <span className="fg-eina fg-eina--on">▸</span>
+            <span className="fg-eina">#</span>
+            <span className="fg-eina">□</span>
+            <span className="fg-eina">T</span>
+          </span>
+          <span className="fg-fitxer">
+            <span className="text-white/40">Altitud Digital /</span> {p.name} — UX/UI
+          </span>
+          <span className="fg-dreta" aria-hidden="true">
+            <span className="fg-avatar" style={{ background: c[3] }}>
+              {client[0]}
+            </span>
+            <span className="fg-avatar fg-avatar--a">A</span>
+            <span className="fg-share">Share</span>
+            <span className="text-white/45">62%</span>
+          </span>
+        </div>
+
+        <div className="fg-cos">
+          {/* Capes */}
+          <aside className="fg-panell fg-capes" aria-hidden="true">
+            <p className="fg-titol">Pàgines</p>
+            <p className="fg-capa fg-capa--on">✦ Disseny</p>
+            <p className="fg-capa">✦ Prototip</p>
+            <p className="fg-capa">✦ Components</p>
+            <p className="fg-titol mt-5">Capes</p>
+            {pantalles.map((u, i) => (
+              <p key={u.src} className={`fg-capa ${i === 1 ? "fg-capa--sel" : ""}`}>
+                <span className="text-white/40">#</span> {u.nom ?? `Pantalla ${pad(i + 1)}`}
+              </p>
+            ))}
+            <p className="fg-capa pl-6 text-white/45">◇ Header</p>
+            <p className="fg-capa pl-6 text-white/45">◇ Botó / Primari</p>
+            <p className="fg-capa pl-6 text-white/45">◇ Targeta</p>
+          </aside>
+
+          {/* Llenç */}
+          <div className="fg-llenc">
+            <div className={`fg-frames ${web ? "fg-frames--web" : ""}`}>
+              {pantalles.map((u, i) => (
+                <figure key={u.src} className={`fg-frame ${i === 1 ? "fg-frame--sel" : ""}`} style={{ ["--i" as string]: i }}>
+                  <figcaption className="fg-nom">{u.nom ?? `Pantalla ${pad(i + 1)}`}</figcaption>
+                  <div className="fg-pantalla">
+                    <Image src={u.src} alt={u.alt} fill sizes="(max-width: 768px) 40vw, 22vw" className="object-cover object-top" />
+                  </div>
+                  {i === 1 && (
+                    <>
+                      <span className="fg-nansa fg-nansa--a" />
+                      <span className="fg-nansa fg-nansa--b" />
+                      <span className="fg-nansa fg-nansa--c" />
+                      <span className="fg-nansa fg-nansa--d" />
+                      <span className="fg-mida">{mida}</span>
+                    </>
+                  )}
+                </figure>
+              ))}
+            </div>
+            <span className="fg-cursor fg-cursor--a" aria-hidden="true">
+              <svg viewBox="0 0 16 16"><path d="M1 1l5.2 13.2 2-5.6 5.6-2z" /></svg>
+              <span>Altitud</span>
+            </span>
+            <span className="fg-cursor fg-cursor--b" aria-hidden="true" style={{ ["--cc" as string]: c[3] }}>
+              <svg viewBox="0 0 16 16"><path d="M1 1l5.2 13.2 2-5.6 5.6-2z" /></svg>
+              <span>{client}</span>
+            </span>
+            <span className="fg-comentari" aria-hidden="true">
+              <span className="fg-avatar fg-avatar--a">A</span>
+              <span>
+                <b>Altitud</b>
+                <br />
+                Versió final ✓
+              </span>
+            </span>
+          </div>
+
+          {/* Inspector */}
+          <aside className="fg-panell fg-inspector" aria-hidden="true">
+            <p className="fg-titol">Frame</p>
+            <div className="fg-camps">
+              <span>W</span>
+              <b>{web ? 1440 : 390}</b>
+              <span>H</span>
+              <b>{web ? 2300 : 844}</b>
+            </div>
+            <p className="fg-titol mt-5">Colors de l&apos;estil</p>
+            {colors.map((col) => (
+              <p key={col} className="fg-color">
+                <span style={{ background: col }} />
+                {col.toUpperCase()}
+              </p>
+            ))}
+            <p className="fg-titol mt-5">Prototip</p>
+            <p className="fg-capa text-white/60">On tap → Navigate</p>
+            <p className="fg-capa text-white/60">Smart animate · 300ms</p>
+          </aside>
+        </div>
+      </div>
+
+      {/* Pantalles a mida gran */}
+      <ul className={`fg-galeria ${web ? "fg-galeria--web" : ""}`}>
+        {pantalles.map((u, i) => (
+          <li key={u.src}>
+            <div className="fg-gran">
+              <Image src={u.src} alt={u.alt} fill sizes="(max-width: 768px) 80vw, 30vw" className="object-cover object-top" />
+            </div>
+            <p className="mt-4 flex items-baseline gap-3 text-sm">
+              <span className="font-mono text-[0.7rem] text-black/35">{pad(i + 1)}</span>
+              <span className="font-light">{u.nom ?? `Pantalla ${pad(i + 1)}`}</span>
+            </p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 /** Arquitectura del web (mapa de seccions), sistema tipogràfic i captures de mòbil */
 const Arquitectura = ({ p, c }: { p: Project; c: string[] }) => {

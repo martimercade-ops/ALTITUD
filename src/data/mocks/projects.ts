@@ -24,7 +24,7 @@ export interface Project {
   /** Text propi per a un servei concret (clau = nom del servei, p. ex. "Web") */
   capitols?: Record<string, string>;
   /** Pantalles de disseny UX/UI (de Figma). format: "mobil" (pantalla de mòbil) o "web" (pàgina d'escriptori) */
-  ux?: { src: string; alt: string; format?: "mobil" | "web" }[];
+  ux?: { src: string; alt: string; format?: "mobil" | "web"; nom?: string }[];
   /** Detalls destacats del projecte (funcionalitats concretes, amb captura) */
   destacats?: { etiqueta?: string; titol: string; text: string; imatge: string; alt: string; punts?: string[]; /** imatge sense marc de navegador (fotos, mockups) */ foto?: boolean }[];
   /** Color d'accent de la marca (si el que s'extreu de la captura no és bo) */
@@ -55,7 +55,7 @@ const llista: Project[] = [
     slug: "el-rato",
     lloc: "Andorra la Vella",
     color: "#d9572b",
-    ux: [{ src: "/assets/altitud/projectes/ux/el-rato-1.webp", alt: "Disseny de la pàgina d'inici d'El Rato a Figma", format: "web" }, { src: "/assets/altitud/projectes/ux/el-rato-2.webp", alt: "Disseny de la pàgina Barre House d'El Rato", format: "web" }, { src: "/assets/altitud/projectes/ux/el-rato-3.webp", alt: "Disseny de la pàgina de tarifes d'El Rato", format: "web" }],
+    ux: [{ src: "/assets/altitud/projectes/ux/el-rato-1.webp", nom: "Inici", alt: "Disseny de la pàgina d'inici d'El Rato a Figma", format: "web" }, { src: "/assets/altitud/projectes/ux/el-rato-2.webp", nom: "Barre House", alt: "Disseny de la pàgina Barre House d'El Rato", format: "web" }, { src: "/assets/altitud/projectes/ux/el-rato-3.webp", nom: "Tarifes", alt: "Disseny de la pàgina de tarifes d'El Rato", format: "web" }],
     name: "El Rato Barre House",
     sector: "Fitness i benestar",
     summary: "Web, xarxes socials i motor de reserves.",
@@ -92,7 +92,7 @@ const llista: Project[] = [
     slug: "henkan",
     lloc: "La Massana",
     color: "#9a7452",
-    ux: [{ src: "/assets/altitud/projectes/ux/henkan-1.webp", alt: "Disseny de la pàgina d'inici de Henkan a Figma", format: "web" }, { src: "/assets/altitud/projectes/ux/henkan-2.webp", alt: "Disseny de la pàgina de projectes de Henkan", format: "web" }, { src: "/assets/altitud/projectes/ux/henkan-3.webp", alt: "Disseny de la pàgina Nosaltres de Henkan", format: "web" }],
+    ux: [{ src: "/assets/altitud/projectes/ux/henkan-1.webp", nom: "Inici", alt: "Disseny de la pàgina d'inici de Henkan a Figma", format: "web" }, { src: "/assets/altitud/projectes/ux/henkan-2.webp", nom: "Projectes", alt: "Disseny de la pàgina de projectes de Henkan", format: "web" }, { src: "/assets/altitud/projectes/ux/henkan-3.webp", nom: "Nosaltres", alt: "Disseny de la pàgina Nosaltres de Henkan", format: "web" }],
     name: "Henkan Spaces",
     sector: "Interiorisme",
     summary: "Web, fotografia i SEO.",
@@ -242,7 +242,7 @@ const llista: Project[] = [
       { src: "/assets/altitud/projectes/detalls/paula-mobil-index.webp", alt: "Portada del web de Paula Ayet al mòbil" },
       { src: "/assets/altitud/projectes/detalls/paula-mobil-camins.webp", alt: "Secció Tria el teu camí al mòbil" },
     ],
-    ux: [{ src: "/assets/altitud/projectes/ux/paula-ayet-1.webp", alt: "Disseny mòbil de la pàgina d'inici de Paula Ayet Yoga a Figma", format: "mobil" }, { src: "/assets/altitud/projectes/ux/paula-ayet-2.webp", alt: "Disseny mòbil de la pàgina Let's work together", format: "mobil" }, { src: "/assets/altitud/projectes/ux/paula-ayet-3.webp", alt: "Disseny mòbil d'una pàgina de curs de Paula Ayet Yoga", format: "mobil" }],
+    ux: [{ src: "/assets/altitud/projectes/ux/paula-ayet-1.webp", nom: "Inici", alt: "Disseny mòbil de la pàgina d'inici de Paula Ayet Yoga a Figma", format: "mobil" }, { src: "/assets/altitud/projectes/ux/paula-ayet-2.webp", nom: "Let's work together", alt: "Disseny mòbil de la pàgina Let's work together", format: "mobil" }, { src: "/assets/altitud/projectes/ux/paula-ayet-3.webp", nom: "Curs", alt: "Disseny mòbil d'una pàgina de curs de Paula Ayet Yoga", format: "mobil" }],
     links: [web("https://www.paulaayet.com/")],
     image: `${P}/paula-ayet.jpg`,
   },
@@ -450,7 +450,7 @@ const llista: Project[] = [
   {
     slug: "brainworks-center",
     lloc: "Escaldes-Engordany",
-    ux: [{ src: "/assets/altitud/projectes/ux/brainworks-1.webp", alt: "Disseny mòbil de la pàgina de serveis de Brainworks a Figma", format: "mobil" }, { src: "/assets/altitud/projectes/ux/brainworks-2.webp", alt: "Disseny mòbil del blog de Brainworks", format: "mobil" }, { src: "/assets/altitud/projectes/ux/brainworks-3.webp", alt: "Disseny mòbil de la pàgina de contacte de Brainworks", format: "mobil" }],
+    ux: [{ src: "/assets/altitud/projectes/ux/brainworks-1.webp", nom: "Serveis", alt: "Disseny mòbil de la pàgina de serveis de Brainworks a Figma", format: "mobil" }, { src: "/assets/altitud/projectes/ux/brainworks-2.webp", nom: "Blog", alt: "Disseny mòbil del blog de Brainworks", format: "mobil" }, { src: "/assets/altitud/projectes/ux/brainworks-3.webp", nom: "Contacte", alt: "Disseny mòbil de la pàgina de contacte de Brainworks", format: "mobil" }],
     name: "Brainworks Center",
     sector: "Salut i benestar",
     summary: "Web, xarxes socials i identitat corporativa.",
