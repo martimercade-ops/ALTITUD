@@ -123,28 +123,31 @@ export const ProjectsList = ({ projects }: { projects: Project[] }) => {
   const FILTRES: Record<string, string[]> = {
     Web: ["Web"],
     [XARXES]: [],
+    "UX/UI": ["Disseny UX/UI"],
     Identitat: ["Identitat corporativa", "Branding"],
     Ecommerce: ["Botiga online"],
     "Projectes amb IA": ["Chatbot amb IA", "IA", "Automatitzacions amb IA"],
     "Publicitat exterior": ["Publicitat exterior"],
   };
-  const tags = Object.keys(FILTRES);
+  const TOTS = "Tots";
+  const tags = [TOTS, ...Object.keys(FILTRES)];
   const [tag, setTag] = useState<string | null>(null);
   const entra = (p: Project, t: string) => FILTRES[t].some((x) => p.services.includes(x));
   const shown = tag ? projects.filter((p) => entra(p, tag)) : projects;
-  const compte = (t: string) => (t === XARXES ? reels.length : projects.filter((p) => entra(p, t)).length);
+  const compte = (t: string) =>
+    t === TOTS ? projects.length : t === XARXES ? reels.length : projects.filter((p) => entra(p, t)).length;
 
   return (
     <>
       <div role="group" aria-label="Filtra per servei" className="filtres -mx-5 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] sm:mx-0 sm:px-0">
         {tags.map((t) => {
-          const on = t === tag;
+          const on = t === TOTS ? tag === null : t === tag;
           return (
             <button
               key={t}
               type="button"
               aria-pressed={on}
-              onClick={() => setTag(on ? null : t)}
+              onClick={() => setTag(t === TOTS || on ? null : t)}
               className={`shrink-0 whitespace-nowrap rounded-full border px-4 py-2 text-sm sm:px-5 sm:py-2.5 transition-colors ${
                 on ? "border-black bg-black text-white" : "border-black/15 text-black/75 hover:border-black/40"
               }`}
