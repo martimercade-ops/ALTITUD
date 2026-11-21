@@ -468,7 +468,7 @@ const visualDe = (t: Tipus, p: Project, c: string[]): ReactNode => {
 /** Detalls destacats: captura gran + explicació (funcionalitats concretes del projecte) */
 const Destacats = ({ p, c }: { p: Project; c: string[] }) =>
   p.destacats?.length ? (
-    <section aria-labelledby="destacats" className="cas-destacats relative overflow-hidden bg-footer py-24 text-white md:py-32">
+    <section aria-labelledby="destacats" className="cas-destacats relative overflow-hidden bg-footer pb-28 pt-24 text-white md:pb-40 md:pt-32">
       <span aria-hidden="true" className="cas-taca cas-taca--a opacity-30" />
       <div className="relative mx-auto max-w-6xl px-6 md:px-10">
         <p className={`${EYEBROW} text-white/55`}>A fons</p>
@@ -691,7 +691,7 @@ export const ProjectView = ({ project: p, prev, next }: ProjectViewProps) => {
         )}
 
         {/* ── Següent projecte ────────────────────────────────── */}
-        <nav aria-label="Altres projectes" className="px-4 pb-24 md:px-10 md:pb-32">
+        <nav aria-label="Altres projectes" className={`px-4 pb-24 md:px-10 md:pb-32 ${p.destacats?.length ? "pt-24 md:pt-40" : ""}`}>
           <Link href={projectHref(next.slug)} className="cas-seguent group relative mx-auto block max-w-6xl overflow-hidden rounded-[2rem] bg-footer text-white">
             <Image
               src={next.image}
