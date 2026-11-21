@@ -1065,3 +1065,106 @@ font { background: transparent !important; }
 @media (prefers-reduced-motion: reduce) { .equip-entra { opacity: 1; transform: none; filter: none; } .membre { transform: none !important; } }
 .membre-brill { display: none; }
 .equip-entra { transition: opacity 1.4s, transform 1.7s cubic-bezier(0.2, 0.8, 0.2, 1), filter 1.4s; transition-delay: calc(var(--i) * 260ms); }
+
+/* ================================================================== */
+/* Cas d'estudi (pàgina de projecte)                                   */
+/* ================================================================== */
+.cas-taca { position: absolute; border-radius: 9999px; filter: blur(90px); opacity: .55; pointer-events: none; }
+.cas-taca--a { width: 42rem; height: 42rem; right: -12rem; top: -14rem; background: var(--c3, #2b72e2); animation: cas-deriva 18s ease-in-out infinite alternate; }
+.cas-taca--b { width: 30rem; height: 30rem; left: -10rem; bottom: -16rem; background: var(--c2, #c9d6ee); opacity: .25; animation: cas-deriva 22s ease-in-out infinite alternate-reverse; }
+.cas-graella {
+  position: absolute; inset: 0; pointer-events: none; opacity: .08;
+  background-image: linear-gradient(rgb(255 255 255 / .6) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / .6) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(70% 60% at 70% 40%, #000, transparent);
+}
+@keyframes cas-deriva { to { transform: translate(-4rem, 3rem) scale(1.1); } }
+
+.cas-titol { animation: cas-puja 1s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes cas-puja { from { opacity: 0; transform: translateY(24px); filter: blur(6px); } }
+
+/* Capes "explotades" de la portada */
+.cas-escena { perspective: 1600px; }
+.cas-capa { display: block; transform-style: preserve-3d; transition: transform .9s cubic-bezier(.2,.7,.2,1); }
+.cas-capa--1 { position: relative; transform: rotateY(-14deg) rotateX(6deg); animation: cas-capa-entra 1.2s .15s cubic-bezier(.2,.7,.2,1) both; }
+.cas-capa--2, .cas-capa--3 { position: absolute; inset: 0; border-radius: 1rem; }
+.cas-capa--2 { background: var(--c2, #c9d6ee); opacity: .55; transform: rotateY(-14deg) rotateX(6deg) translate3d(28px, 26px, -60px); }
+.cas-capa--3 { background: var(--c3, #2b72e2); opacity: .35; transform: rotateY(-14deg) rotateX(6deg) translate3d(56px, 52px, -120px); }
+.cas-escena:hover .cas-capa--1 { transform: rotateY(-6deg) rotateX(3deg) translateZ(20px); }
+.cas-escena:hover .cas-capa--2 { transform: rotateY(-6deg) rotateX(3deg) translate3d(44px, 40px, -60px); }
+.cas-escena:hover .cas-capa--3 { transform: rotateY(-6deg) rotateX(3deg) translate3d(88px, 80px, -120px); }
+@keyframes cas-capa-entra { from { opacity: 0; transform: rotateY(-30deg) rotateX(14deg) translateY(40px); } }
+.cas-segell { z-index: 3; animation: cas-flotar 6s ease-in-out infinite; }
+
+.cas-flota { animation: cas-flotar 6s ease-in-out infinite; }
+@keyframes cas-flotar { 50% { transform: translateY(-10px); } }
+
+.cas-num { color: transparent; -webkit-text-stroke: 1px rgb(23 23 23 / .25); }
+.cas-color { min-width: 0; }
+
+/* Entrades en fer scroll (on el navegador ho suporti) */
+@supports (animation-timeline: view()) {
+  .cas-entra, .cas-visual, .cas-capitol h3 {
+    animation: cas-apareix linear both; animation-timeline: view(); animation-range: entry 0% cover 30%;
+  }
+  .cas-visual { animation-range: entry 10% cover 40%; }
+}
+@keyframes cas-apareix { from { opacity: 0; transform: translateY(48px); } }
+
+/* Visuals */
+.cas-traca { stroke-dasharray: 420; stroke-dashoffset: 420; animation: cas-dibuixa 2.4s .3s ease-out forwards; }
+@keyframes cas-dibuixa { to { stroke-dashoffset: 0; } }
+.cas-bombolla { animation: cas-puja .6s calc(var(--i) * .5s + .2s) both; }
+.cas-punt { animation: cas-salta 1s ease-in-out infinite; }
+@keyframes cas-salta { 30% { transform: translateY(-4px); } }
+.cas-tessela { animation: cas-puja .6s calc(var(--i) * .08s) both; }
+.cas-orbita { animation: cas-gira 14s linear infinite; animation-delay: calc(var(--i) * -3s); opacity: .8; }
+@keyframes cas-gira { from { transform: rotate(0) translateX(4%); } to { transform: rotate(360deg) translateX(4%); } }
+
+/* UX/UI isomètric */
+.cas-iso-diagonal {
+  position: absolute; inset: -20% 35% -20% -30%; transform: rotate(-38deg);
+  background: linear-gradient(90deg, rgb(255 255 255 / .55), rgb(255 255 255 / .2));
+}
+.cas-iso-pla {
+  position: absolute; left: 50%; top: 50%; width: 760px; height: 520px;
+  margin: -260px 0 0 -380px; transform-style: preserve-3d;
+  transform: scale(var(--iso-s, 1)) rotateX(52deg) rotateZ(-36deg);
+}
+.cas-iso-mobil {
+  position: absolute; width: 190px; height: 400px; padding: 7px; border-radius: 1.5rem;
+  background: #fff;
+  box-shadow: -2px 2px 0 #e7e9ee, -4px 4px 0 #d9dce3, -40px 40px 50px -10px rgb(11 20 36 / .35);
+  left: calc(120px + var(--i) * 210px); top: calc(70px - var(--i) * 10px);
+  transform: translateZ(calc(20px + var(--i) * 18px));
+  transition: transform .7s cubic-bezier(.2,.7,.2,1);
+}
+.cas-iso:hover .cas-iso-mobil { transform: translateZ(calc(40px + var(--i) * 30px)); }
+.cas-iso-targeta {
+  position: absolute; border-radius: 1rem; background: #fff; padding: 14px;
+  box-shadow: -28px 28px 36px -12px rgb(11 20 36 / .3);
+  transition: transform .7s cubic-bezier(.2,.7,.2,1);
+}
+.cas-iso-targeta--a { left: -10px; top: 40px; width: 120px; transform: translateZ(70px); }
+.cas-iso-targeta--b { left: 10px; top: 300px; width: 150px; display: flex; gap: 10px; align-items: center; transform: translateZ(90px); }
+.cas-iso-targeta--c { left: 560px; top: 420px; width: 130px; transform: translateZ(110px); }
+.cas-iso:hover .cas-iso-targeta--a { transform: translateZ(110px); }
+.cas-iso:hover .cas-iso-targeta--b { transform: translateZ(130px); }
+.cas-iso:hover .cas-iso-targeta--c { transform: translateZ(150px); }
+.cas-iso-segell {
+  position: absolute; left: 700px; top: 120px; width: 84px; height: 84px; padding: 14px;
+  display: grid; place-items: center; border-radius: 9999px; background: #fff;
+  box-shadow: -24px 24px 30px -10px rgb(11 20 36 / .3); transform: translateZ(80px);
+}
+.cas-iso { --iso-s: .38; }
+@media (min-width: 480px) { .cas-iso { --iso-s: .5; } }
+@media (min-width: 768px) { .cas-iso { --iso-s: .72; } }
+@media (min-width: 1100px) { .cas-iso { --iso-s: .95; } }
+
+@media (max-width: 767px) {
+  .cas-capa--2 { transform: rotateY(-14deg) rotateX(6deg) translate3d(14px, 14px, -40px); }
+  .cas-capa--3 { transform: rotateY(-14deg) rotateX(6deg) translate3d(28px, 28px, -80px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cas-taca, .cas-flota, .cas-segell, .cas-orbita, .cas-punt { animation: none; }
+}

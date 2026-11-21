@@ -1,0 +1,231 @@
+{
+ "auro-jardiners": {
+  "colors": [
+   "#fafbf5",
+   "#889181",
+   "#404934",
+   "#2e301d",
+   "#0f1009"
+  ],
+  "accent": null
+ },
+ "beta-assegurances": {
+  "colors": [
+   "#ffffff",
+   "#d2d6cb",
+   "#7b8587",
+   "#3d4558",
+   "#1b2743"
+  ],
+  "accent": "#1b2743"
+ },
+ "blue-ozone": {
+  "colors": [
+   "#f7f9fb",
+   "#d9dbe6",
+   "#bec3d9",
+   "#b5b0b3",
+   "#777885"
+  ],
+  "accent": null
+ },
+ "brainworks": {
+  "colors": [
+   "#faf7fe",
+   "#b18bc0",
+   "#9c6ab1",
+   "#664178",
+   "#311e3d"
+  ],
+  "accent": "#a46eb7"
+ },
+ "claudia-moncau": {
+  "colors": [
+   "#eae3d3",
+   "#aa996f",
+   "#8c7649",
+   "#514c2e",
+   "#302d21"
+  ],
+  "accent": "#8c7649"
+ },
+ "el-rato": {
+  "colors": [
+   "#faf5ef",
+   "#9d9285",
+   "#8b7967",
+   "#75614c",
+   "#634c34"
+  ],
+  "accent": "#634c34"
+ },
+ "enzo-poulat": {
+  "colors": [
+   "#ecebe8",
+   "#959089",
+   "#5c5c5b",
+   "#252525",
+   "#0e0e0e"
+  ],
+  "accent": null
+ },
+ "erf-assegurances": {
+  "colors": [
+   "#f9f8f4",
+   "#d9dacd",
+   "#6d747e",
+   "#2c3b51",
+   "#132340"
+  ],
+  "accent": "#202f48"
+ },
+ "espai-dor": {
+  "colors": [
+   "#ebe6e0",
+   "#706f69",
+   "#474a4d",
+   "#353230",
+   "#0e1115"
+  ],
+  "accent": null
+ },
+ "fae": {
+  "colors": [
+   "#a6bad0",
+   "#608491",
+   "#436179",
+   "#2a4059",
+   "#131c30"
+  ],
+  "accent": "#2a4059"
+ },
+ "farmacia-guitart": {
+  "colors": [
+   "#ffffff",
+   "#c6caca",
+   "#8c6a59",
+   "#54655f",
+   "#383938"
+  ],
+  "accent": "#8c6a59"
+ },
+ "henkan": {
+  "colors": [
+   "#d7d2ce",
+   "#c7bdb5",
+   "#a6988a",
+   "#342d2b",
+   "#1e1714"
+  ],
+  "accent": null
+ },
+ "hostel-andes": {
+  "colors": [
+   "#ffffff",
+   "#a69c91",
+   "#756451",
+   "#5e3e2b",
+   "#1e2c36"
+  ],
+  "accent": "#c79d6e"
+ },
+ "hotel-niu": {
+  "colors": [
+   "#bbbbbb",
+   "#5f6165",
+   "#3f4148",
+   "#2a2c31",
+   "#171313"
+  ],
+  "accent": null
+ },
+ "la-casa": {
+  "colors": [
+   "#ffffff",
+   "#a38f84",
+   "#817570",
+   "#884634",
+   "#443d45"
+  ],
+  "accent": "#884634"
+ },
+ "la-llotja": {
+  "colors": [
+   "#7e745d",
+   "#615846",
+   "#423f3b",
+   "#2b2825",
+   "#0e0d0d"
+  ],
+  "accent": "#594b34"
+ },
+ "la-rostisseria": {
+  "colors": [
+   "#f9ecd9",
+   "#665f5f",
+   "#44403e",
+   "#302824",
+   "#181413"
+  ],
+  "accent": null
+ },
+ "medic-estetic": {
+  "colors": [
+   "#f4f3ee",
+   "#a39a8c",
+   "#7c6844",
+   "#4f4431",
+   "#0e141d"
+  ],
+  "accent": "#7c6844"
+ },
+ "olympus-race": {
+  "colors": [
+   "#b3a78c",
+   "#555551",
+   "#563b2e",
+   "#412619"
+  ],
+  "accent": "#513225"
+ },
+ "perfect-home": {
+  "colors": [
+   "#ffffff",
+   "#c7c9c7",
+   "#6d7072",
+   "#353535",
+   "#1f1e1d"
+  ],
+  "accent": null
+ },
+ "plexifoto": {
+  "colors": [
+   "#f4f5f7",
+   "#ede1d0",
+   "#c7c5c1",
+   "#ad967a",
+   "#594537"
+  ],
+  "accent": "#ad967a"
+ },
+ "projecte-vida": {
+  "colors": [
+   "#fef9eb",
+   "#865c6f",
+   "#143458",
+   "#322632",
+   "#0c121c"
+  ],
+  "accent": "#143458"
+ },
+ "psicosalut": {
+  "colors": [
+   "#ffffff",
+   "#d9e0e3",
+   "#b9c5c7",
+   "#a4a8a6",
+   "#867a79"
+  ],
+  "accent": null
+ }
+}

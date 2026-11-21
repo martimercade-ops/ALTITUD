@@ -1,5 +1,6 @@
 "use client";
 
+import { LOGOS, LOGOS_COLOR } from "@/data/mocks/project-logos";
 import { useState } from "react";
 import { reels } from "@/data/mocks/reels";
 import { ReelCard } from "./reel-card";
@@ -33,33 +34,6 @@ export const Laptop = ({ src, alt, url }: { src: string; alt: string; url?: stri
     </div>
   </div>
 );
-
-/** Logos en color (es mostren tal qual, sense passar-los a negre) */
-const LOGOS_COLOR: Record<string, string> = {
-  "la-rostisseria": "la-rostisseria",
-  "el-rato": "el-rato",
-  "espai-dor": "espai-dor",
-};
-
-const LOGOS: Record<string, string> = {
-  "perfect-home": "perfect-home",
-  "la-llotja": "restaurante-la-llotja",
-  "claudia-moncau": "claudia-moncau-yoga",
-  "medic-estetic": "medic-estetic",
-  "auro-jardiners": "auro-jardiners",
-  "federacio-andorrana-d-esqui": "fae",
-  "brainworks-center": "brainworks",
-  "hotel-niu": "hotel-niu",
-  "olympus-race": "olympus-race-andorra",
-  "la-casa": "la-casa-gastrobar",
-  "projecte-vida": "projecte-vida",
-  "enzo-poulat": "enzo-poulat",
-  "farmacia-guitart": "farmacia-guitart",
-  "henkan": "henkan",
-  "erf-assegurances": "erf-assegurances",
-  "beta-assegurances": "beta-assegurances",
-  "psicosalut": "psicosalut",
-};
 
 /** Portàtil dibuixat (vectorial, net a qualsevol mida) amb la web del client a la pantalla */
 const Dispositius = ({ src, priority = false }: { src: string; priority?: boolean }) => (

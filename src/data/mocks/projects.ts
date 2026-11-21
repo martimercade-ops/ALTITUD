@@ -16,6 +16,19 @@ export interface Project {
   foto?: boolean;
   /** Fotos de la feina feta (fotografia, plats, rodatges…) */
   gallery?: { src: string; alt: string }[];
+  /** Cas d'estudi (tot opcional: si no hi és, la pàgina fa servir textos per defecte) */
+  /** Quin era el repte del client, en una o dues frases */
+  repte?: string;
+  /** Com ho hem resolt, en una o dues frases */
+  enfoc?: string;
+  /** Text propi per a un servei concret (clau = nom del servei, p. ex. "Web") */
+  capitols?: Record<string, string>;
+  /** Pantalles de disseny UX/UI (exportades de Figma) */
+  ux?: { src: string; alt: string }[];
+  /** Color d'accent de la marca (si el que s'extreu de la captura no és bo) */
+  color?: string;
+  /** Any del projecte */
+  any?: string;
 }
 
 const P = "/assets/altitud/projectes";
@@ -49,6 +62,7 @@ const llista: Project[] = [
   },
   {
     slug: "espai-dor",
+    color: "#c9a227",
     name: "Espai d'Or",
     sector: "Perruqueria i estètica",
     summary: "Web amb botiga online, chatbot amb IA que reserva cites i SEO.",
