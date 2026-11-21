@@ -33,6 +33,14 @@ export interface Project {
   lloc?: string;
   /** Any del projecte */
   any?: string;
+  /** Paleta pròpia de la marca (si no, s'extreu de la captura) */
+  paleta?: string[];
+  /** Arquitectura del web: cada branca del menú, què hi passa i les seves seccions */
+  arquitectura?: { nom: string; text: string; seccions?: string[] }[];
+  /** Tipografies del sistema de disseny */
+  tipografies?: { nom: string; us: string; serif?: boolean }[];
+  /** Captures de mòbil (es mostren dins d'un telèfon) */
+  mobils?: { src: string; alt: string }[];
 }
 
 const P = "/assets/altitud/projectes";
@@ -107,12 +115,133 @@ const llista: Project[] = [
   {
     slug: "paula-ayet",
     name: "Paula Ayet Yoga",
-    sector: "Ioga",
-    summary: "Web i disseny UX/UI.",
-    about: "Professora de Jivamukti Yoga a Andorra: classes, mentories, retirs i un estudi online.",
-    repte: "Una marca personal molt cuidada, amb classes, mentories i retirs, que necessitava un web a l'altura: calmat, elegant i fàcil de recórrer des del mòbil.",
+    sector: "Ioga i mentoria",
+    summary: "Web, arquitectura i disseny UX/UI.",
+    about: "Professora de Jivamukti Yoga i mentora a Andorra: mentories per a professores de ioga, retirs, un curs online i un estudi creatiu.",
+    repte: "La Paula no és només una professora de ioga: és mentora, organitza retirs a Andorra i a l'estranger, té un curs online i un estudi creatiu. Necessitava un web que ho expliqués tot sense perdre la calma que transmet ella.",
+    enfoc: "Vam dissenyar-lo com una revista: una portada que fa d'índex, un sistema de colors on cada camí té el seu to, dues tipografies que conversen i molt d'aire. Tot pensat primer al mòbil, a Figma, abans d'escriure codi.",
     services: ["Web", "Disseny UX/UI"],
-    color: "#7d93a0",
+    color: "#e48fb5",
+    any: "2026",
+    capitols: {
+      Web: "Un web a mida, ràpid i amb selector d'idioma, amb molt més que pàgines: landing per a cada retir, un curs online amb compra, una àrea privada per a les alumnes i un formulari que li arriba directe. Tot animat amb subtilesa: textos que apareixen línia a línia, marquesines i vídeo de fons.",
+      "Disseny UX/UI": "Abans de programar res, vam dibuixar cada pantalla a Figma començant pel mòbil. L'objectiu: que qualsevol persona trobi en dos tocs el que busca, sigui una mentoria, un retir o una classe, i que en cap moment se senti dins d'una botiga.",
+    },
+    paleta: ["#e9ebd6", "#f5ef8f", "#45975f", "#937463", "#bcc9ce", "#b7a4e0", "#e095c0", "#101010"],
+    tipografies: [
+      { nom: "ABC Oracle", us: "Titulars, menú i text. Una grotesca neta i lleugera que deixa respirar la pàgina." },
+      { nom: "ABC Otto", us: "Preguntes, programes i cursives. El to editorial i càlid de la marca.", serif: true },
+    ],
+    arquitectura: [
+      { nom: "Inici", text: "Una portada que fa d'índex i guia cap a cada camí.", seccions: ["Índex de quatre mons", "Mentoria", "Sobre mi", "Tria el teu camí", "Retirs", "Contacte"] },
+      { nom: "Mentorship", text: "Tres programes en acordió, cadascun amb el seu color.", seccions: ["Visionary Practice", "The Aligned CEO", "The Nest"] },
+      { nom: "Retreats", text: "Calendari de retirs i una landing pròpia per a cada un.", seccions: ["Andorra", "Normandia", "Noruega", "Edicions passades"] },
+      { nom: "Online", text: "Curs Daily Practice: tràiler, testimonis, pràctiques i compra.", seccions: ["Tràiler", "Testimonis", "7 pràctiques", "Compra"] },
+      { nom: "AW!ARE", text: "L'estudi creatiu de la Paula: direcció creativa, foto i vídeo.", seccions: ["Galeria", "Serveis"] },
+      { nom: "Login", text: "Àrea privada amb els programes, materials i vídeos de cada alumna.", seccions: ["Accés", "Programes", "Materials"] },
+    ],
+    destacats: [
+      {
+        etiqueta: "Portada",
+        titol: "Un índex, no un bàner",
+        text: "En lloc d'una gran foto amb un eslògan, la portada s'obre com l'índex d'una revista: quatre mons de la Paula, cadascun amb una imatge i dues etiquetes. Qui entra entén en un segon tot el que hi trobarà.",
+        imatge: "/assets/altitud/projectes/detalls/paula-index.webp",
+        alt: "Portada del web de Paula Ayet amb un índex de quatre seccions il·lustrades amb fotos",
+        punts: ["About", "Online space", "Natural wonder", "AW!ARE studio"],
+      },
+      {
+        etiqueta: "Missatge",
+        titol: "Una frase, un botó",
+        text: "Just després, el missatge principal sobre un degradat amb gra, com una foto analògica. Una marquesina anuncia que la mentoria és oberta i un sol botó porta a descobrir-la. Res més competeix per l'atenció.",
+        imatge: "/assets/altitud/projectes/detalls/paula-mentoria.webp",
+        alt: "Bloc de mentoria amb degradat rosa i verd, text gran i botó Descubre más",
+        punts: ["Degradat amb gra", "Marquesina animada", "Una sola crida a l'acció"],
+      },
+      {
+        etiqueta: "Sobre mi",
+        titol: "To editorial",
+        text: "La història de la Paula es llegeix com una entrevista: foto a mida completa, una línia d'etiquetes en versaletes i el titular que barreja cursiva serif i romana. És on més es nota el diàleg entre les dues tipografies.",
+        imatge: "/assets/altitud/projectes/detalls/paula-sobre.webp",
+        alt: "Secció Sobre mí amb foto de la Paula fent ioga i text amb titular en cursiva",
+        punts: ["Serif + grotesca", "Foto protagonista", "Lectura còmoda"],
+      },
+      {
+        etiqueta: "Pausa",
+        titol: "Respira abans de triar",
+        text: "Abans de demanar res, el web proposa una pausa: una papallona desenfocada que es mou lentament i una frase curta. És un detall pensat per a una marca de ioga, i funciona com a transició entre conèixer la Paula i triar un camí.",
+        imatge: "/assets/altitud/projectes/detalls/paula-respira.webp",
+        alt: "Papallona lila desenfocada amb el text Para un momento. Respira.",
+        punts: ["Forma animada", "Microcopy amb intenció"],
+      },
+      {
+        etiqueta: "Tria el teu camí",
+        titol: "Sis preguntes, sis colors",
+        text: "La navegació principal es converteix en preguntes: vols donar forma a la teva visió? Busques una comunitat? Vols uns dies per parar? Cada resposta té el seu color, i aquest color l'acompanya a la pàgina on porta. És el cor del sistema.",
+        imatge: "/assets/altitud/projectes/detalls/paula-camins.webp",
+        alt: "Sis franges de colors amb preguntes que porten a cada servei de Paula Ayet",
+        punts: ["Navegació per intenció", "Color = camí"],
+      },
+      {
+        etiqueta: "Mentorship",
+        titol: "Tres programes, un acordió",
+        text: "La pàgina de mentories obre amb un vídeo de muntanya i ordena els tres programes en un acordió de colors que es desplega. Així la persona compara sense perdre's i arriba directe a la mentoria que li toca.",
+        imatge: "/assets/altitud/projectes/detalls/paula-visionary.webp",
+        alt: "Pàgina Let's work together amb vídeo de muntanyes i acordió amb el programa Visionary Practice obert",
+        punts: ["Vídeo de fons", "Acordió de colors", "Visionary Practice · Aligned CEO · The Nest"],
+      },
+      {
+        etiqueta: "Retirs",
+        titol: "Cada retir, en una fitxa",
+        text: "Els retirs s'ordenen per data en franges desplegables. En obrir-ne una apareix una galeria lliscant, la descripció i el botó per anar a la landing. Les dates van en una càpsula blanca perquè es vegin d'un cop d'ull.",
+        imatge: "/assets/altitud/projectes/detalls/paula-retirs.webp",
+        alt: "Pàgina de retirs amb el retir d'Andorra obert, galeria de fotos i descripció",
+        punts: ["Galeria amb fletxes", "Dates en càpsula", "Andorra · Normandia · Noruega"],
+      },
+      {
+        etiqueta: "Edicions passades",
+        titol: "El mateix patró, una altra història",
+        text: "Les edicions anteriors reprenen el disseny de l'índex de la portada: foto al centre i el nom del lloc a cada costat. Repetir patrons fa que el web se senti coherent i que l'usuari ja sàpiga com llegir-lo.",
+        imatge: "/assets/altitud/projectes/detalls/paula-edicions.webp",
+        alt: "Llista d'edicions passades de retirs: Natsu, Empordà, Begur i Monells",
+        punts: ["Patró reutilitzat", "Natsu · Empordà · Begur · Monells"],
+      },
+      {
+        etiqueta: "Landing de retir",
+        titol: "Between Breaths",
+        text: "Cada retir té la seva pàgina de venda: capçalera partida entre una foto i un vídeo del llac, marquesina amb el nom de la marca i, a sota, tot el que cal per decidir: el programa, l'allotjament, el dia a dia, qui el guia i la informació pràctica.",
+        imatge: "/assets/altitud/projectes/detalls/paula-between-breaths.webp",
+        alt: "Landing del retir Between Breaths amb capçalera partida entre foto i vídeo d'un llac",
+        punts: ["Capçalera foto + vídeo", "Programa", "Dia a dia", "Info pràctica"],
+      },
+      {
+        etiqueta: "Allotjament",
+        titol: "Informació clara, sense soroll",
+        text: "Imatges a sang amb el títol en majúscules i, després, el detall en blocs numerats que es despleguen: tipus d'habitació, què inclou, com arribar. La informació hi és tota, però només apareix quan la busques.",
+        imatge: "/assets/altitud/projectes/detalls/paula-allotjament.webp",
+        alt: "Secció d'allotjament del retir amb foto de muntanyes nevades i blocs numerats",
+        punts: ["Imatge a sang", "Blocs numerats", "Revelació progressiva"],
+      },
+      {
+        etiqueta: "Curs online",
+        titol: "Daily Practice",
+        text: "El curs de set pràctiques es ven des del mateix web: tràiler, preu clar al botó, testimonis en targetes amb els colors de la marca i la llista de pràctiques amb durada i material. Tot el que necessita qui practica des de casa.",
+        imatge: "/assets/altitud/projectes/detalls/paula-curs.webp",
+        alt: "Testimonis del curs Daily Practice en targetes de colors amb fotos dels alumnes",
+        punts: ["Compra directa", "Testimonis", "7 pràctiques"],
+      },
+      {
+        etiqueta: "Àrea privada",
+        titol: "Un espai per a les alumnes",
+        text: "Les alumnes entren amb el seu compte i hi troben el programa, els materials i els vídeos. El formulari d'accés manté l'estètica del web: fons crema, camps grans i el mateix botó en degradat.",
+        imatge: "/assets/altitud/projectes/detalls/paula-area-privada.webp",
+        alt: "Finestra d'accés a l'àrea privada amb camps de correu i contrasenya",
+        punts: ["Comptes d'alumna", "Programes i vídeos", "Recuperar contrasenya"],
+      },
+    ],
+    mobils: [
+      { src: "/assets/altitud/projectes/detalls/paula-mobil-index.webp", alt: "Portada del web de Paula Ayet al mòbil" },
+      { src: "/assets/altitud/projectes/detalls/paula-mobil-camins.webp", alt: "Secció Tria el teu camí al mòbil" },
+    ],
     ux: [{ src: "/assets/altitud/projectes/ux/paula-ayet-1.webp", alt: "Disseny mòbil de la pàgina d'inici de Paula Ayet Yoga a Figma", format: "mobil" }, { src: "/assets/altitud/projectes/ux/paula-ayet-2.webp", alt: "Disseny mòbil de la pàgina Let's work together", format: "mobil" }, { src: "/assets/altitud/projectes/ux/paula-ayet-3.webp", alt: "Disseny mòbil d'una pàgina de curs de Paula Ayet Yoga", format: "mobil" }],
     links: [web("https://www.paulaayet.com/")],
     image: `${P}/paula-ayet.jpg`,

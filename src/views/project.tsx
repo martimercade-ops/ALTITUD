@@ -26,15 +26,15 @@ type Paleta = { colors: string[]; accent: string | null };
 const paletaDe = (p: Project): { paleta: string[]; c: string[] } => {
   const key = p.image.split("/").pop()?.replace(/\.\w+$/, "") ?? "";
   const d = (paletes as Record<string, Paleta>)[key];
-  const paleta = d?.colors ?? PALETA_BASE;
+  const paleta = p.paleta?.slice(0, 5) ?? d?.colors ?? PALETA_BASE;
   const accent = p.color ?? d?.accent ?? "#2b72e2";
   const c = [...paleta];
   c[3] = accent;
   // to clar de l'accent per a fons suaus
   c[1] = `color-mix(in srgb, ${accent} 22%, white)`;
   c[2] = `color-mix(in srgb, ${accent} 55%, white)`;
-  const strip = [...paleta];
-  if (d?.accent && !strip.includes(d.accent)) strip[2] = d.accent;
+  const strip = p.paleta ? [...p.paleta] : [...paleta];
+  if (!p.paleta && d?.accent && !strip.includes(d.accent)) strip[2] = d.accent;
   return { paleta: strip, c };
 };
 
@@ -465,6 +465,94 @@ const visualDe = (t: Tipus, p: Project, c: string[]): ReactNode => {
 };
 
 
+/** Arquitectura del web (mapa de seccions), sistema tipogràfic i captures de mòbil */
+const Arquitectura = ({ p, c }: { p: Project; c: string[] }) => {
+  if (!p.arquitectura?.length && !p.mobils?.length) return null;
+  const domini = p.links[0]?.label ?? p.name;
+  return (
+    <>
+      {p.arquitectura?.length ? (
+        <section aria-labelledby="arquitectura" className="mx-auto max-w-6xl px-6 pb-24 md:px-10 md:pb-32">
+          <div className="border-t border-black/10 pt-16 md:pt-24">
+            <p className={`${EYEBROW} text-muted-small`}>Arquitectura</p>
+            <h2 id="arquitectura" className="mt-4 max-w-2xl text-[2rem] font-light leading-tight tracking-tight sm:text-[2.75rem]">
+              Com s&apos;organitza el web
+            </h2>
+            <div className="mt-14 flex flex-col items-center">
+              <span className="rounded-full px-6 py-3 text-sm font-medium text-white shadow-lg" style={{ background: "#101010" }}>
+                {domini}
+              </span>
+              <span aria-hidden="true" className="h-10 w-px bg-black/20" />
+            </div>
+            <ol className="cas-arbre grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {p.arquitectura.map((b, i) => (
+                <li key={b.nom} className="relative rounded-3xl border border-black/10 bg-white/60 p-7 backdrop-blur transition-transform duration-500 hover:-translate-y-1">
+                  <span className="absolute right-6 top-6 font-mono text-[0.7rem] text-black/35">{pad(i + 1)}</span>
+                  <span aria-hidden="true" className="block h-1.5 w-10 rounded-full" style={{ background: p.paleta?.[(i % 6) + 1] ?? c[3] }} />
+                  <h3 className="mt-5 text-2xl font-light tracking-tight">{b.nom}</h3>
+                  <p className="mt-3 text-[0.95rem] leading-relaxed text-black/60">{b.text}</p>
+                  {b.seccions && (
+                    <ul className="mt-5 flex flex-wrap gap-1.5">
+                      {b.seccions.map((x) => (
+                        <li key={x} className="rounded-full border border-black/10 px-3 py-1 text-xs text-black/70">
+                          {x}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      ) : null}
+
+      {p.tipografies?.length ? (
+        <section aria-labelledby="tipografia" className="mx-auto max-w-6xl px-6 pb-24 md:px-10 md:pb-32">
+          <p id="tipografia" className={`${EYEBROW} text-muted-small`}>Sistema tipogràfic</p>
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            {p.tipografies.map((t) => (
+              <figure key={t.nom} className="flex flex-col justify-between rounded-3xl p-8 md:p-10" style={{ background: p.paleta?.[0] ?? "#f3f1ea" }}>
+                <span className={`block text-[6rem] leading-none tracking-tight md:text-[8rem] ${t.serif ? "font-serif italic" : "font-light"}`} aria-hidden="true">
+                  Aa
+                </span>
+                <figcaption className="mt-10">
+                  <span className="block text-xl font-light">{t.nom}</span>
+                  <span className="mt-2 block max-w-sm text-sm leading-relaxed text-black/60">{t.us}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {p.mobils?.length ? (
+        <section aria-labelledby="mobil" className="px-4 pb-24 md:px-10 md:pb-32">
+          <div className="relative mx-auto grid max-w-6xl items-center gap-12 overflow-hidden rounded-[2rem] px-6 py-16 md:grid-cols-[1fr_1.4fr] md:px-14 md:py-20" style={{ background: c[1] }}>
+            <div>
+              <p className={`${EYEBROW} text-black/50`}>Mòbil</p>
+              <h2 id="mobil" className="mt-4 text-[2rem] font-light leading-tight tracking-tight sm:text-[2.5rem]">Pensat primer per a la pantalla petita</h2>
+              <p className="mt-5 max-w-md text-lg leading-relaxed text-black/60">
+                Qui arriba des d&apos;Instagram ho fa amb el telèfon a la mà. Per això cada secció es va dissenyar primer en vertical: l&apos;índex es converteix en una llista de fotos i els camins, en targetes grans fàcils de tocar.
+              </p>
+            </div>
+            <div className="flex justify-center gap-5 md:gap-8">
+              {p.mobils.map((m, i) => (
+                <figure key={m.src} className={`cas-telefon w-[44%] max-w-[240px] ${i % 2 ? "md:translate-y-12" : ""}`}>
+                  <div className="overflow-hidden rounded-[2rem] border-[6px] border-[#101010] bg-[#101010] shadow-[0_40px_80px_-30px_rgb(0_0_0/0.5)]">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={m.src} alt={m.alt} loading="lazy" decoding="async" className="block w-full rounded-[1.6rem]" />
+                  </div>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+    </>
+  );
+};
+
 /** Detalls destacats: captura gran + explicació (funcionalitats concretes del projecte) */
 const Destacats = ({ p, c }: { p: Project; c: string[] }) =>
   p.destacats?.length ? (
@@ -677,6 +765,8 @@ export const ProjectView = ({ project: p, prev, next }: ProjectViewProps) => {
             ))}
           </div>
         </section>
+
+        <Arquitectura p={p} c={c} />
 
         <Destacats p={p} c={c} />
 
