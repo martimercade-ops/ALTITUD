@@ -53,15 +53,26 @@ export const Method = ({ content, route, h1 = false }: MethodProps) => {
 
   useEffect(() => {
     let lastT = -1;
-    return subscribeToTicker(
+    // Mides en muntar i en redimensionar; a cada fotograma només scrollY (sense forçar layout)
+    let top = 0;
+    let height = 1;
+    const measure = () => {
+      const el = sectionRef.current;
+      if (!el) return;
+      top = el.getBoundingClientRect().top + window.scrollY;
+      height = el.offsetHeight;
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    if (sectionRef.current) ro.observe(sectionRef.current);
+    window.addEventListener("resize", measure);
+    const unsubscribe = subscribeToTicker(
       () => {
-        const el = sectionRef.current;
-        if (!el) return;
-        const rect = el.getBoundingClientRect();
+        const relTop = top - window.scrollY;
         // Fora de pantalla: res a fer
-        if (rect.bottom < 0 || rect.top > window.innerHeight) return;
-        const total = rect.height - window.innerHeight;
-        const t = clamp(-rect.top / Math.max(1, total)) * phases.length;
+        if (relTop + height < 0 || relTop > window.innerHeight) return;
+        const total = height - window.innerHeight;
+        const t = clamp(-relTop / Math.max(1, total)) * phases.length;
         if (Math.abs(t - lastT) < 0.002) return;
         lastT = t;
         // La línia es dibuixa directament al DOM, sense tornar a pintar React a cada fotograma
@@ -85,6 +96,11 @@ export const Method = ({ content, route, h1 = false }: MethodProps) => {
       },
       () => 0,
     );
+    return () => {
+      unsubscribe();
+      ro.disconnect();
+      window.removeEventListener("resize", measure);
+    };
   }, [phases, route]);
 
   const points = [start, ...phases.map((p) => p.at)];

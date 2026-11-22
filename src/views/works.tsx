@@ -64,18 +64,27 @@ export const Works = ({ content }: WorksProps) => {
   const [{ f }, api] = useSpring(() => ({ f: 0 }));
 
   useEffect(() => {
+    // Mides calculades en muntar i en redimensionar; a cada fotograma només scrollY (sense forçar layout)
+    let top = 0;
+    let total = 1;
+    const measure = () => {
+      const el = sectionRef.current;
+      if (!el) return;
+      top = el.getBoundingClientRect().top + window.scrollY;
+      total = Math.max(1, el.offsetHeight - window.innerHeight);
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    if (sectionRef.current) ro.observe(sectionRef.current);
+    window.addEventListener("resize", measure);
     const unsubscribe = subscribeToTicker(
       () => {
-        const el = sectionRef.current;
-        if (!el) return;
-        const total = el.offsetHeight - window.innerHeight;
-        const p = Math.min(
-          Math.max(-el.getBoundingClientRect().top / Math.max(1, total), 0),
-          1,
-        );
+        const p = Math.min(Math.max((window.scrollY - top) / total, 0), 1);
         const OVERSCAN = 0.2;
         const target = p * (count - 1 + OVERSCAN * 2) - OVERSCAN;
-        currentRef.current += (target - currentRef.current) * 0.14;
+        const delta = target - currentRef.current;
+        if (Math.abs(delta) < 0.0005) return;
+        currentRef.current += delta * 0.14;
         api.start({ f: currentRef.current, immediate: true });
 
         const idx = Math.min(
@@ -90,7 +99,11 @@ export const Works = ({ content }: WorksProps) => {
       },
       () => 0,
     );
-    return unsubscribe;
+    return () => {
+      unsubscribe();
+      ro.disconnect();
+      window.removeEventListener("resize", measure);
+    };
   }, [api, count, items]);
 
   return (
@@ -141,7 +154,6 @@ export const Works = ({ content }: WorksProps) => {
             <animated.a
               key={item.name}
               href={item.href}
-              aria-label={`${t("Veure el projecte")} ${item.name}`}
               suppressHydrationWarning
               className="group absolute left-1/2 top-1/2 block aspect-[16/10] w-[90vw] max-w-[46rem] overflow-hidden rounded-3xl bg-card-dark shadow-2xl [backface-visibility:hidden] [will-change:transform]"
               style={{

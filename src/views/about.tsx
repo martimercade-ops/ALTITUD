@@ -114,7 +114,7 @@ export const About = ({ content, labelId }: AboutProps) => {
       { }
       <img
         src="/assets/altitud/muntanyes-llac.webp"
-        srcSet="/assets/altitud/muntanyes-llac-1100.webp 1100w, /assets/altitud/muntanyes-llac.webp 1920w"
+        srcSet="/assets/altitud/muntanyes-llac-720.webp 720w, /assets/altitud/muntanyes-llac-1100.webp 1100w, /assets/altitud/muntanyes-llac-1440.webp 1440w, /assets/altitud/muntanyes-llac.webp 1920w"
         sizes="(max-width: 768px) 180vw, 100vw"
         alt=""
         aria-hidden="true"

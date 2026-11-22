@@ -1377,3 +1377,6 @@ body:has(.panell-app) [role="dialog"][aria-live="polite"] { display: none !impor
 .dif-estrella { opacity: 0.15; animation: dif-brilla 4s ease-in-out infinite; }
 @keyframes dif-brilla { 50% { opacity: 0.7; } }
 @media (prefers-reduced-motion: reduce) { .dif-orbita, .dif-ona, .dif-estrella { animation: none; } }
+
+/* Seccions fora de pantalla: animacions infinites aturades (vegeu AnimPause) */
+[data-fora] *, [data-fora] *::before, [data-fora] *::after { animation-play-state: paused !important; }

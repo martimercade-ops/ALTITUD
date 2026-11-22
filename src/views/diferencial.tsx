@@ -4,7 +4,7 @@ import { Reveal } from "@/components/common/reveal";
 /** El que ens fa diferents: les píndoles giren en òrbita al voltant de la IA */
 const PINDOLES = ["Creativitat + IA", "Innovació constant", "Tendències al dia", "Equip jove", "Atenció propera", "Proactivitat"];
 
-const ESTRELLES = Array.from({ length: 46 }, (_, i) => ({
+const ESTRELLES = Array.from({ length: 28 }, (_, i) => ({
   l: (i * 37) % 100,
   t: (i * 61) % 100,
   s: 1 + (i % 3),

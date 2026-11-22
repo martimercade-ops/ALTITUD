@@ -36,18 +36,18 @@ export interface PreloaderProps {
 }
 
 const HOLD_AT = 0.72;
-const MAX_WAIT = 2500;
+const MAX_WAIT = 1800;
 const WARM_BUDGET = 3000;
 
-const CARD_LEAD = 120;
-const CARD_INTERVAL = 170;
-const FINALE_HOLD = 280;
+const CARD_LEAD = 60;
+const CARD_INTERVAL = 120;
+const FINALE_HOLD = 160;
 
-const FILL_CONFIG = { tension: 60, friction: 30 };
-const FINISH_CONFIG = { tension: 150, friction: 30, clamp: true };
+const FILL_CONFIG = { tension: 90, friction: 30 };
+const FINISH_CONFIG = { tension: 220, friction: 30, clamp: true };
 const HANDOFF_CONFIG = { tension: 210, friction: 34, clamp: true };
 const CARD_CONFIG = { tension: 190, friction: 24 };
-const EXPAND_CONFIG = { tension: 80, friction: 16, clamp: true };
+const EXPAND_CONFIG = { tension: 120, friction: 18, clamp: true };
 const LEAVE_CONFIG = { tension: 320, friction: 30, clamp: true };
 const RELEASE_AT = 0.35;
 

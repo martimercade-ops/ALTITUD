@@ -114,7 +114,6 @@ const ProjectCard = ({ p, priority = false, ux = false }: { p: Project; priority
   return (
     <Link
       href={modeUX ? `${projectHref(p.slug)}#ux-ui` : projectHref(p.slug)}
-      aria-label={modeUX ? `Veure el disseny UX/UI de ${p.name}` : `Veure el projecte de ${p.name}`}
       onPointerMove={onMove}
       onPointerLeave={onLeave}
       className={`illa illa--clar ${p.foto ? "illa--foto" : ""} group relative flex h-full flex-col overflow-hidden rounded-[28px] bg-[#eceef2] text-black`}
@@ -214,7 +213,7 @@ export const ProjectsList = ({ projects }: { projects: Project[] }) => {
             >
               {t}
               {compte(t) > 0 && (
-                <span className={`ml-2 ${on ? "text-white/60" : "text-black/35"}`}>
+                <span className={`ml-2 ${on ? "text-white/70" : "text-black/55"}`}>
                   {compte(t)}
                 </span>
               )}

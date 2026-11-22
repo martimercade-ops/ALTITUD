@@ -55,7 +55,7 @@ export const SiteNav = ({
   <header className="fixed inset-x-[14px] top-[14px] z-50 flex items-center justify-between gap-4 text-white md:inset-x-[24px] md:top-[24px]">
     <div className="flex items-center gap-3">
       <a href={homeHref} aria-label={brand} className={`${PILL} relative z-[60] gap-2 px-[22px] font-medium md:px-[26px]`}>
-        <img src="/assets/altitud/altitud-logo-h.svg" alt="" width={128} height={16} className="block h-[19px] w-auto md:h-[21px]" />
+        <img src="/assets/altitud/altitud-logo-h.svg" alt="" width={128} height={16} fetchPriority="high" className="block h-[19px] w-auto md:h-[21px]" />
       </a>
       <nav aria-label={navLabel} className={`${PILL} hidden px-2 md:flex`}>
         {items.map((item) =>

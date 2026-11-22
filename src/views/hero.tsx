@@ -130,18 +130,31 @@ export const Hero = ({ content }: HeroProps) => {
   });
 
   useEffect(() => {
+    // Posició calculada una sola vegada (i en redimensionar): a cada fotograma només es llegeix scrollY
+    let heroTop = 0;
+    let dist = 1;
+    const measure = () => {
+      const el = sectionRef.current;
+      if (!el) return;
+      heroTop = el.getBoundingClientRect().top + window.scrollY;
+      dist = Math.max(1, window.innerHeight * SHRINK_VH);
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    let lastRaw = -1;
     const unsubscribe = subscribeToTicker(
       () => {
-        const el = sectionRef.current;
-        if (!el) return;
-        const top = el.getBoundingClientRect().top;
-        const dist = Math.max(1, window.innerHeight * SHRINK_VH);
-        const raw = Math.min(Math.max(-top / dist, 0), 1);
+        const raw = Math.min(Math.max((window.scrollY - heroTop) / dist, 0), 1);
+        if (raw === lastRaw) return;
+        lastRaw = raw;
         api.start({ p: raw });
       },
       () => 0,
     );
-    return unsubscribe;
+    return () => {
+      unsubscribe();
+      window.removeEventListener("resize", measure);
+    };
   }, [api]);
 
   return (

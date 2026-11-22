@@ -14,6 +14,7 @@ import { Guardia } from "@/components/common/guardia";
 import { WhatsappButton } from "@/components/common/whatsapp-button";
 import { ScrollLayout } from "@/layouts/scroll-layout";
 import { ConsentBanner } from "@/components/common/consent";
+import { AnimPause } from "@/components/common/anim-pause";
 
 import "@/app/globals.css";
 
@@ -56,6 +57,7 @@ export default function RootLayout({
           {children}
         </ScrollLayout>
         <ConsentBanner />
+        <AnimPause />
       </body>
     </html>
   );
