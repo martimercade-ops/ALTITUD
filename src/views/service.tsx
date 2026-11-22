@@ -102,8 +102,10 @@ export const ServiceView = ({ service: serviceCa }: ServiceViewProps) => {
               <span className="text-xs font-semibold uppercase tracking-[0.25em] text-black/40"><Tx>Treballem amb</Tx></span>
               {service.tools.map((t) =>
                 t === "Hostinger" ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img key={t} src="/assets/altitud/hostinger-partner-light.svg" alt="Hostinger Partner" width={96} height={36} className="h-9 w-auto self-center" />
+                  <a key={t} href="https://www.hostinger.com/es?REFERRALCODE=ALTITUD" target="_blank" rel="sponsored noopener" title="Agència partner oficial de Hostinger" className="self-center transition-opacity hover:opacity-80">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="/assets/altitud/hostinger-partner-light.svg" alt="Hostinger Partner" width={96} height={36} className="h-9 w-auto" />
+                  </a>
                 ) : (
                   <span key={t} className="text-[15px] text-black/55">{t}</span>
                 ),

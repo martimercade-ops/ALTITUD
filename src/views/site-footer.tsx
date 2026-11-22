@@ -228,8 +228,10 @@ export const SiteFooter = ({ content }: SiteFooterProps) => {
           <p>
             {content.copyright} NRT F-222591-D
           </p>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/assets/altitud/hostinger-partner-dark.svg" alt="Hostinger Partner" title="Agència partner oficial de Hostinger" width={96} height={36} loading="lazy" className="h-9 w-auto" />
+          <a href="https://www.hostinger.com/es?REFERRALCODE=ALTITUD" target="_blank" rel="sponsored noopener" title="Agència partner oficial de Hostinger" className="transition-opacity hover:opacity-80">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/assets/altitud/hostinger-partner-dark.svg" alt="Hostinger Partner" width={96} height={36} loading="lazy" className="h-9 w-auto" />
+          </a>
         </div>
         <ul className="flex flex-wrap justify-center gap-x-5 gap-y-2 md:justify-start">
           {legalPages.map((p) => (
