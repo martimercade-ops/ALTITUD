@@ -41,10 +41,10 @@ export const HomeView = ({ content = homeContent, robot = false }: HomeViewProps
       <About content={about} labelId={about.labelId} />
       <Showcase content={showcase} />
       <Eines />
+      <Diferencial />
       <Works content={works} />
       <Method content={T(methodContent)} />
       <Agencia360 />
-      <Diferencial />
       <Team content={team} />
       <div className="relative">
         <ContactForm content={T(contactContent)} />

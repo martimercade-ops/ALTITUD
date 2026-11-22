@@ -1,96 +1,145 @@
+import Image from "next/image";
 import { getI18n } from "@/i18n/server";
 import { Reveal } from "@/components/common/reveal";
 
-const PILARS = [
-  {
-    n: "01",
-    titol: "La IA al centre",
-    text: "Fem servir la intel·ligència artificial i la tecnologia a cada projecte per aconseguir un millor resultat per al client.",
-  },
-  {
-    n: "02",
-    titol: "Creativitat i IA de la mà",
-    text: "Les idees i el criteri els posem nosaltres. La IA ens ajuda a fer-les realitat més ràpid i millor.",
-  },
-  {
-    n: "03",
-    titol: "Sempre un pas per davant",
-    text: "Innovació constant: seguim cada dia les tendències, l'algoritme i les eines noves per avançar-nos.",
-  },
-  {
-    n: "04",
-    titol: "Atenció propera i proactiva",
-    text: "Parles directament amb qui fa la feina. I no esperem que ens ho demanis: et proposem millores.",
-  },
-];
+/** El que ens fa diferents: les píndoles giren en òrbita al voltant de la IA */
+const PINDOLES = ["Creativitat + IA", "Innovació constant", "Tendències al dia", "Equip jove", "Atenció propera", "Proactivitat"];
 
 const EQUIP = [
-  {
-    nom: "Martí Mercadé",
-    rol: "CEO",
-    text: "Ha portat campanyes a Havas Media per a UNICEF, JDE i Banca March, gestionant pressupostos molt grans.",
-  },
-  {
-    nom: "Eric Carrera",
-    rol: "CTO",
-    text: "Treballa en el sector tecnològic des de molt jove, amb experiència en altres agències de Tarragona.",
-  },
-  {
-    nom: "Andrea Ramos",
-    rol: "Project Manager",
-    text: "Graduada en Sociologia, amb un màster en màrqueting per la UB i experiència en diverses agències de màrqueting.",
-  },
-  {
-    nom: "Maria Socias",
-    rol: "Content Creator",
-    text: "Formada en vídeo i amb un curs d'il·luminació: el contingut, ben gravat i ben il·luminat.",
-  },
+  { nom: "Martí", rol: "CEO", foto: "marti", text: "Havas Media · UNICEF, JDE i Banca March", x: -470, y: -225, d: "0s" },
+  { nom: "Eric", rol: "CTO", foto: "eric", text: "Tecnologia des de jove · agències de Tarragona", x: 470, y: -225, d: "-1.4s" },
+  { nom: "Andrea", rol: "Project Manager", foto: "andrea", text: "Sociologia · màster a la UB · agències", x: -470, y: 225, d: "-2.3s" },
+  { nom: "Maria", rol: "Content Creator", foto: "maria", text: "Vídeo i il·luminació", x: 470, y: 225, d: "-0.8s" },
 ];
+
+const ESTRELLES = Array.from({ length: 46 }, (_, i) => ({
+  l: (i * 37) % 100,
+  t: (i * 61) % 100,
+  s: 1 + (i % 3),
+  d: `${((i * 13) % 40) / 10}s`,
+}));
+
+const Centre = () => {
+  const { t } = getI18n();
+  return (
+    <div className="relative mx-auto flex h-[210px] w-[210px] items-center justify-center md:h-[240px] md:w-[240px]">
+      <span aria-hidden="true" className="dif-ona absolute inset-0 rounded-full border border-[#2f5bff]/60" />
+      <span aria-hidden="true" className="dif-ona absolute inset-0 rounded-full border border-[#2f5bff]/60" style={{ animationDelay: "1.6s" }} />
+      <div className="relative flex h-full w-full flex-col items-center justify-center rounded-full bg-[radial-gradient(circle_at_35%_25%,#3a4a52,#1a2228_55%,#121619)] shadow-[0_0_80px_rgb(47_91_255/0.35),0_40px_90px_rgb(0_0_0/0.55)]">
+        <span className="pl-[0.3em] text-[54px] font-semibold leading-none tracking-[0.3em] md:text-[64px]">IA</span>
+        <span className="mt-3 pl-[0.3em] text-[12px] uppercase tracking-[0.3em] text-white/70 md:text-[13px]">{t("al centre")}</span>
+      </div>
+    </div>
+  );
+};
+
+const Persona = ({ p }: { p: (typeof EQUIP)[number] }) => {
+  const { t } = getI18n();
+  return (
+    <div className="flex w-[250px] items-center gap-3 rounded-full border border-white/25 bg-[#141414]/80 p-2 pr-5 backdrop-blur-md">
+      <Image src={`/assets/altitud/equip/${p.foto}-480.webp`} alt="" width={56} height={56} className="h-14 w-14 shrink-0 rounded-full object-cover" />
+      <span className="min-w-0 text-left">
+        <span className="block text-[15px] leading-tight">
+          {p.nom} <span className="text-[11px] uppercase tracking-[0.14em] text-white/45">{t(p.rol)}</span>
+        </span>
+        <span className="mt-1 block text-[12px] leading-snug text-white/60">{t(p.text)}</span>
+      </span>
+    </div>
+  );
+};
 
 export const Diferencial = () => {
   const { t } = getI18n();
   return (
-    <section aria-labelledby="diferencial-title" className="relative overflow-hidden bg-[#0e1116] px-6 py-24 text-white md:px-10 md:py-32 lg:px-12">
-      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(50%_60%_at_85%_10%,rgb(47_91_255/0.16),transparent_70%)]" />
-      <div className="relative mx-auto max-w-6xl">
+    <section aria-labelledby="diferencial-title" className="relative overflow-hidden bg-[#141414] text-white">
+      {/* Fons: resplendor i estrelles */}
+      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(45%_40%_at_50%_62%,rgb(47_91_255/0.18),transparent_70%)]" />
+      <div aria-hidden="true" className="absolute inset-0">
+        {ESTRELLES.map((e, i) => (
+          <span key={i} className="dif-estrella absolute rounded-full bg-white" style={{ left: `${e.l}%`, top: `${e.t}%`, width: e.s, height: e.s, animationDelay: e.d }} />
+        ))}
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-4xl px-6 pt-28 text-center md:pt-36">
         <Reveal className="reveal-up">
-          <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-white/55">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent-lime" />
+          <span className="inline-flex items-center rounded-full bg-[#2f5bff] px-4 py-1.5 text-[12px] font-light uppercase md:text-[13px]">
             {t("El que ens fa diferents")}
-          </p>
-          <h2 id="diferencial-title" className="mt-5 max-w-[22ch] text-[2rem] font-light leading-[1.1] tracking-tight md:text-[2.75rem]">
-            {t("Un equip jove que va")} <strong className="font-semibold">{t("un pas per davant.")}</strong>
+          </span>
+        </Reveal>
+        <Reveal className="reveal-up" style={{ transitionDelay: "120ms" }}>
+          <h2 id="diferencial-title" className="mt-6 text-[1.75rem] font-light leading-[1.22] tracking-[-0.01em] md:text-[2.6rem]">
+            {t("Un equip jove, nascut amb l'algoritme, que va")} <strong className="font-bold">{t("un pas per davant.")}</strong>
           </h2>
-          <p className="mt-6 max-w-2xl text-[16px] leading-relaxed text-white/65">
-            {t("Hem crescut amb les xarxes i amb l'algoritme del dia a dia. Ens avancem a les tendències i a la tecnologia, i ho sumem a l'experiència de projectes reals: coneixement jove, però amb ofici.")}
+        </Reveal>
+        <Reveal className="reveal-up" style={{ transitionDelay: "220ms" }}>
+          <p className="mx-auto mt-6 max-w-2xl text-[16px] leading-relaxed text-white/60">
+            {t("Creativitat i IA de la mà per donar-te un millor resultat. Coneixement jove, però amb experiència.")}
           </p>
-        </Reveal>
-
-        {/* Pilars */}
-        <Reveal as="ul" className="reveal-stagger mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {PILARS.map((p, i) => (
-            <li key={p.n} className="rounded-3xl border border-white/10 bg-white/[0.03] p-7" style={{ transitionDelay: `${i * 110}ms` }}>
-              <span className="text-sm font-medium text-accent-lime">{p.n}</span>
-              <p className="mt-6 text-lg leading-snug">{t(p.titol)}</p>
-              <p className="mt-3 text-[15px] leading-relaxed text-white/55">{t(p.text)}</p>
-            </li>
-          ))}
-        </Reveal>
-
-        {/* Experiència de l'equip */}
-        <Reveal className="reveal-up mt-4 rounded-3xl border border-white/10 bg-[linear-gradient(135deg,rgb(47_91_255/0.14),rgb(255_255_255/0.02)_55%)] p-8 md:p-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-white/50">{t("Joves, però amb experiència")}</p>
-          <ul className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {EQUIP.map((m) => (
-              <li key={m.nom} className="text-[15px] leading-relaxed text-white/65">
-                <span className="block text-[1.15rem] font-light tracking-tight text-white">{m.nom}</span>
-                <span className="mb-3 block text-[12px] uppercase tracking-[0.18em] text-white/40">{t(m.rol)}</span>
-                {t(m.text)}
-              </li>
-            ))}
-          </ul>
         </Reveal>
       </div>
+
+      {/* Línia que baixa fins al centre */}
+      <div aria-hidden="true" className="relative z-10 mx-auto mt-14 flex w-px flex-col items-center">
+        <span className="h-6 w-6 rounded-full bg-[radial-gradient(circle_at_35%_30%,#3a4a52,#1a2228)]" />
+        <span className="h-24 w-0 border-l-2 border-dotted border-white/80" />
+      </div>
+
+      {/* Escriptori: òrbita */}
+      <div className="dif-orbita relative z-10 mx-auto -mt-[190px] hidden h-[640px] w-full max-w-[1280px] lg:block">
+        <div className="absolute left-1/2 top-1/2 h-0 w-0 lg:scale-[0.84] xl:scale-100">
+          {/* Anell dibuixat */}
+          <span aria-hidden="true" className="absolute left-0 top-0 h-[340px] w-[680px] -translate-x-1/2 -translate-y-1/2 rounded-[50%] border border-dashed border-white/15" />
+
+          {/* Píndoles en òrbita (el·lipse = gir dins d'un contenidor aplanat) */}
+          <div className="absolute left-0 top-0" style={{ transform: "scaleY(0.5)" }}>
+            <div className="dif-gira absolute left-0 top-0">
+              {PINDOLES.map((label, i) => (
+                <div key={label} className="absolute left-0 top-0" style={{ transform: `rotate(${i * 60}deg) translateX(340px) rotate(${-i * 60}deg)` }}>
+                  <div className="dif-contra">
+                    <div style={{ transform: "scaleY(2)" }}>
+                      <span className="block -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border border-white/90 bg-[#141414]/70 px-7 py-3.5 text-[14px] uppercase backdrop-blur-sm transition-colors hover:bg-white hover:text-black">
+                        {t(label)}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2">
+            <Centre />
+          </div>
+
+          {/* L'equip, surant a les cantonades */}
+          {EQUIP.map((p) => (
+            <div key={p.nom} className="agencia-pindola absolute w-[250px]" style={{ left: p.x, top: p.y, animationDelay: p.d }}>
+              <Persona p={p} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Mòbil i tauleta */}
+      <div className="relative z-10 -mt-1 px-6 lg:hidden">
+        <Centre />
+        <ul className="mt-10 flex flex-wrap justify-center gap-2.5">
+          {PINDOLES.map((label) => (
+            <li key={label} className="rounded-full border border-white/80 px-4 py-2.5 text-[12px] uppercase">
+              {t(label)}
+            </li>
+          ))}
+        </ul>
+        <ul className="mx-auto mt-10 grid max-w-xl gap-3 sm:grid-cols-2">
+          {EQUIP.map((p) => (
+            <li key={p.nom} className="flex justify-center">
+              <Persona p={p} />
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="pb-20 md:pb-28" />
     </section>
   );
 };

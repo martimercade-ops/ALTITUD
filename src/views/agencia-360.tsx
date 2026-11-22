@@ -7,12 +7,12 @@ import { Reveal } from "@/components/common/reveal";
 
 /** El que ens diferencia: flota al voltant del client */
 const PILLS = [
-  { label: "Un sol equip", dx: -380, dy: -200, d: "0s" },
-  { label: "Tracte proper", dx: 330, dy: -150, d: "1.2s" },
-  { label: "Coneixem Andorra", dx: -470, dy: 20, d: "2.1s" },
-  { label: "Resultats mesurables", dx: 470, dy: 60, d: "0.6s" },
-  { label: "Creativitat", dx: -300, dy: 200, d: "1.6s" },
-  { label: "Tecnologia i IA", dx: 260, dy: 240, d: "2.6s" },
+  { label: "Un sol equip", dx: -380, dy: -200, d: "-0s" },
+  { label: "Tracte proper", dx: 330, dy: -150, d: "-1.2s" },
+  { label: "Coneixem Andorra", dx: -470, dy: 20, d: "-2.1s" },
+  { label: "Resultats mesurables", dx: 470, dy: 60, d: "-0.6s" },
+  { label: "Creativitat", dx: -300, dy: 200, d: "-1.6s" },
+  { label: "Tecnologia i IA", dx: 260, dy: 240, d: "-2.6s" },
 ];
 
 const Center = () => (
