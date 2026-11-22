@@ -61,6 +61,7 @@ const nextConfig: NextConfig = {
       { source: "/es/servicios/xarxes-socials", destination: "/es/redes-sociales-andorra", permanent: true },
       { source: "/es/servicios/branding", destination: "/es/branding-andorra", permanent: true },
       { source: "/es/servicios/chatbots-ia", destination: "/es/chatbots-ia-andorra", permanent: true },
+      { source: "/es/servicios/formacions-ia", destination: "/es/cursos-marketing-digital-andorra", permanent: true },
     ];
   },
 

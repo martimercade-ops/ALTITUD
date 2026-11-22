@@ -21,6 +21,7 @@ export const SERVEI_ES: Record<string, string> = {
   "xarxes-socials": "redes-sociales-andorra",
   branding: "branding-andorra",
   "chatbots-ia": "chatbots-ia-andorra",
+  "formacions-ia": "cursos-marketing-digital-andorra",
 };
 
 const SERVEIS_PREFIX: Record<LangAlt, string> = { es: "/es/servicios", fr: "/fr/services", en: "/en/services" };

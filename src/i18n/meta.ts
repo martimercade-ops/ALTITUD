@@ -11,7 +11,7 @@ export const META: Record<"/" | "/serveis" | "/equip" | "/parlem", M> = {
         "Agencia de marketing digital en Andorra la Vella: diseño web, SEO, redes sociales, publicidad online e IA para empresas de Andorra. Más de 100 clientes y 4,9★ en Google.",
     },
     fr: {
-      title: "Agence de marketing digital en Andorre | Altitud Digital",
+      title: "Agence web et de marketing digital en Andorre | Altitud Digital",
       description:
         "Agence de marketing digital à Andorre-la-Vieille : sites web, SEO, réseaux sociaux, publicité en ligne et IA pour les entreprises d'Andorre. Plus de 100 clients.",
     },

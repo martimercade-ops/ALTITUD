@@ -35,11 +35,11 @@ export const landingsEs: LandingEs[] = [
     slug: "agencia-seo-andorra",
     ca: "/serveis/seo-sem",
     nom: "Agencia SEO",
-    title: "Agencia SEO en Andorra: posicionamiento web y SEO local | Altitud Digital",
+    title: "Agencia SEO en Andorra: posicionamiento web, SEO local y GEO | Altitud Digital",
     description:
-      "Posicionamiento SEO en Andorra: auditoría, SEO técnico, contenidos y Google Maps para que tu empresa salga arriba en Google. Agencia SEO en Andorra la Vella.",
+      "Posicionamiento SEO en Andorra: auditoría, SEO técnico, contenidos, Google Maps y posicionamiento en IA (GEO) para que tu empresa salga arriba. Agencia SEO en Andorra la Vella.",
     eyebrow: "SEO · Posicionamiento en Google",
-    h1: "Agencia SEO en Andorra.",
+    h1: "Agencia SEO y posicionamiento web en Andorra.",
     intro:
       "Hacemos que tu empresa aparezca cuando alguien busca en Google lo que vendes en Andorra. Auditoría, SEO técnico, contenidos que responden lo que pregunta la gente y SEO local para que salgas en Google Maps.",
     image: `${A}/serveis/foto-seo-sem.jpg`,
@@ -52,6 +52,8 @@ export const landingsEs: LandingEs[] = [
       { title: "Contenidos que posicionan", text: "Páginas de servicio y artículos útiles, escritos por personas, que responden a lo que busca tu cliente." },
       { title: "SEO local y Google Maps", text: "Optimizamos tu ficha de Google Business para que salgas en el mapa cuando buscan cerca de ti." },
       { title: "Informes mensuales", text: "Posiciones, clics y contactos que llegan desde Google, explicados de forma clara cada mes." },
+      { title: "Posicionamiento en IA (GEO)", text: "Preparamos tu web para que ChatGPT, Gemini y las respuestas con IA de Google te citen cuando alguien pregunta por tu sector en Andorra." },
+      { title: "Google Ads (SEM)", text: "Si necesitas resultados ya, combinamos el SEO con campañas de Google Ads mientras el posicionamiento orgánico crece." },
     ],
     porQue: {
       title: "Cómo trabajamos el SEO en Andorra",
@@ -66,6 +68,8 @@ export const landingsEs: LandingEs[] = [
       { q: "¿Cuánto tarda el SEO en dar resultados?", a: "Las mejoras técnicas suelen notarse en pocas semanas. Para posicionarse de forma estable en búsquedas competidas hay que contar con 3 a 6 meses de trabajo constante." },
       { q: "¿Qué diferencia hay entre SEO y SEM?", a: "El SEO trabaja los resultados orgánicos de Google, que no se pagan por clic. El SEM son los anuncios de Google Ads: resultados inmediatos mientras inviertes. Lo ideal suele ser combinarlos." },
       { q: "¿Hacéis SEO en catalán, castellano y francés?", a: "Sí. En Andorra es habitual que los clientes busquen en varios idiomas, así que planteamos el SEO según los idiomas de tu público." },
+      { q: "¿Qué es el posicionamiento GEO o en IA?", a: "Cada vez más gente pregunta a ChatGPT o ve la respuesta con IA de Google antes que los enlaces. El GEO consiste en que tu negocio aparezca citado en esas respuestas: contenido claro, datos estructurados y buena reputación en la web." },
+      { q: "¿Hacéis SEO local en Andorra la Vella, Escaldes y el resto de parroquias?", a: "Sí. Trabajamos la ficha de Google Business y las páginas de tu web para que salgas en Google Maps cuando buscan tu servicio cerca, en cualquier parroquia." },
       { q: "¿Necesito cambiar de web para hacer SEO?", a: "No siempre. Primero auditamos la que tienes; si la base es buena, la optimizamos. Si te frena, te lo diremos con datos." },
     ],
   },
@@ -73,11 +77,11 @@ export const landingsEs: LandingEs[] = [
     slug: "diseno-web-andorra",
     ca: "/serveis/web-ecommerce",
     nom: "Diseño web",
-    title: "Diseño web en Andorra: páginas web y tiendas online | Altitud Digital",
+    title: "Diseño web en Andorra: páginas web a medida y tiendas online | Altitud Digital",
     description:
       "Diseño de páginas web y tiendas online en Andorra: rápidas, bonitas y pensadas para vender. WordPress, Shopify, WooCommerce o a medida, con SEO incluido.",
     eyebrow: "Diseño web · Tiendas online",
-    h1: "Diseño web en Andorra.",
+    h1: "Diseño y desarrollo web en Andorra.",
     intro:
       "Diseñamos y programamos webs y tiendas online para empresas de Andorra: rápidas, fáciles de actualizar y pensadas para que la visita acabe en una llamada, una reserva o una venta.",
     image: `${A}/serveis/foto-web-ecommerce.jpg`,
@@ -148,11 +152,11 @@ export const landingsEs: LandingEs[] = [
     slug: "publicidad-online-andorra",
     ca: "/serveis/seo-sem",
     nom: "Publicidad online",
-    title: "Publicidad online en Andorra: Google Ads y Meta Ads | Altitud Digital",
+    title: "Agencia Google Ads y Meta Ads en Andorra: publicidad online | Altitud Digital",
     description:
       "Campañas de Google Ads y Meta Ads para empresas de Andorra. Te ayudamos a conseguir clientes desde el primer día, midiendo cada euro invertido.",
     eyebrow: "Google Ads · Meta Ads",
-    h1: "Publicidad online en Andorra.",
+    h1: "Agencia de Google Ads y Meta Ads en Andorra.",
     intro:
       "Campañas en Google, Instagram y Facebook para que te encuentren hoy mismo los clientes que ya están buscando lo que ofreces. Segmentamos por zona, idioma e intereses y medimos cada contacto.",
     image: `${A}/serveis/foto-cro-growth.jpg`,
@@ -184,7 +188,7 @@ export const landingsEs: LandingEs[] = [
     slug: "branding-andorra",
     ca: "/serveis/branding",
     nom: "Branding",
-    title: "Branding y diseño de logotipos en Andorra | Altitud Digital",
+    title: "Branding en Andorra: creación de marca, logotipos y diseño gráfico | Altitud Digital",
     description:
       "Diseño de logotipos, identidad corporativa y diseño gráfico para empresas de Andorra: tarjetas, cartelería, packaging y manual de marca.",
     eyebrow: "Branding · Diseño gráfico",
@@ -285,6 +289,43 @@ export const landingsEs: LandingEs[] = [
       { q: "¿Quién puede pedir las ayudas PDE?", a: "Empresas y autónomos con actividad en Andorra que quieran digitalizarse. El porcentaje depende del tamaño de la empresa." },
       { q: "¿Cuándo abre la próxima convocatoria?", a: "La próxima está prevista para 2027. El cuestionario de autodiagnóstico, que es obligatorio, ya se puede hacer." },
       { q: "¿Os encargáis de los trámites?", a: "Te acompañamos en todo el proceso y preparamos el presupuesto para que lo presentes el primer día." },
+    ],
+  },
+  {
+    slug: "cursos-marketing-digital-andorra",
+    ca: "/serveis/formacions-ia",
+    nom: "Cursos de marketing",
+    title: "Cursos y formación de marketing digital e IA en Andorra | Altitud Digital",
+    description:
+      "Formación de marketing digital en Andorra para empresas: cursos in company de redes sociales, SEO, Google Ads e inteligencia artificial (Claude, ChatGPT), presenciales y prácticos.",
+    eyebrow: "Formación · In company",
+    h1: "Cursos de marketing digital e IA en Andorra.",
+    intro:
+      "Formación práctica para que tu equipo haga el marketing digital por su cuenta: redes sociales, SEO, Google Ads e inteligencia artificial. Cursos in company, presenciales, adaptados a tu sector y al nivel de cada persona.",
+    image: `${A}/equip.jpg`,
+    imageAlt: "Equipo de Altitud Digital en una sesión de trabajo",
+    servei: "formacions-ia",
+    incluye: [
+      { title: "Diagnóstico inicial", text: "Vemos qué sabe ya tu equipo y qué necesita aprender para que la formación vaya al grano." },
+      { title: "Redes sociales y contenido", text: "Instagram, reels, calendario y Meta Ads explicados con ejemplos de tu propio negocio." },
+      { title: "SEO y Google", text: "Cómo funciona el posicionamiento web, Google Business y Search Console, sin tecnicismos." },
+      { title: "Google Ads", text: "Crear, medir y optimizar campañas para no tirar el presupuesto." },
+      { title: "Inteligencia artificial", text: "Usar Claude o ChatGPT con criterio y seguridad para escribir, analizar y ahorrar horas cada semana." },
+      { title: "Seguimiento", text: "Resolvemos dudas después del curso para que lo aprendido se aplique de verdad." },
+    ],
+    porQue: {
+      title: "Aprender haciendo, con casos reales",
+      paragraphs: [
+        "No damos clases teóricas genéricas. Cada sesión parte de las tareas reales de tu equipo: el post de la semana, la campaña que no funciona o el informe que tarda horas en hacerse.",
+        "Damos los cursos en tus oficinas o en las nuestras, en Andorra la Vella, y los adaptamos a tu sector y al nivel de cada persona. Ya formamos a equipos de empresas de Andorra, como Advantia, en el uso de la IA.",
+      ],
+    },
+    projectes: [],
+    faqs: [
+      { q: "¿Hacéis cursos in company o en grupo?", a: "Sobre todo in company: formación para el equipo de una empresa, en sus oficinas o en las nuestras. Así podemos trabajar con casos reales de vuestro negocio." },
+      { q: "¿Qué nivel hace falta?", a: "Ninguno en concreto. Hacemos un diagnóstico antes y adaptamos el contenido, desde lo más básico hasta un nivel avanzado." },
+      { q: "¿Cuánto dura un curso?", a: "Depende de los temas y del equipo. Puede ser un taller de unas horas o un programa de varias sesiones. Te proponemos el formato después del diagnóstico." },
+      { q: "¿Hacéis formación de inteligencia artificial?", a: "Sí. Enseñamos a usar Claude y ChatGPT en el día a día de la empresa, con criterio y cuidando los datos." },
     ],
   },
 ];
