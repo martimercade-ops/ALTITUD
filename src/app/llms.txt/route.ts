@@ -28,6 +28,7 @@ export function GET() {
 - Idiomas: catalán, castellano, francés e inglés
 - CEO: Martí Mercadé (antes en Havas Media con campañas para UNICEF, JDE y Banca March)
 - Equipo joven especializado en marketing, tecnología, vídeo e IA
+- Agencia partner oficial de Hostinger (alojamiento web y dominios)
 - Ayudas: gestiona las ayudas PDE (Pla de Digitalització d'Empreses) del Govern d'Andorra para sus clientes
 - Reseñas en Google: https://www.google.com/maps?cid=16031392341318370555
 - Instagram: https://www.instagram.com/altitudigital

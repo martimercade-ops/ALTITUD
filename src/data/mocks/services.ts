@@ -123,7 +123,7 @@ export const services: Service[] = [
       { title: "Manteniment", text: "Actualitzacions, seguretat i canvis quan els necessitis." },
       { title: "Analítica", text: "Mesurem visites i conversions per saber què funciona." },
     ],
-    tools: ["WordPress", "Elementor", "WooCommerce", "Shopify", "PrestaShop", "Figma"],
+    tools: ["WordPress", "Elementor", "WooCommerce", "Shopify", "PrestaShop", "Figma", "Hostinger"],
     steps: STEPS_MARKETING,
     projectTags: ["Web"],
   },

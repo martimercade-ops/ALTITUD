@@ -224,9 +224,13 @@ export const SiteFooter = ({ content }: SiteFooterProps) => {
       </nav>
 
       <div className="-mx-6 mt-10 flex flex-col items-center gap-4 border-t border-footer-fg/15 px-6 pt-6 text-center text-xs text-footer-fg/55 md:mt-12 md:items-stretch md:text-left md:-mx-10 md:flex-row md:items-center md:justify-between md:px-10 lg:-mx-12 lg:px-12">
-        <p>
-          {content.copyright} NRT F-222591-D
-        </p>
+        <div className="flex flex-col items-center gap-4 md:flex-row md:gap-5">
+          <p>
+            {content.copyright} NRT F-222591-D
+          </p>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/assets/altitud/hostinger-partner-dark.svg" alt="Hostinger Partner" title="Agència partner oficial de Hostinger" width={96} height={36} loading="lazy" className="h-9 w-auto" />
+        </div>
         <ul className="flex flex-wrap justify-center gap-x-5 gap-y-2 md:justify-start">
           {legalPages.map((p) => (
             <li key={p.slug}>

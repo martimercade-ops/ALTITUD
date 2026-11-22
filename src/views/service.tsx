@@ -100,9 +100,14 @@ export const ServiceView = ({ service: serviceCa }: ServiceViewProps) => {
           <section aria-label={t("Eines")} className="mx-auto -mt-12 max-w-6xl px-6 pb-24 md:-mt-16 md:px-10 md:pb-28">
             <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2 border-t border-black/10 pt-6">
               <span className="text-xs font-semibold uppercase tracking-[0.25em] text-black/40"><Tx>Treballem amb</Tx></span>
-              {service.tools.map((t) => (
-                <span key={t} className="text-[15px] text-black/55">{t}</span>
-              ))}
+              {service.tools.map((t) =>
+                t === "Hostinger" ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img key={t} src="/assets/altitud/hostinger-partner-light.svg" alt="Hostinger Partner" width={96} height={36} className="h-9 w-auto self-center" />
+                ) : (
+                  <span key={t} className="text-[15px] text-black/55">{t}</span>
+                ),
+              )}
             </div>
           </section>
         )}
