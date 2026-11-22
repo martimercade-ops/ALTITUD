@@ -1,4 +1,11 @@
 import { siteConfig } from "@/lib/site";
+import { services, serviceHref } from "@/data/mocks/services";
+
+const SAME_AS = [
+  "https://www.instagram.com/altitudigital",
+  "https://www.facebook.com/people/Altitud-Digital/61563871467106/",
+  "https://www.google.com/maps?cid=16031392341318370555",
+];
 
 export function getSiteStructuredData() {
   return {
@@ -12,6 +19,10 @@ export function getSiteStructuredData() {
         slogan: siteConfig.tagline,
         url: siteConfig.url,
         logo: `${siteConfig.url}/icon-512.png`,
+        sameAs: SAME_AS,
+        founder: { "@type": "Person", name: "Martí Mercadé", jobTitle: "CEO" },
+        email: "info@altitudigital.com",
+        telephone: "+376 670 222",
       },
       {
         "@type": "ProfessionalService",
@@ -40,7 +51,23 @@ export function getSiteStructuredData() {
           { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"], opens: "09:00", closes: "14:00" },
           { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"], opens: "15:00", closes: "18:00" },
         ],
-        knowsAbout: ["Màrqueting digital", "SEO", "Disseny web", "Xarxes socials", "Publicitat digital", "Intel·ligència artificial"],
+        alternateName: ["Altitud Digital Andorra", "Altitud Digital agència de màrqueting"],
+        sameAs: SAME_AS,
+        hasMap: "https://www.google.com/maps?cid=16031392341318370555",
+        availableLanguage: ["ca", "es", "fr", "en"],
+        knowsAbout: [
+          "Màrqueting digital", "Agencia de marketing digital", "SEO", "Posicionamiento web", "GEO (posicionamiento en IA)",
+          "Disseny web", "Tiendas online", "Xarxes socials", "Reels", "Google Ads", "Meta Ads", "Branding",
+          "Disseny UX/UI", "Vídeo", "Intel·ligència artificial", "Chatbots amb IA", "Automatitzacions", "Formació de màrqueting digital",
+        ],
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Serveis d'Altitud Digital",
+          itemListElement: services.map((sv) => ({
+            "@type": "Offer",
+            itemOffered: { "@type": "Service", name: sv.name, description: sv.short, url: `${siteConfig.url}${serviceHref(sv.slug)}` },
+          })),
+        },
         parentOrganization: { "@id": `${siteConfig.url}/#organization` },
       },
       {

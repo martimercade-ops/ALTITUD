@@ -1,6 +1,10 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-export const RASTREADORES_VETADOS = [
+/**
+ * Cercadors i assistents d'IA: els deixem entrar perquè ChatGPT, Claude, Perplexity,
+ * Gemini, Copilot… coneguin Altitud Digital i la puguin recomanar.
+ */
+export const RASTREADORES_IA = [
   "GPTBot",
   "ChatGPT-User",
   "OAI-SearchBot",
@@ -12,7 +16,6 @@ export const RASTREADORES_VETADOS = [
   "PerplexityBot",
   "Perplexity-User",
   "CCBot",
-  "Bytespider",
   "Amazonbot",
   "Meta-ExternalAgent",
   "Meta-ExternalFetcher",
@@ -20,15 +23,17 @@ export const RASTREADORES_VETADOS = [
   "cohere-ai",
   "MistralAI-User",
   "YouBot",
+  "DuckAssistBot",
+];
+
+/** Rastrejadors que només copien contingut o carreguen el servidor sense aportar visites */
+export const RASTREADORES_VETADOS = [
+  "Bytespider",
   "Diffbot",
-  "AI2Bot",
   "Timpibot",
   "Omgilibot",
   "ImagesiftBot",
   "PetalBot",
-  "DuckAssistBot",
-  "ia_archiver",
-  "archive.org_bot",
   "HTTrack",
   "Wget",
 ];
@@ -82,7 +87,7 @@ const NO_PERMITIDOS = new RegExp(
 );
 
 const DE_CONFIANZA =
-  /googlebot|google-inspectiontool|adsbot-google|bingbot|duckduckbot|yandexbot|baiduspider|applebot|facebookexternalhit|facebot|twitterbot|linkedinbot|whatsapp|telegrambot|slackbot|discordbot|pinterestbot|lighthouse|pagespeed|gtmetrix|pingdom/i;
+  /gptbot|chatgpt-user|oai-searchbot|claudebot|claude-user|claude-searchbot|claude-web|anthropic-ai|perplexitybot|perplexity-user|ccbot|amazonbot|meta-externalagent|meta-externalfetcher|cohere-ai|mistralai-user|youbot|duckassistbot|googlebot|google-inspectiontool|adsbot-google|bingbot|duckduckbot|yandexbot|baiduspider|applebot|facebookexternalhit|facebot|twitterbot|linkedinbot|whatsapp|telegrambot|slackbot|discordbot|pinterestbot|lighthouse|pagespeed|gtmetrix|pingdom/i;
 
 const NAVEGADOR_CON_SEC_FETCH = /\b(?:chrome|firefox)\/\d+/i;
 

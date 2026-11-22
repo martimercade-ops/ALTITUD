@@ -29,6 +29,6 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!robots\\.txt|sitemap\\.xml|favicon|icon|apple-icon|android-icon|maskable-icon|manifest\\.json|browserconfig\\.xml|safari-pinned-tab|open-graph).*)",
+    "/((?!robots\\.txt|sitemap\\.xml|llms\\.txt|llms-full\\.txt|favicon|icon|apple-icon|android-icon|maskable-icon|manifest\\.json|browserconfig\\.xml|safari-pinned-tab|open-graph|b03906c42712fa20c387763bae49ed17\\.txt).*)",
   ],
 };
