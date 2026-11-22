@@ -6,6 +6,8 @@ import { ServiceView } from "@/views/service";
 import { TeamPageView } from "@/views/team-page";
 import { ParlemView } from "@/views/parlem";
 import { LandingEsView } from "@/views/landing-es";
+import { ArticleEsView, BlogIndexEs } from "@/views/blog-es";
+import { findArticleEs, articleEsHref, type ArticleEs } from "@/data/blog-es";
 import { findService, serviceHref, services } from "@/data/mocks/services";
 import { findLandingEs, landingEsHref, type LandingEs } from "@/data/landings-es";
 import { alternates, LOCALE, SERVEI_ES, type Lang, type LangAlt } from "@/i18n/config";
@@ -81,6 +83,29 @@ export const PaginaLanding = ({ lang, slug }: { lang: LangAlt; slug: string }) =
   if (!l) notFound();
   setLang(lang);
   return <Wrap lang={lang}><LandingEsView l={l} /></Wrap>;
+};
+
+export const metaBlogEs = (): Metadata =>
+  pageMetadata({
+    title: "Blog de marketing digital, SEO e IA en Andorra | Altitud Digital",
+    description: "Guías prácticas de SEO, diseño web, Google Ads e inteligencia artificial para empresas de Andorra, escritas por el equipo de Altitud Digital.",
+    url: "/es/blog",
+    locale: LOCALE.es,
+  });
+
+export const metaArticleEs = (a: ArticleEs): Metadata =>
+  pageMetadata({ title: a.title, description: a.description, url: articleEsHref(a.slug), locale: LOCALE.es });
+
+export const PaginaBlogEs = () => {
+  setLang("es");
+  return <Wrap lang="es"><BlogIndexEs /></Wrap>;
+};
+
+export const PaginaArticleEs = ({ slug }: { slug: string }) => {
+  const a = findArticleEs(slug);
+  if (!a) notFound();
+  setLang("es");
+  return <Wrap lang="es"><ArticleEsView a={a} /></Wrap>;
 };
 
 export { getI18n, landingEsHref };

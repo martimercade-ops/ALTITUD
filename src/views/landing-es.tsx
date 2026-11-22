@@ -9,6 +9,7 @@ import { FormEs } from "@/views/form-es";
 import { projectHref, projects } from "@/data/mocks/projects";
 import { landingEsHref, landingsEs, type LandingEs } from "@/data/landings-es";
 import { GOOGLE_REVIEWS } from "@/data/mocks/home";
+import { articleEsHref, articlesEs } from "@/data/blog-es";
 
 
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -21,6 +22,7 @@ export const LandingEsView = ({ l: lEs }: { l: LandingEs }) => {
   const related = lEs.projectes
     .map((s) => projects.find((p) => p.slug === s))
     .filter((p): p is (typeof projects)[number] => Boolean(p));
+  const guies = lang === "es" ? articlesEs.filter((a) => a.landing.href === landingEsHref(lEs.slug)) : [];
   const others = lang === "es" ? landingsEs.filter((x) => x.slug !== lEs.slug) : [];
   const faqLd = {
     "@context": "https://schema.org",
@@ -97,6 +99,21 @@ export const LandingEsView = ({ l: lEs }: { l: LandingEs }) => {
             </div>
           </div>
         </section>
+
+        {guies.length > 0 && (
+          <section aria-label="Guías relacionadas" className="mx-auto max-w-6xl px-6 pt-20 md:px-10">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-black/45">Guías relacionadas del blog</p>
+            <ul className="mt-5 flex flex-wrap gap-3">
+              {guies.map((g) => (
+                <li key={g.slug}>
+                  <Link href={articleEsHref(g.slug)} className="inline-flex rounded-full border border-black/15 px-5 py-2.5 text-sm hover:border-black/50">
+                    {g.h1} →
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         {/* Projectes */}
         {related.length > 0 && (

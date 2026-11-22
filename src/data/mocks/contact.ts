@@ -79,6 +79,7 @@ export const footerContent: FooterContent = {
       { label: "Serveis", href: "/serveis" },
       { label: "Projectes", href: "/projectes" },
       { label: "Ajuts PDE", href: "/ajuts-pde" },
+      { label: "Blog", href: "/es/blog" },
       { label: "Parlem", href: "/parlem" },
     ],
   },

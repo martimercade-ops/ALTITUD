@@ -1,3 +1,4 @@
+import { articleEsHref, articlesEs } from "@/data/blog-es";
 import type { MetadataRoute } from "next";
 
 import { siteConfig } from "@/lib/site";
@@ -89,6 +90,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: l.slug ? 0.9 : 1,
+    })),
+    { url: `${siteConfig.url}/es/blog`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.7 },
+    ...articlesEs.map((a) => ({
+      url: `${siteConfig.url}${articleEsHref(a.slug)}`,
+      lastModified: new Date(a.date),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
     })),
     ...projects.map((p) => ({
       url: `${siteConfig.url}${projectHref(p.slug)}`,
