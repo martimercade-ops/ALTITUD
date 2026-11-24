@@ -70,8 +70,6 @@ export function generateMetadata({
     },
     manifest: "/manifest.json",
     other: {
-      robots: "noai, noimageai",
-      "tdm-reservation": "1",
       copyright: "© 2026 Altitud Digital",
       "site-id": "AD-AND-2026-8R3T",
     },
