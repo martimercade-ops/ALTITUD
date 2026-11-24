@@ -288,6 +288,75 @@ export const articlesEs: ArticleEs[] = [
       { q: "¿Se puede pagar para salir en ChatGPT?", a: "A día de hoy, las recomendaciones de los asistentes dependen sobre todo del contenido y de la reputación de tu negocio en la web, no de un pago directo." },
     ],
   },
+  {
+    slug: "agencia-redes-sociales-andorra",
+    title: "Cómo elegir una agencia de redes sociales en Andorra (y qué debe incluir) | Altitud Digital",
+    description:
+      "Qué debe incluir la gestión de redes sociales de una empresa en Andorra, qué preguntar a una agencia o community manager y cómo saber si funciona. Guía práctica.",
+    h1: "Cómo elegir una agencia de redes sociales en Andorra (y qué debe incluir)",
+    date: "2026-11-24",
+    minutos: 6,
+    categoria: "Redes sociales",
+    intro:
+      "Instagram y TikTok son hoy el escaparate de muchos negocios de Andorra: restaurantes, tiendas, centros de estética, inmobiliarias o empresas de servicios. Pero no todas las gestiones de redes son iguales. Te explicamos qué debería incluir una buena agencia de redes sociales y qué preguntas hacer antes de contratarla.",
+    secciones: [
+      {
+        h2: "1. Estrategia antes que publicaciones",
+        p: [
+          "Publicar por publicar no sirve. Una buena agencia empieza analizando tu negocio, tu cliente y tu competencia en Andorra, y define los pilares de contenido: qué vas a contar, a quién y con qué objetivo (vender, captar contactos, construir marca o llenar el local).",
+          "Pide ver un calendario de contenidos antes de empezar y que te lo enseñen cada mes para validarlo.",
+        ],
+      },
+      {
+        h2: "2. Contenido grabado en tu negocio",
+        p: [
+          "El contenido que mejor funciona es el real: tu equipo, tu local, tu producto. Pregunta si la agencia viene a grabar, cuántas sesiones al mes incluye y quién edita los vídeos. En Andorra, una agencia local puede grabar en cualquier parroquia sin costes de desplazamiento extra.",
+        ],
+        li: [
+          "Reels con ritmo, subtítulos y, si hace falta, voz en off.",
+          "Fotos de producto, de equipo y de espacio.",
+          "Guiones que puedas aprobar antes de grabar.",
+        ],
+      },
+      {
+        h2: "3. Idiomas: catalán, castellano y francés",
+        p: [
+          "Tu cliente puede ser andorrano, español, francés o turista. Una agencia de redes en Andorra tiene que saber escribir y subtitular en los idiomas de tu público, y adaptar el tono a cada uno.",
+        ],
+      },
+      {
+        h2: "4. Community management de verdad",
+        p: [
+          "Responder comentarios y mensajes rápido y con el tono de tu marca genera confianza y ventas. Pregunta quién lo hace, en qué horario y cómo te avisan cuando un mensaje necesita tu respuesta.",
+        ],
+      },
+      {
+        h2: "5. Publicidad en Meta Ads",
+        p: [
+          "El contenido orgánico construye marca; los anuncios en Instagram y Facebook te ponen delante de gente nueva en Andorra y alrededores. Una buena agencia combina las dos cosas y te dice claramente qué parte va para la agencia y qué parte es inversión en Meta.",
+        ],
+      },
+      {
+        h2: "6. Informes que se entiendan",
+        p: [
+          "Cada mes deberías recibir un resumen claro: alcance, interacciones, seguidores, mensajes y contactos, y qué se va a cambiar para mejorar. Si solo te hablan de «likes», pregunta cómo se traduce eso en clientes.",
+        ],
+      },
+      {
+        h2: "Agencia o community manager freelance",
+        p: [
+          "Un freelance puede ser una buena opción para empezar. Una agencia te da estrategia, grabación, edición, diseño, publicidad e informes en un solo equipo, y no dependes de una sola persona. Lo importante es que haya constancia: las redes dan resultados a partir de varios meses de trabajo continuado.",
+          "Si quieres ver cómo lo hacemos nosotros, echa un vistazo a nuestro servicio de [gestión de redes sociales en Andorra](/es/redes-sociales-andorra) o a nuestros [proyectos](/projectes).",
+        ],
+      },
+    ],
+    landing: { href: "/es/redes-sociales-andorra", label: "Ver nuestro servicio de redes sociales" },
+    faqs: [
+      { q: "¿Cuánto tiempo tardan las redes en dar resultados?", a: "Los primeros cambios suelen verse en pocas semanas, pero los resultados estables llegan con varios meses de publicación constante y, si hace falta, publicidad." },
+      { q: "¿Cuántas veces hay que publicar?", a: "Depende del sector y del objetivo. Lo importante es la constancia y la calidad: es mejor menos contenido bueno y regular que mucho contenido sin estrategia." },
+      { q: "¿Instagram o TikTok?", a: "Instagram sigue siendo la red principal para la mayoría de negocios de Andorra. TikTok funciona muy bien para llegar a público joven y turistas; muchas veces se reutiliza el mismo vídeo en las dos." },
+    ],
+  },
 ];
 
 export const articleEsHref = (slug: string) => `/es/blog/${slug}`;

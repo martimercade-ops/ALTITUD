@@ -14,7 +14,7 @@ export function generateStaticParams() {
 const TITOLS: Record<string, string> = {
   "seo-sem": "Agència SEO i SEM a Andorra: posicionament web i Google Ads | Altitud Digital",
   "web-ecommerce": "Disseny web i botigues online a Andorra | Altitud Digital",
-  "xarxes-socials": "Gestió de xarxes socials a Andorra: Instagram i Meta Ads | Altitud Digital",
+  "xarxes-socials": "Agència de xarxes socials a Andorra: Instagram, TikTok i reels | Altitud Digital",
   "branding": "Branding, logotips i disseny gràfic a Andorra | Altitud Digital",
   "consultoria": "Consultoria de màrqueting digital a Andorra | Altitud Digital",
   "chatbots-ia": "Chatbots amb IA per a empreses d'Andorra | Altitud Digital",
