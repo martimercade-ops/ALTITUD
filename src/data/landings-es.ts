@@ -133,6 +133,7 @@ export const landingsEs: LandingEs[] = [
       { title: "Instagram, TikTok y Facebook", text: "Adaptamos cada pieza a la red donde está tu cliente, y creamos o configuramos los perfiles y el Business Manager de Meta si hace falta." },
       { title: "Meta Ads", text: "Campañas en Instagram y Facebook para llegar a más gente de Andorra, del Alt Urgell, la Cerdanya o el sur de Francia." },
       { title: "Contenido en varios idiomas", text: "Textos y subtítulos en catalán, castellano o francés, según quién sea tu cliente." },
+      { title: "Guiones y validación", text: "Te pasamos los guiones y los textos por WhatsApp para que los apruebes antes de grabar y de publicar." },
       { title: "Informes mensuales", text: "Alcance, interacciones, seguidores y contactos, explicados de forma clara, con lo que haremos para mejorar." },
     ],
     porQue: {
