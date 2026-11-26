@@ -9,6 +9,8 @@ import { useRobot } from "@/components/common/robot-view";
 export interface HeroTitleProps {
   lines: string[];
   className?: string;
+  /** Etiqueta HTML: per defecte h1 */
+  as?: "h1" | "p";
 }
 
 const DURATION = 1600;
@@ -20,7 +22,7 @@ const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
 const letterAlpha = (line: number, pos: number) =>
   line % 2 === 0 ? 1 - pos * 0.25 : 0.75 + pos * 0.25;
 
-export const HeroTitle = ({ lines, className }: HeroTitleProps) => {
+export const HeroTitle = ({ lines, className, as: Tag = "h1" }: HeroTitleProps) => {
   type Letter = { ch: string; alpha: number; i: number };
   const { lineWords, total } = useMemo(() => {
     let gi = 0;
@@ -79,7 +81,7 @@ export const HeroTitle = ({ lines, className }: HeroTitleProps) => {
   };
 
   return (
-    <h1 aria-label={lines.join(" ")} className={className}>
+    <Tag aria-label={lines.join(" ")} className={className}>
       {lineWords.map((words, li) => (
         <span key={li} aria-hidden="true" className="block">
           {words.flatMap((word, wi) => {
@@ -108,6 +110,6 @@ export const HeroTitle = ({ lines, className }: HeroTitleProps) => {
           })}
         </span>
       ))}
-    </h1>
+    </Tag>
   );
 };

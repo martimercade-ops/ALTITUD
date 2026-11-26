@@ -155,7 +155,7 @@ export const ArticleEsView = ({ a }: { a: ArticleEs }) => {
         {/* Crida */}
         <div className="mt-16 rounded-3xl bg-[#0b1424] p-8 text-white md:p-10">
           <p className="text-[1.5rem] font-light leading-snug">¿Quieres que lo hagamos por ti?</p>
-          <p className="mt-3 text-white/70">Somos una agencia de marketing digital en Andorra la Vella. Te asesoramos sin compromiso.</p>
+          <p className="mt-3 text-white/70">Somos una <Link href="/es" className="underline decoration-white/30 underline-offset-4 hover:decoration-white">agencia de marketing digital en Andorra</Link> la Vella. Te asesoramos sin compromiso.</p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link href={a.landing.href} className="inline-flex h-12 items-center rounded-full bg-white px-6 text-sm font-medium text-black hover:bg-white/90">
               {a.landing.label}

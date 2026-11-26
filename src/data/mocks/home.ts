@@ -74,7 +74,7 @@ export const homeContent: HomeContent = {
     image: { src: `${A}/nevado-hero.jpg`, alt: "Cim nevat al capvespre, protagonista al centre de la imatge" },
     cta: { label: "Parlem", href: PARLEM_HREF },
     secondaryCta: { label: "Veure projectes", href: "/projectes" },
-    insightTitle: "Agència de màrqueting 360° a Andorra.",
+    insightTitle: "Agència de màrqueting digital 360° a Andorra.",
     insightBody:
       "Estratègia, creativitat i tecnologia per atraure clients, fer créixer la teva marca i convertir oportunitats en resultats reals.",
   },

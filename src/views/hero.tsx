@@ -204,6 +204,7 @@ export const Hero = ({ content }: HeroProps) => {
           className="absolute inset-0 z-10 flex flex-col px-6 pb-6 pt-5 text-white md:px-10 md:pb-10 lg:px-12 lg:pb-12"
         >
           <HeroTitle
+            as="p"
             lines={titleLines}
             className="mt-24 text-[2.25rem] font-light leading-[1] tracking-tight sm:text-5xl lg:text-[3.5rem]"
           />
@@ -229,12 +230,12 @@ export const Hero = ({ content }: HeroProps) => {
             )}
 
             <div className="max-w-lg">
-              <animated.p
+              <animated.h1
                 style={revealStyle(3)}
                 className="text-xl font-medium leading-snug lg:text-2xl [will-change:transform,opacity]"
               >
                 {insightTitle}
-              </animated.p>
+              </animated.h1>
               <animated.p
                 style={revealStyle(4)}
                 className="mt-4 hidden text-base leading-relaxed text-white/80 sm:block [will-change:transform,opacity]"
