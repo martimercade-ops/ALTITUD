@@ -6,12 +6,13 @@ export const LANG_LABEL: Record<Lang, string> = { ca: "Català", es: "Español",
 export const LOCALE: Record<Lang, string> = { ca: "ca_ES", es: "es_ES", fr: "fr_FR", en: "en_GB" };
 
 /** Pàgines catalanes que tenen traducció, amb la ruta a cada idioma */
-const BASE: Record<string, Record<LangAlt, string>> = {
+const BASE: Record<string, Partial<Record<LangAlt, string>>> = {
   "/": { es: "/es", fr: "/fr", en: "/en" },
   "/serveis": { es: "/es/servicios", fr: "/fr/services", en: "/en/services" },
   "/equip": { es: "/es/equipo", fr: "/fr/equipe", en: "/en/team" },
   "/parlem": { es: "/es/contacto", fr: "/fr/contact", en: "/en/contact" },
   "/ajuts-pde": { es: "/es/ayudas-pde-andorra", fr: "/fr/aides-pde", en: "/en/pde-grants" },
+  "/blog": { es: "/es/blog" },
 };
 
 /** Serveis que en castellà tenen pàgina pròpia per a cerques locals */
@@ -28,7 +29,7 @@ const SERVEIS_PREFIX: Record<LangAlt, string> = { es: "/es/servicios", fr: "/fr/
 
 /** Ruta catalana → ruta en l'idioma (o null si no està traduïda) */
 export const rutaTraduida = (ruta: string, lang: LangAlt): string | null => {
-  if (BASE[ruta]) return BASE[ruta][lang];
+  if (BASE[ruta]) return BASE[ruta][lang] ?? null;
   const m = ruta.match(/^\/serveis\/([a-z0-9-]+)$/);
   if (m) {
     if (lang === "es" && SERVEI_ES[m[1]]) return `/es/${SERVEI_ES[m[1]]}`;

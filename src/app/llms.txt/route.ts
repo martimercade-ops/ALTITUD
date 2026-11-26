@@ -1,3 +1,4 @@
+import { articleCaHref, articlesCa } from "@/data/blog-ca";
 import { siteConfig } from "@/lib/site";
 import { projects, projectHref } from "@/data/mocks/projects";
 import { services, serviceHref } from "@/data/mocks/services";
@@ -57,6 +58,7 @@ Otros clientes de referencia: Viamoda, Maisons du Monde, Olympus Race, Balanzen,
 ## Guías
 
 ${articlesEs.map((a) => `- [${a.h1}](${u(articleEsHref(a.slug))})`).join("\n")}
+${articlesCa.map((a) => `- [${a.h1}](${u(articleCaHref(a))}) (català)`).join("\n")}
 
 ## Páginas principales
 

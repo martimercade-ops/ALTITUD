@@ -1,4 +1,5 @@
 import { articleEsHref, articlesEs } from "@/data/blog-es";
+import { articleCaHref, articlesCa } from "@/data/blog-ca";
 import type { MetadataRoute } from "next";
 
 import { siteConfig } from "@/lib/site";
@@ -90,6 +91,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: l.slug ? 0.9 : 1,
+    })),
+    { url: `${siteConfig.url}/blog`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.7 },
+    ...articlesCa.map((a) => ({
+      url: `${siteConfig.url}${articleCaHref(a)}`,
+      lastModified: new Date(a.date),
+      changeFrequency: "monthly" as const,
+      priority: a.ruta ? 0.9 : 0.7,
     })),
     { url: `${siteConfig.url}/es/blog`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.7 },
     ...articlesEs.map((a) => ({

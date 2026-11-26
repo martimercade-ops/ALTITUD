@@ -186,6 +186,7 @@ export const HOME: Entrades = {
   "Enllaços": ["Enlaces", "Liens", "Links"],
   "Mapa del lloc": ["Mapa del sitio", "Plan du site", "Sitemap"],
   "Ajuts PDE": ["Ayudas PDE", "Aides PDE", "PDE grants"],
+  "Màrqueting de continguts": ["Marketing de contenidos", "Marketing de contenu", "Content marketing"],
   "Contacte": ["Contacto", "Contact", "Contact"],
   "Dl–Dj · 9–14 h i 15–18 h\nOficina amb cita prèvia": ["Lu–Ju · 9–14 h y 15–18 h\nOficina con cita previa", "Lun–Jeu · 9 h–14 h et 15 h–18 h\nBureau sur rendez-vous", "Mon–Thu · 9am–2pm & 3pm–6pm\nOffice by appointment"],
   "Segueix-nos": ["Síguenos", "Suivez-nous", "Follow us"],
