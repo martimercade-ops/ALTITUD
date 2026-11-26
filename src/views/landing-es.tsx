@@ -10,6 +10,7 @@ import { projectHref, projects } from "@/data/mocks/projects";
 import { landingEsHref, landingsEs, type LandingEs } from "@/data/landings-es";
 import { GOOGLE_REVIEWS } from "@/data/mocks/home";
 import { articleEsHref, articlesEs } from "@/data/blog-es";
+import { PdeGuia } from "@/views/pde-guia";
 
 
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -138,6 +139,8 @@ export const LandingEsView = ({ l: lEs }: { l: LandingEs }) => {
             </div>
           </section>
         )}
+
+        {lEs.slug === "ayudas-pde-andorra" && lang === "es" && <PdeGuia lang="es" faq={false} />}
 
         {/* Preguntes freqüents */}
         <section aria-labelledby="faq-title" className="mx-auto max-w-4xl px-6 pb-24 md:px-10 md:pb-32">

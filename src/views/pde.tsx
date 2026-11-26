@@ -10,6 +10,7 @@ import { GoogleMark } from "@/views/reviews";
 import { WHATSAPP_URL } from "@/components/common/whatsapp-button";
 import { formatEuros, pdeSolutions } from "@/data/mocks/pde";
 import { Pas1Banner, Pas1Popup } from "@/views/pde-pas1";
+import { PdeGuia } from "@/views/pde-guia";
 
 const POINTS = [
   "Fins al 50% del cost pagat pel Govern",
@@ -148,6 +149,10 @@ export const PdeView = () => {
             </a>
           </div>
         </section>
+
+        <div className="bg-[#f4f4f2]">
+          <PdeGuia lang="ca" />
+        </div>
 
         <SiteFooter content={footerContent} />
         <Pas1Popup />
