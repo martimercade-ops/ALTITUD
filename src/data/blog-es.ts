@@ -22,6 +22,77 @@ export interface ArticleEs {
 
 export const articlesEs: ArticleEs[] = [
   {
+    slug: "agencia-marketing-andorra-como-elegir",
+    title: "Agencia de marketing en Andorra: cómo elegir la mejor (guía 2026) | Altitud Digital",
+    description:
+      "Qué mirar antes de contratar una agencia de marketing en Andorra: trabajo real en el país, equipo, idiomas, resultados, contratos, precios y ayudas PDE. Con preguntas clave.",
+    h1: "Agencia de marketing en Andorra: cómo elegir la mejor para tu empresa",
+    date: "2026-11-27",
+    minutos: 6,
+    categoria: "Agencia",
+    intro:
+      "En Andorra hay agencias, consultores veteranos y freelances que ofrecen marketing. Esta es la lista de lo que miraríamos nosotros si tuviéramos que contratar una, explicada sin rodeos.",
+    secciones: [
+      {
+        h2: "1. Que enseñe trabajo real hecho en Andorra",
+        p: [
+          "Pide webs, cuentas de redes y campañas de clientes que puedas visitar. Una agencia que no tiene nada hecho aquí no conoce el mercado: los idiomas, la temporada de invierno, el cliente francés o cómo compra el residente.",
+        ],
+      },
+      {
+        h2: "2. Que sepas quién hará el trabajo",
+        p: [
+          "Pregunta quién escribirá, quién grabará y quién llevará los anuncios. Algunas agencias lo subcontratan todo fuera. Un equipo cerca significa reuniones en persona, rapidez y alguien que entiende tu negocio.",
+        ],
+      },
+      {
+        h2: "3. Que trabaje en catalán, castellano y francés",
+        p: [
+          "En Andorra el cliente busca en tres o cuatro idiomas. Una estrategia en un solo idioma deja clientes por el camino, sobre todo en turismo, comercio e inmobiliaria.",
+        ],
+      },
+      {
+        h2: "4. Que hable de resultados, no de likes",
+        p: ["Un buen informe mensual te dice cosas que importan a tu negocio:"],
+        li: [
+          "Cuántos contactos, llamadas o reservas has recibido.",
+          "En qué posición sales en Google para las búsquedas que importan.",
+          "Cuánto te cuesta cada cliente que llega con publicidad.",
+        ],
+      },
+      {
+        h2: "5. Que el contrato sea claro",
+        p: [
+          "Revisa la permanencia, de quién son las cuentas y la web, y qué pasa si lo dejas. Las cuentas de Google, Meta y el dominio deben estar siempre a tu nombre.",
+        ],
+      },
+      {
+        h2: "6. Que haga todo con un solo equipo",
+        p: [
+          "Web, SEO, redes, vídeo, publicidad e IA funcionan mejor cuando los coordina el mismo equipo. Así no tienes que hacer de puente entre tres proveedores que no se hablan.",
+        ],
+      },
+      {
+        h2: "7. Que te ayude con las ayudas PDE",
+        p: [
+          "Si vas a hacer web, tienda online, SEO o IA, pregunta si es proveedor del Programa de Digitalització d'Empreses: puede cubrir entre el 30% y el 50% del coste. Lo explicamos en nuestra [guía de ayudas PDE](/es/ayudas-pde-andorra).",
+        ],
+      },
+      {
+        h2: "Por qué Altitud Digital",
+        p: [
+          "Somos un equipo joven de Andorra la Vella que ha trabajado para más de 100 empresas de todas las parroquias, con 4,9★ en Google. Hacemos web, redes, SEO, publicidad, vídeo e IA con el mismo equipo, y nos encontrarás en la oficina de la calle Ciutat de Valls. Puedes ver lo que hacemos en [nuestra agencia de marketing en Andorra](/es).",
+        ],
+      },
+    ],
+    landing: { href: "/es/contacto", label: "Hablemos de tu proyecto" },
+    faqs: [
+      { q: "¿Cuánto cuesta una agencia de marketing en Andorra?", a: "Depende de los servicios. Una gestión de redes suele ir de unos cientos a más de mil euros al mes y una web se presupuesta por proyecto. Pide siempre un presupuesto cerrado." },
+      { q: "¿Es mejor una agencia o un freelance?", a: "Un freelance puede ir bien para una sola tarea. Si necesitas web, redes, vídeo y anuncios a la vez, una agencia te da un equipo coordinado con un solo interlocutor." },
+      { q: "¿Qué agencias de marketing hay en Andorra?", a: "Hay agencias digitales, consultores independientes y estudios de diseño. Te recomendamos comparar trabajo real en Andorra, equipo, idiomas y resultados antes de decidir." },
+    ],
+  },
+  {
     slug: "posicionamiento-seo-andorra",
     title: "Posicionamiento SEO en Andorra: guía práctica para salir en Google | Altitud Digital",
     description:

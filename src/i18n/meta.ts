@@ -6,9 +6,9 @@ type M = Record<LangAlt, { title: string; description: string }>;
 export const META: Record<"/" | "/serveis" | "/equip" | "/parlem", M> = {
   "/": {
     es: {
-      title: "Agencia de marketing digital en Andorra | Altitud Digital",
+      title: "Agencia de marketing en Andorra: digital, online y redes | Altitud Digital",
       description:
-        "Agencia de marketing digital en Andorra la Vella: diseño web, SEO, redes sociales, publicidad online e IA para empresas de Andorra. Más de 100 clientes y 4,9★ en Google.",
+        "Agencia de marketing digital y online en Andorra la Vella: diseño web, SEO, redes sociales, publicidad e IA. Más de 100 empresas de todas las parroquias confían en nosotros. 4,9★ en Google.",
     },
     fr: {
       title: "Agence web et de marketing digital en Andorre | Altitud Digital",

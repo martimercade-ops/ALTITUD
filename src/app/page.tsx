@@ -3,7 +3,7 @@ import { generateMetadata as pageMetadata } from "@/utils/seo/generate-page-meta
 import { alternates } from "@/i18n/config";
 
 export const metadata = pageMetadata({
-  title: "Agència de màrqueting digital a Andorra | Altitud Digital",
+  title: "Agència de màrqueting a Andorra: digital, online i xarxes | Altitud Digital",
   description:
     "Agència de màrqueting digital a Andorra la Vella: webs, SEO, xarxes socials, publicitat i IA per a empreses d'Andorra. Més de 100 clients. Parlem?",
   url: "/",
