@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  /* Hostinger dona 55 CPU al build però poca memòria: limitem els treballadors perquè no peti */
+  experimental: { cpus: 4, workerThreads: false },
   async headers() {
     return [
       {
